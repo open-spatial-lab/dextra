@@ -1,0 +1,35 @@
+{
+  "name": "dextra-utils",
+  "version": "0.0.1",
+  "description": "",
+  "main": "dist/index.js",
+  "module": "dist/index.mjs",
+  "types": "dist/index.d.ts",
+  "scripts": {
+    "build": "tsup src/index.ts --format cjs,esm --dts",
+    "lint": "tsc",
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "watch": "node ./lib/watch-changes.js",
+    "build-worker": "esbuild src/workers/dextra-worker.ts --bundle --outfile=dist/dextra-worker.js --define:__VERSION__=\\\"$npm_package_version\\\""
+  },
+  "author": "",
+  "license": "MIT",
+  "devDependencies": {
+    "@changesets/cli": "^2.26.0",
+    "@storybook/csf": "^0.0.1",
+    "chokidar": "^3.5.3",
+    "esbuild": "^0.17.4",
+    "tsup": "^6.5.0",
+    "typescript": "^4.9.4"
+  },
+  "dependencies": {
+    "@babel/runtime": "^7.20.13",
+    "@loaders.gl/core": "^3.2.13",
+    "@loaders.gl/csv": "^3.2.13",
+    "apache-arrow": "^10.0.1",
+    "comlink": "^4.3.1",
+    "loaders.gl": "^0.3.5",
+    "simple-statistics": "^7.8.2",
+    "zod": "^3.20.2"
+  }
+}

@@ -1,0 +1,24 @@
+// tsconfig.json
+{
+	"compilerOptions": {
+		"module": "esnext",
+		"lib": ["es2017", "dom", "dom.iterable"],
+		"declaration": true,
+		"emitDeclarationOnly": true,
+		"outDir": "./types",
+		"strict": true,
+		"noUnusedLocals": true,
+		"noUnusedParameters": true,
+		"noImplicitReturns": true,
+		"noFallthroughCasesInSwitch": true,
+		"moduleResolution": "node",
+		"allowSyntheticDefaultImports": true,
+		"experimentalDecorators": true,
+		"forceConsistentCasingInFileNames": true,
+		"useDefineForClassFields": false,
+		"emitDecoratorMetadata": true
+	},
+	"include": ["src/**/*.ts"],
+	"exclude": ["src/**/*.stories.ts"],
+	"references": [{ "path": "./tsconfig.node.json" }]
+}
