@@ -14,7 +14,7 @@ export class DextraSummary extends DextraElement {
 
   /**
    * Schema for column to access
-   */
+  */
   @property({type: Object})
   columnSchema: ColumnSchema = {
     column: "Capital city population (UN Urbanization Prospects, 2018)",

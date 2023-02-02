@@ -21,7 +21,9 @@ const Template: Story<Partial<any>> = (props) => {
 
   return html`
     <h1>Data Table</h1>
-    <dextra-table></dextra-table>
+    <dextra-table
+      data-source="http...."
+    ></dextra-table>
 `;
 };
 // Button(args);

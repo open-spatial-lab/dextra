@@ -2,6 +2,8 @@
 import { wrap } from "comlink";
 // @ts-ignore
 import SharedWorker from "@okikio/sharedworker";
+import { dextraState, actions } from "../components/core/dextra-state";
+import nanoid from "nanoid";
 
 // @ts-ignore
 const WORKER_URL =

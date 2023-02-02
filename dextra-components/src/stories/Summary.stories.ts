@@ -7,7 +7,7 @@ import * as ss from "simple-statistics";
 
 // More on default export: https://storybook.js.org/docs/web-components/writing-stories/introduction#default-export
 export default {
-  title: "Example/Dextra",
+  title: "Example/Text",
   // More on argTypes: https://storybook.js.org/docs/web-components/api/argtypes
   argTypes: {
     // data: {
@@ -46,7 +46,7 @@ const Template: Story<Partial<any>> = (props) => {
       <li>
         Median:
         <dextra-summary
-          analysisSchema="${JSON.stringify(medianSchema)}"
+          analysisSchema="{type:median}"
         ></dextra-summary>
       </li>
       <li>

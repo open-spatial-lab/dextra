@@ -1,9 +1,13 @@
 import { LitElement } from 'lit'
 import { property } from 'lit/decorators.js'
+import { nanoid } from 'nanoid'
 import { getWorker, PromisifyClass } from '../../utils/getWorker'
 import {DextraWorker} from "../../../../dextra-utils/src/schemas/worker-schema";
 import {DataSchema} from '../../../../dextra-utils/src/schemas/data-schema'
 
+const onlyUnique = (value: any, index: number, self: any) => {
+  return self.indexOf(value) === index;
+}
 export class DextraElement extends LitElement {
   /**
    * The data schema
@@ -24,25 +28,57 @@ export class DextraElement extends LitElement {
    */
   protected dataInitialized = false;
 
+  /**
+   * The id of the element
+   */
+  protected id = nanoid();
+
   constructor(){
     super();
     this.worker = null;
     this.init()
-    // window.addEventListener("data-filter-update", e => console.log(e))
-    window.addEventListener("data-filter-update", e => console.log(e))
   }
-
-  protected async init() {
-    const {api, worker} = await getWorker<DextraWorker>();
-    // console.log(worker.ActualWorker.port.onmessage)
-    this.worker = api;
-    const loadedData = await api.loadData(this.dataSchema);
+  protected async loadData() {
+    if (!this.worker) {
+      throw new Error("Worker not initialized");
+    }
+    const loadedData = await this.worker.loadData(this.dataSchema);
     if (loadedData) {
       this.dataInitialized = true;
     } else {
       throw new Error("Could not load data");
     }
     this.runAnalysis();
+  }
+
+  protected async initWorker() {
+    if (this.worker == null) {
+      const {api, worker} = await getWorker<DextraWorker>();
+      window.workerInitialized = !!api;
+      this.worker = api;
+    }
+    this.loadData();
+  }
+
+  protected async waitForWorker() {
+    setTimeout(() => {
+      if (window.workerInitialized) {
+        this.initWorker();
+      } else {
+        this.waitForWorker();
+      }
+    }, 250);
+  }
+
+  protected async init() {
+    const componentList = window?.intiializedComponents ? [...window.intiializedComponents, this.id] : [this.id];
+    window.intiializedComponents = componentList.filter(onlyUnique);
+    if (componentList.length === 1) {
+      window.workerInitialized=false;
+      this.initWorker()
+    } else {
+      this.waitForWorker();
+    }
   }
   
   protected async runAnalysis() {}

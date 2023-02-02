@@ -24,6 +24,7 @@
   },
   "dependencies": {
     "@babel/runtime": "^7.20.13",
+    "@duckdb/duckdb-wasm": "^1.20.0",
     "@loaders.gl/core": "^3.2.13",
     "@loaders.gl/csv": "^3.2.13",
     "apache-arrow": "^10.0.1",
