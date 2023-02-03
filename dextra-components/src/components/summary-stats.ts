@@ -28,6 +28,23 @@ export class DextraSummary extends DextraElement {
     type: "max"
   }
 
+  constructor() {
+    super();
+    console.log("Summary constructor")
+    this.initializeListeners();
+  }
+
+  private initializeListeners() {
+    if (typeof window === "undefined") {
+      return;
+    }
+    window.addEventListener('dextra-initialized', (e) => {
+      console.log(e)
+    })
+    const event = new CustomEvent('dextra-initialized', {detail: {message: 'Hello World!', id: this.id}});
+    window.dispatchEvent(event);
+  }
+
   private formatResult<T extends number | object | string>(result: T): string {
     switch (typeof result){
       case 'number':

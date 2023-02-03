@@ -16,7 +16,12 @@
 		"experimentalDecorators": true,
 		"forceConsistentCasingInFileNames": true,
 		"useDefineForClassFields": false,
-		"emitDecoratorMetadata": true
+		"emitDecoratorMetadata": true,
+		"paths": {
+			"*": [
+				"./node_modules/*"
+			]
+		}
 	},
 	"include": ["src/**/*.ts"],
 	"exclude": ["src/**/*.stories.ts"],

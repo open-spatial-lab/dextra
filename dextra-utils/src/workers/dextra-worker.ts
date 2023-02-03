@@ -1,7 +1,7 @@
-import { Worker } from "./worker-class";
+import { DataWorker } from "./worker-class";
 import { expose } from "comlink";
 
-const AnalysisWorker = new Worker();
+const AnalysisWorker = new DataWorker();
 
 // @ts-ignore
 onconnect = (e: MessageEvent) => expose(AnalysisWorker, e.ports[0]);
