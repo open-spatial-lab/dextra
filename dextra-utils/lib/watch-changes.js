@@ -7,7 +7,7 @@ const watcher = chokidar.watch('./src/**/*.*', {
 
 const build = () => {
     console.log("Building worker...")
-    exec('yarn workspace dextra-utils build-worker && yarn workspace dextra-utils build')
+    exec('pnpm --filter dextra-utils build-analysis && pnpm --filter dextra-utils build-state  && pnpm --filter dextra-utils build && pnpm --filter dextra-utils copy-to-components')
 }
 
 watcher.on('add', build);

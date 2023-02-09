@@ -1,11 +1,12 @@
 import { html } from 'lit'
 import { customElement, property } from 'lit/decorators.js'
-import { DextraElement } from './core/dextra-element';
-import type {AnalysisSchema, ColumnSchema} from '../../../dextra-utils/src/schemas/data-schema'
+// import { WorkerDataLayer } from './core/worker-data-layer';
+import type {AnalysisSchema, ColumnSchema} from '../../../dextra-utils/src/schemas/interfaces'
+import { EventLayer } from './core/event-layer';
 
 
 @customElement('dextra-summary')
-export class DextraSummary extends DextraElement {
+export class DextraSummary extends EventLayer {
   /**
    * Analysis result
    */
@@ -30,20 +31,36 @@ export class DextraSummary extends DextraElement {
 
   constructor() {
     super();
-    console.log("Summary constructor")
-    this.initializeListeners();
+    this.handlers = {
+      ...this.handlers,
+      test: {
+        handler: (_self, payload) => {
+          console.log(payload)
+        },
+        payload: {
+          test: ""
+        }
+      }
+    }
+
+    // setTimeout(() => {
+    //   this.dispatch({
+    //     type: "test",
+    //     payload: "asdf"
+    //   })
+    // }, 500)
   }
 
-  private initializeListeners() {
-    if (typeof window === "undefined") {
-      return;
-    }
-    window.addEventListener('dextra-initialized', (e) => {
-      console.log(e)
-    })
-    const event = new CustomEvent('dextra-initialized', {detail: {message: 'Hello World!', id: this.id}});
-    window.dispatchEvent(event);
-  }
+  // private initializeListeners() {
+  //   if (typeof window === "undefined") {
+  //     return;
+  //   }
+  //   // window.addEventListener('dextra-initialized', (e) => {
+  //   //   console.log(e)
+  //   // })
+  //   // const event = new CustomEvent('dextra-initialized', {detail: {message: 'Hello World!', id: this.id}});
+  //   // window.dispatchEvent(event);
+  // }
 
   private formatResult<T extends number | object | string>(result: T): string {
     switch (typeof result){
@@ -60,12 +77,12 @@ export class DextraSummary extends DextraElement {
   }
 
   protected async runAnalysis() { 
-    if (!this.dataInitialized || !this.worker) {
+    if (!this.dataInitialized || !this.analyst) {
       await this.init()
     }
     try {
-      const worker = this.worker!;
-      const analysisResult = await worker.runAnalysis(this.dataSchema, this.columnSchema, this.analysisSchema)
+      const analyst = this.analyst!;
+      const analysisResult = await analyst.runAnalysis(this.dataSchema, this.columnSchema, this.analysisSchema)
       this.result = this.formatResult(analysisResult);
     } catch {
       this.result = "Error";

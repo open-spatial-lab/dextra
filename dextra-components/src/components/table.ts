@@ -1,10 +1,10 @@
 import { css, html } from 'lit'
 import { customElement, property } from 'lit/decorators.js'
-import { DextraElement } from './core/dextra-element';
+import { WorkerDataLayer } from './core/worker-data-layer';
 
 
 @customElement('dextra-table')
-export class DextraTable extends DextraElement {
+export class DextraTable extends WorkerDataLayer {
   /**
    * Analysis result
    */
@@ -12,12 +12,13 @@ export class DextraTable extends DextraElement {
   private result: null | any = null;
 
   protected async runAnalysis() { 
-    if (!this.dataInitialized || !this.worker) {
+    if (!this.analyst?.db) {
       await this.init()
     }
+
     try {
-      const worker = this.worker!;
-      const tableRequestResponse = await worker.getTable(this.dataSchema);
+      const analyst = this.analyst!;
+      const tableRequestResponse = await analyst.getTable(this.dataSchema);
       this.result = tableRequestResponse
     } catch {
       this.result = "Error";
@@ -37,11 +38,12 @@ export class DextraTable extends DextraElement {
 
   tableRow(i: number) {
     return html`<tr>
-        ${this.result.columns.map((_: string, j: number) => html`<td>${this.result.data[j][i]}</td>`)}
+        ${this.result.columns.map((col: string) => html`<td>${this.result.data[i][col]}</td>`)}
     </tr>`
   }
+
   tableRows() {
-    return html`${this.result.data[0].map((_: any, i: number) => this.tableRow(i))}`
+    return html`${this.result.data.map((_: any, i: number) => this.tableRow(i))}`
 
   }
   render() {    
