@@ -10,7 +10,7 @@ import maplibregl from "maplibre-gl";
 export class DextraDeck extends AnalysisLayer {
   @query("#map-canvas")
   // @ts-ignore
-  mapCanvas: HTMLCanvasElement;
+  mapCanvas: HTMLDivElement;
 
   map: maplibregl.Map | null = null;
 
@@ -45,19 +45,6 @@ export class DextraDeck extends AnalysisLayer {
     });
 
     this.map.addControl(deckOverlay);
-    // this.map.addControl(new mapboxgl.NavigationControl());
-    // this.deck = new Deck({
-    //   initialViewState: {
-    //     longitude: 0,
-    //     latitude: 0,
-    //     zoom: 4,
-    //   },
-
-    //   controller: true,
-    //   layers: [
-    //   ],
-    //   canvas: this.deckCanvas,
-    // });
   }
 
   protected shouldRunAnalysis: boolean = false;
