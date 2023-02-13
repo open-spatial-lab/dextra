@@ -39,7 +39,7 @@ export class DataLayer extends DataClass {
   public id = nanoid();
 
   /**
-   * The data store shared by all instances of this class
+   * The data store shared by all1 instances of this class
    */
   @sharedState()
   protected store: State = globalState;
@@ -95,36 +95,14 @@ export class DataLayer extends DataClass {
   }
 
   protected async loadData() {
-    if (this.store.datasets[this.dataSchema.url]) {
+    if (!this.dataSchema || this.store.datasets[this.dataSchema.url]) {
       return;
     }
 
     this.store.datasets[this.dataSchema.url] = {
       state: "loading",
     }
-
-    const db = this.db()!;
-
-    let dataLoadResult = null;
-    switch (this.dataSchema.type) {
-      case "csv":
-        const text = await fetch(this.dataSchema.url).then((res) => res.text());
-        await db.registerFileText(this.dataSchema.url, text);
-        const columns = await this.query(
-          `SELECT * FROM "${this.dataSchema.url}" LIMIT 1`
-        );
-        if (!columns) {
-          throw new Error("Could not load data");
-        }
-        dataLoadResult = {
-          // @ts-ignore
-          columns: Object.keys(columns.get(0)),
-          state: "loaded",
-        } satisfies Dataset;
-        break;
-      default:
-        break;
-    }
+    let dataLoadResult = await this.loadFile(this.dataSchema.type, this.dataSchema.url);
 
     if (dataLoadResult) {
       this.store.datasets = {
@@ -132,9 +110,45 @@ export class DataLayer extends DataClass {
         [this.dataSchema.url]: dataLoadResult
       };
     }
-    console.log('loaded data', this.store.datasets[this.dataSchema.url])
   }
+  protected async loadFile(filetype: string, url: string){
+    if (!this.db()) return
+    switch (filetype) {
+      case "csv":
+        const text = await fetch(url).then((res) => res.text());
+        await this.db()!.registerFileText(url, text);
+        const columns = await this.query(
+          `SELECT * FROM "${url}" LIMIT 1`
+        );
+        if (!columns) {
+          throw new Error("Could not load data");
+        }
+        return {
+          // @ts-ignore
+          columns: Object.keys(columns.get(0)),
+          state: "loaded",
+        } satisfies Dataset;
+        break;
+      default:
+        return {
+          // @ts-ignore
+          columns: [],
+          state: "loaded",
+        } satisfies Dataset;
+        break;
+    }
+  }
+  
   protected async getTable() {
+    if (!this.dataSchema) {
+      return {
+        data: [] satisfies IterableArrayLike<RowLike<any>>,
+        dataset: {
+          state: "loaded",
+          columns: []
+        } satisfies Dataset
+      }
+    }
     if (!this.store.datasets[this.dataSchema.url]) {
       await this.loadData();
     }
@@ -152,6 +166,14 @@ export class DataLayer extends DataClass {
     }
   }
 
+  toObject(obj: Object) {
+    return JSON.parse(JSON.stringify(obj, (_key: string, value: any) =>
+        typeof value === 'bigint'
+            ? value.toString()
+            : value // return everything else unchanged
+    ));
+  }
+
   // LIT LIFECYCLE METHODS
 
   protected dataLayerUpdate() {
@@ -163,7 +185,7 @@ export class DataLayer extends DataClass {
       this.init();
       return;
     }
-    if (!this.store.datasets[this.dataSchema.url]) {
+    if (this.dataSchema && !this.store.datasets[this.dataSchema.url]?.columns) {
       this.loadData();
       return;
     }

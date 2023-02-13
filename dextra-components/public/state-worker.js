@@ -12,7 +12,7 @@
     return result;
   };
 
-  // node_modules/lit-shared-state/dist/lit-shared-state.js
+  // ../node_modules/lit-shared-state/dist/lit-shared-state.js
   function state(stateOptions) {
     return function(constructor) {
       return class extends constructor {
@@ -161,10 +161,11 @@
   ], State);
   var globalState = new State();
 
-  // ../node_modules/.pnpm/comlink@4.3.1/node_modules/comlink/dist/esm/comlink.mjs
+  // ../node_modules/comlink/dist/esm/comlink.mjs
   var proxyMarker = Symbol("Comlink.proxy");
   var createEndpoint = Symbol("Comlink.endpoint");
   var releaseProxy = Symbol("Comlink.releaseProxy");
+  var finalizer = Symbol("Comlink.finalizer");
   var throwMarker = Symbol("Comlink.thrown");
   var isObject = (val) => typeof val === "object" && val !== null || typeof val === "function";
   var proxyTransferHandler = {
@@ -208,9 +209,24 @@
     ["proxy", proxyTransferHandler],
     ["throw", throwTransferHandler]
   ]);
-  function expose(obj, ep = self) {
+  function isAllowedOrigin(allowedOrigins, origin) {
+    for (const allowedOrigin of allowedOrigins) {
+      if (origin === allowedOrigin || allowedOrigin === "*") {
+        return true;
+      }
+      if (allowedOrigin instanceof RegExp && allowedOrigin.test(origin)) {
+        return true;
+      }
+    }
+    return false;
+  }
+  function expose(obj, ep = globalThis, allowedOrigins = ["*"]) {
     ep.addEventListener("message", function callback(ev) {
       if (!ev || !ev.data) {
+        return;
+      }
+      if (!isAllowedOrigin(allowedOrigins, ev.origin)) {
+        console.warn(`Invalid origin '${ev.origin}' for comlink proxy`);
         return;
       }
       const { id, type, path } = Object.assign({ path: [] }, ev.data);
@@ -268,7 +284,16 @@
         if (type === "RELEASE") {
           ep.removeEventListener("message", callback);
           closeEndPoint(ep);
+          if (finalizer in obj && typeof obj[finalizer] === "function") {
+            obj[finalizer]();
+          }
         }
+      }).catch((error) => {
+        const [wireValue, transferables] = toWireValue({
+          value: new TypeError("Unserializable return value"),
+          [throwMarker]: 0
+        });
+        ep.postMessage(Object.assign(Object.assign({}, wireValue), { id }), transferables);
       });
     });
     if (ep.start) {
@@ -290,6 +315,33 @@
       throw new Error("Proxy has been released and is not useable");
     }
   }
+  function releaseEndpoint(ep) {
+    return requestResponseMessage(ep, {
+      type: "RELEASE"
+    }).then(() => {
+      closeEndPoint(ep);
+    });
+  }
+  var proxyCounter = /* @__PURE__ */ new WeakMap();
+  var proxyFinalizers = "FinalizationRegistry" in globalThis && new FinalizationRegistry((ep) => {
+    const newCount = (proxyCounter.get(ep) || 0) - 1;
+    proxyCounter.set(ep, newCount);
+    if (newCount === 0) {
+      releaseEndpoint(ep);
+    }
+  });
+  function registerProxy(proxy2, ep) {
+    const newCount = (proxyCounter.get(ep) || 0) + 1;
+    proxyCounter.set(ep, newCount);
+    if (proxyFinalizers) {
+      proxyFinalizers.register(proxy2, ep, proxy2);
+    }
+  }
+  function unregisterProxy(proxy2) {
+    if (proxyFinalizers) {
+      proxyFinalizers.unregister(proxy2);
+    }
+  }
   function createProxy(ep, path = [], target = function() {
   }) {
     let isProxyReleased = false;
@@ -298,13 +350,9 @@
         throwIfProxyReleased(isProxyReleased);
         if (prop === releaseProxy) {
           return () => {
-            return requestResponseMessage(ep, {
-              type: "RELEASE",
-              path: path.map((p) => p.toString())
-            }).then(() => {
-              closeEndPoint(ep);
-              isProxyReleased = true;
-            });
+            unregisterProxy(proxy2);
+            releaseEndpoint(ep);
+            isProxyReleased = true;
           };
         }
         if (prop === "then") {
@@ -356,6 +404,7 @@
         }, transferables).then(fromWireValue);
       }
     });
+    registerProxy(proxy2, ep);
     return proxy2;
   }
   function myFlat(arr) {
@@ -427,3 +476,12 @@
   var StateWorker = new State();
   onconnect = (e) => expose(StateWorker, e.ports[0]);
 })();
+/*! Bundled license information:
+
+comlink/dist/esm/comlink.mjs:
+  (**
+   * @license
+   * Copyright 2019 Google LLC
+   * SPDX-License-Identifier: Apache-2.0
+   *)
+*/

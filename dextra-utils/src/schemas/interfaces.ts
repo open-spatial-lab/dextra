@@ -9,7 +9,7 @@ export type DataSchema = {
 } | {
     type: "tsv",
     url: string
-}
+} | null
 
 export type ColumnSchema = {
     column: string,
@@ -18,14 +18,15 @@ export type ColumnSchema = {
         value?: number,
         column?: ColumnSchema
     }
-}
+} | null
 
 export type AnalysisSchema = {
     type: keyof typeof ss,
+    kwargs?: Record<any, any>,
     derive?: {
         operation: "sum" | "multiply" | "divide" | "subtract",
         schema?: AnalysisSchema,
         value?: number,
         column?: ColumnSchema
     }
-}
+} | null

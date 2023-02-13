@@ -24,22 +24,9 @@ export class DextraSummary extends AnalysisLayer {
     }
   }
 
-  result() {
-    // if (this.store.db) {
-    //   console.log(this.store.db)
-    //   // const analysisResult = await this.store.analyst.db.runAnalysis(this.dataSchema, this.columnSchema, this.analysisSchema)
-    //   return this.formatResult('db initialized');
-    // }
-    return this.formatResult('asdf');
-  }
-  // protected willUpdate(_changedProperties: PropertyValueMap<any> | Map<PropertyKey, unknown>): void {
-  //   console.log(this.store.db)
-  // }
-
   render() {
     return html`
-      ${this.result()}
-      ${this.isInitialized ? 'initialized baby' : 'not initialized'}
+      ${this.formatResult(this.result)}
     `
   }
 

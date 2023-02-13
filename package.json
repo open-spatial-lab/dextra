@@ -8,7 +8,8 @@
     "dev:worker": "pnpm --filter dextra-utils build-worker && pnpm --filter dextra-utils watch",
     "serve:worker": "npx http-server ./dextra-utils/dist -p 8765 -g true -s --cors -c-1",
     "dev:components": "pnpm --filter dextra-components storybook",
-    "dev": "concurrently --kill-others \"pnpm dev:worker\"  \"pnpm dev:components\" \"pnpm serve:worker \""
+    "dev": "concurrently --kill-others \"pnpm dev:worker\"  \"pnpm dev:components\" \"pnpm serve:worker \"",
+    "clean": "rm -rf node_modules && rm -rf dextra-components/node_modules && rm -rf dextra-utils/node_modules"
   },
   "packageManager": "yarn@3.3.1",
   "devDependencies": {
