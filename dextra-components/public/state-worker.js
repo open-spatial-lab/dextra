@@ -1,62 +1,165 @@
 "use strict";
 (() => {
-  // ../node_modules/.pnpm/storeon@3.1.5/node_modules/storeon/index.js
-  var createStoreon = (modules) => {
-    let events = {};
-    let state = {};
-    let store2 = {
-      dispatch(event, data) {
-        if (event !== "@dispatch") {
-          store2.dispatch("@dispatch", [event, data, events[event]]);
-        }
-        if (events[event]) {
-          let changes;
-          events[event].forEach((i) => {
-            let diff = events[event].includes(i) && i(state, data, store2);
-            if (diff && typeof diff.then !== "function") {
-              state = { ...state, ...diff };
-              changes = { ...changes, ...diff };
-            }
-          });
-          if (changes)
-            store2.dispatch("@changed", changes);
-        }
-      },
-      get: () => state,
-      on(event, cb) {
-        ;
-        (events[event] || (events[event] = [])).push(cb);
-        return () => {
-          events[event] = events[event].filter((i) => i !== cb);
-        };
-      }
-    };
-    modules.forEach((i) => {
-      if (i)
-        i(store2);
-    });
-    store2.dispatch("@init");
-    return store2;
+  var __defProp = Object.defineProperty;
+  var __getOwnPropDesc = Object.getOwnPropertyDescriptor;
+  var __decorateClass = (decorators, target, key, kind) => {
+    var result = kind > 1 ? void 0 : kind ? __getOwnPropDesc(target, key) : target;
+    for (var i = decorators.length - 1, decorator; i >= 0; i--)
+      if (decorator = decorators[i])
+        result = (kind ? decorator(target, key, result) : decorator(result)) || result;
+    if (kind && result)
+      __defProp(target, key, result);
+    return result;
   };
 
+  // node_modules/lit-shared-state/dist/lit-shared-state.js
+  function state(stateOptions) {
+    return function(constructor) {
+      return class extends constructor {
+        constructor(...args) {
+          super(...args);
+          __parents.set(this, []);
+          Object.keys(this).forEach((propKey) => {
+            const desc = Object.getOwnPropertyDescriptor(this, propKey);
+            if (desc === null || desc === void 0 ? void 0 : desc.writable) {
+              defineState(constructor, this, propKey, stateOptions, desc.value);
+            }
+          });
+          const optional = __optionals.get(constructor.prototype);
+          if (optional) {
+            for (const propKey of optional) {
+              if (!Object.getOwnPropertyDescriptor(this, propKey)) {
+                defineState(constructor, this, propKey, stateOptions);
+              }
+            }
+          }
+          !(stateOptions === null || stateOptions === void 0 ? void 0 : stateOptions.noSeal) && Object.seal(this);
+        }
+      };
+    };
+  }
+  function updateAncestory(stateVar, value, propKey) {
+    var _a, _b;
+    if (stateVar.value instanceof Object && __parents.has(stateVar.value)) {
+      __parents.set(stateVar.value, __parents.get(stateVar.value).filter(({ parent }) => parent != stateVar));
+    }
+    if (value instanceof Object && __parents.has(value)) {
+      (_a = __parents.get(value)) === null || _a === void 0 ? void 0 : _a.push({ parent: stateVar, propKey });
+    }
+    if (value instanceof Array) {
+      for (const v of value) {
+        if (v instanceof Object && __parents.has(v)) {
+          (_b = __parents.get(v)) === null || _b === void 0 ? void 0 : _b.push({ parent: stateVar, propKey });
+        }
+      }
+    }
+  }
+  function defineState(constructor, object, propKey, stateOptions, value) {
+    const options = defaultOptions(chainOptions(constructor, propKey, stateOptions));
+    const stateVar = new StateVar(object, propKey, options, value);
+    updateAncestory(stateVar, value, propKey);
+    Object.defineProperty(object, propKey, {
+      enumerable: true,
+      set(value2) {
+        if (stateVar.options.lock && stateVar.options.lock.symbol !== __lock) {
+          throw new AccessError(stateVar.key);
+        }
+        updateAncestory(stateVar, value2, propKey);
+        stateVar.options.set(stateVar, value2);
+      },
+      get() {
+        __currentController && stateVar.observers.add(__currentController);
+        return stateVar === null || stateVar === void 0 ? void 0 : stateVar.options.get(stateVar);
+      }
+    });
+  }
+  var StateVar = class {
+    constructor(parent, key, options, _value) {
+      this.parent = parent;
+      this.key = key;
+      this.options = options;
+      this._value = _value;
+      this.observers = /* @__PURE__ */ new Set();
+      if (this.options.init) {
+        this._value = this.options.init(this, _value);
+        options.notifyOnInit && this.notifyObservers();
+      }
+    }
+    get value() {
+      return this._value;
+    }
+    set value(value) {
+      this._value = value;
+      this.notifyObservers();
+    }
+    /**
+     * notifies all LitElement observers and all explicitly passed observers
+     */
+    notifyObservers() {
+      for (const observer2 of this.observers.keys()) {
+        observer2.update();
+      }
+      for (const observer2 of this.options.observers) {
+        __currentTransaction ? __currentTransaction.deferr(observer2, this) : observer2(/* @__PURE__ */ new Set([this]));
+      }
+      const parents = __parents.get(this.parent);
+      for (const { parent } of parents) {
+        parent.notifyObservers();
+      }
+    }
+  };
+  var __currentTransaction = void 0;
+  function defaultOptions({ observers = [], notifyOnInit = false, noSeal = false, lock = null, init = function init2(_stateVar, v) {
+    return v;
+  }, set = function set2(stateVar, v) {
+    if (stateVar.value !== v) {
+      stateVar.value = v;
+    }
+  }, get = function get2(stateVar) {
+    return stateVar.value;
+  } } = {}) {
+    return { lock, set, get, init, observers, notifyOnInit, noSeal };
+  }
+  var __optionals = /* @__PURE__ */ new WeakMap();
+  function chainOptions(object, propKey, optionsBefore = {}, optionsAfter = {}) {
+    let t = __options.get(object);
+    if (!t) {
+      t = /* @__PURE__ */ new Map();
+      __options.set(object, t);
+    }
+    const o = Object.assign(Object.assign(Object.assign({}, optionsBefore), t.get(propKey) || {}), optionsAfter);
+    t.set(propKey, o);
+    return o;
+  }
+  var AccessError = class extends Error {
+    constructor(name) {
+      super(`Access to '${name}' is locked. Needs unlocked context for access!`);
+    }
+  };
+  var __options = /* @__PURE__ */ new WeakMap();
+  var __parents = /* @__PURE__ */ new WeakMap();
+  var __currentController;
+  var __lock = null;
+
   // src/schemas/state.ts
+  var DEBUG = false;
+  function observer(changed) {
+    for (let { key, value } of changed) {
+      console.log("new value:", value, "for", key);
+    }
+  }
   var State = class {
     constructor() {
       this.datasets = {};
-    }
-    setState(dataSchema, state) {
-      this.datasets[dataSchema.url] = state;
+      this.db = null;
+      this.analysis = null;
+      this.dbWorkerstatus = void 0;
     }
   };
-  var counterModule = (store2) => {
-    store2.on("@init", (state) => {
-      console.log("I AM INITIALIZING THE STATE");
-      return { counter: 0 };
-    });
-    store2.on("inc", (state) => ({ counter: state.counter + 1 }));
-    store2.on("set", (state, event) => ({ counter: event }));
-  };
-  var store = createStoreon([counterModule]);
+  State = __decorateClass([
+    state({ observers: DEBUG ? [observer] : [] })
+  ], State);
+  var globalState = new State();
 
   // ../node_modules/.pnpm/comlink@4.3.1/node_modules/comlink/dist/esm/comlink.mjs
   var proxyMarker = Symbol("Comlink.proxy");

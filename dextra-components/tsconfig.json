@@ -17,6 +17,7 @@
 		"forceConsistentCasingInFileNames": true,
 		"useDefineForClassFields": false,
 		"emitDecoratorMetadata": true,
+		"baseUrl": "./dextra-components"
 	},
 	"include": ["src/**/*.ts"],
 	"exclude": ["src/**/*.stories.ts"],

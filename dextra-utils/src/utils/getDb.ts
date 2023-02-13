@@ -3,12 +3,7 @@ import { AsyncDuckDB } from "@duckdb/duckdb-wasm";
 
 const JSDELIVR_BUNDLES = duckdb.getJsDelivrBundles();
 
-export async function getDb(): Promise<AsyncDuckDB> {
-  if (typeof window !== "undefined" && window.duckdbWorker !== undefined){
-    // console.log('reusing duckdb from window', window)
-    return window.duckdbWorker;
-  }
-  
+export async function getDb(): Promise<AsyncDuckDB> {  
   const bundle = await duckdb.selectBundle(JSDELIVR_BUNDLES);
   const worker_url = URL.createObjectURL(
     new Blob([`importScripts("${bundle.mainWorker!}");`], {

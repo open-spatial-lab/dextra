@@ -1,53 +1,47 @@
+import { IterableArrayLike, RowLike } from 'apache-arrow/type';
 import { css, html } from 'lit'
 import { customElement, property } from 'lit/decorators.js'
-import { WorkerDataLayer } from './core/worker-data-layer';
-
+import { AnalysisLayer } from './core/analysis-layer';
 
 @customElement('dextra-table')
-export class DextraTable extends WorkerDataLayer {
-  /**
-   * Analysis result
-   */
-  @property({type: String})
-  private result: null | any = null;
+export class DextraTable extends AnalysisLayer {
 
-  protected async runAnalysis() { 
-    if (!this.analyst?.db) {
-      await this.init()
-    }
+  @property({ type: Number })
+  dataTimestamp: number = 0;
 
-    try {
-      const analyst = this.analyst!;
-      const tableRequestResponse = await analyst.getTable(this.dataSchema);
-      this.result = tableRequestResponse
-    } catch {
-      this.result = "Error";
-    }
+  data: IterableArrayLike<RowLike<any>> | undefined;
+  columns: string[] | undefined;
+
+  getColumns() {
+    return this.store.datasets?.[this.dataSchema.url]?.columns
   }
 
-  async willUpdate(changedProperties: Map<any, any>){
-    if (changedProperties.has('dataSchema')) {
-      await this.runAnalysis()
-    }
+  async runAnalysis() {
+    const result = await this.getTable();
+    this.data = result.data;
+    this.dataTimestamp = Date.now();
   }
+
   tableHeader() {
+    if (!this.getColumns()) return html`<tr></tr>`;
+    const cols = this.getColumns()!;
     return html`<tr>
-        ${this.result.columns.map((column: string) => html`<th>${column}</th>`)}
+        ${cols.map((column: string) => html`<th>${column}</th>`)}
     </tr>`
   }
 
   tableRow(i: number) {
     return html`<tr>
-        ${this.result.columns.map((col: string) => html`<td>${this.result.data[i][col]}</td>`)}
+        ${this.getColumns()!.map((col: string) => html`<td>${this.data![i][col]}</td>`)}
     </tr>`
   }
 
   tableRows() {
-    return html`${this.result.data.map((_: any, i: number) => this.tableRow(i))}`
-
+    if (!this.data || !this.getColumns()) return html``;
+    return html`${(this.data! as Array<any>).map((_: any, i: number) => this.tableRow(i))}`
   }
-  render() {    
-    if (!this?.result?.columns) return null
+
+  render() {
     return html`
         <table>
             ${this.tableHeader()}
