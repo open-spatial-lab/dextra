@@ -142,7 +142,7 @@
   var __lock = null;
 
   // src/schemas/state.ts
-  var DEBUG = false;
+  var DEBUG = true;
   function observer(changed) {
     for (let { key, value } of changed) {
       console.log("new value:", value, "for", key);
@@ -151,15 +151,16 @@
   var State = class {
     constructor() {
       this.datasets = {};
+      this.params = {};
       this.db = null;
       this.analysis = null;
       this.dbWorkerstatus = void 0;
+      this.variables = {};
     }
   };
   State = __decorateClass([
     state({ observers: DEBUG ? [observer] : [] })
   ], State);
-  var globalState = new State();
 
   // ../node_modules/comlink/dist/esm/comlink.mjs
   var proxyMarker = Symbol("Comlink.proxy");

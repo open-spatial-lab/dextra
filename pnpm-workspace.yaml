@@ -1,3 +1,4 @@
 packages:
   - 'dextra-components'
+  - 'dextra-components/src/components/**'
   - 'dextra-utils'

@@ -9,17 +9,18 @@
     "serve:worker": "npx http-server ./dextra-utils/dist -p 8765 -g true -s --cors -c-1",
     "dev:components": "pnpm --filter dextra-components storybook",
     "dev": "concurrently --kill-others \"pnpm dev:worker\"  \"pnpm dev:components\" \"pnpm serve:worker \"",
-    "clean": "rm -rf node_modules && rm -rf dextra-components/node_modules && rm -rf dextra-utils/node_modules"
+    "clean": "rm -rf node_modules && rm -rf dextra-components/node_modules && rm -rf dextra-utils/node_modules",
+    "plop": "plop"
   },
   "packageManager": "yarn@3.3.1",
   "devDependencies": {
     "@babel/core": "^7.20.12",
     "@changesets/cli": "^2.26.0",
-    "@storybook/csf": "^0.0.1",
     "babel-loader": "^9.1.2",
     "tsup": "^6.5.0",
     "typescript": "^4.9.4",
-    "zx": "^7.1.1"
+    "zx": "^7.1.1",
+    "plop": "^3.1.2"
   },
   "dependencies": {
     "@babel/runtime": "^7.20.13",

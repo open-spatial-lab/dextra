@@ -1,0 +1,20 @@
+import { LitElement, html } from "lit";
+import { customElement, property } from "lit/decorators.js";
+import { DexterData } from '../../data/src/Data'
+
+@customElement("dexter-{{lowerCase name}}")
+export class Dexter{{titleCase name}} extends DexterData {
+  render() {
+    return html`
+      <div>
+        <h1>Hello, {{titleCase name}}!</h1>
+      </div>
+    `;
+  }
+}
+
+declare global {
+  interface HTMLElementTagNameMap {
+    "dexter-{{lowerCase name}}": Dexter{{titleCase name}};
+  }
+}

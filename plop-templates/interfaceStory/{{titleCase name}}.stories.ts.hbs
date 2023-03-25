@@ -1,0 +1,13 @@
+import { Meta } from "@storybook/web-components";
+import { html } from "lit";
+import "../components/{{name}}/src/{{name}}.ts";
+
+export default {
+  title: "Interface",
+}
+
+export const {{titleCase name}} = () => {
+  return html`
+    <dexter-{{lowerCase name}}></dexter-{{lowerCase name}}>
+    `
+}

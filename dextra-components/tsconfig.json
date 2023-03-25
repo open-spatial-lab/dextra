@@ -19,7 +19,7 @@
 		"emitDecoratorMetadata": true,
 		"baseUrl": "./dextra-components"
 	},
-	"include": ["src/**/*.ts"],
+	"include": ["src/**/*.ts", "../archive/analysis-layer.ts", "../archive/interface-layer.ts"],
 	"exclude": ["src/**/*.stories.ts"],
 	"references": [{ "path": "./tsconfig.node.json" }]
 }

@@ -1,0 +1,101 @@
+import { html } from "lit";
+import { customElement, property } from "lit/decorators.js";
+import { ValtioElement } from "../../core/state";
+
+@customElement("dexter-interface")
+export class DexterInterface extends ValtioElement {
+  @property({ type: String })
+  data = "";
+
+  @property({ type: String })
+  option: string = "";
+
+  @property({ type: Number })
+  initialValue?: string | number | Array<string | number>;
+
+  @property()
+  value: string | number | Array<string | number> = 1;
+
+  @property({ type: Array })
+  options?: Array<string | number> = [];
+
+  @property({ type: Number })
+  min?: number;
+
+  @property({ type: Number })
+  max?: number;
+
+  @property({ type: Number })
+  step?: number;
+
+  @property({ type: String })
+  type?: string;
+
+  @property({ type: String })
+  label?: string;
+
+  @property({ type: String })
+  placeholder?: string;
+
+  @property({ type: String })
+  description?: string;
+
+  @property({ type: String })
+  unit?: string;
+
+  protected initDataset() {
+    if (!this.data) {
+      return
+    }
+    if (!this.store.datasets[this.data] && this.data !== "") {
+      this.store.datasets[this.data] = {
+        parameters: {},
+        headless: true,
+        results: {},
+        status: "loading",
+      };
+    }
+    const currentParams = this.store.datasets[this.data].parameters;
+    if (
+      currentParams[this.option] === undefined &&
+      this.initialValue !== undefined
+    ) {
+      this.value = this.initialValue;
+      this.store.datasets[this.data].parameters[this.option] =
+        this.initialValue;
+    } else {
+      this.value = currentParams[this.option];
+    }
+    this.subscribe(
+      (store) => store.datasets[this.data].parameters,
+      () => {
+        this.value = this.store.datasets[this.data].parameters[this.option];
+      }
+    );
+  }
+
+  protected eventValueAccessor(event: Event) {
+    const target = event.target as HTMLInputElement;
+    return target.value;
+  }
+
+  protected handleChange(event: Event) {
+    const value = this.eventValueAccessor(event);
+    this.store.datasets[this.data].parameters[this.option] = value;
+  }
+
+  override connectedCallback() {
+    super.connectedCallback();
+    this.initDataset();
+  }
+
+  render() {
+    return html`${this.value}`;
+  }
+}
+
+declare global {
+  interface HTMLElementTagNameMap {
+    "dexter-interface": DexterInterface;
+  }
+}
