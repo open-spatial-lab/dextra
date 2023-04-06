@@ -69,9 +69,9 @@ export class DexterInterface extends ValtioElement {
     this.subscribe(
       (store) => store.datasets[this.data].parameters,
       () => {
-        console.log('params changed')
+        // console.log('params changed')
         this.value = this.store.datasets[this.data].parameters[this.option];
-        console.log(this.value)
+        // console.log(this.value)
         this.domUpdatesOnChange();
       }
     );

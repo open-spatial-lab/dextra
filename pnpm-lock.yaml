@@ -55,7 +55,7 @@ importers:
         version: 1.24.0
       '@observablehq/plot':
         specifier: git+ssh://git@github.com/observablehq/plot.git
-        version: github.com/observablehq/plot/9b165f8647b40b530b9362cc0b1c3dc6d05b5c34
+        version: github.com/observablehq/plot/44f4f9ac547ee8ac6be51f54f2da9828849ac336
       '@okikio/sharedworker':
         specifier: ^1.0.4
         version: 1.0.4
@@ -247,7 +247,73 @@ importers:
         specifier: ^2.1.3
         version: 2.9.15
 
+  dextra-components/src/components/Marks/Density:
+    dependencies:
+      lit-element:
+        specifier: ^2.4.0
+        version: 2.5.1
+      lit-html:
+        specifier: ^2.7.0
+        version: 2.7.0
+      valtio:
+        specifier: ^1.10.3
+        version: 1.10.3(react@18.2.0)
+    devDependencies:
+      '@types/node':
+        specifier: ^14.14.37
+        version: 14.18.42
+      typescript:
+        specifier: ^4.1.3
+        version: 4.9.5
+      vite:
+        specifier: ^2.1.3
+        version: 2.9.15
+
   dextra-components/src/components/Marks/Dot:
+    dependencies:
+      lit-element:
+        specifier: ^2.4.0
+        version: 2.5.1
+      lit-html:
+        specifier: ^2.7.0
+        version: 2.7.0
+      valtio:
+        specifier: ^1.10.3
+        version: 1.10.3(react@18.2.0)
+    devDependencies:
+      '@types/node':
+        specifier: ^14.14.37
+        version: 14.18.42
+      typescript:
+        specifier: ^4.1.3
+        version: 4.9.5
+      vite:
+        specifier: ^2.1.3
+        version: 2.9.15
+
+  dextra-components/src/components/Marks/Heatmap:
+    dependencies:
+      lit-element:
+        specifier: ^2.4.0
+        version: 2.5.1
+      lit-html:
+        specifier: ^2.7.0
+        version: 2.7.0
+      valtio:
+        specifier: ^1.10.3
+        version: 1.10.3(react@18.2.0)
+    devDependencies:
+      '@types/node':
+        specifier: ^14.14.37
+        version: 14.18.42
+      typescript:
+        specifier: ^4.1.3
+        version: 4.9.5
+      vite:
+        specifier: ^2.1.3
+        version: 2.9.15
+
+  dextra-components/src/components/Marks/Histogram:
     dependencies:
       lit-element:
         specifier: ^2.4.0
@@ -3683,7 +3749,7 @@ packages:
       '@storybook/csf-plugin': 7.0.0-rc.10
       '@storybook/csf-tools': 7.0.0-rc.10
       '@storybook/global': 5.0.0
-      '@storybook/mdx2-csf': 1.0.0-next.7
+      '@storybook/mdx2-csf': 1.0.0-next.8
       '@storybook/node-logger': 7.0.0-rc.10
       '@storybook/postinstall': 7.0.0-rc.10
       '@storybook/preview-api': 7.0.0-rc.10
@@ -3929,7 +3995,7 @@ packages:
       '@storybook/client-logger': 7.0.0-rc.10
       '@storybook/core-common': 7.0.0-rc.10
       '@storybook/csf-plugin': 7.0.0-rc.10
-      '@storybook/mdx2-csf': 1.0.0-next.7
+      '@storybook/mdx2-csf': 1.0.0-next.8
       '@storybook/node-logger': 7.0.0-rc.10
       '@storybook/preview': 7.0.0-rc.10
       '@storybook/preview-api': 7.0.0-rc.10
@@ -4114,7 +4180,7 @@ packages:
       '@storybook/core-events': 7.0.0-rc.10
       '@storybook/csf': 0.0.2-next.11
       '@storybook/csf-tools': 7.0.0-rc.10
-      '@storybook/docs-mdx': 0.0.1-next.6
+      '@storybook/docs-mdx': 0.0.1-next.7
       '@storybook/global': 5.0.0
       '@storybook/manager': 7.0.0-rc.10
       '@storybook/node-logger': 7.0.0-rc.10
@@ -4187,8 +4253,8 @@ packages:
       type-fest: 2.19.0
     dev: true
 
-  /@storybook/docs-mdx@0.0.1-next.6:
-    resolution: {integrity: sha512-DjoSIXADmLJtdroXAjUotFiZlcZ2usWhqrS7aeOtZs0DVR0Ws5WQjnwtpDUXt8gryTSd+OZJ0cNsDcqg4JDEvQ==}
+  /@storybook/docs-mdx@0.0.1-next.7:
+    resolution: {integrity: sha512-JbgBf/EMBtx65iXtB3pOiX3818UeL9jZ+KAY241OAPqJVXjMQ5KaVOdg/57MSmd508HDIGx7CiImOMEmWwQ9/g==}
     dev: true
 
   /@storybook/docs-tools@7.0.0-rc.10:
@@ -4238,8 +4304,8 @@ packages:
     resolution: {integrity: sha512-WmGyBFPCaW7ee57nSaPCb5teeI3mUBL+cRY3wXi7n+tzCHuWlYM/AWmQgOtb2goMgt7iZn76+uL9JUfTbvfRCg==}
     dev: true
 
-  /@storybook/mdx2-csf@1.0.0-next.7:
-    resolution: {integrity: sha512-xcQ8w4IecABAjsakaZTGiUEnEgFZzVKsMjqECjd+qdkwgD3R/kwrBdfyC15CLM5Ye1miPwYBIwJGeBXB9qxsZg==}
+  /@storybook/mdx2-csf@1.0.0-next.8:
+    resolution: {integrity: sha512-t2O5s/HHTH5evZVHgVtCWTZgMZ/CaqDu3xVGgjVbKeTvpPAbi0Waab5SSX8T9PG5jNDei/x+jpAVCcNMOHoWzg==}
     dev: true
 
   /@storybook/node-logger@7.0.0-rc.10:
@@ -11753,10 +11819,10 @@ packages:
       yaml: 2.2.1
     dev: true
 
-  github.com/observablehq/plot/9b165f8647b40b530b9362cc0b1c3dc6d05b5c34:
-    resolution: {tarball: https://codeload.github.com/observablehq/plot/tar.gz/9b165f8647b40b530b9362cc0b1c3dc6d05b5c34}
+  github.com/observablehq/plot/44f4f9ac547ee8ac6be51f54f2da9828849ac336:
+    resolution: {tarball: https://codeload.github.com/observablehq/plot/tar.gz/44f4f9ac547ee8ac6be51f54f2da9828849ac336}
     name: '@observablehq/plot'
-    version: 0.6.4
+    version: 0.6.5
     engines: {node: '>=12'}
     dependencies:
       d3: 7.8.3
