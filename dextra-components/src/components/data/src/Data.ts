@@ -17,7 +17,7 @@ export class DexterData extends ValtioElement {
   @property({ type: String })
   currentParametersHash = "{}";
 
-  protected syncDataFromStore(){
+  protected syncDataFromStore() {
     const results = this.store.datasets[this.data].results;
     const currentParametersHash = JSON.stringify(
       this.store.datasets[this.data].parameters
@@ -27,6 +27,8 @@ export class DexterData extends ValtioElement {
   }
 
   protected initDataset() {
+    if (!this.data) return;
+    
     if (!this.store.datasets[this.data] && this.data !== "") {
       this.store.datasets[this.data] = {
         parameters: {},
@@ -35,23 +37,17 @@ export class DexterData extends ValtioElement {
         status: "loading",
       };
     } else {
-      this.syncDataFromStore()
+      this.syncDataFromStore();
     }
 
     this.subscribe(
       (store) => store.datasets[this.data].results,
-      () => {
-        this.syncDataFromStore()
-      }
+      () => this.syncDataFromStore()
     );
 
     this.subscribe(
       (store) => store.datasets[this.data].parameters,
-      () => {
-        this.currentParametersHash = JSON.stringify(
-          this.store.datasets[this.data].parameters
-        );
-      }
+      () => this.syncDataFromStore()
     );
   }
 
@@ -60,7 +56,7 @@ export class DexterData extends ValtioElement {
     this.initDataset();
   }
 
-  render() {
+  template() {
     if (this.currentResults) {
       return html`<pre>${JSON.stringify(this.currentResults, null, 2)}</pre>`;
     } else {

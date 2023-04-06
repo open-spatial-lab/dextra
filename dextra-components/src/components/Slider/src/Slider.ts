@@ -1,21 +1,23 @@
 import { html } from "lit";
 import { customElement } from "lit/decorators.js";
 import { DexterInterface } from "../../Interface/src/Interface";
-import "@ui5/webcomponents/dist/Slider.js";
+import '@spectrum-web-components/slider/sp-slider.js';
+import "@spectrum-web-components/theme/sp-theme.js";
+import "@spectrum-web-components/theme/src/themes.js";
 
 @customElement("dexter-slider")
 export class DexterSlider extends DexterInterface {
-  render() {
+  template() {
     return html`
-      <ui5-slider
+      <sp-slider
         min="${this.min !== undefined ? this.min : 1}"
         max="${this.max !== undefined ? this.max : 1}"
         step="${this.step !== undefined ? this.step : 1}"
         value="${this.value}"
+        name="${this.title}"
+        label="${this.title}"
         @change="${this.handleChange}"
-        @keydown="${this.handleChange}"
-        show-tooltip="true"
-      ></ui5-slider>
+      ></sp-slider>
     `;
   }
 }

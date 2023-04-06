@@ -1,6 +1,5 @@
-import { proxy } from "valtio";
+import { proxy, subscribe } from "valtio";
 import { StateSchema } from "./types";
-import { subscribe } from "valtio";
 
 export const initialState: StateSchema = {
   datasets: {},
@@ -12,7 +11,6 @@ subscribe(store.datasets, async () => {
   const allDatasets = Object.keys(store.datasets);
   allDatasets.forEach((key) => {
     const dataset = store.datasets[key];
-    console.log(dataset.parameters)
     const currentParams = dataset.parameters
     const currentParamString = JSON.stringify(currentParams);
     // todo add abort logic

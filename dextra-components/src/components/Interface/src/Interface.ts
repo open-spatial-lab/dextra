@@ -10,7 +10,7 @@ export class DexterInterface extends ValtioElement {
   @property({ type: String })
   option: string = "";
 
-  @property({ type: Number })
+  @property()
   initialValue?: string | number | Array<string | number>;
 
   @property()
@@ -69,9 +69,16 @@ export class DexterInterface extends ValtioElement {
     this.subscribe(
       (store) => store.datasets[this.data].parameters,
       () => {
+        console.log('params changed')
         this.value = this.store.datasets[this.data].parameters[this.option];
+        console.log(this.value)
+        this.domUpdatesOnChange();
       }
     );
+  }
+
+  protected domUpdatesOnChange(){
+    // const value = this.value;
   }
 
   protected eventValueAccessor(event: Event) {
@@ -89,7 +96,7 @@ export class DexterInterface extends ValtioElement {
     this.initDataset();
   }
 
-  render() {
+  template() {
     return html`${this.value}`;
   }
 }

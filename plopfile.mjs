@@ -16,6 +16,12 @@ const elementTypes = [
     name: "Data Component",
     description: "An element to display data, like tables, charts, or maps",
     plopDir: "data"
+  },
+  {
+    name: "Mark Component",
+    description: "A Chart Mark based on observablehq plot",
+    plopDir: "mark",
+    outputSubfolder: "marks/"
   }
 ]
 
@@ -35,7 +41,7 @@ export default function (plop) {
         {
           type: "addMany",
           base: `plop-templates/${type.plopDir}`,
-          destination: `${componentDir}/{{name}}`,
+          destination: `${componentDir}/${type.outputSubfolder || ''}{{titleCase name}}`,
           templateFiles: `plop-templates/${type.plopDir}/**/*`
         },
         {

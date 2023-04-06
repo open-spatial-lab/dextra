@@ -1,0 +1,18 @@
+import { Meta } from "@storybook/web-components";
+import { html } from "lit";
+import "../components/marks/{{titleCase name}}/src/{{titleCase name}}.ts";
+import "../components/Plot/src/Plot.ts";
+
+export default {
+  title: "Marks",
+}
+
+export const {{titleCase name}} = () => {
+  return html`
+    <dexter-plot
+      data="https://d2vloi59ojgfpi.cloudfront.net/data-query/6417b73afe20b50008149901"
+    >
+      <dexter-{{lowerCase name}}></dexter-{{lowerCase name}}>
+    </dexter-plot>
+    `
+}
