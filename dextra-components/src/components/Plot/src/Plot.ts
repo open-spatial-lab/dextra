@@ -28,9 +28,18 @@ export class DexterPlot extends DexterData {
   @property({ type: Boolean })
   framed = true
 
+  @property({ type: Boolean })
+  grid = true
+
+  @property({ type: Boolean })
+  colorLegend = false
+
   protected plot(){
     const { inset, marks } = this
     const plot = Plot.plot({
+
+      grid: this.grid,
+      color: {legend: this.colorLegend},
       inset,
       marks
     })

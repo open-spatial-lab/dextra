@@ -17,6 +17,27 @@ export const Dot = () => {
   `;
 };
 
+export const ComplexDot = () => {
+  return html`
+    <p>Air quality vs income inequality ratio</p>
+    <p>Size of the dot is population</p>
+    <p>Color of the dot is presence of water quality violation</p>
+
+    <dexter-plot
+      colorLegend="true"
+      data="https://d2vloi59ojgfpi.cloudfront.net/data-query/642da9a7cbd1580008828021"
+    >
+      <dexter-dot
+        x="avg_daily_pm25"
+        y="income_ratio"
+        fill="water_violation"
+        r="population"
+      >
+      </dexter-dot>
+    </dexter-plot>
+  `;
+};
+
 export const ControlledDot = () => {
   return html`
     <dexter-slider
