@@ -1,5 +1,5 @@
-import { LitElement, html } from "lit";
-import { customElement, property } from "lit/decorators.js";
+import { html } from "lit";
+import { customElement } from "lit/decorators.js";
 import { DexterInterface } from "../../Interface/src/Interface";
 import "@spectrum-web-components/picker/sp-picker.js";
 import "@spectrum-web-components/help-text/sp-help-text.js";
@@ -38,7 +38,7 @@ export class DexterSelect extends DexterInterface {
       : html``;
   }
 
-  template() {
+  override template() {
     return html`
       ${this.renderTitle()}
       <sp-picker

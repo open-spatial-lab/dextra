@@ -1,5 +1,5 @@
-import { LitElement, html } from "lit";
-import { customElement, property } from "lit/decorators.js";
+import { html } from "lit";
+import { customElement } from "lit/decorators.js";
 import { DexterInterface } from "../../Interface/src/Interface";
 import "@spectrum-web-components/tags/sp-tags.js";
 import "@spectrum-web-components/tags/sp-tag.js";
@@ -40,9 +40,10 @@ export class DexterChips extends DexterInterface {
 
   protected handleRemove(value: string | number | any) {
     const options = this.getJsonValues();
-    const newValues = options.filter((option) => option !== value);
+    const newValues = options.filter((option: string) => option !== value);
     this.handleChange({
       target: {
+        // @ts-ignore
         value: newValues
       },
     });
@@ -53,7 +54,7 @@ export class DexterChips extends DexterInterface {
     // this.store.datasets[this.data].parameters[this.option] = newValues;
   }
 
-  template() {
+  override template() {
     return html`
       <sp-tags> ${this.renderTags()} </sp-tags><br />
       <sp-field-label for="chips-${this.id}">${this.title}</sp-field-label>

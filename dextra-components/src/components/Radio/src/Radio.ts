@@ -47,7 +47,7 @@ export class DexterRadio extends DexterInterface {
 
   }
 
-  template() {
+  override template() {
     const value = (this.value || "") as string;
     return html`
           ${this.renderTitle()}

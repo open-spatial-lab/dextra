@@ -17,6 +17,9 @@ export class DexterData extends ValtioElement {
   @property({ type: String })
   currentParametersHash = "{}";
 
+  // @property({type: Boolean})
+  // isNectrBackend = true;
+
   protected syncDataFromStore() {
     const results = this.store.datasets[this.data].results;
     const currentParametersHash = JSON.stringify(
@@ -56,7 +59,7 @@ export class DexterData extends ValtioElement {
     this.initDataset();
   }
 
-  template() {
+  override template() {
     if (this.currentResults) {
       return html`<pre>${JSON.stringify(this.currentResults, null, 2)}</pre>`;
     } else {

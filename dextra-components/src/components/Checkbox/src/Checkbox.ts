@@ -1,10 +1,10 @@
-import { LitElement, html } from "lit";
-import { customElement, property } from "lit/decorators.js";
+import { html } from "lit";
+import { customElement } from "lit/decorators.js";
 import { DexterInterface } from '../../Interface/src/Interface';
 
 @customElement("dexter-checkbox")
 export class DexterCheckbox extends DexterInterface {
-  render() {
+  override render() {
     return html`
       <div>
         <h1>Hello, Checkbox!</h1>

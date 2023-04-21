@@ -36,7 +36,7 @@ export class DexterTable extends DexterData {
     `;
   }
 
-  template() {
+  override template() {
     if (!this.currentResults?.length) {
       return this.preloader();
     }

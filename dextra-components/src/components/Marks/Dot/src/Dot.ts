@@ -5,7 +5,7 @@ import { PlotMark } from "../../PlotMark/src/PlotMark";
 
 @customElement("dexter-dot")
 export class DexterDot extends PlotMark {
-  mark = "dot";
+  override mark = "dot";
 
   @property({ type: String })
   x?: DotOptions["x"];
@@ -16,9 +16,9 @@ export class DexterDot extends PlotMark {
   @property({ type: String })
   r?: DotOptions["fill"];
 
-  markOptions: (keyof this)[] = ["x", "y", "r"];
+  override markOptions: (keyof this)[] = ["x", "y", "r"];
 
-  public get plot() {
+  public override get plot() {
     const innerData = this?.currentResults;
     const options = this.allOptions;
 
@@ -28,7 +28,7 @@ export class DexterDot extends PlotMark {
     };
   }
 
-  render() {
+  override render() {
     return null;
   }
 }

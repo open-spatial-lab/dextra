@@ -4,7 +4,7 @@ import * as Plot from "@observablehq/plot";
 
 @customElement("dexter-density")
 export class DexterDensity extends PlotMark {
-  mark = "density"
+  override mark = "density"
 
   @property({ type: String })
   x?: string;
@@ -15,15 +15,15 @@ export class DexterDensity extends PlotMark {
   @property({ type: Number })
   bandwidth?: number;
 
-  markOptions: (keyof this)[] = ['x','y','bandwidth'];
+  override markOptions: (keyof this)[] = ['x','y','bandwidth'];
 
-  connectedCallback(): void {
+  override connectedCallback(): void {
     console.log('connected!')
     console.log(this.allOptions)
     super.connectedCallback();
   }
 
-  public get plot() {
+  public override get plot() {
     const innerData = this?.currentResults;
     const options = this.allOptions;
 
@@ -33,7 +33,7 @@ export class DexterDensity extends PlotMark {
     };
   }
 
-  render() {
+  override render() {
     return null
   }
 }

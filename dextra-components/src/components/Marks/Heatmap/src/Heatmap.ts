@@ -10,7 +10,7 @@ type BinInputs = {
 
 @customElement("dexter-heatmap")
 export class DexterHeatmap extends PlotMark {
-  mark = "heatmap";
+  override mark = "heatmap";
 
   @property({ type: String })
   x?: BinInputs["x"];
@@ -18,12 +18,12 @@ export class DexterHeatmap extends PlotMark {
   @property({ type: String })
   y?: BinInputs["y"];
 
-  markOptions: (keyof this)[] = ["x", "y"];
+  override markOptions: (keyof this)[] = ["x", "y"];
 
   @property({ type: Boolean })
   transparent?: boolean = true;
 
-  public get plot() {
+  public override get plot() {
     const innerData = this?.currentResults;
     const options = this.allOptions;
     // const useTransparent = this.transparent;
@@ -38,7 +38,7 @@ export class DexterHeatmap extends PlotMark {
     };
   }
 
-  render() {
+  override render() {
     return null;
   }
 }

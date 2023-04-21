@@ -1,4 +1,4 @@
-import { LitElement, html } from "lit";
+import { html } from "lit";
 import { customElement, property } from "lit/decorators.js";
 import { DexterData } from '../../data/src/Data'
 import * as Plot from "@observablehq/plot";
@@ -45,7 +45,7 @@ export class DexterPlot extends DexterData {
     })
     return plot
   }
-  render() {
+  override render() {
     return html`
       <div>
         ${this.plot()}

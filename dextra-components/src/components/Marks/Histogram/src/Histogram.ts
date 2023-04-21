@@ -4,7 +4,7 @@ import * as Plot from "@observablehq/plot";
 
 @customElement("dexter-histogram")
 export class DexterHistogram extends PlotMark {
-  mark = "histogram"
+  override mark = "histogram"
 
   @property({ type: String })
   x?: string;
@@ -15,9 +15,9 @@ export class DexterHistogram extends PlotMark {
   @property({ type: Boolean })
   vertical?: boolean = false;
   
-  markOptions: (keyof this)[] = ['x'];
+  override markOptions: (keyof this)[] = ['x'];
 
-  public get plot() {
+  public override get plot() {
     const innerData = this?.currentResults;
     const options = this.allOptions;
 
@@ -40,7 +40,7 @@ export class DexterHistogram extends PlotMark {
     };
   }
 
-  render() {
+  override render() {
     return null
   }
 }
