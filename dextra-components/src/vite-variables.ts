@@ -1,0 +1,1 @@
+export const external = []// [/^lit/, /^@loaders.gl/, 'valtio', /@spectrum-web-components/]
