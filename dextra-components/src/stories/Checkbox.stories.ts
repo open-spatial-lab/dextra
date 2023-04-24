@@ -19,6 +19,8 @@ The value is:
     <br/>
     <osl-checkbox
       options="[1,2,3]"
+      initialValue="[1,2]"
+      option="mag"
       data="https://d2vloi59ojgfpi.cloudfront.net/data-query/6417b73afe20b50008149901"
 
     >
