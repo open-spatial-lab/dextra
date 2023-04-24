@@ -8,16 +8,9 @@ export default {
 };
 
 export const Histogram = () => {
-  return html`
-  <osl-plot
+  return html` <osl-plot scheme="inferno"
     data="https://d2vloi59ojgfpi.cloudfront.net/data-query/642da9a7cbd1580008828021"
   >
-    <osl-histogram x="avg_daily_pm25"></osl-histogram>
-  </osl-plot>
-    <!-- <osl-plot
-      data="https://d2vloi59ojgfpi.cloudfront.net/data-query/642da9a7cbd1580008828021"
-    >
-      <osl-histogram vertical="True" y="avg_daily_pm25"></osl-histogram>
-    </osl-plot> -->
-  `;
+    <osl-histogram-plot x="avg_daily_pm25" fill="forestgreen"></osl-histogram-plot>
+  </osl-plot>`;
 };

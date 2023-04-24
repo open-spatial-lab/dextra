@@ -12,7 +12,7 @@ export const Dot = () => {
     <osl-plot
       data="https://d2vloi59ojgfpi.cloudfront.net/data-query/642da9a7cbd1580008828021"
     >
-      <osl-dot x="avg_daily_pm25" y="income_ratio"> </osl-dot>
+      <osl-dot-plot x="avg_daily_pm25" y="income_ratio"> </osl-dot-plot>
     </osl-plot>
   `;
 };
@@ -27,13 +27,13 @@ export const ComplexDot = () => {
       colorLegend="true"
       data="https://d2vloi59ojgfpi.cloudfront.net/data-query/642da9a7cbd1580008828021"
     >
-      <osl-dot
+      <osl-dot-plot
         x="avg_daily_pm25"
         y="income_ratio"
         fill="water_violation"
         r="population"
       >
-      </osl-dot>
+      </osl-dot-plot>
     </osl-plot>
   `;
 };
@@ -53,7 +53,7 @@ export const ControlledDot = () => {
     <osl-plot
       data="https://d2vloi59ojgfpi.cloudfront.net/data-query/642da9a7cbd1580008828021"
     >
-      <osl-dot x="avg_daily_pm25" y="income_ratio"> </osl-dot>
+      <osl-dot-plot x="avg_daily_pm25" y="income_ratio"> </osl-dot-plot>
     </osl-plot>
   `;
 };
