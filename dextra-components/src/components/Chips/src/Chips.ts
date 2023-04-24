@@ -39,20 +39,20 @@ export class OslChips extends OslControl {
       : html``;
   }
 
-  protected get inputElement() {
-    return (
-      this.renderRoot.querySelector(`.chips-${this.elementId}`) as LitElement
-    ).renderRoot.querySelector(".input")!;
+  protected get spectrumTextfield() {
+    return this.renderRoot.querySelector(
+      `.chips-${this.elementId}`
+    ) as LitElement;
   }
 
   protected get inputValue(): string {
     // @ts-ignore
-    return this.inputElement.value!;
+    return this.spectrumTextfield.value!;
   }
 
   resetText() {
     // @ts-ignore
-    this.inputElement.value = "";
+    this.spectrumTextfield.value = "";
   }
   protected override eventValueAccessor(event: any): string {
     return event;
@@ -100,8 +100,8 @@ export class OslChips extends OslControl {
       </sp-textfield>
 
       <sp-action-button @click=${this.handleAdd}>
-                <sp-icon-add-circle slot="icon"></sp-icon-add-circle>
-            </sp-action-button>
+          <sp-icon-add-circle slot="icon"></sp-icon-add-circle>
+      </sp-action-button>
 
     `;
   }
