@@ -16,13 +16,7 @@ export default defineConfig({
       },
     },
   },
-  // TODO exclude core bundle
-  // optimizeDeps: {
+  optimizeDeps: {
   //   exclude: ['./node_modules/lit-element', './node_modules/lit', './node_modules/immer', './node_modules/zustand'],
-  // },
-  "resolve": {
-    "alias": {
-      "lit-element": path.resolve("./node_modules/lit-element")
-    }
-  }
+  },
 })
