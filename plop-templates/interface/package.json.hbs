@@ -1,26 +1,22 @@
 {
   "name": "@open-spatial-lab/{{lowerCase name}}",
   "version": "0.0.0",
-  "main": "dist/{{lowerCase name}}.es.js",
+  "main": "dist/{{titleCase name}}.js",
   "exports": {
-    ".": "./dist/{{lowerCase name}}.es.js"
+    ".": "./dist/{{titleCase name}}.js"
   },
-  "types": "types/{{lowerCase name}}.d.ts",
   "files": [
-    "dist",
-    "types"
+    "dist"
   ],
   "scripts": {
-    "start": "npm run dev",
     "dev": "vite",
-    "build": "rm -rf ./types && tsc && vite build",
-    "serve": "tsc && vite preview"
+    "build": "vite build",
+    "serve:prod": "http-server . -p 8080 --gzip"
   },
   "dependencies": {
     "lit-element": "^2.4.0",
     "lit-html": "^2.7.0",
-    "valtio": "^1.10.3",
-    "@ui5/webcomponents": "^1.10.5"
+    "valtio": "^1.10.3"
   },
   "devDependencies": {
     "@types/node": "^14.14.37",

@@ -1,26 +1,22 @@
 {
   "name": "@open-spatial-lab/select",
   "version": "0.0.0",
-  "main": "dist/select.es.js",
+  "main": "dist/Slider.js",
   "exports": {
-    ".": "./dist/select.es.js"
+    ".": "./dist/Slider.js"
   },
-  "types": "types/select.d.ts",
   "files": [
-    "dist",
-    "types"
+    "dist"
   ],
   "scripts": {
-    "start": "npm run dev",
     "dev": "vite",
-    "build": "rm -rf ./types && tsc && vite build",
-    "serve": "tsc && vite preview"
+    "build": "vite build",
+    "serve:prod": "http-server . -p 8080 --gzip"
   },
   "dependencies": {
     "lit-element": "^2.4.0",
     "lit-html": "^2.7.0",
-    "valtio": "^1.10.3",
-    "@ui5/webcomponents": "^1.10.5"
+    "valtio": "^1.10.3"
   },
   "devDependencies": {
     "@types/node": "^14.14.37",

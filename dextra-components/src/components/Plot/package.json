@@ -1,20 +1,17 @@
 {
   "name": "@open-spatial-lab/plot",
   "version": "0.0.0",
-  "main": "dist/plot.es.js",
+  "main": "dist/Plot.js",
   "exports": {
-    ".": "./dist/plot.es.js"
+    ".": "./dist/Plot.js"
   },
-  "types": "types/plot.d.ts",
   "files": [
-    "dist",
-    "types"
+    "dist"
   ],
   "scripts": {
-    "start": "npm run dev",
     "dev": "vite",
-    "build": "rm -rf ./types && tsc && vite build",
-    "serve": "tsc && vite preview"
+    "build": "vite build",
+    "serve:prod": "http-server . -p 8080 --gzip"
   },
   "dependencies": {
     "lit-element": "^2.4.0",

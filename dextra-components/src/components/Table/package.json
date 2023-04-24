@@ -1,20 +1,17 @@
 {
   "name": "@open-spatial-lab/table",
   "version": "0.0.0",
-  "main": "dist/table.es.js",
+  "main": "dist/Table.js",
   "exports": {
-    ".": "./dist/table.es.js"
+    ".": "./dist/Table.js"
   },
-  "types": "types/table.d.ts",
   "files": [
-    "dist",
-    "types"
+    "dist"
   ],
   "scripts": {
-    "start": "npm run dev",
     "dev": "vite",
-    "build": "rm -rf ./types && tsc && vite build",
-    "serve": "tsc && vite preview"
+    "build": "vite build",
+    "serve:prod": "http-server . -p 8080 --gzip"
   },
   "dependencies": {
     "lit-element": "^2.4.0",
