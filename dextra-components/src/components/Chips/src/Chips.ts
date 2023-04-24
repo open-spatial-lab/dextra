@@ -6,6 +6,8 @@ import "@spectrum-web-components/tags/sp-tag.js";
 import "@spectrum-web-components/theme/sp-theme.js";
 import "@spectrum-web-components/theme/src/themes.js";
 import "@spectrum-web-components/textfield/sp-textfield.js";
+import "@spectrum-web-components/action-button/sp-action-button.js";
+import "@spectrum-web-components/icons-workflow/icons/sp-icon-add-circle.js";
 
 @customElement("osl-chips")
 export class OslChips extends OslControl {
@@ -56,7 +58,7 @@ export class OslChips extends OslControl {
     return event;
   }
 
-  protected handleRemove(inputValue: string | number | any) {
+  handleRemove(inputValue: string | number | any) {
     const storeValue = this.value as Array<string | number>;
     const value = inputValue;
     const newValues = storeValue.filter((item) => item !== value);
@@ -64,23 +66,27 @@ export class OslChips extends OslControl {
     this.handleChange(newValues);
   }
 
-  protected handleAdd(event: KeyboardEvent): void {
-    const isEnter = event.key === "Enter";
+  handleAdd() {
     const inputValue = this.inputValue?.trim();
     const isValidText = inputValue && inputValue.length > 0;
+    if (!isValidText) return;
+    const storeValue = this.value as Array<string | number>;
+    const newValues = [...storeValue, inputValue];
+    this.store.datasets[this.data].parameters[this.option] = newValues;
+    this.resetText();
+  }
 
-    if (isEnter && isValidText) {
-      const storeValue = this.value as Array<string | number>;
-      const newValues = [...storeValue, inputValue];
-      this.store.datasets[this.data].parameters[this.option] = newValues;
-      // this.value = JSON.stringify(newValues);
-      this.resetText();
-    }
+  handleTextEnter(event: KeyboardEvent): void {
+    const isEnter = event.key === "Enter";
+    if (isEnter) this.handleAdd();
   }
 
   override template() {
     return html`
-      <sp-tags> ${this.renderTags()} </sp-tags><br />
+      <!-- <sp-tags> </sp-tags><br /> -->
+      <div style="max-width:"100%">
+      ${this.renderTags()} 
+      </div>
       <sp-field-label for="chips-${this.elementId}"
         >${this.title}</sp-field-label
       >
@@ -88,10 +94,15 @@ export class OslChips extends OslControl {
         class="chips-${this.elementId}"
         id="chips-${this.elementId}"
         placeholder=${this.label as string}
-        @keydown=${this.handleAdd}
+        @keydown=${this.handleTextEnter}
       >
         ${this.renderHelpText()}
       </sp-textfield>
+
+      <sp-action-button @click=${this.handleAdd}>
+                <sp-icon-add-circle slot="icon"></sp-icon-add-circle>
+            </sp-action-button>
+
     `;
   }
 }
