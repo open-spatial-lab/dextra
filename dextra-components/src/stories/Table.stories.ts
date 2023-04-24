@@ -3,6 +3,7 @@ import { html } from "lit";
 import "../components/Table/src/Table.ts";
 import "../components/Slider/src/Slider.ts";
 
+
 export default {
   title: "Data",
 };

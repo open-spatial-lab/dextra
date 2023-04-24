@@ -2,9 +2,10 @@ import { css, html, LitElement } from "lit";
 import { subscribe } from "valtio";
 import { Sub } from "./Sub";
 import { store } from "./Store";
-import "@spectrum-web-components/theme/sp-theme.js";
-import "@spectrum-web-components/theme/theme-light.js";
 import "@spectrum-web-components/progress-bar/sp-progress-bar.js";
+import "@spectrum-web-components/theme/sp-theme.js";
+import "@spectrum-web-components/theme/src/themes.js";
+
 import {nanoid} from "nanoid";
 
 export class ValtioElement extends LitElement {
@@ -12,9 +13,6 @@ export class ValtioElement extends LitElement {
   protected store = store;
   private subs: Array<Sub<typeof store>> = [];
   private rootSub: Sub<typeof store> | null = null;
-  static override styles = css`
-    @import "@spectrum-web-components/styles/theme-light.css";
-  `;
 
   protected subscribe(
     selector: (state: typeof store) => any,

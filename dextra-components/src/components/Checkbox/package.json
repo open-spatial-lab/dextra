@@ -1,9 +1,9 @@
 {
   "name": "@open-spatial-lab/checkbox",
   "version": "0.0.0",
-  "main": "dist/Checkbox.js",
+  "main": "dist/index.js",
   "exports": {
-    ".": "./dist/Checkbox.js"
+    ".": "./dist/index.js"
   },
   "files": [
     "dist"
@@ -11,7 +11,9 @@
   "scripts": {
     "dev": "vite",
     "build": "vite build",
-    "serve:prod": "http-server . -p 8080 --gzip"
+    "serve": "http-server . -p 8080 --gzip",
+    "build-n-test": "npm run build && npm run serve"
+
   },
   "dependencies": {
     "lit-element": "^2.4.0",

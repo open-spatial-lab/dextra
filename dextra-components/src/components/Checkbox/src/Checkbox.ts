@@ -2,8 +2,7 @@ import { html } from "lit";
 import { property, customElement } from "lit/decorators.js";
 import { OslControl } from "../../Interface/src/Interface";
 import "@spectrum-web-components/checkbox/sp-checkbox.js";
-import "@spectrum-web-components/theme/sp-theme.js";
-import "@spectrum-web-components/theme/src/themes.js";
+
 @customElement("osl-checkbox")
 export class OslCheckbox extends OslControl {
   @property({ type: String })

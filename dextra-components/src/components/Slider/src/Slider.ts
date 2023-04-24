@@ -3,8 +3,6 @@ import { customElement } from "lit/decorators.js";
 // @ts-ignore
 import { OslControl } from "../../Interface/src/Interface";
 import "@spectrum-web-components/slider/sp-slider.js";
-import "@spectrum-web-components/theme/sp-theme.js";
-import "@spectrum-web-components/theme/src/themes.js";
 
 @customElement("osl-slider")
 export class SliderControl extends OslControl {

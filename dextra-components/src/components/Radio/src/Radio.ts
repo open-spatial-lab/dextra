@@ -3,8 +3,6 @@ import { customElement, property } from "lit/decorators.js";
 import { OslControl } from "../../Interface/src/Interface";
 import "@spectrum-web-components/radio/sp-radio.js";
 import "@spectrum-web-components/radio/sp-radio-group.js";
-import "@spectrum-web-components/theme/sp-theme.js";
-import "@spectrum-web-components/theme/src/themes.js";
 import '@spectrum-web-components/help-text/sp-help-text.js';
 
 @customElement("osl-radio")

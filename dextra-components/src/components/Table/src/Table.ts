@@ -8,8 +8,6 @@ import "@spectrum-web-components/table/sp-table-checkbox-cell.js";
 import "@spectrum-web-components/table/sp-table-head.js";
 import "@spectrum-web-components/table/sp-table-head-cell.js";
 import "@spectrum-web-components/table/sp-table-row.js";
-import "@spectrum-web-components/theme/sp-theme.js";
-import "@spectrum-web-components/theme/src/themes.js";
 
 @customElement("osl-table")
 export class OslTable extends OslData {

@@ -4,7 +4,7 @@ import path, { resolve } from 'path';
 export default defineConfig({
   base: '/',
   build: {
-    outDir: 'build',
+    outDir: 'dist',
     lib: {
       entry: 'src/maplayer.ts',
       formats: ['es'],

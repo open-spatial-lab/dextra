@@ -1,9 +1,9 @@
 {
   "name": "@open-spatial-lab/select",
   "version": "0.0.0",
-  "main": "dist/Slider.js",
+  "main": "dist/index.js",
   "exports": {
-    ".": "./dist/Slider.js"
+    ".": "./dist/index.js"
   },
   "files": [
     "dist"
@@ -11,7 +11,9 @@
   "scripts": {
     "dev": "vite",
     "build": "vite build",
-    "serve:prod": "http-server . -p 8080 --gzip"
+    "serve": "http-server . -p 8080 --gzip",
+    "build-n-test": "npm run build && npm run serve"
+
   },
   "dependencies": {
     "lit-element": "^2.4.0",

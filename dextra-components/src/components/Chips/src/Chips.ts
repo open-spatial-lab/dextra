@@ -3,8 +3,6 @@ import { customElement, property } from "lit/decorators.js";
 import { OslControl } from "../../Interface/src/Interface";
 import "@spectrum-web-components/tags/sp-tags.js";
 import "@spectrum-web-components/tags/sp-tag.js";
-import "@spectrum-web-components/theme/sp-theme.js";
-import "@spectrum-web-components/theme/src/themes.js";
 import "@spectrum-web-components/textfield/sp-textfield.js";
 import "@spectrum-web-components/action-button/sp-action-button.js";
 import "@spectrum-web-components/icons-workflow/icons/sp-icon-add-circle.js";
