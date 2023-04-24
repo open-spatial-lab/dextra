@@ -1,5 +1,5 @@
 {
-  "name": "@dexter/basemark",
+  "name": "@open-spatial-lab/basemark",
   "version": "0.0.0",
   "main": "dist/basemark.es.js",
   "exports": {

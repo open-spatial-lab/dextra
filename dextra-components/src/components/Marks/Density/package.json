@@ -1,5 +1,5 @@
 {
-  "name": "@dexter/mark-density",
+  "name": "@open-spatial-lab/mark-density",
   "version": "0.0.0",
   "main": "dist/density.es.js",
   "exports": {

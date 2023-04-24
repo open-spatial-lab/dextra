@@ -1,5 +1,5 @@
 {
-  "name": "@dexter/checkbox",
+  "name": "@open-spatial-lab/checkbox",
   "version": "0.0.0",
   "main": "dist/checkbox.es.js",
   "exports": {

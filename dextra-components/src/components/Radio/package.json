@@ -1,5 +1,5 @@
 {
-  "name": "@dexter/radio",
+  "name": "@open-spatial-lab/radio",
   "version": "0.0.0",
   "main": "dist/radio.es.js",
   "exports": {

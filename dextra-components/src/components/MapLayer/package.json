@@ -1,5 +1,5 @@
 {
-  "name": "@dexter/maplayer",
+  "name": "@open-spatial-lab/maplayer",
   "version": "0.0.0",
   "main": "dist/maplayer.es.js",
   "exports": {

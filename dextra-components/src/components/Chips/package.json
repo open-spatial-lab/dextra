@@ -1,5 +1,5 @@
 {
-  "name": "@dexter/chips",
+  "name": "@open-spatial-lab/chips",
   "version": "0.0.0",
   "main": "dist/chips.es.js",
   "exports": {

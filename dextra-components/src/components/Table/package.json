@@ -1,5 +1,5 @@
 {
-  "name": "@dexter/table",
+  "name": "@open-spatial-lab/table",
   "version": "0.0.0",
   "main": "dist/table.es.js",
   "exports": {

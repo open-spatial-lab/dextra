@@ -1,5 +1,5 @@
 {
-  "name": "@dexter/switch",
+  "name": "@open-spatial-lab/switch",
   "version": "0.0.0",
   "main": "dist/switch.es.js",
   "exports": {

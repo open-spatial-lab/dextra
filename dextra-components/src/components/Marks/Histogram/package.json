@@ -1,5 +1,5 @@
 {
-  "name": "@dexter/mark-histogram",
+  "name": "@open-spatial-lab/mark-histogram",
   "version": "0.0.0",
   "main": "dist/histogram.es.js",
   "exports": {

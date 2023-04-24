@@ -1,5 +1,5 @@
 {
-  "name": "@dexter/interface",
+  "name": "@open-spatial-lab/interface",
   "version": "0.0.0",
   "main": "dist/interface.es.js",
   "exports": {

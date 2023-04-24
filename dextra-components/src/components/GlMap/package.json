@@ -1,5 +1,5 @@
 {
-  "name": "@dexter/glmap",
+  "name": "@open-spatial-lab/glmap",
   "version": "0.0.0",
   "main": "dist/glmap.es.js",
   "exports": {

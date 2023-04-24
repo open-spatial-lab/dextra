@@ -1,5 +1,5 @@
 {
-  "name": "@dexter/data",
+  "name": "@open-spatial-lab/data",
   "version": "0.0.0",
   "main": "dist/data.es.js",
   "exports": {
