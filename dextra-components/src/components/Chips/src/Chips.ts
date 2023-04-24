@@ -1,14 +1,14 @@
 import { html } from "lit";
 import { customElement } from "lit/decorators.js";
-import { DexterInterface } from "../../Interface/src/Interface";
+import { OslControl } from "../../Interface/src/Interface";
 import "@spectrum-web-components/tags/sp-tags.js";
 import "@spectrum-web-components/tags/sp-tag.js";
 import "@spectrum-web-components/theme/sp-theme.js";
 import "@spectrum-web-components/theme/src/themes.js";
 import "@spectrum-web-components/textfield/sp-textfield.js";
 
-@customElement("dexter-chips")
-export class DexterChips extends DexterInterface {
+@customElement("osl-chips")
+export class OslChips extends OslControl {
 
   getJsonValues(){
     const value = (this.value as Array<string | number>) || [];
@@ -67,6 +67,6 @@ export class DexterChips extends DexterInterface {
 
 declare global {
   interface HTMLElementTagNameMap {
-    "dexter-chips": DexterChips;
+    "osl-chips": OslChips;
   }
 }

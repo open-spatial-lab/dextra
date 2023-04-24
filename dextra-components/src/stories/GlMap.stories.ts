@@ -9,24 +9,24 @@ export default {
 
 export const GlMap = () => {
   return html`
-    <dexter-glmap
+    <osl-glmap
       center="[-122.41669, 37.7853]"
       zoom="2"
       mapStyle="https://demotiles.maplibre.org/style.json"
     >
-      <dexter-map-layer
+      <osl-map-layer
         type="scatter"
         getPosition="(d) => [d.x, d.y]"
         data="https://d2vloi59ojgfpi.cloudfront.net/data-query/6417b73afe20b50008149901"
       >
-      </dexter-map-layer>
-    </dexter-glmap>
+      </osl-map-layer>
+    </osl-glmap>
   `;
 };
 
 export const ControlledGlMap = () => {
   return html`
-    <dexter-slider
+    <osl-slider
       data="https://d2vloi59ojgfpi.cloudfront.net/data-query/6417b73afe20b50008149901"
       option="mag"
       min="7"
@@ -34,19 +34,19 @@ export const ControlledGlMap = () => {
       step="0.1"
       initialValue="7"
       title="Magnitude"
-    ></dexter-slider>
+    ></osl-slider>
     <br/><br/>
-    <dexter-glmap
+    <osl-glmap
       center="[-122.41669, 37.7853]"
       zoom="2"
       mapStyle="https://demotiles.maplibre.org/style.json"
     >
-      <dexter-map-layer
+      <osl-map-layer
         type="scatter"
         getPosition="(d) => [d.x, d.y]"
         data="https://d2vloi59ojgfpi.cloudfront.net/data-query/6417b73afe20b50008149901"
       >
-      </dexter-map-layer>
-    </dexter-glmap>
+      </osl-map-layer>
+    </osl-glmap>
   `;
 };

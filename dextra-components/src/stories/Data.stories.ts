@@ -8,8 +8,8 @@ export default {
 
 export const Data = () => {
   return html`
-    <dexter-data
+    <osl-data
       data="https://d2vloi59ojgfpi.cloudfront.net/data-query/6417b73afe20b50008149901"
-    ></dexter-data>
+    ></osl-data>
   `;
 };

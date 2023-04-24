@@ -9,11 +9,11 @@ export default {
 
 export const Dot = () => {
   return html`
-    <dexter-plot
+    <osl-plot
       data="https://d2vloi59ojgfpi.cloudfront.net/data-query/642da9a7cbd1580008828021"
     >
-      <dexter-dot x="avg_daily_pm25" y="income_ratio"> </dexter-dot>
-    </dexter-plot>
+      <osl-dot x="avg_daily_pm25" y="income_ratio"> </osl-dot>
+    </osl-plot>
   `;
 };
 
@@ -23,24 +23,24 @@ export const ComplexDot = () => {
     <p>Size of the dot is population</p>
     <p>Color of the dot is presence of water quality violation</p>
 
-    <dexter-plot
+    <osl-plot
       colorLegend="true"
       data="https://d2vloi59ojgfpi.cloudfront.net/data-query/642da9a7cbd1580008828021"
     >
-      <dexter-dot
+      <osl-dot
         x="avg_daily_pm25"
         y="income_ratio"
         fill="water_violation"
         r="population"
       >
-      </dexter-dot>
-    </dexter-plot>
+      </osl-dot>
+    </osl-plot>
   `;
 };
 
 export const ControlledDot = () => {
   return html`
-    <dexter-slider
+    <osl-slider
       data="https://d2vloi59ojgfpi.cloudfront.net/data-query/642da9a7cbd1580008828021"
       option="population"
       min="0"
@@ -48,12 +48,12 @@ export const ControlledDot = () => {
       step="1000"
       title="Minimum Population"
       initialValue="0"
-    ></dexter-slider>
+    ></osl-slider>
 
-    <dexter-plot
+    <osl-plot
       data="https://d2vloi59ojgfpi.cloudfront.net/data-query/642da9a7cbd1580008828021"
     >
-      <dexter-dot x="avg_daily_pm25" y="income_ratio"> </dexter-dot>
-    </dexter-plot>
+      <osl-dot x="avg_daily_pm25" y="income_ratio"> </osl-dot>
+    </osl-plot>
   `;
 };

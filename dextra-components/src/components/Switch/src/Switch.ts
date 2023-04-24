@@ -1,9 +1,9 @@
 import { html } from "lit";
 import { customElement } from "lit/decorators.js";
-import { DexterInterface } from '../../Interface/src/Interface';
+import { OslControl } from '../../Interface/src/Interface';
 
-@customElement("dexter-switch")
-export class DexterSwitch extends DexterInterface {
+@customElement("osl-switch")
+export class SwitchControl extends OslControl {
   override render() {
     return html`
       <div>
@@ -15,6 +15,6 @@ export class DexterSwitch extends DexterInterface {
 
 declare global {
   interface HTMLElementTagNameMap {
-    "dexter-switch": DexterSwitch;
+    "osl-switch": SwitchControl;
   }
 }

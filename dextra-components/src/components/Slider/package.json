@@ -1,5 +1,5 @@
 {
-  "name": "@open-spatial-lab/dexter-slider",
+  "name": "@open-spatial-lab/slider",
   "version": "0.0.1",
   "main": "dist/Slider.js",
   "exports": {

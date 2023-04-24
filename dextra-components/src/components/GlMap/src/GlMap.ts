@@ -1,11 +1,11 @@
 import { html } from "lit";
 import { customElement, property, query } from "lit/decorators.js";
-import { DexterData } from "../../data/src/Data";
+import { OslData } from "../../data/src/Data";
 import * as maplibregl from "maplibre-gl";
 import { MapboxOverlay as DeckOverlay } from "@deck.gl/mapbox/typed";
 import 'maplibre-gl/dist/maplibre-gl.css';
 import { styles } from "./mapStyles"
-import { DexterMapLayer } from "../../MapLayer/src/MapLayer";
+import { OslMapLayer } from "../../MapLayer/src/MapLayer";
 
 const basicStyle = {
   "version": 8,
@@ -27,8 +27,8 @@ const basicStyle = {
   ]
 };
 
-@customElement("dexter-glmap")
-export class DexterGlMap extends DexterData {
+@customElement("osl-glmap")
+export class OslGlMap extends OslData {
   static override styles = styles;
 
   @property({type: Array})
@@ -46,9 +46,9 @@ export class DexterGlMap extends DexterData {
   map: maplibregl.Map | null = null;
   deck: DeckOverlay | null = null;
 
-  get layers(): Array<DexterMapLayer['renderLayer'] | null> {
+  get layers(): Array<OslMapLayer['renderLayer'] | null> {
     const children = Array.from(this.childNodes)
-    const layers = children.filter((node) => 'renderLayer' in node) as DexterMapLayer[]
+    const layers = children.filter((node) => 'renderLayer' in node) as OslMapLayer[]
     return layers.map((layer) => 'renderLayer' in layer ? layer.renderLayer : null)
   }
 
@@ -98,6 +98,6 @@ export class DexterGlMap extends DexterData {
 
 declare global {
   interface HTMLElementTagNameMap {
-    "dexter-glmap": DexterGlMap;
+    "osl-glmap": OslGlMap;
   }
 }

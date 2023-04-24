@@ -8,8 +8,8 @@ type BinInputs = {
   y?: ChannelValueBinSpec;
 } & BinOptions;
 
-@customElement("dexter-heatmap")
-export class DexterHeatmap extends PlotMark {
+@customElement("osl-heatmap-plot")
+export class HeatmapPlot extends PlotMark {
   override mark = "heatmap";
 
   @property({ type: String })
@@ -45,6 +45,6 @@ export class DexterHeatmap extends PlotMark {
 
 declare global {
   interface HTMLElementTagNameMap {
-    "dexter-heatmap": DexterHeatmap;
+    "osl-heatmap-plot": HeatmapPlot;
   }
 }

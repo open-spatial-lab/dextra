@@ -2,8 +2,8 @@ import { customElement, property } from "lit/decorators.js";
 import { PlotMark } from "../../PlotMark/src/PlotMark";
 import * as Plot from "@observablehq/plot";
 
-@customElement("dexter-density")
-export class DexterDensity extends PlotMark {
+@customElement("osl-density-plot")
+export class OslPlotDensity extends PlotMark {
   override mark = "density"
 
   @property({ type: String })
@@ -40,6 +40,6 @@ export class DexterDensity extends PlotMark {
 
 declare global {
   interface HTMLElementTagNameMap {
-    "dexter-density": DexterDensity;
+    "osl-density-plot": OslPlotDensity;
   }
 }

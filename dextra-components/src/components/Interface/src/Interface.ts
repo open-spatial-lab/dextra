@@ -3,8 +3,8 @@ import { customElement, property } from "lit/decorators.js";
 // @ts-ignore
 import { ValtioElement } from "../../core/state";
 
-@customElement("dexter-interface")
-export class DexterInterface extends ValtioElement {
+@customElement("osl-interface")
+export class OslControl extends ValtioElement {
   @property({ type: String })
   data = "";
 
@@ -104,6 +104,6 @@ export class DexterInterface extends ValtioElement {
 
 declare global {
   interface HTMLElementTagNameMap {
-    "dexter-interface": DexterInterface;
+    "osl-control": OslControl;
   }
 }

@@ -1,5 +1,5 @@
 {
-  "name": "@open-spatial-lab/mark-density",
+  "name": "@open-spatial-lab/density-plot",
   "version": "0.0.0",
   "main": "dist/density.es.js",
   "exports": {

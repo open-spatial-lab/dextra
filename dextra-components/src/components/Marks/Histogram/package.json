@@ -1,5 +1,5 @@
 {
-  "name": "@open-spatial-lab/mark-histogram",
+  "name": "@open-spatial-lab/histogram-plot",
   "version": "0.0.0",
   "main": "dist/histogram.es.js",
   "exports": {

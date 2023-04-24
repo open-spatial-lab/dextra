@@ -1,5 +1,5 @@
 import { customElement, property } from "lit/decorators.js";
-import { DexterData } from "../../data/src/Data";
+import { OslData } from "../../data/src/Data";
 import { ScatterplotLayer } from "@deck.gl/layers/typed";
 import { MapboxOverlay as DeckOverlay } from "@deck.gl/mapbox/typed";
 
@@ -57,8 +57,8 @@ const interpretFuncJsonOrString = (value: string | null, _type: unknown) => {
   }
 };
 
-@customElement("dexter-map-layer")
-export class DexterMapLayer extends DexterData {
+@customElement("osl-map-layer")
+export class OslMapLayer extends OslData {
   @property({ converter: interpretFuncJsonOrString })
   getPosition?: (d: any) => number[] | number[];
 
@@ -120,6 +120,6 @@ export class DexterMapLayer extends DexterData {
 
 declare global {
   interface HTMLElementTagNameMap {
-    "dexter-map-layer": DexterMapLayer;
+    "osl-map-layer": OslMapLayer;
   }
 }

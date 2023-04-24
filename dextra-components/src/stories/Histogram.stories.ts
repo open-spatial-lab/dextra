@@ -9,15 +9,15 @@ export default {
 
 export const Histogram = () => {
   return html`
-  <dexter-plot
+  <osl-plot
     data="https://d2vloi59ojgfpi.cloudfront.net/data-query/642da9a7cbd1580008828021"
   >
-    <dexter-histogram x="avg_daily_pm25"></dexter-histogram>
-  </dexter-plot>
-    <!-- <dexter-plot
+    <osl-histogram x="avg_daily_pm25"></osl-histogram>
+  </osl-plot>
+    <!-- <osl-plot
       data="https://d2vloi59ojgfpi.cloudfront.net/data-query/642da9a7cbd1580008828021"
     >
-      <dexter-histogram vertical="True" y="avg_daily_pm25"></dexter-histogram>
-    </dexter-plot> -->
+      <osl-histogram vertical="True" y="avg_daily_pm25"></osl-histogram>
+    </osl-plot> -->
   `;
 };

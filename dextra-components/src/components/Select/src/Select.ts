@@ -1,14 +1,14 @@
 import { html } from "lit";
 import { customElement } from "lit/decorators.js";
-import { DexterInterface } from "../../Interface/src/Interface";
+import { OslControl } from "../../Interface/src/Interface";
 import "@spectrum-web-components/picker/sp-picker.js";
 import "@spectrum-web-components/help-text/sp-help-text.js";
 import "@spectrum-web-components/theme/sp-theme.js";
 import "@spectrum-web-components/theme/src/themes.js";
 import "@spectrum-web-components/menu/sp-menu-item.js";
 
-@customElement("dexter-select")
-export class DexterSelect extends DexterInterface {
+@customElement("osl-select")
+export class SelectControl extends OslControl {
   renderSelectOptions() {
     const options = this.options || [];
     return html`
@@ -56,6 +56,6 @@ export class DexterSelect extends DexterInterface {
 
 declare global {
   interface HTMLElementTagNameMap {
-    "dexter-select": DexterSelect;
+    "osl-select": SelectControl;
   }
 }

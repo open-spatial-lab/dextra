@@ -2,8 +2,8 @@ import { customElement, property } from "lit/decorators.js";
 import { PlotMark } from "../../PlotMark/src/PlotMark";
 import * as Plot from "@observablehq/plot";
 
-@customElement("dexter-histogram")
-export class DexterHistogram extends PlotMark {
+@customElement("osl-histogram-plot")
+export class HistogramPlot extends PlotMark {
   override mark = "histogram"
 
   @property({ type: String })
@@ -47,6 +47,6 @@ export class DexterHistogram extends PlotMark {
 
 declare global {
   interface HTMLElementTagNameMap {
-    "dexter-histogram": DexterHistogram;
+    "osl-histogram-plot": HistogramPlot;
   }
 }

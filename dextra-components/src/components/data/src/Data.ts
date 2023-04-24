@@ -3,8 +3,8 @@ import { customElement, property } from "lit/decorators.js";
 import { ValtioElement } from "../../core/state";
 import { DataResult } from "../../core/state/types";
 
-@customElement("dexter-data")
-export class DexterData extends ValtioElement {
+@customElement("osl-data")
+export class OslData extends ValtioElement {
   @property({ type: String })
   data = "";
 

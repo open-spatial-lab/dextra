@@ -3,8 +3,8 @@ import * as Plot from "@observablehq/plot";
 import { DotOptions } from "@observablehq/plot";
 import { PlotMark } from "../../PlotMark/src/PlotMark";
 
-@customElement("dexter-dot")
-export class DexterDot extends PlotMark {
+@customElement("osl-dot-plot")
+export class OslDotPlot extends PlotMark {
   override mark = "dot";
 
   @property({ type: String })
@@ -35,6 +35,6 @@ export class DexterDot extends PlotMark {
 
 declare global {
   interface HTMLElementTagNameMap {
-    "dexter-dot": DexterDot;
+    "osl-dot-plot": OslDotPlot;
   }
 }

@@ -1,12 +1,12 @@
 import { html } from "lit";
 import { customElement, property } from "lit/decorators.js";
-import { DexterData } from '../../data/src/Data'
+import { OslData } from '../../data/src/Data'
 import * as Plot from "@observablehq/plot";
 
 export type MarkFunction = (data: any, overrideOptions: any) => any
 
-@customElement("dexter-plot")
-export class DexterPlot extends DexterData {
+@customElement("osl-plot")
+export class OslPlot extends OslData {
   get markFunctions(): Array<MarkFunction> {
     const children = Array.from(this.childNodes)
     const marks = children.filter((node) => 'mark' in node)
@@ -56,6 +56,6 @@ export class DexterPlot extends DexterData {
 
 declare global {
   interface HTMLElementTagNameMap {
-    "dexter-plot": DexterPlot;
+    "osl-plot": OslPlot;
   }
 }

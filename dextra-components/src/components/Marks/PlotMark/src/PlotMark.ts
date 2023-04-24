@@ -1,9 +1,9 @@
-import { DexterData } from "../../../data/src/Data";
+import { OslData } from "../../../data/src/Data";
 import type { MarkOptions } from "@observablehq/plot";
 import * as Plot from "@observablehq/plot";
 import { property } from "lit/decorators.js";
 
-export class PlotMark extends DexterData {
+export class PlotMark extends OslData {
   mark = "base";
 
   @property({ type: String })

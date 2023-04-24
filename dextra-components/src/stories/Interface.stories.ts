@@ -9,14 +9,14 @@ export default {
 
 export const Interface = () => {
   return html`
-    Querying with a magnitude of: <dexter-interface
+    Querying with a magnitude of: <osl-interface
       data="https://d2vloi59ojgfpi.cloudfront.net/data-query/6417b73afe20b50008149901"
       option="mag"
       initialValue="7"
-    > </dexter-interface>
+    > </osl-interface>
     <br/> <br/>
-    <dexter-data
+    <osl-data
       data="https://d2vloi59ojgfpi.cloudfront.net/data-query/6417b73afe20b50008149901"
-    ></dexter-data>
+    ></osl-data>
   `;
 };

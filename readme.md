@@ -1,4 +1,4 @@
-# Dexter Components
+# OSL Components
 
 ## Quickstart
 1. Install [NodeJS](https://nodejs.org/en). Use your relevant package manager, like Brew on MacOS, if that's how you like to install stuff. Node gives access to Node Package Manager, or *npm*, which allows you to install and manage packages/libraries that we're calling in our code.

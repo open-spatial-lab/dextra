@@ -1,5 +1,5 @@
 {
-  "name": "@open-spatial-lab/mark-heatmap",
+  "name": "@open-spatial-lab/heatmap-plot",
   "version": "0.0.0",
   "main": "dist/heatmap.es.js",
   "exports": {

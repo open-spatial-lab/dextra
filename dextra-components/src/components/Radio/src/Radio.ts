@@ -1,14 +1,14 @@
 import { html } from "lit";
 import { customElement, property } from "lit/decorators.js";
-import { DexterInterface } from "../../Interface/src/Interface";
+import { OslControl } from "../../Interface/src/Interface";
 import "@spectrum-web-components/radio/sp-radio.js";
 import "@spectrum-web-components/radio/sp-radio-group.js";
 import "@spectrum-web-components/theme/sp-theme.js";
 import "@spectrum-web-components/theme/src/themes.js";
 import '@spectrum-web-components/help-text/sp-help-text.js';
 
-@customElement("dexter-radio")
-export class DexterRadio extends DexterInterface {
+@customElement("osl-radio")
+export class RadioControl extends OslControl {
   @property({ type: String })
   valueState: "None" | "Success" | "Warning" | "Error" | "Information" = "None";
 
@@ -61,6 +61,6 @@ export class DexterRadio extends DexterInterface {
 
 declare global {
   interface HTMLElementTagNameMap {
-    "dexter-radio": DexterRadio;
+    "osl-radio": RadioControl;
   }
 }

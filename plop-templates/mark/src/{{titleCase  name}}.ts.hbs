@@ -2,8 +2,8 @@ import { customElement } from "lit/decorators.js";
 import { PlotMark } from "../../PlotMark/src/PlotMark";
 import * as Plot from "@observablehq/plot";
 
-@customElement("dexter-{{lowerCase name}}")
-export class Dexter{{titleCase name}} extends PlotMark {
+@customElement("osl-{{lowerCase name}}")
+export class Osl{{titleCase name}} extends PlotMark {
   mark = "{{lowerCase name}}"
 
   markOptions: (keyof this)[] = [];
@@ -25,6 +25,6 @@ export class Dexter{{titleCase name}} extends PlotMark {
 
 declare global {
   interface HTMLElementTagNameMap {
-    "dexter-{{lowerCase name}}": Dexter{{titleCase name}};
+    "osl-{{lowerCase name}}": Osl{{titleCase name}};
   }
 }

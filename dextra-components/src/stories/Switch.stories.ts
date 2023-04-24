@@ -8,6 +8,6 @@ export default {
 
 export const Switch = () => {
   return html`
-    <dexter-switch></dexter-switch>
+    <osl-switch></osl-switch>
     `
 }

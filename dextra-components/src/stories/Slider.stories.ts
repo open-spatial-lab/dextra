@@ -9,14 +9,14 @@ export default {
 export const Slider = () => {
   return html`
   The value is: 
-  <dexter-interface
+  <osl-interface
     data="https://d2vloi59ojgfpi.cloudfront.net/data-query/6417b73afe20b50008149901"
     option="mag"
-    ></dexter-interface>
+    ></osl-interface>
     <br/>
     <hr/>
     <br/>
-    <dexter-slider
+    <osl-slider
       data="https://d2vloi59ojgfpi.cloudfront.net/data-query/6417b73afe20b50008149901"
       option="mag"
       min="7"
@@ -24,7 +24,7 @@ export const Slider = () => {
       step="0.1"
       initialValue="7"
       title="Magnitude"
-    ></dexter-slider>
+    ></osl-slider>
 
   `;
 };
