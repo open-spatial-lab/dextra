@@ -8,7 +8,7 @@ export default {
   title: "Marks",
 }
 
-export const Regression = () => {
+export const LinearRegression = () => {
   return html`
     <dexter-plot
       data="https://d2vloi59ojgfpi.cloudfront.net/data-query/642da9a7cbd1580008828021"
