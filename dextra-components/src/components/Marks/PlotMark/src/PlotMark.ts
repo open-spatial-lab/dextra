@@ -84,7 +84,7 @@ export class PlotMark extends DexterData {
   @property({ type: String })
   strokeMiterlimit?: MarkOptions["strokeMiterlimit"];
 
-  @property({ type: String })
+  @property({ type: Number })
   strokeOpacity?: MarkOptions["strokeOpacity"];
 
   @property({ type: String })

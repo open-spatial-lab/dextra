@@ -2,7 +2,7 @@ import { customElement, property } from "lit/decorators.js";
 import { PlotMark } from "../../PlotMark/src/PlotMark";
 import * as Plot from "@observablehq/plot";
 import { LinearRegressionOptions } from "@observablehq/plot";
-import { LinearRegressionXOptions } from "@observablehq/plot";
+import { LinearRegressionYOptions } from "@observablehq/plot";
 
 
 @customElement("dexter-regression")
@@ -10,10 +10,10 @@ export class DexterRegression extends PlotMark {
   mark = "regression"
 
   @property({ type: String })
-  x?: LinearRegressionXOptions["x"];
+  x?: LinearRegressionYOptions["interval"];
 
   @property({ type: String })
-  y?: LinearRegressionXOptions["y"];
+  y?: LinearRegressionYOptions["y"];
 
   @property({ type: String })
   ci?: LinearRegressionOptions["ci"];
@@ -26,7 +26,7 @@ export class DexterRegression extends PlotMark {
 
     return (overrideData?: any, overrideOptions?: {}) => {
       const data = innerData?.length ? innerData : overrideData;
-      return Plot.linearRegressionX(data, { ...overrideOptions, ...options});
+      return Plot.linearRegressionY(data, { ...overrideOptions, ...options});
     };
   }
 
