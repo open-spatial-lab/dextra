@@ -3,44 +3,43 @@
   "private": true,
   "version": "0.0.0",
   "type": "module",
-  "main": "dist/my-element.es.js",
-  "exports": {
-    ".": "./dist/my-element.es.js"
-  },
-  "types": "types/my-element.d.ts",
-  "files": [
-    "dist",
-    "types"
-  ],
   "scripts": {
     "dev": "vite",
-    "build": "tsc && vite build",
+    "build": "tsc",
     "storybook": "storybook dev -p 6006",
     "build-storybook": "storybook build"
   },
   "dependencies": {
     "@duckdb/duckdb-wasm": "^1.20.0",
+    "@lit-labs/context": "^0.3.0",
+    "@loaders.gl/core": "^3.3.3",
+    "@loaders.gl/csv": "^3.3.3",
+    "@loaders.gl/json": "^3.3.3",
+    "@observablehq/plot": "git+ssh://git@github.com/observablehq/plot.git",
     "@okikio/sharedworker": "^1.0.4",
+    "@rollup/plugin-replace": "^5.0.2",
+    "@spectrum-web-components/bundle": "^0.29.3",
     "comlink": "^4.3.1",
     "deck.gl": "^8.8.24",
-    "lit": "^2.4.1",
+    "kill-port": "^2.0.1",
+    "lit": "^2.7.0",
     "maplibre-gl": "^2.4.0",
-    "nanoid": "^4.0.0",
+    "nanoid": "^4.0.2",
     "sql-bricks": "^3.0.0",
     "threads": "^1.7.0",
     "valtio": "^1.10.3",
-    "zod": "^3.20.2",
-    "@spectrum-web-components/bundle": "^0.29.3",
-    "@observablehq/plot": "git+ssh://git@github.com/observablehq/plot.git"
+    "zod": "^3.20.2"
   },
   "devDependencies": {
     "@babel/core": "^7.20.12",
+    "@babel/plugin-proposal-decorators": "^7.21.0",
     "@storybook/addon-essentials": "^7.0.0-rc.7",
     "@storybook/addon-links": "^7.0.0-rc.7",
     "@storybook/blocks": "^7.0.0-rc.7",
     "@storybook/builder-vite": "^7.0.0-rc.7",
     "@storybook/web-components": "^7.0.0-rc.7",
     "@storybook/web-components-vite": "^7.0.0-rc.7",
+    "@types/d3": "^7.4.0",
     "@types/node": "^18.11.18",
     "ansi-to-html": "^0.7.2",
     "babel-loader": "^8.3.0",

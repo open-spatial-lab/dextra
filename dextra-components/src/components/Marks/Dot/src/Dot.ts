@@ -2,23 +2,24 @@ import { customElement, property } from "lit/decorators.js";
 import * as Plot from "@observablehq/plot";
 import { DotOptions } from "@observablehq/plot";
 import { PlotMark } from "../../PlotMark/src/PlotMark";
+import { interpretFuncJsonOrString } from "../../../core/utils/converters";
 
-@customElement("dexter-dot")
-export class DexterDot extends PlotMark {
-  mark = "dot";
+@customElement("osl-dot-plot")
+export class OslDotPlot extends PlotMark {
+  override mark = "dot";
 
-  @property({ type: String })
+  @property({ converter: interpretFuncJsonOrString })
   x?: DotOptions["x"];
 
-  @property({ type: String })
+  @property({ converter: interpretFuncJsonOrString })
   y?: DotOptions["y"];
 
-  @property({ type: String })
+  @property({ converter: interpretFuncJsonOrString })
   r?: DotOptions["fill"];
 
-  markOptions: (keyof this)[] = ["x", "y", "r"];
+  override markOptions: (keyof this)[] = ["x", "y", "r"];
 
-  public get plot() {
+  public override get plot() {
     const innerData = this?.currentResults;
     const options = this.allOptions;
 
@@ -28,13 +29,13 @@ export class DexterDot extends PlotMark {
     };
   }
 
-  render() {
+  override render() {
     return null;
   }
 }
 
 declare global {
   interface HTMLElementTagNameMap {
-    "dexter-dot": DexterDot;
+    "osl-dot-plot": OslDotPlot;
   }
 }

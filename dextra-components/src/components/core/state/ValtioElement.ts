@@ -2,16 +2,17 @@ import { css, html, LitElement } from "lit";
 import { subscribe } from "valtio";
 import { Sub } from "./Sub";
 import { store } from "./Store";
-import "@spectrum-web-components/theme/sp-theme.js";
-import "@spectrum-web-components/theme/theme-light.js";
 import "@spectrum-web-components/progress-bar/sp-progress-bar.js";
+import "@spectrum-web-components/theme/sp-theme.js";
+import "@spectrum-web-components/theme/src/themes.js";
+
+import {nanoid} from "nanoid";
+
 export class ValtioElement extends LitElement {
+  protected elementId = nanoid();
   protected store = store;
   private subs: Array<Sub<typeof store>> = [];
   private rootSub: Sub<typeof store> | null = null;
-  static styles = css`
-    @import "@spectrum-web-components/styles/theme-light.css";
-  `;
 
   protected subscribe(
     selector: (state: typeof store) => any,
@@ -39,12 +40,12 @@ export class ValtioElement extends LitElement {
     this.rootSub = new Sub(subscribe(store, cb));
   }
 
-  connectedCallback() {
+  override connectedCallback() {
     super.connectedCallback();
     this.initRootSub();
   }
 
-  disconnectedCallback() {
+  override disconnectedCallback() {
     super.disconnectedCallback();
     this.subs.forEach((sub) => sub.unsubscribe());
     this.rootSub?.unsubscribe();
@@ -52,7 +53,7 @@ export class ValtioElement extends LitElement {
   protected template() {
     return html``;
   }
-  protected render(): unknown {
+  protected override render(): unknown {
     return html`
       <sp-theme scale="" color="light"> ${this.template()} </sp-theme>
     `;

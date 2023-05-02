@@ -9,10 +9,10 @@ export default {
 
 export const Heatmap = () => {
   return html`
-    <dexter-plot
+    <osl-plot
   data="https://d2vloi59ojgfpi.cloudfront.net/data-query/642da9a7cbd1580008828021"
     >
-      <dexter-heatmap  x="avg_daily_pm25" y="income_ratio"></dexter-heatmap>
-    </dexter-plot>
+      <osl-heatmap-plot  x="avg_daily_pm25" y="income_ratio"></osl-heatmap-plot>
+    </osl-plot>
     `
 }

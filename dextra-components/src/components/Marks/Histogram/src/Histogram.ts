@@ -2,9 +2,9 @@ import { customElement, property } from "lit/decorators.js";
 import { PlotMark } from "../../PlotMark/src/PlotMark";
 import * as Plot from "@observablehq/plot";
 
-@customElement("dexter-histogram")
-export class DexterHistogram extends PlotMark {
-  mark = "histogram"
+@customElement("osl-histogram-plot")
+export class HistogramPlot extends PlotMark {
+  override mark = "histogram"
 
   @property({ type: String })
   x?: string;
@@ -15,9 +15,9 @@ export class DexterHistogram extends PlotMark {
   @property({ type: Boolean })
   vertical?: boolean = false;
   
-  markOptions: (keyof this)[] = ['x'];
+  override markOptions: (keyof this)[] = ['x'];
 
-  public get plot() {
+  public override get plot() {
     const innerData = this?.currentResults;
     const options = this.allOptions;
 
@@ -40,13 +40,13 @@ export class DexterHistogram extends PlotMark {
     };
   }
 
-  render() {
+  override render() {
     return null
   }
 }
 
 declare global {
   interface HTMLElementTagNameMap {
-    "dexter-histogram": DexterHistogram;
+    "osl-histogram-plot": HistogramPlot;
   }
 }

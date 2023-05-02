@@ -1,9 +1,9 @@
 import { LitElement, html } from "lit";
 import { customElement, property } from "lit/decorators.js";
-import { DexterInterface } from '../../Interface/src/Interface';
+import { OslControl } from '../../Interface/src/Interface';
 
-@customElement("dexter-{{lowerCase name}}")
-export class Dexter{{titleCase name}} extends DexterInterface {
+@customElement("osl-{{lowerCase name}}")
+export class Osl{{titleCase name}} extends OslControl {
   render() {
     return html`
       <div>
@@ -15,6 +15,6 @@ export class Dexter{{titleCase name}} extends DexterInterface {
 
 declare global {
   interface HTMLElementTagNameMap {
-    "dexter-{{lowerCase name}}": Dexter{{titleCase name}};
+    "osl-{{lowerCase name}}": Osl{{titleCase name}};
   }
 }

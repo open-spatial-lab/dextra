@@ -4,7 +4,7 @@ import path, { resolve } from 'path';
 export default defineConfig({
   base: '/',
   build: {
-    outDir: 'build',
+    outDir: 'dist',
     lib: {
       entry: 'src/radio.ts',
       formats: ['es'],
@@ -22,7 +22,7 @@ export default defineConfig({
   // },
   "resolve": {
     "alias": {
-      "lit-element": path.resolve("./node_modules/lit-element")
+      
     }
   }
 })

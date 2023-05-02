@@ -1,20 +1,19 @@
 {
-  "name": "@dexter/mark-histogram",
+  "name": "@open-spatial-lab/histogram-plot",
   "version": "0.0.0",
-  "main": "dist/histogram.es.js",
+  "main": "dist/index.js",
   "exports": {
-    ".": "./dist/histogram.es.js"
+    ".": "./dist/index.js"
   },
-  "types": "types/histogram.d.ts",
   "files": [
-    "dist",
-    "types"
+    "dist"
   ],
   "scripts": {
-    "start": "npm run dev",
     "dev": "vite",
-    "build": "rm -rf ./types && tsc && vite build",
-    "serve": "tsc && vite preview"
+    "build": "vite build",
+    "serve": "http-server . -p 8080 --gzip",
+    "build-n-test": "npm run build && npm run serve"
+
   },
   "dependencies": {
     "lit-element": "^2.4.0",

@@ -3,6 +3,7 @@ import { html } from "lit";
 import "../components/Table/src/Table.ts";
 import "../components/Slider/src/Slider.ts";
 
+
 export default {
   title: "Data",
 };
@@ -10,9 +11,9 @@ export default {
 
 export const Table = () => {
   return html`
-    <dexter-table
+    <osl-table
       data="https://d2vloi59ojgfpi.cloudfront.net/data-query/642da9a7cbd1580008828021"
-    ></dexter-table>
+    ></osl-table>
     `
 }
 
@@ -20,7 +21,7 @@ export const Table = () => {
 export const ControlledTable = () => {
   return html`
   <p></p>
-    <dexter-slider
+    <osl-slider
       data="https://d2vloi59ojgfpi.cloudfront.net/data-query/642da9a7cbd1580008828021"
       option="population"
       min="0"
@@ -28,10 +29,10 @@ export const ControlledTable = () => {
       step="1000"
       title="Minimum Population"
       initialValue="0"
-    ></dexter-slider>
+    ></osl-slider>
 
-    <dexter-table
+    <osl-table
       data="https://d2vloi59ojgfpi.cloudfront.net/data-query/642da9a7cbd1580008828021"
-    ></dexter-table>
+    ></osl-table>
   `;
 };

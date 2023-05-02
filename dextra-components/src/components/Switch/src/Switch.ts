@@ -1,20 +1,24 @@
-import { LitElement, html } from "lit";
-import { customElement, property } from "lit/decorators.js";
-import { DexterInterface } from '../../Interface/src/Interface';
+import { html } from "lit";
+import { customElement } from "lit/decorators.js";
+import { OslControl } from "../../Interface/src/Interface";
+import "@spectrum-web-components/switch/sp-switch.js";
 
-@customElement("dexter-switch")
-export class DexterSwitch extends DexterInterface {
-  render() {
+@customElement("osl-switch")
+export class SwitchControl extends OslControl {
+  protected override eventValueAccessor(event: Event): string {
+    return (!(event.target as HTMLInputElement).checked).toString();
+  }
+  override template() {
     return html`
-      <div>
-        <h1>Hello, Switch!</h1>
-      </div>
+      <sp-switch label="${this.label}" @click=${this.handleChange}>
+        ${this.title}
+      </sp-switch>
     `;
   }
 }
 
 declare global {
   interface HTMLElementTagNameMap {
-    "dexter-switch": DexterSwitch;
+    "osl-switch": SwitchControl;
   }
 }

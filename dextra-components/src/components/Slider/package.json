@@ -1,26 +1,25 @@
 {
-  "name": "@dexter/slider",
-  "version": "0.0.0",
-  "main": "dist/slider.es.js",
+  "name": "@open-spatial-lab/slider",
+  "version": "0.0.1",
+  "main": "dist/index.js",
   "exports": {
-    ".": "./dist/slider.es.js"
+    ".": "./dist/index.js"
   },
-  "types": "types/slider.d.ts",
   "files": [
-    "dist",
-    "types"
+    "dist"
   ],
+  "private": false,
   "scripts": {
-    "start": "npm run dev",
     "dev": "vite",
-    "build": "rm -rf ./types && tsc && vite build",
-    "serve": "tsc && vite preview"
+    "build": "vite build",
+    "serve": "http-server . -p 8080 --gzip",
+    "build-n-test": "npm run build && npm run serve"
+
   },
   "dependencies": {
     "lit-element": "^2.4.0",
     "lit-html": "^2.7.0",
-    "valtio": "^1.10.3",
-    "@ui5/webcomponents": "^1.10.5"
+    "valtio": "^1.10.3"
   },
   "devDependencies": {
     "@types/node": "^14.14.37",

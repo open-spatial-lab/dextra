@@ -1,114 +1,115 @@
-import { DexterData } from "../../../data/src/Data";
+import { OslData } from "../../../data/src/Data";
 import type { MarkOptions } from "@observablehq/plot";
 import * as Plot from "@observablehq/plot";
 import { property } from "lit/decorators.js";
+import { interpretFuncJsonOrString } from "../../../core/utils/converters";
 
-export class PlotMark extends DexterData {
+export class PlotMark extends OslData {
   mark = "base";
 
-  @property({ type: String })
+  @property({ converter: interpretFuncJsonOrString })
   filter?: MarkOptions["filter"];
 
-  @property({ type: Boolean })
+  @property({ converter: interpretFuncJsonOrString })
   reverse?: MarkOptions["reverse"];
 
-  @property()
+  @property({ converter: interpretFuncJsonOrString })
   sort?: MarkOptions["sort"];
 
-  @property({ type: Function })
+  @property({ converter: interpretFuncJsonOrString })
   transform?: MarkOptions["transform"];
 
-  @property({ type: Function })
+  @property({ converter: interpretFuncJsonOrString })
   initializer?: MarkOptions["initializer"];
 
-  @property()
+  @property({ converter: interpretFuncJsonOrString })
   fx?: MarkOptions["fx"];
 
-  @property()
+  @property({ converter: interpretFuncJsonOrString })
   fy?: MarkOptions["fy"];
 
-  @property({ type: String })
+  @property({ converter: interpretFuncJsonOrString })
   facet?: MarkOptions["facet"];
 
-  @property({ type: String })
+  @property({ converter: interpretFuncJsonOrString })
   facetAnchror?: MarkOptions["facetAnchor"];
 
-  @property({ type: Number })
+  @property({ converter: interpretFuncJsonOrString })
   margin?: MarkOptions["margin"];
 
-  @property({ type: Number })
+  @property({ converter: interpretFuncJsonOrString })
   marginTop?: MarkOptions["marginTop"];
 
-  @property({ type: Number })
+  @property({ converter: interpretFuncJsonOrString })
   marginRight?: MarkOptions["marginRight"];
 
-  @property({ type: Number })
+  @property({ converter: interpretFuncJsonOrString })
   marginBottom?: MarkOptions["marginBottom"];
 
-  @property({ type: Number })
+  @property({ converter: interpretFuncJsonOrString })
   marginLeft?: MarkOptions["marginLeft"];
 
-  @property({ type: String })
+  @property({ converter: interpretFuncJsonOrString })
   ariaDescription?: MarkOptions["ariaDescription"];
 
-  @property({ type: String })
+  @property({ converter: interpretFuncJsonOrString })
   pointerEvents?: MarkOptions["pointerEvents"];
 
-  @property({ type: String })
+  @property({ converter: interpretFuncJsonOrString })
   clip?: MarkOptions["clip"];
 
-  @property({ type: Number })
+  @property({ converter: interpretFuncJsonOrString })
   dx?: MarkOptions["dx"];
 
-  @property({ type: Number })
+  @property({ converter: interpretFuncJsonOrString })
   dy?: MarkOptions["dy"];
 
-  @property({ type: String })
+  @property({ converter: interpretFuncJsonOrString })
   fill?: MarkOptions["fill"];
 
-  @property({ type: String })
+  @property({ converter: interpretFuncJsonOrString })
   fillOpacity?: MarkOptions["fillOpacity"];
 
-  @property({ type: String })
+  @property({ converter: interpretFuncJsonOrString })
   strokeDasharray?: MarkOptions["strokeDasharray"];
 
-  @property({ type: String })
+  @property({ converter: interpretFuncJsonOrString })
   strokeDashoffset?: MarkOptions["strokeDashoffset"];
 
-  @property({ type: String })
+  @property({ converter: interpretFuncJsonOrString })
   strokeLinecap?: MarkOptions["strokeLinecap"];
 
-  @property({ type: String })
+  @property({ converter: interpretFuncJsonOrString })
   strokeLinejoin?: MarkOptions["strokeLinejoin"];
 
-  @property({ type: String })
+  @property({ converter: interpretFuncJsonOrString })
   strokeMiterlimit?: MarkOptions["strokeMiterlimit"];
 
-  @property({ type: Number })
+  @property({ converter: interpretFuncJsonOrString })
   strokeOpacity?: MarkOptions["strokeOpacity"];
 
-  @property({ type: String })
+  @property({ converter: interpretFuncJsonOrString })
   strokeWidth?: MarkOptions["strokeWidth"];
 
-  @property({ type: String })
+  @property({ converter: interpretFuncJsonOrString })
   opacity?: MarkOptions["opacity"];
 
-  @property({ type: String })
+  @property({ converter: interpretFuncJsonOrString })
   mixBlendMode?: MarkOptions["mixBlendMode"];
 
-  @property({ type: String })
+  @property({ converter: interpretFuncJsonOrString })
   paintOrder?: MarkOptions["paintOrder"];
 
-  @property({ type: String })
+  @property({ converter: interpretFuncJsonOrString })
   shapeRendering?: MarkOptions["shapeRendering"];
 
-  @property({ type: String })
+  @property({ converter: interpretFuncJsonOrString })
   href?: MarkOptions["href"];
 
-  @property({ type: String })
+  @property({ converter: interpretFuncJsonOrString })
   target?: MarkOptions["target"];
 
-  @property({ type: String })
+  @property({ converter: interpretFuncJsonOrString })
   channels?: MarkOptions["channels"];
 
   baseOptions: (keyof this)[] = [
@@ -174,7 +175,7 @@ export class PlotMark extends DexterData {
     return (_f, _j) => [];
   }
 
-  render() {
+  override render() {
     return null;
   }
 }

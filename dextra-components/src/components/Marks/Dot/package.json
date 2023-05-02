@@ -1,21 +1,21 @@
 {
-  "name": "@dexter/dot",
+  "name": "@open-spatial-lab/dot",
   "version": "0.0.0",
-  "main": "dist/dot.es.js",
+  "main": "dist/index.js",
   "exports": {
-    ".": "./dist/dot.es.js"
+    ".": "./dist/index.js"
   },
-  "types": "types/dot.d.ts",
   "files": [
-    "dist",
-    "types"
+    "dist"
   ],
   "scripts": {
-    "start": "npm run dev",
     "dev": "vite",
-    "build": "rm -rf ./types && tsc && vite build",
-    "serve": "tsc && vite preview"
+    "build": "vite build",
+    "serve": "http-server . -p 8080 --gzip",
+    "build-n-test": "npm run build && npm run serve"
+
   },
+
   "dependencies": {
     "lit-element": "^2.4.0",
     "lit-html": "^2.7.0",

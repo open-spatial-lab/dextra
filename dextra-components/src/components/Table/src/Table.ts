@@ -1,6 +1,6 @@
 import { html } from "lit";
 import { customElement } from "lit/decorators.js";
-import { DexterData } from "../../data/src/Data";
+import { OslData } from "../../data/src/Data";
 import "@spectrum-web-components/table/sp-table.js";
 import "@spectrum-web-components/table/sp-table-body.js";
 import "@spectrum-web-components/table/sp-table-cell.js";
@@ -8,11 +8,9 @@ import "@spectrum-web-components/table/sp-table-checkbox-cell.js";
 import "@spectrum-web-components/table/sp-table-head.js";
 import "@spectrum-web-components/table/sp-table-head-cell.js";
 import "@spectrum-web-components/table/sp-table-row.js";
-import "@spectrum-web-components/theme/sp-theme.js";
-import "@spectrum-web-components/theme/src/themes.js";
 
-@customElement("dexter-table")
-export class DexterTable extends DexterData {
+@customElement("osl-table")
+export class OslTable extends OslData {
   renderHeader(columns: string[]) {
     return html`
       ${columns.map(
@@ -36,7 +34,7 @@ export class DexterTable extends DexterData {
     `;
   }
 
-  template() {
+  override template() {
     if (!this.currentResults?.length) {
       return this.preloader();
     }
@@ -54,6 +52,6 @@ export class DexterTable extends DexterData {
 
 declare global {
   interface HTMLElementTagNameMap {
-    "dexter-table": DexterTable;
+    "osl-table": OslTable;
   }
 }
