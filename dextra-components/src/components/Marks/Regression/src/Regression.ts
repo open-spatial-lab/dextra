@@ -18,6 +18,7 @@ export class OslRegressionPlot extends PlotMark {
   @property({ type: String })
   ci?: LinearRegressionOptions["ci"];
 
+
   markOptions: (keyof this)[] = ["x", "y", "ci"];
 
   public get plot() {
@@ -37,6 +38,6 @@ export class OslRegressionPlot extends PlotMark {
 
 declare global {
   interface HTMLElementTagNameMap {
-    "osl-regression-plot": OslRegression;
+    "osl-regression-plot": OslRegressionPlot;
   }
 }
