@@ -5,8 +5,8 @@ import { LinearRegressionOptions } from "@observablehq/plot";
 import { LinearRegressionYOptions } from "@observablehq/plot";
 
 
-@customElement("dexter-regression")
-export class DexterRegression extends PlotMark {
+@customElement("osl-regression-plot")
+export class OslRegressionPlot extends PlotMark {
   mark = "regression"
 
   @property({ type: String })
@@ -37,6 +37,6 @@ export class DexterRegression extends PlotMark {
 
 declare global {
   interface HTMLElementTagNameMap {
-    "dexter-regression": DexterRegression;
+    "osl-regression-plot": OslRegression;
   }
 }

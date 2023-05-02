@@ -10,15 +10,15 @@ export default {
 
 export const LinearRegression = () => {
   return html`
-    <dexter-plot
+    <osl-plot
       data="https://d2vloi59ojgfpi.cloudfront.net/data-query/642da9a7cbd1580008828021"
     >
-    <dexter-dot 
+    <osl-dot 
     x="avg_daily_pm25" 
     y="income_ratio"
     strokeOpacity=0.5
-    > </dexter-dot>
-      <dexter-regression x="avg_daily_pm25" y="income_ratio"></dexter-regression>
-    </dexter-plot>
+    > </osl-dot>
+      <osl-regression-plot x="avg_daily_pm25" y="income_ratio"></osl-regression-plot>
+    </osl-plot>
     `
 }

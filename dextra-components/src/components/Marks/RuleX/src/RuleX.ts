@@ -5,9 +5,9 @@ import { RuleOptions } from "@observablehq/plot";
 import { RuleXOptions } from "@observablehq/plot";
 
 
-@customElement("dexter-rulex")
-export class DexterRuleX extends PlotMark {
-  mark = "rulex"
+@customElement("osl-rulex-plot")
+export class OslRuleX extends PlotMark {
+  override mark = "rulex"
   @property({ type: String })
   interval?: RuleOptions["interval"];
 
@@ -24,11 +24,11 @@ export class DexterRuleX extends PlotMark {
   y2?: RuleXOptions["y2"];
 
   @property({ type: Array })
-  number?: "[0]";  
+  number?: [0];  
 
-  markOptions: (keyof this)[] = ["interval", "x", "y", "y1", "y2", "number"];
+  override markOptions: (keyof this)[] = ["interval", "x", "y", "y1", "y2", "number"];
 
-  public get plot() {
+  public override get plot() {
     const innerData = this?.currentResults;
     const options = this.allOptions;
 
@@ -43,13 +43,13 @@ export class DexterRuleX extends PlotMark {
     };
   }
 
-  render() {
+  override render() {
     return null
   }
 }
 
 declare global {
   interface HTMLElementTagNameMap {
-    "dexter-rulex": DexterRuleX;
+    "osl-rulex-plot": OslRuleX;
   }
 }
