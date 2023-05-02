@@ -1,5 +1,5 @@
 import { defineConfig } from 'vite'
-import path, { resolve } from 'path';
+import { resolve } from 'path';
 // https://vitejs.dev/config/
 export default defineConfig({
   base: '/',
@@ -22,7 +22,7 @@ export default defineConfig({
   // },
   "resolve": {
     "alias": {
-      "lit-element": path.resolve("./node_modules/lit-element")
+      
     }
   }
 })
