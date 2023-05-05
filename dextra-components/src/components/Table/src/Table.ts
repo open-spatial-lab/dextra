@@ -34,7 +34,7 @@ export class OslTable extends OslData {
     `;
   }
 
-  override template() {
+  template() {
     if (!this.currentResults?.length) {
       return this.preloader();
     }

@@ -45,7 +45,7 @@ export class OslPlot extends OslData {
     })
     return plot
   }
-  override render() {
+  render() {
     return html`
       <div>
         ${this.plot()}
