@@ -4,7 +4,7 @@ import * as Plot from "@observablehq/plot";
 
 @customElement("osl-histogram-plot")
 export class HistogramPlot extends PlotMark {
-  override mark = "histogram"
+  mark = "histogram"
 
   @property({ type: String })
   x?: string;
@@ -15,9 +15,9 @@ export class HistogramPlot extends PlotMark {
   @property({ type: Boolean })
   vertical?: boolean = false;
   
-  override markOptions: (keyof this)[] = ['x'];
+  markOptions: (keyof this)[] = ['x'];
 
-  public override get plot() {
+  public get plot() {
     const innerData = this?.currentResults;
     const options = this.allOptions;
 
@@ -40,7 +40,7 @@ export class HistogramPlot extends PlotMark {
     };
   }
 
-  override render() {
+  render() {
     return null
   }
 }

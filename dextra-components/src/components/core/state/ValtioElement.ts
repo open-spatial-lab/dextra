@@ -40,12 +40,12 @@ export class ValtioElement extends LitElement {
     this.rootSub = new Sub(subscribe(store, cb));
   }
 
-  override connectedCallback() {
+   connectedCallback() {
     super.connectedCallback();
     this.initRootSub();
   }
 
-  override disconnectedCallback() {
+   disconnectedCallback() {
     super.disconnectedCallback();
     this.subs.forEach((sub) => sub.unsubscribe());
     this.rootSub?.unsubscribe();
@@ -53,7 +53,7 @@ export class ValtioElement extends LitElement {
   protected template() {
     return html``;
   }
-  protected override render(): unknown {
+  protected  render(): unknown {
     return html`
       <sp-theme scale="" color="light"> ${this.template()} </sp-theme>
     `;

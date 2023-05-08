@@ -10,7 +10,7 @@ type BinInputs = {
 
 @customElement("osl-heatmap-plot")
 export class HeatmapPlot extends PlotMark {
-  override mark = "heatmap";
+  mark = "heatmap";
 
   @property({ type: String })
   x?: BinInputs["x"];
@@ -18,12 +18,12 @@ export class HeatmapPlot extends PlotMark {
   @property({ type: String })
   y?: BinInputs["y"];
 
-  override markOptions: (keyof this)[] = ["x", "y"];
+  markOptions: (keyof this)[] = ["x", "y"];
 
   @property({ type: Boolean })
   transparent?: boolean = true;
 
-  public override get plot() {
+  public get plot() {
     const innerData = this?.currentResults;
     const options = this.allOptions;
     // const useTransparent = this.transparent;
@@ -38,7 +38,7 @@ export class HeatmapPlot extends PlotMark {
     };
   }
 
-  override render() {
+  render() {
     return null;
   }
 }

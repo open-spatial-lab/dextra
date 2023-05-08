@@ -54,12 +54,12 @@ export class OslData extends ValtioElement {
     );
   }
 
-  override connectedCallback() {
+  connectedCallback() {
     super.connectedCallback();
     this.initDataset();
   }
 
-  override template() {
+  template() {
     if (this.currentResults) {
       return html`<pre>${JSON.stringify(this.currentResults, null, 2)}</pre>`;
     } else {

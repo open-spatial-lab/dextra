@@ -1,6 +1,6 @@
 {
   "compilerOptions": {
-    "target": "es2019",
+    "target": "es2018",
     "module": "es2020",
     "lib": ["es2020", "DOM", "DOM.Iterable"],
     "declaration": true,
@@ -11,6 +11,7 @@
     "rootDir": "./src",
     "strict": true,
     "noUnusedLocals": true,
+    "useDefineForClassFields": false,
     "noUnusedParameters": true,
     "noImplicitReturns": true,
     "noFallthroughCasesInSwitch": true,
@@ -20,7 +21,7 @@
     "allowSyntheticDefaultImports": true,
     "experimentalDecorators": true,
     "forceConsistentCasingInFileNames": true,
-    "noImplicitOverride": true,
+    "noImplicitOverride": false,
     "skipLibCheck": true,
     "plugins": [
       {

@@ -56,7 +56,7 @@ export class OslMapLayer extends OslData {
     this.map?.redraw();
   }
 
-  override connectedCallback(): void {
+  connectedCallback(): void {
     super.connectedCallback();
     this.updateLayer();
     this.subscribe(
@@ -65,7 +65,7 @@ export class OslMapLayer extends OslData {
     );
   }
 
-  override render() {
+  render() {
     return null;
   }
 }

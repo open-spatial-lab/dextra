@@ -175,7 +175,7 @@ export class PlotMark extends OslData {
     return (_f, _j) => [];
   }
 
-  override render() {
+  render() {
     return null;
   }
 }

@@ -1,10 +1,13 @@
 import { defineConfig } from 'vite'
-import path, { resolve } from 'path';
+import { resolve } from 'path';
 // https://vitejs.dev/config/
 export default defineConfig({
   base: '/',
   build: {
     outDir: 'dist',
+    target: 'es2018',
+    assetsInlineLimit: 0,
+    sourcemap: true,
     lib: {
       entry: 'src/data.ts',
       formats: ['es'],
@@ -16,6 +19,11 @@ export default defineConfig({
       },
     },
   },
+  esbuild: {
+    jsxFactory: 'h',
+    jsxFragment: 'Fragment',
+  },
+  plugins: [],
   // TODO exclude core bundle
   // optimizeDeps: {
   //   exclude: ['./node_modules/lit-element', './node_modules/lit', './node_modules/immer', './node_modules/zustand'],

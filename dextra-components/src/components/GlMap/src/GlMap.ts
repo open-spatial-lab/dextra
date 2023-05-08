@@ -29,7 +29,7 @@ const basicStyle = {
 
 @customElement("osl-glmap")
 export class OslGlMap extends OslData {
-  static override styles = styles;
+  static styles = styles;
 
   @property({type: Array})
   center?: [number, number] = [0, 0];
@@ -79,12 +79,12 @@ export class OslGlMap extends OslData {
     this.map.addControl(this.deck);
   }
 
-  override firstUpdated(_changedProperties: Map<string | number | symbol, unknown>) {
+  firstUpdated(_changedProperties: Map<string | number | symbol, unknown>) {
     super.firstUpdated(_changedProperties);
     this.initializeMap();
   }
 
-  override render() {
+  render() {
     return html`
       <div
         style="position:relative; width:100%; height:80vh;"

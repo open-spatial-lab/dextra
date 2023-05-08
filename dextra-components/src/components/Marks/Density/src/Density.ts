@@ -4,7 +4,7 @@ import * as Plot from "@observablehq/plot";
 
 @customElement("osl-density-plot")
 export class OslPlotDensity extends PlotMark {
-  override mark = "density"
+  mark = "density"
 
   @property({ type: String })
   x?: string;
@@ -15,15 +15,15 @@ export class OslPlotDensity extends PlotMark {
   @property({ type: Number })
   bandwidth?: number;
 
-  override markOptions: (keyof this)[] = ['x','y','bandwidth'];
+  markOptions: (keyof this)[] = ['x','y','bandwidth'];
 
-  override connectedCallback(): void {
+  connectedCallback(): void {
     console.log('connected!')
     console.log(this.allOptions)
     super.connectedCallback();
   }
 
-  public override get plot() {
+  public get plot() {
     const innerData = this?.currentResults;
     const options = this.allOptions;
 
@@ -33,7 +33,7 @@ export class OslPlotDensity extends PlotMark {
     };
   }
 
-  override render() {
+  render() {
     return null
   }
 }
