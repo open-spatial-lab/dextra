@@ -11,6 +11,7 @@
     "rootDir": "./src",
     "strict": true,
     "noUnusedLocals": true,
+    "useDefineForClassFields": false,
     "noUnusedParameters": true,
     "noImplicitReturns": true,
     "noFallthroughCasesInSwitch": true,
