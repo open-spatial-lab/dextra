@@ -9,7 +9,7 @@ export default {
 export const Chips = () => {
   return html`
     <osl-chips
-      data="https://d2vloi59ojgfpi.cloudfront.net/data-query/6417b73afe20b50008149901"
+      data="https://d3uldu0bz6pkei.cloudfront.net/data-query/6463ec5412b93e00099b0e05"
       initialValue="[5,6,7,8]"
       title="Magnitude"
       option="morg"

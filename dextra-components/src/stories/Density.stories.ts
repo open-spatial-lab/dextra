@@ -11,7 +11,7 @@ export const Density = () => {
   return html`
     <osl-plot
       inset="50"
-      data="https://d2vloi59ojgfpi.cloudfront.net/data-query/642da9a7cbd1580008828021"
+      data="https://d3uldu0bz6pkei.cloudfront.net/data-query/642da9a7cbd1580008828021"
     >
       <osl-density-plot x="avg_daily_pm25" y="income_ratio" bandwidth="6" stroke="red"></osl-density-plot>
     </osl-plot>

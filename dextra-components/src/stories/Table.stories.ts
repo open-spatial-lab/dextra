@@ -12,7 +12,7 @@ export default {
 export const Table = () => {
   return html`
     <osl-table
-      data="https://d2vloi59ojgfpi.cloudfront.net/data-query/642da9a7cbd1580008828021"
+      data="https://d3uldu0bz6pkei.cloudfront.net/data-query/642da9a7cbd1580008828021"
     ></osl-table>
     `
 }
@@ -22,7 +22,7 @@ export const ControlledTable = () => {
   return html`
   <p></p>
     <osl-slider
-      data="https://d2vloi59ojgfpi.cloudfront.net/data-query/642da9a7cbd1580008828021"
+      data="https://d3uldu0bz6pkei.cloudfront.net/data-query/642da9a7cbd1580008828021"
       option="population"
       min="0"
       max="1000000"
@@ -32,7 +32,7 @@ export const ControlledTable = () => {
     ></osl-slider>
 
     <osl-table
-      data="https://d2vloi59ojgfpi.cloudfront.net/data-query/642da9a7cbd1580008828021"
+      data="https://d3uldu0bz6pkei.cloudfront.net/data-query/642da9a7cbd1580008828021"
     ></osl-table>
   `;
 };

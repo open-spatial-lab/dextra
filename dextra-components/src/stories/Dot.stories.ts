@@ -10,7 +10,7 @@ export default {
 export const Dot = () => {
   return html`
     <osl-plot
-      data="https://d2vloi59ojgfpi.cloudfront.net/data-query/642da9a7cbd1580008828021"
+      data="https://d3uldu0bz6pkei.cloudfront.net/data-query/642da9a7cbd1580008828021"
     >
       <osl-dot-plot x="avg_daily_pm25" y="income_ratio"> </osl-dot-plot>
     </osl-plot>
@@ -25,7 +25,7 @@ export const ComplexDot = () => {
 
     <osl-plot
       colorLegend="true"
-      data="https://d2vloi59ojgfpi.cloudfront.net/data-query/642da9a7cbd1580008828021"
+      data="https://d3uldu0bz6pkei.cloudfront.net/data-query/642da9a7cbd1580008828021"
     >
       <osl-dot-plot
         x="avg_daily_pm25"
@@ -41,7 +41,7 @@ export const ComplexDot = () => {
 export const ControlledDot = () => {
   return html`
     <osl-slider
-      data="https://d2vloi59ojgfpi.cloudfront.net/data-query/642da9a7cbd1580008828021"
+      data="https://d3uldu0bz6pkei.cloudfront.net/data-query/642da9a7cbd1580008828021"
       option="population"
       min="0"
       max="1000000"
@@ -51,7 +51,7 @@ export const ControlledDot = () => {
     ></osl-slider>
 
     <osl-plot
-      data="https://d2vloi59ojgfpi.cloudfront.net/data-query/642da9a7cbd1580008828021"
+      data="https://d3uldu0bz6pkei.cloudfront.net/data-query/642da9a7cbd1580008828021"
     >
       <osl-dot-plot x="avg_daily_pm25" y="income_ratio"> </osl-dot-plot>
     </osl-plot>
