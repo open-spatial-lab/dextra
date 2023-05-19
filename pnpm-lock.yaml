@@ -67,7 +67,7 @@ importers:
         version: 3.3.3
       '@observablehq/plot':
         specifier: git+ssh://git@github.com/observablehq/plot.git
-        version: github.com/observablehq/plot/6427dee2426da1a73755fa4e4d7ae63bd9a2c21c
+        version: github.com/observablehq/plot/86ac53e95e4104345a5bcbeb0d84c6c799bccab8
       '@okikio/sharedworker':
         specifier: ^1.0.4
         version: 1.0.4
@@ -301,6 +301,9 @@ importers:
       valtio:
         specifier: ^1.10.3
         version: 1.10.3(react@18.2.0)
+      wkt:
+        specifier: ^0.1.1
+        version: 0.1.1
     devDependencies:
       '@types/node':
         specifier: ^14.14.37
@@ -12927,6 +12930,10 @@ packages:
       string-width: 4.2.3
     dev: true
 
+  /wkt@0.1.1:
+    resolution: {integrity: sha512-2vtzYZOqN0VZdtDTMDUgbpXpE+MXRdsFTiCpS08FZ4yktT9pPylVMZaLxcIqT9pRkBp5FIAGVQyJ/kJa9b8uGg==}
+    dev: false
+
   /wordwrap@1.0.0:
     resolution: {integrity: sha512-gvVzJFlPycKc5dZN4yPkP8w7Dc37BtP1yczEneOb4uq34pXZcvrtRTmWV8W+Ume+XCxKgbjM+nevkyFPMybd4Q==}
     dev: true
@@ -13115,10 +13122,10 @@ packages:
       yaml: 2.2.2
     dev: true
 
-  github.com/observablehq/plot/6427dee2426da1a73755fa4e4d7ae63bd9a2c21c:
-    resolution: {tarball: https://codeload.github.com/observablehq/plot/tar.gz/6427dee2426da1a73755fa4e4d7ae63bd9a2c21c}
+  github.com/observablehq/plot/86ac53e95e4104345a5bcbeb0d84c6c799bccab8:
+    resolution: {tarball: https://codeload.github.com/observablehq/plot/tar.gz/86ac53e95e4104345a5bcbeb0d84c6c799bccab8}
     name: '@observablehq/plot'
-    version: 0.6.6
+    version: 0.6.7-rc.1
     engines: {node: '>=12'}
     dependencies:
       d3: 7.8.4

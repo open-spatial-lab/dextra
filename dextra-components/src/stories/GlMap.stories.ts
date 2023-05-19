@@ -24,6 +24,23 @@ export const GlMap = () => {
     </osl-glmap>
   `;
 };
+export const ChoroplethMap = () => {
+  return html`
+    <osl-glmap
+      center="[-122.41669, 37.7853]"
+      zoom="2"
+      mapStyle="https://demotiles.maplibre.org/style.json"
+    >
+      <osl-map-layer
+        layer="polygon"
+        data="https://d3uldu0bz6pkei.cloudfront.net/data-query/6466e8ee505b900008f2c80d"
+        getPolygon="(d) => d.WKT"
+        choroplethColumn="AWATER10"
+      >
+      </osl-map-layer>
+    </osl-glmap>
+  `;
+};
 
 export const ControlledGlMap = () => {
   return html`
@@ -73,7 +90,7 @@ export const ControlledGlMap = () => {
       initialValue="90"
       title="Max Y"
     ></osl-slider>
-    <br/><br/>
+    <br /><br />
     <osl-glmap
       center="[60, 22]"
       zoom="2"
@@ -87,6 +104,6 @@ export const ControlledGlMap = () => {
       </osl-map-layer>
     </osl-glmap>
 
-    <br/><br/>
+    <br /><br />
   `;
 };

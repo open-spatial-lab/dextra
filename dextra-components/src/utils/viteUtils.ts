@@ -29,9 +29,9 @@ export const makeViteConfig = ({
   },
   plugins: [],
   // TODO exclude core bundle
-  // optimizeDeps: {
-  //   exclude: ['./node_modules/lit-element', './node_modules/lit', './node_modules/immer', './node_modules/zustand'],
-  // },
+  optimizeDeps: {
+    exclude: ['./node_modules/@spectrum-web-components/*'],
+  },
   "resolve": {
     "alias": {
       

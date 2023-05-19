@@ -1,9 +1,9 @@
 import { html } from "lit-html";
-import { customElement, property } from "lit/decorators.js";
+import { property } from "lit/decorators.js";
 import { ValtioElement } from "../../core/state";
 import { DataResult } from "../../core/state/types";
 
-@customElement("osl-data")
+// @customElement("osl-data")
 export class OslData extends ValtioElement {
   @property({ type: String })
   data = "";

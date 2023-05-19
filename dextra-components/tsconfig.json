@@ -1,8 +1,8 @@
 {
   "compilerOptions": {
-    "target": "es2018",
-    "module": "es2020",
-    "lib": ["es2020", "DOM", "DOM.Iterable"],
+    "target": "esnext",
+    "module": "esnext",
+    "lib": ["esnext", "DOM", "DOM.Iterable"],
     "declaration": true,
     "declarationMap": true,
     "sourceMap": true,

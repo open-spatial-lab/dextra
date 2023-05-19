@@ -2,9 +2,9 @@ import { css, html, LitElement } from "lit";
 import { subscribe } from "valtio";
 import { Sub } from "./Sub";
 import { store } from "./Store";
-import "@spectrum-web-components/progress-bar/sp-progress-bar.js";
-import "@spectrum-web-components/theme/sp-theme.js";
-import "@spectrum-web-components/theme/src/themes.js";
+// import "@spectrum-web-components/progress-bar/sp-progress-bar.js";
+// import "@spectrum-web-components/theme/sp-theme.js";
+// import "@spectrum-web-components/theme/src/themes.js";
 
 import {nanoid} from "nanoid";
 
