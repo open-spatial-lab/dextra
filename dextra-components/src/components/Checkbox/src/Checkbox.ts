@@ -9,7 +9,7 @@ export class OslCheckbox extends OslControl {
   size: "s" | "m" | "l" | "xl" = "s";
 
   @property({ type: Array })
-  override initialValue?: (string | number)[] = [];
+  initialValue?: (string | number)[] = [];
 
   renderSingleBox(i: number) {
     const options = this.options || [];
@@ -45,13 +45,13 @@ export class OslCheckbox extends OslControl {
   renderCheckboxes() {
     const options = this.options || [];
     return html` ${options.map((_, i) => this.renderSingleBox(i))} `;
-  }
+  };
 
-  override eventValueAccessor(value: any) {
+  eventValueAccessor(value: any) {
     return value;
-  }
+  };
 
-  override handleChange(inputValue: any) {
+  handleChange(inputValue: any) {
     const storeValue = this.value as Array<string | number>;
 
     const newValues = storeValue.includes(inputValue)
@@ -60,7 +60,7 @@ export class OslCheckbox extends OslControl {
     this.store.datasets[this.data].parameters[this.option] = newValues;
   }
 
-  override template() {
+  template() {
     return html`
       <div style="display:flex; flex-direction: column;">
         ${this.renderCheckboxes()}

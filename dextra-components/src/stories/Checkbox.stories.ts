@@ -1,6 +1,7 @@
 import { Meta } from "@storybook/web-components";
 import { html } from "lit";
 import "../components/Checkbox/src/Checkbox.ts";
+import "../components/CoreBundle/src/CoreBundle.ts";
 
 export default {
   title: "Interface",
@@ -11,7 +12,7 @@ export const Checkbox = () => {
 
 The value is: 
   <osl-interface
-    data="https://d2vloi59ojgfpi.cloudfront.net/data-query/6417b73afe20b50008149901"
+    data="https://d3uldu0bz6pkei.cloudfront.net/data-query/6463ec5412b93e00099b0e05"
     option="mag"
     ></osl-interface>
     <br/>
@@ -21,7 +22,7 @@ The value is:
       options="[1,2,3]"
       initialValue="[1,2]"
       option="mag"
-      data="https://d2vloi59ojgfpi.cloudfront.net/data-query/6417b73afe20b50008149901"
+      data="https://d3uldu0bz6pkei.cloudfront.net/data-query/6463ec5412b93e00099b0e05"
 
     >
 

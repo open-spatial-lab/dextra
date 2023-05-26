@@ -92,12 +92,12 @@ export class OslControl extends ValtioElement {
     this.store.datasets[this.data].parameters[this.option] = value;
   }
 
-  override connectedCallback() {
+  connectedCallback() {
     super.connectedCallback();
     this.initDataset();
   }
 
-  override template() {
+  template() {
     return html`${this.value}`;
   }
 }

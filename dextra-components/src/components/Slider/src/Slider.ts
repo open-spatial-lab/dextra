@@ -6,7 +6,7 @@ import "@spectrum-web-components/slider/sp-slider.js";
 
 @customElement("osl-slider")
 export class SliderControl extends OslControl {
-  override template() {
+  template() {
     return html`
       <sp-slider
         min="${this.min !== undefined ? this.min : 1}"

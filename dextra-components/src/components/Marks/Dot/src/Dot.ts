@@ -6,7 +6,7 @@ import { interpretFuncJsonOrString } from "../../../core/utils/converters";
 
 @customElement("osl-dot-plot")
 export class OslDotPlot extends PlotMark {
-  override mark = "dot";
+  mark = "dot";
 
   @property({ converter: interpretFuncJsonOrString })
   x?: DotOptions["x"];
@@ -17,9 +17,9 @@ export class OslDotPlot extends PlotMark {
   @property({ converter: interpretFuncJsonOrString })
   r?: DotOptions["fill"];
 
-  override markOptions: (keyof this)[] = ["x", "y", "r"];
+  markOptions: (keyof this)[] = ["x", "y", "r"];
 
-  public override get plot() {
+  public get plot() {
     const innerData = this?.currentResults;
     const options = this.allOptions;
 
@@ -29,7 +29,7 @@ export class OslDotPlot extends PlotMark {
     };
   }
 
-  override render() {
+  render() {
     return null;
   }
 }

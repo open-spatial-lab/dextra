@@ -36,7 +36,7 @@ export class SelectControl extends OslControl {
       : html``;
   }
 
-  override template() {
+  template() {
     return html`
       ${this.renderTitle()}
       <sp-picker

@@ -45,7 +45,7 @@ export class RadioControl extends OslControl {
 
   }
 
-  override template() {
+  template() {
     const value = (this.value || "") as string;
     return html`
           ${this.renderTitle()}

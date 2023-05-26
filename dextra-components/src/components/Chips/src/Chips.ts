@@ -10,7 +10,7 @@ import "@spectrum-web-components/icons-workflow/icons/sp-icon-add-circle.js";
 @customElement("osl-chips")
 export class OslChips extends OslControl {
   @property({ type: Object })
-  override initialValue: Array<string | number> = [];
+  initialValue: Array<string | number> = [];
 
   renderTags() {
     if (!Array.isArray(this.value) || this.value.length === 0) {
@@ -52,7 +52,7 @@ export class OslChips extends OslControl {
     // @ts-ignore
     this.spectrumTextfield.value = "";
   }
-  protected override eventValueAccessor(event: any): string {
+  protected eventValueAccessor(event: any): string {
     return event;
   }
 
@@ -79,7 +79,7 @@ export class OslChips extends OslControl {
     if (isEnter) this.handleAdd();
   }
 
-  override template() {
+  template() {
     return html`
       <!-- <sp-tags> </sp-tags><br /> -->
       <div style="max-width:"100%">
