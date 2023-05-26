@@ -11,9 +11,9 @@ export default {
 export const RuleX = () => {
   return html`
     <osl-plot
-      data="https://d2vloi59ojgfpi.cloudfront.net/data-query/642da9a7cbd1580008828021"
+      data="https://d3uldu0bz6pkei.cloudfront.net/data-query/646fd0f4e06ddb00081c002a"
     >
-      <osl-dot-plot x="avg_daily_pm25" y="income_ratio"> </osl-dot-plot>
+      <osl-dot-plot  x="MedianHouseholdIncome" y="UnEmplyPrc"> </osl-dot-plot>
       <osl-rulex-plot number="[4, 10]"></osl-rulex-plot>
     </osl-plot>
   `;
@@ -22,10 +22,10 @@ export const RuleX = () => {
 export const RuleXData = () => {
   return html`
     <osl-plot
-      data="https://d2vloi59ojgfpi.cloudfront.net/data-query/642da9a7cbd1580008828021"
+      data="https://d3uldu0bz6pkei.cloudfront.net/data-query/646fd0f4e06ddb00081c002a"
     >
-      <osl-dot-plot x="avg_daily_pm25" y="income_ratio"> </osl-dot-plot>
-      <osl-rulex-plot x="uninsured_pct"></osl-rulex-plot>
+      <osl-dot-plot  x="MedianHouseholdIncome" y="UnEmplyPrc"> </osl-dot-plot>
+      <osl-rulex-plot x="MedianHouseholdIncome"></osl-rulex-plot>
     </osl-plot>
   `;
 };
