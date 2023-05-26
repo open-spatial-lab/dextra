@@ -1,6 +1,7 @@
 import { Meta } from "@storybook/web-components";
 import { html } from "lit";
 import "../components/Checkbox/src/Checkbox.ts";
+import "../components/CoreBundle/src/CoreBundle.ts";
 
 export default {
   title: "Interface",

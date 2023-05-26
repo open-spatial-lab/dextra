@@ -5,15 +5,20 @@ import "../components/Plot/src/Plot.ts";
 
 export default {
   title: "Marks",
-}
+};
 
 export const Density = () => {
   return html`
     <osl-plot
       inset="50"
-      data="https://d3uldu0bz6pkei.cloudfront.net/data-query/642da9a7cbd1580008828021"
+      data="https://d3uldu0bz6pkei.cloudfront.net/data-query/646fd0f4e06ddb00081c002a"
     >
-      <osl-density-plot x="avg_daily_pm25" y="income_ratio" bandwidth="6" stroke="red"></osl-density-plot>
+      <osl-density-plot
+        x="MedianHouseholdIncome"
+        y="UnEmplyPrc"
+        bandwidth="6"
+        stroke="red"
+      ></osl-density-plot>
     </osl-plot>
-    `
-}
+  `;
+};

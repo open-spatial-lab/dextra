@@ -1,7 +1,7 @@
 import { Meta } from "@storybook/web-components";
 import { html } from "lit";
 import "../components/GlMap/src/GlMap.ts";
-import "../components/MapLayer/src/MapLayer.ts";
+// import "../components/MapLayer/src/MapLayer.ts";
 import "../components/Slider/src/Slider.ts";
 
 export default {

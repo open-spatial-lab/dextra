@@ -1,9 +1,9 @@
 {
-  "name": "@open-spatial-lab/slider",
+  "name": "@open-spatial-lab/core-bundle",
   "version": "0.0.5",
-  "main": "dist/slider.es.js",
+  "main": "dist/core-bundle.es.js",
   "exports": {
-    ".": "./dist/slider.es.js"
+    ".": "./dist/core-bundle.es.js"
   },
   "files": [
     "dist"

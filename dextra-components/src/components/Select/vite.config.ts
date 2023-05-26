@@ -1,28 +1,5 @@
-import { defineConfig } from 'vite'
-import { resolve } from 'path';
-// https://vitejs.dev/config/
-export default defineConfig({
-  base: '/',
-  build: {
-    outDir: 'dist',
-    lib: {
-      entry: 'src/select.ts',
-      formats: ['es'],
-    },
-    manifest: true,
-    rollupOptions: {
-      input: {
-        main: resolve(__dirname, 'index.html'),
-      },
-    },
-  },
-  // TODO exclude core bundle
-  // optimizeDeps: {
-  //   exclude: ['./node_modules/lit-element', './node_modules/lit', './node_modules/immer', './node_modules/zustand'],
-  // },
-  "resolve": {
-    "alias": {
-      
-    }
-  }
+import { makeViteConfig } from '../../utils/viteUtils'
+
+export default makeViteConfig({
+  entry: 'src/Select.ts',
 })
