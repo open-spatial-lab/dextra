@@ -9,10 +9,6 @@ export default {
 export const Select = () => {
   return html`
     The value is:
-    <osl-interface
-      data="https://d3uldu0bz6pkei.cloudfront.net/data-query/6463ec5412b93e00099b0e05"
-      option="mag"
-      ></osl-interface>
       <br/>
       <hr/>
       <br/>
