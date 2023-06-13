@@ -10,7 +10,7 @@ export class OslRegressionPlot extends PlotMark {
   mark = "regression"
 
   @property({ type: String })
-  x?: LinearRegressionYOptions["interval"];
+  x?: LinearRegressionYOptions["x"];
 
   @property({ type: String })
   y?: LinearRegressionYOptions["y"];
@@ -18,6 +18,8 @@ export class OslRegressionPlot extends PlotMark {
   @property({ type: String })
   ci?: LinearRegressionOptions["ci"];
 
+  @property({ type: Boolean })
+  regressionX?: boolean=false;
 
   markOptions: (keyof this)[] = ["x", "y", "ci"];
 
@@ -27,7 +29,12 @@ export class OslRegressionPlot extends PlotMark {
 
     return (overrideData?: any, overrideOptions?: {}) => {
       const data = innerData?.length ? innerData : overrideData;
-      return Plot.linearRegressionY(data, { ...overrideOptions, ...options});
+      
+      if (this.regressionX) {
+        return Plot.linearRegressionX(data, { ...overrideOptions, ...options});
+      } else {
+        return Plot.linearRegressionY(data, { ...overrideOptions, ...options});
+      }
     };
   }
 

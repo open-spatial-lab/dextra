@@ -18,7 +18,7 @@ export class OslRule extends PlotMark {
   y?: string;
 
   @property({ converter: interpretFuncJsonOrString })
-  interval?: string;
+  interval?: RuleOptions["interval"];
 
   @property({ type: String })
   x1?: RuleYOptions["x1"];
