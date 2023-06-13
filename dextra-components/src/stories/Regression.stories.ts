@@ -11,14 +11,14 @@ export default {
 export const LinearRegression = () => {
   return html`
     <osl-plot
-      data="https://d2vloi59ojgfpi.cloudfront.net/data-query/642da9a7cbd1580008828021"
+      data="https://d3uldu0bz6pkei.cloudfront.net/data-query/646fd0f4e06ddb00081c002a"
     >
     <osl-dot 
-    x="avg_daily_pm25" 
-    y="income_ratio"
+    x="MedianHouseholdIncome" 
+    y="UnEmplyPrc"
     strokeOpacity=0.5
     > </osl-dot>
-      <osl-regression-plot x="avg_daily_pm25" y="income_ratio"></osl-regression-plot>
+      <osl-regression-plot x="MedianHouseholdIncome" y="UnEmplyPrc"></osl-regression-plot>
     </osl-plot>
     `
 }
