@@ -62,22 +62,3 @@ export const RuleBound = () => {
     </osl-plot>
   `;
 };
-
-// export const RuleCandlestick = () => {
-//   const data = "https://d3uldu0bz6pkei.cloudfront.net/data-query/647e4573a0fa480008e0fbbd";
-//   const parsedData = fetch(data)
-//     .then(response => response.json())
-//     .then(data => {
-//       return data.map(item => ({
-//         ...item,
-//         date: new Date(item.date)
-//       }));
-//     });
-
-//   return html`
-//     <osl-plot data="${parsedData}">
-//       <osl-rule-plot direction="vertical" x="date" y1="temp_min" y2="temp_max"></osl-rule-plot>
-//       <osl-rule-plot direction="horizontal" y=[0]></osl-rule-plot>
-//     </osl-plot>
-//   `;
-// };
