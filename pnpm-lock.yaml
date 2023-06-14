@@ -66,8 +66,8 @@ importers:
         specifier: ^3.3.3
         version: 3.3.3
       '@observablehq/plot':
-        specifier: git+ssh://git@github.com/observablehq/plot.git
-        version: github.com/observablehq/plot/16c75f4379df795277626c051065de3e96633687
+        specifier: ^0.6.8
+        version: 0.6.8
       '@okikio/sharedworker':
         specifier: ^1.0.4
         version: 1.0.4
@@ -4244,6 +4244,15 @@ packages:
       '@nodelib/fs.scandir': 2.1.5
       fastq: 1.15.0
     dev: true
+
+  /@observablehq/plot@0.6.8:
+    resolution: {integrity: sha512-P8+ThM1fF5TyXov5fgDBy877N38WiJpFDwuqjXKK0ln80HC4x8hSuRCLaB+JjpKjQm7ERHbgvVldws7YwWC9Qw==}
+    engines: {node: '>=12'}
+    dependencies:
+      d3: 7.8.4
+      interval-tree-1d: 1.0.4
+      isoformat: 0.2.1
+    dev: false
 
   /@okikio/sharedworker@1.0.4:
     resolution: {integrity: sha512-QffYDNQ30RtrvmTVDu5WtNiwZRcrx+3Lkd02STsMXj3JBJMWmJkiQv+ruKgsLoijXVwqjW6LYuf41of7Ro/rfg==}
@@ -13165,14 +13174,3 @@ packages:
       which: 2.0.2
       yaml: 2.2.2
     dev: true
-
-  github.com/observablehq/plot/16c75f4379df795277626c051065de3e96633687:
-    resolution: {tarball: https://codeload.github.com/observablehq/plot/tar.gz/16c75f4379df795277626c051065de3e96633687}
-    name: '@observablehq/plot'
-    version: 0.6.8
-    engines: {node: '>=12'}
-    dependencies:
-      d3: 7.8.4
-      interval-tree-1d: 1.0.4
-      isoformat: 0.2.1
-    dev: false

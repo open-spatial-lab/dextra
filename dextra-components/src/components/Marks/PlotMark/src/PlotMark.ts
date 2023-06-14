@@ -71,6 +71,9 @@ export class PlotMark extends OslData {
   fillOpacity?: MarkOptions["fillOpacity"];
 
   @property({ converter: interpretFuncJsonOrString })
+  stroke?: MarkOptions["stroke"];
+  
+  @property({ converter: interpretFuncJsonOrString })
   strokeDasharray?: MarkOptions["strokeDasharray"];
 
   @property({ converter: interpretFuncJsonOrString })
@@ -112,6 +115,9 @@ export class PlotMark extends OslData {
   @property({ converter: interpretFuncJsonOrString })
   channels?: MarkOptions["channels"];
 
+  @property({ converter: interpretFuncJsonOrString })
+  tip?: MarkOptions["tip"] = true;
+
   baseOptions: (keyof this)[] = [
     "filter",
     "reverse",
@@ -134,6 +140,7 @@ export class PlotMark extends OslData {
     "dy",
     "fill",
     "fillOpacity",
+    "stroke",
     "strokeDasharray",
     "strokeDashoffset",
     "strokeLinecap",
@@ -148,6 +155,7 @@ export class PlotMark extends OslData {
     "href",
     "target",
     "channels",
+    "tip",
   ];
 
   markOptions: (keyof this)[] = [];
@@ -171,7 +179,7 @@ export class PlotMark extends OslData {
   public get plot(): (
     _overrideData?: any,
     _overrideOptions?: {}
-  ) => Plot.RenderableMark | never[] {
+  ) => Plot.RenderableMark | Plot.CompoundMark | never[] {
     return (_f, _j) => [];
   }
 

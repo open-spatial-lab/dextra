@@ -15,7 +15,7 @@
     "@loaders.gl/core": "^3.3.3",
     "@loaders.gl/csv": "^3.3.3",
     "@loaders.gl/json": "^3.3.3",
-    "@observablehq/plot": "git+ssh://git@github.com/observablehq/plot.git",
+    "@observablehq/plot": "^0.6.8",
     "@okikio/sharedworker": "^1.0.4",
     "@rollup/plugin-replace": "^5.0.2",
     "@spectrum-web-components/bundle": "^0.29.3",

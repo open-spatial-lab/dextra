@@ -2,8 +2,8 @@ export const interpretFuncJsonOrString = (value: string | null, _type: unknown) 
   if (value === null) {
     return value;
   }
-  // regex to check if string contians (*)=>
-  const isArrowFunction = /\(\w+\)\s*=>/g.test(value);
+  // regex to check if string contians (a,b)=>
+  const isArrowFunction = /\([^()]*\)\s*=>/g.test(value);
   // regex to check if arrow function with no parenthesis
   const isArrowFunctionNoParenthesis = /\w+\s*=>/g.test(value);
   // regex to check if string is stringified function
