@@ -70,8 +70,8 @@ importers:
         specifier: ^3.3.3
         version: 3.3.3
       '@observablehq/plot':
-        specifier: git+ssh://git@github.com/observablehq/plot.git
-        version: github.com/observablehq/plot/c247e18851e97f96942d1b03c083b3607b07494d
+        specifier: ^0.6.8
+        version: 0.6.8
       '@okikio/sharedworker':
         specifier: ^1.0.4
         version: 1.0.4
@@ -202,6 +202,28 @@ importers:
       vite:
         specifier: ^4.0.0
         version: 4.0.0(@types/node@18.11.18)
+
+  dextra-components/src/FullBundle:
+    dependencies:
+      lit-element:
+        specifier: ^2.4.0
+        version: 2.4.0
+      lit-html:
+        specifier: ^2.7.0
+        version: 2.7.0
+      valtio:
+        specifier: ^1.10.3
+        version: 1.10.3(react@18.2.0)
+    devDependencies:
+      '@types/node':
+        specifier: ^14.14.37
+        version: 14.14.37
+      typescript:
+        specifier: ^5.0
+        version: 5.0.2
+      vite:
+        specifier: ^2.1.3
+        version: 2.1.3
 
   dextra-components/src/components/Checkbox:
     dependencies:
@@ -4292,6 +4314,15 @@ packages:
       '@nodelib/fs.scandir': 2.1.5
       fastq: 1.15.0
     dev: true
+
+  /@observablehq/plot@0.6.8:
+    resolution: {integrity: sha512-P8+ThM1fF5TyXov5fgDBy877N38WiJpFDwuqjXKK0ln80HC4x8hSuRCLaB+JjpKjQm7ERHbgvVldws7YwWC9Qw==}
+    engines: {node: '>=12'}
+    dependencies:
+      d3: 7.8.4
+      interval-tree-1d: 1.0.4
+      isoformat: 0.2.1
+    dev: false
 
   /@okikio/sharedworker@1.0.4:
     resolution: {integrity: sha512-QffYDNQ30RtrvmTVDu5WtNiwZRcrx+3Lkd02STsMXj3JBJMWmJkiQv+ruKgsLoijXVwqjW6LYuf41of7Ro/rfg==}
@@ -13220,10 +13251,10 @@ packages:
       yaml: 2.2.2
     dev: true
 
-  github.com/observablehq/plot/c247e18851e97f96942d1b03c083b3607b07494d:
-    resolution: {tarball: https://codeload.github.com/observablehq/plot/tar.gz/c247e18851e97f96942d1b03c083b3607b07494d}
+  github.com/observablehq/plot/86ac53e95e4104345a5bcbeb0d84c6c799bccab8:
+    resolution: {tarball: https://codeload.github.com/observablehq/plot/tar.gz/86ac53e95e4104345a5bcbeb0d84c6c799bccab8}
     name: '@observablehq/plot'
-    version: 0.6.8
+    version: 0.6.7-rc.1
     engines: {node: '>=12'}
     dependencies:
       d3: 7.8.4
