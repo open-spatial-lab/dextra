@@ -29,14 +29,6 @@ export const Line = () => {
         stroke="maroon"
         fy="weather"
       ></osl-line>
-      <osl-axis
-        ticks="month"
-        anchor="bottom"
-        tickPadding="5"
-        tickSize="0"
-        tickRotate="45"
-        tickFormat="(d, i) => i % 40 === 0 ? (new Date(d)).toISOString().slice(0,10) : ''"
-      ></osl-axis>
     </osl-plot>
     `
 }

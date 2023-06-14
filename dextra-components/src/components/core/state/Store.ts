@@ -25,6 +25,23 @@ const handleLoad = async (url: string) => {
   }
 }
 
+const parseData = (data: Array<Record<string, unknown>>) => {
+  const columns = Object.keys(data[0]);
+  const parseRow = (row: Record<string, unknown>) => {
+    for (let i=0;i<columns.length;i++) {
+      const key = columns[i];
+      const value = row[key];
+      if (typeof value === "string" && !isNaN(Number(value))) {
+        row[key] = Number(value);
+      } else if (typeof value === "string" && !isNaN(Date.parse(value))) {
+        row[key] = new Date(value);
+      }
+    }
+    return row;
+  }
+  return data.map(parseRow);  
+}
+
 subscribe(store.datasets, async () => {
   const allDatasets = Object.keys(store.datasets);
   const fetchAllDatasets = allDatasets.map(async (key) => {
@@ -42,7 +59,8 @@ subscribe(store.datasets, async () => {
         );
       });
       const data = await handleLoad(url.toString())
-      store.datasets[key].results[currentParamString] = data
+      const parsedData = parseData(data)
+      store.datasets[key].results[currentParamString] = parsedData
     }
   });
   await Promise.all(fetchAllDatasets);
