@@ -14,7 +14,7 @@ export const RuleX= () => {
       data="https://d3uldu0bz6pkei.cloudfront.net/data-query/646fd0f4e06ddb00081c002a"
     >
       <osl-dot-plot x="MedianHouseholdIncome" y="UnEmplyPrc"> </osl-dot-plot>
-      <osl-rule-plot vertical="true" x="0"></osl-rule-plot>
+      <osl-rule-plot direction="vertical" x="0"></osl-rule-plot>
     </osl-plot>
   `;
 };
@@ -25,7 +25,7 @@ export const RuleXData = () => {
       data="https://d3uldu0bz6pkei.cloudfront.net/data-query/646fd0f4e06ddb00081c002a"
     >
       <osl-dot-plot x="MedianHouseholdIncome" y="UnEmplyPrc"> </osl-dot-plot>
-      <osl-rule-plot vertical="true" x="MedianHouseholdIncome" strokeOpacity=0.1></osl-rule-plot>
+      <osl-rule-plot direction="vertical" x="MedianHouseholdIncome" strokeOpacity=0.1></osl-rule-plot>
     </osl-plot>
   `;
 };
@@ -36,7 +36,7 @@ export const RuleY= () => {
       data="https://d3uldu0bz6pkei.cloudfront.net/data-query/646fd0f4e06ddb00081c002a"
     >
       <osl-dot-plot x="MedianHouseholdIncome" y="UnEmplyPrc"> </osl-dot-plot>
-      <osl-rule-plot y="[0]"></osl-rule-plot>
+      <osl-rule-plot direction="horizontal" y="[0]"></osl-rule-plot>
     </osl-plot>
   `;
 };
@@ -47,7 +47,37 @@ export const RuleYData = () => {
       data="https://d3uldu0bz6pkei.cloudfront.net/data-query/646fd0f4e06ddb00081c002a"
     >
       <osl-dot-plot x="MedianHouseholdIncome" y="UnEmplyPrc"> </osl-dot-plot>
-      <osl-rule-plot y="UnEmplyPrc"></osl-rule-plot>
+      <osl-rule-plot direction="horizontal" y="UnEmplyPrc"></osl-rule-plot>
     </osl-plot>
   `;
 };
+
+export const RuleBound = () => {
+  return html`
+    <osl-plot
+      data="https://d3uldu0bz6pkei.cloudfront.net/data-query/647e4573a0fa480008e0fbbd"
+    >
+      <osl-rule-plot direction="vertical" x="date" y1="temp_min" y2="temp_max"></osl-rule-plot>
+      <osl-rule-plot direction="horizontal" y=[0]></osl-rule-plot>
+    </osl-plot>
+  `;
+};
+
+// export const RuleCandlestick = () => {
+//   const data = "https://d3uldu0bz6pkei.cloudfront.net/data-query/647e4573a0fa480008e0fbbd";
+//   const parsedData = fetch(data)
+//     .then(response => response.json())
+//     .then(data => {
+//       return data.map(item => ({
+//         ...item,
+//         date: new Date(item.date)
+//       }));
+//     });
+
+//   return html`
+//     <osl-plot data="${parsedData}">
+//       <osl-rule-plot direction="vertical" x="date" y1="temp_min" y2="temp_max"></osl-rule-plot>
+//       <osl-rule-plot direction="horizontal" y=[0]></osl-rule-plot>
+//     </osl-plot>
+//   `;
+// };

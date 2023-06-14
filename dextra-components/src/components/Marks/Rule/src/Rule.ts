@@ -32,10 +32,10 @@ export class OslRule extends PlotMark {
   @property({ type: String })
   y2?: RuleXOptions["y2"];
 
-  @property({ type: Boolean })
-  vertical?: boolean = false;
+  @property({ type: String })
+  direction?: string="horizontal";
 
-  markOptions: (keyof this)[] = ["x", "y", "interval", "x1", "x2", "y1", "y2", "vertical"];
+  markOptions: (keyof this)[] = ["x", "y", "interval", "x1", "x2", "y1", "y2", "direction"];
 
   public override get plot() {
     const innerData = this?.currentResults;
@@ -44,7 +44,7 @@ export class OslRule extends PlotMark {
     return (overrideData?: any, overrideOptions?: {}) => {
       const data = innerData?.length ? innerData : overrideData;
 
-      if (this.vertical) {
+      if (this.direction=="vertical") {
           return Plot.ruleX(data, { ...overrideOptions, ...options});
       } else {
           return Plot.ruleY(data, { ...overrideOptions, ...options});
