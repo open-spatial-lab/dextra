@@ -43,18 +43,26 @@ export class OslPlot extends OslData {
   marginLeft = 20;
 
   @property({ type: Number })
-  marginBottom = 20;
+  marginBottom = 30;
 
   @property({ type: Number })
   marginRight = 20;
 
+  @property({ type: Number })
+  width = 600;
+
+  @property({ type: Number })
+  height = 400;
+
   protected plot(){
-    const { inset, marks, marginBottom, marginLeft, marginTop, marginRight } = this
+    const { inset, marks, marginBottom, marginLeft, marginTop, marginRight, width, height } = this
     const plot = Plot.plot({
       marginTop,
       marginLeft,
       marginBottom,
       marginRight,
+      width, 
+      height, 
       grid: this.grid,
       color: {legend: this.colorLegend},
       inset,

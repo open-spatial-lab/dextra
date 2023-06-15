@@ -10,6 +10,8 @@ export default {
 export const Box = () => {
   return html`
     <osl-plot
+      width = 1000
+      height = 500
       marginLeft = 60
       marginBottom = 100
       data="https://d3uldu0bz6pkei.cloudfront.net/data-query/646fd0f4e06ddb00081c002a"
