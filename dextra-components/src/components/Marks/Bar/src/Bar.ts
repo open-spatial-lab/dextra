@@ -1,4 +1,4 @@
-import { customElement } from "lit/decorators.js";
+import { customElement, property } from "lit/decorators.js";
 import { PlotMark } from "../../PlotMark/src/PlotMark";
 import * as Plot from "@observablehq/plot";
 
@@ -6,7 +6,16 @@ import * as Plot from "@observablehq/plot";
 export class OslBar extends PlotMark {
   mark = "bar"
 
-  markOptions: (keyof this)[] = [];
+  @property({ type: String })
+  x?: string;
+
+  @property({ type: String })
+  y?: string;
+
+  @property({ type: String })
+  direction?: "horizontal" | "vertical" = "vertical";
+
+  markOptions: (keyof this)[] = ["x", "y", "direction"];
 
   public get plot() {
     const innerData = this?.currentResults;
@@ -14,8 +23,16 @@ export class OslBar extends PlotMark {
 
     return (overrideData?: any, overrideOptions?: {}) => {
       const data = innerData?.length ? innerData : overrideData;
-      return Plot.dot(data, { ...overrideOptions, ...options});
-    };
+      
+      switch (this.direction) {
+        case "horizontal":
+          return Plot.barX(data, {...overrideOptions, ...options});
+        case "vertical":
+          return Plot.barY(data, {...overrideOptions, ...options});
+        default:
+          return Plot.barY(data, {...overrideOptions, ...options});
+      }
+  }
   }
 
   render() {
