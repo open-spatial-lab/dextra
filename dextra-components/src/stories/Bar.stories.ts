@@ -38,3 +38,21 @@ export const GroupedBar = () => {
     </osl-plot>
     `
 }
+
+export const StackedBar = () => {
+  return html`
+  <osl-plot
+      width = 1000
+      height = 500
+      marginLeft = 60
+      colorLegend="true"
+      data="https://d3uldu0bz6pkei.cloudfront.net/data-query/64a2e11ff85e5800085aab6d"     
+    >
+    <osl-bar x="key" 
+      y="population" 
+      direction="vertical" 
+      fill="state" 
+    ></osl-bar>
+    </osl-plot>
+    `
+}
