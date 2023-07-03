@@ -15,6 +15,8 @@ export class OslBar extends PlotMark {
   @property({ type: String })
   direction?: "horizontal" | "vertical" = "vertical";
 
+
+
   markOptions: (keyof this)[] = ["x", "y", "direction"];
 
   public get plot() {
@@ -23,7 +25,7 @@ export class OslBar extends PlotMark {
 
     return (overrideData?: any, overrideOptions?: {}) => {
       const data = innerData?.length ? innerData : overrideData;
-      
+
       switch (this.direction) {
         case "horizontal":
           return Plot.barX(data, {...overrideOptions, ...options});
