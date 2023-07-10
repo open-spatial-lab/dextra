@@ -1,5 +1,5 @@
 import { Meta } from "@storybook/web-components";
-import { html } from "lit";
+import { html } from "lit"; 
 import "../components/marks/Bar/src/Bar.ts";
 import "../components/Plot/src/Plot.ts";
 
@@ -26,10 +26,12 @@ export const GroupedBar = () => {
       width = 1000
       height = 500
       marginLeft = 60
-      colorLegend="true"
+      colorLegend="true" 
+      axis_x = null
       data="https://d3uldu0bz6pkei.cloudfront.net/data-query/64a2e11ff85e5800085aab6d"     
     >
-    <osl-bar x="key" 
+    <osl-bar 
+      x="key" 
       y="population" 
       direction="vertical" 
       fill="key" 
@@ -42,10 +44,10 @@ export const GroupedBar = () => {
 export const StackedBar = () => {
   return html`
   <osl-plot
-      width = 1000
-      height = 500
-      marginLeft = 60
-      colorLegend="true"
+      width = 1000 
+      height = 500 
+      marginLeft = 60 
+      colorLegend="true" 
       data="https://d3uldu0bz6pkei.cloudfront.net/data-query/64a2e11ff85e5800085aab6d"     
     >
     <osl-bar x="key" 
