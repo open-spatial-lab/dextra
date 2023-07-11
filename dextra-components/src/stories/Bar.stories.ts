@@ -10,10 +10,11 @@ export default {
 export const Bar = () => {
   return html`
   <osl-plot
-      width = 1000
+      width = 1100
       height = 500
       marginLeft = 180
-      data="https://d3uldu0bz6pkei.cloudfront.net/data-query/649d9a93b7c5c900081ad8dc"     
+      data="https://d3uldu0bz6pkei.cloudfront.net/data-query/649d9a93b7c5c900081ad8dc" 
+      x_type="sqrt"     
     >
     <osl-bar y="Active_Ingredient" x="Ingredient_Used_lb_per_acre" direction="horizontal"></osl-bar>
     </osl-plot>
@@ -27,7 +28,7 @@ export const GroupedBar = () => {
       height = 500
       marginLeft = 60
       colorLegend="true" 
-      axis_x = null
+      x_axis="null"
       data="https://d3uldu0bz6pkei.cloudfront.net/data-query/64a2e11ff85e5800085aab6d"     
     >
     <osl-bar 
