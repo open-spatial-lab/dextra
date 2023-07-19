@@ -47,7 +47,7 @@ export const StackedBar = () => {
   <osl-plot
       width = 1000 
       height = 500 
-      marginLeft = 60 
+      marginLeft = 65 
       colorLegend="true" 
       data="http://localhost:6006/data/population-state-age.json"     
     >
