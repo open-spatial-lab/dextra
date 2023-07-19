@@ -9,7 +9,7 @@ export default {
 export const Radio = () => {
   return html`
   <osl-radio
-    data="https://d3uldu0bz6pkei.cloudfront.net/data-query/6463ec5412b93e00099b0e05"
+    data="http://localhost:6006/data/interaction.json"
     option="mag"
     options="[5,6,7,8]"
     title="Magnitude"

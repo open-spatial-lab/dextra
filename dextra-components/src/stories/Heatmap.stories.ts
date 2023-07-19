@@ -10,7 +10,7 @@ export default {
 export const Heatmap = () => {
   return html`
     <osl-plot
-    data="https://d3uldu0bz6pkei.cloudfront.net/data-query/646fd0f4e06ddb00081c002a"
+    data="http://localhost:6006/data/household.json"
     >
       <osl-heatmap-plot x="MedianHouseholdIncome" y="UnEmplyPrc"></osl-heatmap-plot>
     </osl-plot>
