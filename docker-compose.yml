@@ -1,0 +1,10 @@
+version: "3.5"
+services:
+    storybook:
+        container_name: dextra-docker
+        image: node:18-alpine
+        working_dir: /dextra
+        build: .
+        command: sh -c "npm install -g pnpm && pnpm install && pnpm dev:component"
+        ports:
+            - "6006:6006"
