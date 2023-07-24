@@ -18,7 +18,7 @@ export const GlMap = () => {
       <osl-map-layer
         type="scatter"
         getPosition="(d) => [d.LONGITUDE, d.LATITUDE]"
-        data="https://d3uldu0bz6pkei.cloudfront.net/data-query/646689a096f1f70008e1d3f1?zip=60640"
+        data="http://localhost:6006/data/map.json"
       >
       </osl-map-layer>
     </osl-glmap>
@@ -33,7 +33,7 @@ export const ChoroplethMap = () => {
     >
       <osl-map-layer
         layer="polygon"
-        data="https://d3uldu0bz6pkei.cloudfront.net/data-query/6466e8ee505b900008f2c80d"
+        data="http://localhost:6006/data/choropleth.json"
         getPolygon="(d) => d.WKT"
         choroplethColumn="AWATER10"
       >
@@ -45,7 +45,7 @@ export const ChoroplethMap = () => {
 export const ControlledGlMap = () => {
   return html`
     <osl-slider
-      data="https://d3uldu0bz6pkei.cloudfront.net/data-query/6463ec5412b93e00099b0e05"
+      data="http://localhost:6006/data/interaction.json"
       option="mag"
       min="7"
       max="8"
@@ -55,7 +55,7 @@ export const ControlledGlMap = () => {
     ></osl-slider>
 
     <osl-slider
-      data="https://d3uldu0bz6pkei.cloudfront.net/data-query/6463ec5412b93e00099b0e05"
+      data="http://localhost:6006/data/interaction.json"
       option="xmin"
       min="-180"
       max="180"
@@ -64,7 +64,7 @@ export const ControlledGlMap = () => {
       title="Min X"
     ></osl-slider>
     <osl-slider
-      data="https://d3uldu0bz6pkei.cloudfront.net/data-query/6463ec5412b93e00099b0e05"
+      data="http://localhost:6006/data/interaction.json"
       option="xmax"
       min="-180"
       max="180"
@@ -73,7 +73,7 @@ export const ControlledGlMap = () => {
       title="Max X"
     ></osl-slider>
     <osl-slider
-      data="https://d3uldu0bz6pkei.cloudfront.net/data-query/6463ec5412b93e00099b0e05"
+      data="http://localhost:6006/data/interaction.json"
       option="ymin"
       min="-90"
       max="90"
@@ -82,7 +82,7 @@ export const ControlledGlMap = () => {
       title="Min Y"
     ></osl-slider>
     <osl-slider
-      data="https://d3uldu0bz6pkei.cloudfront.net/data-query/6463ec5412b93e00099b0e05"
+      data="http://localhost:6006/data/interaction.json"
       option="ymax"
       min="-90"
       max="90"
@@ -99,7 +99,7 @@ export const ControlledGlMap = () => {
       <osl-map-layer
         type="scatter"
         getPosition="(d) => [d.x, d.y]"
-        data="https://d3uldu0bz6pkei.cloudfront.net/data-query/6463ec5412b93e00099b0e05"
+        data="http://localhost:6006/data/interaction.json"
       >
       </osl-map-layer>
     </osl-glmap>

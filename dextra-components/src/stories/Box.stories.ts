@@ -14,7 +14,7 @@ export const Box = () => {
       height = 500
       marginLeft = 60
       marginBottom = 100
-      data="https://d3uldu0bz6pkei.cloudfront.net/data-query/646fd0f4e06ddb00081c002a"
+      data="http://localhost:6006/data/household.json"
     >
       <osl-axis tickRotate="90"></osl-axis>
       <osl-box x="State" y="MedianHouseholdIncome"></osl-box>

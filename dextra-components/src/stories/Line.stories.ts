@@ -11,7 +11,7 @@ export default {
 export const Line = () => {
   return html`
     <osl-plot
-      data="https://d3uldu0bz6pkei.cloudfront.net/data-query/647e4573a0fa480008e0fbbd"
+      data="http://localhost:6006/data/temperature.json"
       marginBottom="80"
       grid="false"
       marginRight="80"

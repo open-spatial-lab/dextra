@@ -10,13 +10,13 @@ export default {
 export const Interface = () => {
   return html`
     Querying with a magnitude of: <osl-interface
-      data="https://d3uldu0bz6pkei.cloudfront.net/data-query/6463ec5412b93e00099b0e05"
+      data="http://localhost:6006/data/interaction.json"
       option="mag"
       initialValue="7"
     > </osl-interface>
     <br/> <br/>
     <osl-data
-      data="https://d3uldu0bz6pkei.cloudfront.net/data-query/6463ec5412b93e00099b0e05"
+      data="http://localhost:6006/data/interaction.json"
     ></osl-data>
   `;
 };

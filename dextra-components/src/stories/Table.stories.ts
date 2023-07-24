@@ -10,7 +10,7 @@ export default {
 export const Table = () => {
   return html`
     <osl-table
-      data="https://d3uldu0bz6pkei.cloudfront.net/data-query/646fd0f4e06ddb00081c002a"
+      data="http://localhost:6006/data/household.json"
     ></osl-table>
   `;
 };
@@ -19,7 +19,7 @@ export const ControlledTable = () => {
   return html`
     <p></p>
     <osl-slider
-      data="https://d3uldu0bz6pkei.cloudfront.net/data-query/646fd0f4e06ddb00081c002a"
+      data="http://localhost:6006/data/household.json"
       option="RsiSgrBlckRt"
       min="0"
       max="100"
@@ -29,7 +29,7 @@ export const ControlledTable = () => {
     ></osl-slider>
 
     <osl-table
-      data="https://d3uldu0bz6pkei.cloudfront.net/data-query/646fd0f4e06ddb00081c002a"
+      data="http://localhost:6006/data/household.json"
     ></osl-table>
   `;
 };

@@ -11,7 +11,7 @@ export const Density = () => {
   return html`
     <osl-plot
       inset="50"
-      data="https://d3uldu0bz6pkei.cloudfront.net/data-query/646fd0f4e06ddb00081c002a"
+      data="http://localhost:6006/data/household.json"
     >
       <osl-density-plot
         x="MedianHouseholdIncome"

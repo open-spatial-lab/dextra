@@ -10,8 +10,8 @@ export default {
 
 export const Dot = () => {
   return html`
-    <osl-plot
-      data="https://d3uldu0bz6pkei.cloudfront.net/data-query/646fd0f4e06ddb00081c002a"
+  <osl-plot
+      data="http://localhost:6006/data/household.json"
     >
       <osl-dot-plot x="MedianHouseholdIncome" y="UnEmplyPrc"> </osl-dot-plot>
     </osl-plot>
@@ -26,7 +26,7 @@ export const ComplexDot = () => {
 
     <osl-plot
       colorLegend="true"
-      data="https://d3uldu0bz6pkei.cloudfront.net/data-query/646fd0f4e06ddb00081c002a"
+      data="http://localhost:6006/data/household.json"
     >
       <osl-dot-plot r="MedianHouseholdIncome" x="MedianHouseholdIncome" y="UnEmplyPrc" fill="State"> </osl-dot-plot>
       </osl-dot-plot>
@@ -37,7 +37,7 @@ export const ComplexDot = () => {
 export const ControlledDot = () => {
   return html`
     <osl-slider
-      data="https://d3uldu0bz6pkei.cloudfront.net/data-query/646fd0f4e06ddb00081c002a"
+      data="http://localhost:6006/data/household.json"
       option="RsiSgrBlckRt"
       min="0"
       max="100"
@@ -47,7 +47,7 @@ export const ControlledDot = () => {
     ></osl-slider>
 
     <osl-plot
-      data="https://d3uldu0bz6pkei.cloudfront.net/data-query/646fd0f4e06ddb00081c002a"
+      data="http://localhost:6006/data/household.json"
     >
       <osl-dot-plot x="MedianHouseholdIncome" y="UnEmplyPrc"> </osl-dot-plot>
     </osl-plot>
