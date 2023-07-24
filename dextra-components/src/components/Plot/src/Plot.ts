@@ -67,7 +67,7 @@ export class OslPlot extends OslData {
   colorDomain?: Plot.ScaleOptions["domain"];
 
   @property({ type: Number })
-  colorN?: Plot.ScaleOptions["n"];
+  colorInterval?: Plot.ScaleOptions["n"];
 
   @property({ type: String })
   colorLabel?: Plot.ScaleOptions["label"];
@@ -86,7 +86,7 @@ export class OslPlot extends OslData {
         type: this.colorType, 
         scheme: this.colorScheme, 
         domain: this.colorDomain, 
-        n: this.colorN, 
+        n: this.colorInterval, 
         label: this.colorLabel
       },
       inset,
