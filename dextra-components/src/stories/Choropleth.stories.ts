@@ -19,7 +19,7 @@ export const Choropleth = () => {
     colorDomain="[1, 10]"
     colorInterval="9"
     colorLabel="Unemployment rate (%)"
-    data="http://localhost:6006/unemployment.json" 
+    data="http://localhost:6006/data/unemployment.json" 
     >
       <osl-choropleth
       fill="(d) => d.properties.rate"

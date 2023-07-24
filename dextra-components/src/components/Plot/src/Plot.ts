@@ -32,10 +32,6 @@ export class OslPlot extends OslData {
   @property({ converter: interpretFuncJsonOrString })
   grid: boolean = true
 
-  @property({ type: Boolean })
-  colorLegend = false
-
-  // properties for eachmargin top, left, bottom, right
   @property({ type: Number })
   marginTop = 20;
 
@@ -68,6 +64,9 @@ export class OslPlot extends OslData {
 
   @property({ type: Number })
   colorInterval?: Plot.ScaleOptions["n"];
+
+  @property({ type: Boolean })
+  colorLegend = false
 
   @property({ type: String })
   colorLabel?: Plot.ScaleOptions["label"];
