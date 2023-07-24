@@ -52,10 +52,25 @@ export class OslPlot extends OslData {
   width = 600;
 
   @property({ type: Number })
-  height = 400;
+  height = 400; 
+
+  @property({ converter: interpretFuncJsonOrString })
+  projection?: Plot.PlotOptions["projection"];
+
+  @property({ converter: interpretFuncJsonOrString })
+  colorType?: Plot.ScaleOptions["type"];
+
+  @property({ converter: interpretFuncJsonOrString })
+  colorScheme?: Plot.ScaleOptions["scheme"];
+
+  @property({ converter: interpretFuncJsonOrString })
+  colorDomain?: Plot.ScaleOptions["domain"];
+
+  @property({ converter: interpretFuncJsonOrString })
+  colorN?: Plot.ScaleOptions["n"];
 
   protected plot(){
-    const { inset, marks, marginBottom, marginLeft, marginTop, marginRight, width, height } = this
+    const { inset, marks, marginBottom, marginLeft, marginTop, marginRight, width, height, projection } = this
     const plot = Plot.plot({
       marginTop,
       marginLeft,
@@ -64,9 +79,15 @@ export class OslPlot extends OslData {
       width, 
       height, 
       grid: this.grid,
-      color: {legend: this.colorLegend},
+      color: {legend: this.colorLegend, 
+        type: this.colorType, 
+        scheme: this.colorScheme, 
+        domain: this.colorDomain, 
+        n: this.colorN, 
+      },
       inset,
       marks,
+      projection, 
     })
     return plot
   }
