@@ -14,7 +14,7 @@ export const Bar = () => {
       height = 500
       marginLeft = 180
       data="http://localhost:6006/data/pesticide.json"
-      x_type="sqrt"     
+      xAxisScaling="sqrt"     
     >
     <osl-bar y="Active_Ingredient" x="Ingredient_Used_lb_per_acre" direction="horizontal"></osl-bar>
     </osl-plot>
@@ -28,7 +28,7 @@ export const GroupedBar = () => {
       height = 500
       marginLeft = 60
       colorLegend="true" 
-      x_axis="null"
+      xAxisAnchor="null"
       data="http://localhost:6006/data/population-state-age.json"    
     >
     <osl-bar 
@@ -51,7 +51,8 @@ export const StackedBar = () => {
       colorLegend="true" 
       data="http://localhost:6006/data/population-state-age.json"     
     >
-    <osl-bar x="key" 
+    <osl-bar 
+      x="key" 
       y="population" 
       direction="vertical" 
       fill="state" 

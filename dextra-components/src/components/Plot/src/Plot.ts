@@ -50,20 +50,21 @@ export class OslPlot extends OslData {
 
   @property({ type: Number })
   width = 600;
-
+  
   @property({ type: Number })
   height = 400;
 
   @property({ converter: interpretFuncJsonOrString })
-  x_axis?: Plot.AxisOptions["anchor"] | boolean | null;
+  xAxisAnchor?: Plot.AxisOptions["anchor"] | null = "bottom";
 
   @property({ converter: interpretFuncJsonOrString })
-  y_axis?: Plot.AxisOptions["anchor"] | boolean | null;
+  yAxisAnchor?: Plot.AxisOptions["anchor"] | null = "left";
 
   @property({ converter: interpretFuncJsonOrString })
-  x_type?: Plot.ScaleOptions["type"];
+  xAxisScaling?: Plot.ScaleOptions["type"];
+
   @property({ converter: interpretFuncJsonOrString })
-  y_type?: Plot.ScaleOptions["type"];
+  yAxisScaling?: Plot.ScaleOptions["type"];
 
   protected plot(){
     const { inset, marks, marginBottom, marginLeft, marginTop, marginRight, width, height } = this
@@ -77,8 +78,8 @@ export class OslPlot extends OslData {
       grid: this.grid,
       color: {legend: this.colorLegend},
       inset,
-      x: {axis: this.x_axis, type: this.x_type}, 
-      y: {axis: this.y_axis, type: this.y_type}, 
+      x: {axis: this.xAxisAnchor, type: this.xAxisScaling}, 
+      y: {axis: this.yAxisAnchor, type: this.yAxisScaling}, 
       marks,
     })
     return plot
