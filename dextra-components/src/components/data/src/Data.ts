@@ -20,43 +20,43 @@ export class OslData extends ValtioElement {
   // @property({type: Boolean})
   // isNectrBackend = true;
 
-  protected syncDataFromStore() {
-    const results = this.store.datasets[this.data].results;
+  protected syncDataFromStore(data: string) {
+    const results = this.store.datasets[data].results;
     const currentParametersHash = JSON.stringify(
-      this.store.datasets[this.data].parameters
+      this.store.datasets[data].parameters
     );
     this.currentResults = results[currentParametersHash];
     this.currentParametersHash = currentParametersHash;
   }
 
-  protected initDataset() {
-    if (!this.data) return;
+  protected initDataset(data: string) {
+    if (!data) return;
     
-    if (!this.store.datasets[this.data] && this.data !== "") {
-      this.store.datasets[this.data] = {
+    if (!this.store.datasets[data] && data !== "") {
+      this.store.datasets[data] = {
         parameters: {},
         headless: true,
         results: {},
         status: "loading",
       };
     } else {
-      this.syncDataFromStore();
+      this.syncDataFromStore(data);
     }
 
     this.subscribe(
-      (store) => store.datasets[this.data].results,
-      () => this.syncDataFromStore()
+      (store) => store.datasets[data].results,
+      () => this.syncDataFromStore(data)
     );
 
     this.subscribe(
-      (store) => store.datasets[this.data].parameters,
-      () => this.syncDataFromStore()
+      (store) => store.datasets[data].parameters,
+      () => this.syncDataFromStore(data)
     );
   }
 
   connectedCallback() {
     super.connectedCallback();
-    this.initDataset();
+    this.data && this.initDataset(this.data);
   }
 
   template() {

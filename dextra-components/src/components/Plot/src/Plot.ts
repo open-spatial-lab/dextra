@@ -8,19 +8,30 @@ export type MarkFunction = (data: any, overrideOptions: any) => any
 
 @customElement("osl-plot")
 export class OslPlot extends OslData {
-  get markFunctions(): Array<MarkFunction> {
+  get childMarks(): Array<ChildNode> {
     const children = Array.from(this.childNodes)
-    const marks = children.filter((node) => 'mark' in node)
-    return marks.map((mark) => 'plot' in mark ? mark.plot as MarkFunction : (_f: any) => []) 
+    return children.filter((node) => 'mark' in node)
   }
 
+  get markFunctions(): Array<MarkFunction> {
+    return this.childMarks.map((mark) => 'plot' in mark ? mark.plot as MarkFunction : (_f: any) => []) 
+  }
+
+  get markSources(): Array<string> {
+    return this.childMarks.map((mark) => '__data' in mark ? mark.__data : false).filter(f => f) as Array<string>
+  }
+  
   get marks() {
     const data = this.currentResults
-    const marks= [
+    const marks = [
       this.framed ? Plot.frame() : null,
       this.markFunctions.map((mark) => mark(data, {}))
     ]
     return marks
+  }
+  override connectedCallback() {
+    super.connectedCallback();
+    this.markSources.forEach((source) => this.initDataset(source));
   }
 
   @property({ type: Number })
