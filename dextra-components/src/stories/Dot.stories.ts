@@ -11,9 +11,8 @@ export default {
 export const Dot = () => {
   return html`
   <osl-plot
-      data="http://localhost:6006/data/household.json"
     >
-      <osl-dot-plot x="MedianHouseholdIncome" y="UnEmplyPrc"> </osl-dot-plot>
+      <osl-dot-plot data="http://localhost:6006/data/household.json" x="MedianHouseholdIncome" y="UnEmplyPrc"> </osl-dot-plot>
     </osl-plot>
   `;
 };
