@@ -1,6 +1,6 @@
 import { Meta } from "@storybook/web-components";
 import { html } from "lit";
-import "../components/marks/Choropleth/src/Choropleth.ts";
+import "../components/marks/Geo/src/Geo.ts";
 import "../components/Plot/src/Plot.ts";
 
 export default {
@@ -14,13 +14,13 @@ export const DotMap = () => {
     height = 450
     projection="equirectangular"
     >
-      <osl-choropleth
+      <osl-geo
       data="http://localhost:6006/data/world.json" 
       fill="currentColor"
       fillOpacity="0.2"
-      ></osl-choropleth>
+      ></osl-geo>
 
-      <osl-choropleth
+      <osl-geo
       data="http://localhost:6006/data/earthquack.json" 
       r="(d) => Math.pow(10, d.properties.mag)"
       fill="red",
@@ -29,7 +29,7 @@ export const DotMap = () => {
       tag="(d) => d.properties.title"
       href="(d) => d.properties.url"
       target="_blank"
-      ></osl-choropleth>
+      ></osl-geo>
 
     </osl-plot>
     `
