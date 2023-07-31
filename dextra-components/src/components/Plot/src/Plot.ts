@@ -32,10 +32,6 @@ export class OslPlot extends OslData {
   @property({ converter: interpretFuncJsonOrString })
   grid: boolean = true
 
-  @property({ type: Boolean })
-  colorLegend = false
-
-  // properties for eachmargin top, left, bottom, right
   @property({ type: Number })
   marginTop = 20;
 
@@ -52,7 +48,28 @@ export class OslPlot extends OslData {
   width = 600;
   
   @property({ type: Number })
-  height = 400;
+  height = 400; 
+
+  @property({ type: String })
+  projection?: Plot.PlotOptions["projection"];
+
+  @property({ type: String })
+  colorType?: Plot.ScaleOptions["type"];
+
+  @property({ type: String })
+  colorScheme?: Plot.ScaleOptions["scheme"];
+
+  @property({ type: Array })
+  colorDomain?: Plot.ScaleOptions["domain"];
+
+  @property({ type: Number })
+  colorInterval?: Plot.ScaleOptions["n"];
+
+  @property({ type: Boolean })
+  colorLegend = false
+
+  @property({ type: String })
+  colorLabel?: Plot.ScaleOptions["label"];
 
   @property({ converter: interpretFuncJsonOrString })
   xAxisAnchor?: Plot.AxisOptions["anchor"] | null = "bottom";
@@ -67,7 +84,7 @@ export class OslPlot extends OslData {
   yAxisScaling?: Plot.ScaleOptions["type"];
 
   protected plot(){
-    const { inset, marks, marginBottom, marginLeft, marginTop, marginRight, width, height } = this
+    const { inset, marks, marginBottom, marginLeft, marginTop, marginRight, width, height, projection } = this
     const plot = Plot.plot({
       marginTop,
       marginLeft,
@@ -76,11 +93,18 @@ export class OslPlot extends OslData {
       width, 
       height, 
       grid: this.grid,
-      color: {legend: this.colorLegend},
+      color: {legend: this.colorLegend, 
+        type: this.colorType, 
+        scheme: this.colorScheme, 
+        domain: this.colorDomain, 
+        n: this.colorInterval, 
+        label: this.colorLabel
+      },
       inset,
       x: {axis: this.xAxisAnchor, type: this.xAxisScaling}, 
       y: {axis: this.yAxisAnchor, type: this.yAxisScaling}, 
       marks,
+      projection, 
     })
     return plot
   }
