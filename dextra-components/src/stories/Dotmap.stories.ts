@@ -7,11 +7,11 @@ export default {
   title: "Marks",
 }
 
-export const Dotmap = () => {
+export const DotMap = () => {
   return html`
     <osl-plot
-    width = 1000
-    height = 650
+    width = 800
+    height = 450
     projection="equirectangular"
     >
       <osl-choropleth
@@ -26,7 +26,9 @@ export const Dotmap = () => {
       fill="red",
       fillOpacity="0.2",
       stroke="red"
+      tag="(d) => d.properties.title"
       href="(d) => d.properties.url"
+      target="_blank"
       ></osl-choropleth>
 
     </osl-plot>

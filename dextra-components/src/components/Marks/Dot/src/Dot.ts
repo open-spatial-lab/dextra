@@ -18,12 +18,6 @@ export class OslDotPlot extends PlotMark {
   r?: DotOptions["fill"];
 
   markOptions: (keyof this)[] = ["x", "y", "r"];
-
-  connectedCallback(): void {
-    console.log('connected!')
-    console.log(this.allOptions)
-    super.connectedCallback();
-  }
   
   public get plot() {
     const innerData = this?.currentResults;
