@@ -23,6 +23,7 @@ export const DensityMap = () => {
         y="latitude"
         bandwidth="10"
         fill="density"
+        tip="false"
     ></osl-density-plot>
     <osl-geo
         data="http://localhost:6006/data/nations.json" 
@@ -37,6 +38,7 @@ export const DensityMap = () => {
         y="latitude"
         r="1"
         fill="currentColor"
+        title="date"
     ><osl-dot-plot>
   </osl-plot>
 
