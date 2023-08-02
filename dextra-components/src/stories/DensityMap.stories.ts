@@ -12,7 +12,6 @@ export default {
 export const DensityMap = () => {
   return html`
   <osl-plot
-
     projection="albers" 
     colorScheme="YlGnBu"
     colorLegend="true"
@@ -25,9 +24,12 @@ export const DensityMap = () => {
         bandwidth="10"
         fill="density"
     ></osl-density-plot>
-  >
     <osl-geo
         data="http://localhost:6006/data/nations.json" 
+    ></osl-geo>
+    <osl-geo
+        data="http://localhost:6006/data/states.json" 
+        strokeOpacity="0.3"
     ></osl-geo>
     <osl-dot-plot
         data="http://localhost:6006/data/walmarts.tsv" 
