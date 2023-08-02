@@ -36,6 +36,6 @@ export class OslGeo extends PlotMark {
 
 declare global {
   interface HTMLElementTagNameMap {
-    "osl-choropleth": OslGeo;
+    "osl-geo": OslGeo;
   }
 }
