@@ -3,12 +3,11 @@ import { PlotMark } from "../../PlotMark/src/PlotMark";
 import * as Plot from "@observablehq/plot";
 import { GeoOptions } from "@observablehq/plot";
 import { interpretFuncJsonOrString } from "../../../core/utils/converters";
-// import type {ChannelValue} from "../../../../../../node_modules/@observablehq/plot/src/channel.js";
 
 
-@customElement("osl-choropleth")
-export class OslChoropleth extends PlotMark {
-  mark = "choropleth"
+@customElement("osl-geo")
+export class OslGeo extends PlotMark {
+  mark = "geo"
 
   @property({ converter: interpretFuncJsonOrString })
   geometry?: GeoOptions["geometry"];
@@ -37,6 +36,6 @@ export class OslChoropleth extends PlotMark {
 
 declare global {
   interface HTMLElementTagNameMap {
-    "osl-choropleth": OslChoropleth;
+    "osl-geo": OslGeo;
   }
 }

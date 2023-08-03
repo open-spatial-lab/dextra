@@ -18,7 +18,7 @@ export class OslDotPlot extends PlotMark {
   r?: DotOptions["fill"];
 
   markOptions: (keyof this)[] = ["x", "y", "r"];
-
+  
   public get plot() {
     const innerData = this?.currentResults;
     const options = this.allOptions;

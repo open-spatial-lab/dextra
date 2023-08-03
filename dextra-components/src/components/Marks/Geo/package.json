@@ -1,5 +1,5 @@
 {
-  "name": "@open-spatial-lab/choropleth-mark",
+  "name": "@open-spatial-lab/geo-mark",
   "version": "0.0.0",
   "main": "dist/index.js",
   "exports": {

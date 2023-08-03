@@ -1,6 +1,6 @@
 import { Meta } from "@storybook/web-components";
 import { html } from "lit";
-import "../components/marks/Choropleth/src/Choropleth.ts";
+import "../components/marks/Geo/src/Geo.ts";
 import "../components/Plot/src/Plot.ts";
 
 export default {
@@ -21,10 +21,10 @@ export const Choropleth = () => {
     colorLabel="Unemployment rate (%)"
     data="http://localhost:6006/data/unemployment.json" 
     >
-      <osl-choropleth
+      <osl-geo
       fill="(d) => d.properties.rate"
       tip="true"
-      ></osl-choropleth>
+      ></osl-geo>
     </osl-plot>
     `
 }
