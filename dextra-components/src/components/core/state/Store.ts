@@ -24,39 +24,44 @@ const handleLoad = async (url: string) => {
   }
 }
 
-interface PointGeometry {
-  type: 'Point';
-  coordinates: [number, number];
-}
-
-interface Feature {
-  type: 'Feature';
-  properties: Record<string, unknown>;
-  geometry: PointGeometry;
-}
+// Parse properties for a data file using the GeoJSON FeatureCollection type.
+// In the future, the data file will be in WKT format and should be transformed into GeoJSON after being loaded. 
 
 interface FeatureCollection {
   type: 'FeatureCollection';
   features: Feature[];
 }
 
+interface Feature {
+  type: 'Feature';
+  properties?: Record<string, unknown> | undefined;
+  geometry: Geometry;
+}
+
+interface Geometry {
+  type: any;
+  coordinates: any;
+}
+
 const parseDataFeatureCollection = (data: FeatureCollection[]): FeatureCollection[] => {
   const parseRow = (row: FeatureCollection): FeatureCollection => {
     const features = row.features;
-    const columns = Object.keys(features[0].properties);
+    const columns = features[0].properties ? Object.keys(features[0].properties) : [];
 
     for (let i = 0; i < features.length; i++) {
       const feature = features[i];
       const properties = feature.properties;
 
-      for (let j = 0; j < columns.length; j++) {
-        const key = columns[j];
-        const value = properties[key];
+      if (properties) { 
+        for (let j = 0; j < columns.length; j++) {
+          const key = columns[j];
+          const value = properties[key];
 
-        if (typeof value === "string" && !isNaN(Number(value))) {
-          properties[key] = Number(value);
-        } else if (typeof value === "string" && !isNaN(Date.parse(value))) {
-          properties[key] = new Date(value);
+          if (typeof value === "string" && !isNaN(Number(value))) {
+            properties[key] = Number(value);
+          } else if (typeof value === "string" && !isNaN(Date.parse(value))) {
+            properties[key] = new Date(value);
+          }
         }
       }
     }
@@ -67,7 +72,6 @@ const parseDataFeatureCollection = (data: FeatureCollection[]): FeatureCollectio
   return data.map(parseRow);
 };
 
-// Previous parseData implementation
 const parseData = (data: Array<Record<string, unknown>>) => {
   const columns = Object.keys(data[0]);
   const parseRow = (row: Record<string, unknown>) => {
@@ -103,13 +107,10 @@ subscribe(store.datasets, async () => {
       });
       const data = await handleLoad(url.toString());
 
-      // Check if the first object in data is a FeatureCollection
       if (data.length > 0 && data[0].type === "FeatureCollection") {
-        // Use the new parseDataFeatureCollection implementation
         const parsedData = parseDataFeatureCollection(data);
         store.datasets[key].results[currentParamString] = parsedData;
       } else {
-        // Use the previous parseData implementation
         const parsedData = parseData(data);
         store.datasets[key].results[currentParamString] = parsedData;
       }
