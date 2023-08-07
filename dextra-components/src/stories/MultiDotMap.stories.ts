@@ -13,7 +13,8 @@ export const MultiMap = () => {
     console.log(fyinterval)
     return html`
       <osl-plot
-      height = 2000
+        height = 2000
+        marginLeft="50"
         projection="albers"
         fyInterval="10 years"
       >
