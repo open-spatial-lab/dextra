@@ -2,21 +2,19 @@ import { Meta } from "@storybook/web-components";
 import { html } from "lit";
 import "../components/marks/Geo/src/Geo.ts";
 import "../components/Plot/src/Plot.ts";
-import * as d3 from "d3"
 
 export default {
   title: "Marks",
 }
 
 export const MultiMap = () => {
-    const fyinterval = d3.utcYear.every(10)
-    console.log(fyinterval)
     return html`
       <osl-plot
         height = 2000
         marginLeft="50"
         projection="albers"
         fyInterval="10 years"
+        fyTickFormat="${(d) => `${d.getUTCFullYear()}’s`}"
       >
         <osl-geo
             data="http://localhost:6006/data/nations.json" 
@@ -30,6 +28,7 @@ export const MultiMap = () => {
             fy="(d) => d.properties.date" 
             r="1.5"
             fill="blue"
+            tip="null"
         ></osl-geo>
       </osl-plot>
       `
