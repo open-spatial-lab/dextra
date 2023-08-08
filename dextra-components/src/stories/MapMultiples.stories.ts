@@ -7,7 +7,7 @@ export default {
   title: "Marks",
 }
 
-export const MultiMap = () => {
+export const MapMultiples = () => {
     return html`
       <osl-plot
         height = 2000
