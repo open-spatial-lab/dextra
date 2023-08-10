@@ -92,7 +92,19 @@ export class OslPlot extends OslData {
   xAxisScaling?: Plot.ScaleOptions["type"];
 
   @property({ converter: interpretFuncJsonOrString })
-  yAxisScaling?: Plot.ScaleOptions["type"];
+  yAxisScaling?: Plot.ScaleOptions["type"]; 
+  
+  @property({ converter: interpretFuncJsonOrString })
+  fxInterval?: Plot.ScaleOptions["interval"]; 
+
+  @property({ converter: interpretFuncJsonOrString })
+  fxTickFormat?: Plot.ScaleOptions["tickFormat"]; 
+
+  @property({ converter: interpretFuncJsonOrString })
+  fyInterval?: Plot.ScaleOptions["interval"]; 
+
+  @property({ converter: interpretFuncJsonOrString })
+  fyTickFormat?: Plot.ScaleOptions["tickFormat"]; 
 
   protected plot(){
     const { inset, marks, marginBottom, marginLeft, marginTop, marginRight, width, height, projection } = this
@@ -113,7 +125,9 @@ export class OslPlot extends OslData {
       },
       inset,
       x: {axis: this.xAxisAnchor, type: this.xAxisScaling}, 
-      y: {axis: this.yAxisAnchor, type: this.yAxisScaling}, 
+      y: {axis: this.yAxisAnchor, type: this.yAxisScaling},
+      fx: {interval: this.fxInterval, tickFormat: this.fxTickFormat},
+      fy: {interval: this.fyInterval, tickFormat: this.fyTickFormat},
       marks,
       projection, 
     })
