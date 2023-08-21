@@ -27,6 +27,7 @@ export class OslPlot extends OslData {
       this.framed ? Plot.frame() : null,
       this.markFunctions.map((mark) => mark(data, {}))
     ]
+    console.log('marks', marks)
     return marks
   }
   override connectedCallback() {

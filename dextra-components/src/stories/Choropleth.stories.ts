@@ -28,3 +28,26 @@ export const Choropleth = () => {
     </osl-plot>
     `
 }
+
+
+export const Choropleth2 = () => {
+  return html`
+    <osl-plot
+    width = 1000
+    height = 650
+    colorType="quantize"
+    projection="orthographic"
+    colorScheme="blues"
+    colorLegend="true"
+    colorInterval="9"
+    colorLabel="Vision Providers"
+    >
+    <osl-geo
+      geometry="WKT"
+      data="http://localhost:6006/data/choropleth.json" 
+      fill="(d) => d.properties.VISION_PROVIDERS"
+      tip="true"
+      ></osl-geo>
+    </osl-plot>
+    `
+}
