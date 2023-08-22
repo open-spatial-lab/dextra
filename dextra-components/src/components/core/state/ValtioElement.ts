@@ -3,10 +3,10 @@ import { subscribe } from "valtio";
 import { Sub } from "./Sub";
 import { store } from "./Store";
 // import "@spectrum-web-components/progress-bar/sp-progress-bar.js";
-// import "@spectrum-web-components/theme/sp-theme.js";
-// import "@spectrum-web-components/theme/src/themes.js";
+import "@spectrum-web-components/theme/sp-theme.js";
+import "@spectrum-web-components/theme/src/themes.js";
 
-import {nanoid} from "nanoid";
+import { nanoid } from "nanoid";
 
 export class ValtioElement extends LitElement {
   protected elementId = nanoid();
@@ -40,12 +40,12 @@ export class ValtioElement extends LitElement {
     this.rootSub = new Sub(subscribe(store, cb));
   }
 
-   connectedCallback() {
+  connectedCallback() {
     super.connectedCallback();
     this.initRootSub();
   }
 
-   disconnectedCallback() {
+  disconnectedCallback() {
     super.disconnectedCallback();
     this.subs.forEach((sub) => sub.unsubscribe());
     this.rootSub?.unsubscribe();
@@ -53,7 +53,7 @@ export class ValtioElement extends LitElement {
   protected template() {
     return html``;
   }
-  protected  render(): unknown {
+  protected render(): unknown {
     return html`
       <sp-theme scale="" color="light"> ${this.template()} </sp-theme>
     `;

@@ -1,36 +1,40 @@
 import { html } from "lit";
 import { customElement, property } from "lit/decorators.js";
-import { OslData } from '../../data/src/Data'
+import { OslData } from "../../data/src/Data";
 import * as Plot from "@observablehq/plot";
 import { interpretFuncJsonOrString } from "../../core/utils/converters";
 
-export type MarkFunction = (data: any, overrideOptions: any) => any
+export type MarkFunction = (data: any, overrideOptions: any) => any;
 
 @customElement("osl-plot")
 export class OslPlot extends OslData {
   get childMarks(): Array<ChildNode> {
-    const children = Array.from(this.childNodes)
-    return children.filter((node) => 'mark' in node)
+    const children = Array.from(this.childNodes);
+    return children.filter((node) => "mark" in node);
   }
 
   get markFunctions(): Array<MarkFunction> {
-    return this.childMarks.map((mark) => 'plot' in mark ? mark.plot as MarkFunction : (_f: any) => []) 
+    return this.childMarks.map((mark) =>
+      "plot" in mark ? (mark.plot as MarkFunction) : (_f: any) => []
+    );
   }
 
   get markSources(): Array<string> {
-    return this.childMarks.map((mark) => '__data' in mark ? mark.__data : false).filter(f => f) as Array<string>
+    return this.childMarks
+      .map((mark) => ("__data" in mark ? mark.__data : false))
+      .filter((f) => f) as Array<string>;
   }
-  
+
   get marks() {
-    const data = this.currentResults
+    const data = this.currentResults;
     const marks = [
       this.framed ? Plot.frame() : null,
-      this.markFunctions.map((mark) => mark(data, {}))
-    ]
-    console.log('marks', marks)
-    return marks
+      this.markFunctions.map((mark) => mark(data, {})),
+    ];
+    return marks;
   }
-  override connectedCallback() {
+
+  connectedCallback() {
     super.connectedCallback();
     this.markSources.forEach((source) => this.initDataset(source));
   }
@@ -39,10 +43,10 @@ export class OslPlot extends OslData {
   inset = 20;
 
   @property({ type: Boolean })
-  framed = true
+  framed = true;
 
   @property({ converter: interpretFuncJsonOrString })
-  grid: boolean = true
+  grid: boolean = true;
 
   @property({ type: Number })
   marginTop = 20;
@@ -58,9 +62,9 @@ export class OslPlot extends OslData {
 
   @property({ type: Number })
   width = 600;
-  
+
   @property({ type: Number })
-  height = 400; 
+  height = 400;
 
   @property({ type: String })
   projection?: Plot.PlotOptions["projection"];
@@ -78,7 +82,7 @@ export class OslPlot extends OslData {
   colorInterval?: Plot.ScaleOptions["n"];
 
   @property({ type: Boolean })
-  colorLegend = false
+  colorLegend = false;
 
   @property({ type: String })
   colorLabel?: Plot.ScaleOptions["label"];
@@ -95,37 +99,44 @@ export class OslPlot extends OslData {
   @property({ converter: interpretFuncJsonOrString })
   yAxisScaling?: Plot.ScaleOptions["type"];
 
-  protected plot(){
-    const { inset, marks, marginBottom, marginLeft, marginTop, marginRight, width, height, projection } = this
+  protected plot() {
+    const {
+      inset,
+      marks,
+      marginBottom,
+      marginLeft,
+      marginTop,
+      marginRight,
+      width,
+      height,
+      projection,
+    } = this;
     const plot = Plot.plot({
       marginTop,
       marginLeft,
       marginBottom,
       marginRight,
-      width, 
-      height, 
+      width,
+      height,
       grid: this.grid,
-      color: {legend: this.colorLegend, 
-        type: this.colorType, 
-        scheme: this.colorScheme, 
-        domain: this.colorDomain, 
-        n: this.colorInterval, 
-        label: this.colorLabel
+      color: {
+        legend: this.colorLegend,
+        type: this.colorType,
+        scheme: this.colorScheme,
+        domain: this.colorDomain,
+        n: this.colorInterval,
+        label: this.colorLabel,
       },
       inset,
-      x: {axis: this.xAxisAnchor, type: this.xAxisScaling}, 
-      y: {axis: this.yAxisAnchor, type: this.yAxisScaling}, 
+      x: { axis: this.xAxisAnchor, type: this.xAxisScaling },
+      y: { axis: this.yAxisAnchor, type: this.yAxisScaling },
       marks,
-      projection, 
-    })
-    return plot
+      projection,
+    });
+    return plot;
   }
   render() {
-    return html`
-      <div>
-        ${this.plot()}
-      </div>
-    `;
+    return html` <div>${this.plot()}</div> `;
   }
 }
 
