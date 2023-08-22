@@ -89,12 +89,8 @@ export class OslGlMap extends OslData {
 
   render() {
     return html`
-      <div
-        style="position:relative; width:100%; height:80vh;"
-      >
-        <div id="map-canvas" style="width:100%;height:100%;" />
+        <div id="map-canvas" style="width:100%;height:100%;max-height:300vh;min-width:50px;min-height:50px" />
         <slot></slot>
-      </div>
     `;
   }
 }

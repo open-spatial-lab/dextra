@@ -10,35 +10,39 @@ export default {
 
 export const GlMap = () => {
   return html`
-    <osl-glmap
-      center="[-122.41669, 37.7853]"
-      zoom="2"
-      mapStyle="https://demotiles.maplibre.org/style.json"
-    >
-      <osl-map-layer
-        type="scatter"
-        getPosition="(d) => [d.LONGITUDE, d.LATITUDE]"
-        data="http://localhost:6006/data/map.json"
+    <div style="height: 500px; width: 100%">
+      <osl-glmap
+        center="[-122.41669, 37.7853]"
+        zoom="2"
+        mapStyle="https://demotiles.maplibre.org/style.json"
       >
-      </osl-map-layer>
-    </osl-glmap>
+        <osl-map-layer
+          type="scatter"
+          getPosition="(d) => [d.LONGITUDE, d.LATITUDE]"
+          data="http://localhost:6006/data/map.json"
+        >
+        </osl-map-layer>
+      </osl-glmap>
+    </div>
   `;
 };
 export const ChoroplethMap = () => {
   return html`
-    <osl-glmap
-      center="[-122.41669, 37.7853]"
-      zoom="2"
-      mapStyle="https://demotiles.maplibre.org/style.json"
-    >
-      <osl-map-layer
-        layer="polygon"
-        data="http://localhost:6006/data/choropleth.json"
-        getPolygon="(d) => d.WKT"
-        choroplethColumn="AWATER10"
+    <div style="height: 500px; width: 100%">
+      <osl-glmap
+        center="[-122.41669, 37.7853]"
+        zoom="2"
+        mapStyle="https://demotiles.maplibre.org/style.json"
       >
-      </osl-map-layer>
-    </osl-glmap>
+        <osl-map-layer
+          layer="polygon"
+          data="http://localhost:6006/data/choropleth.json"
+          getPolygon="(d) => d.WKT"
+          choroplethColumn="AWATER10"
+        >
+        </osl-map-layer>
+      </osl-glmap>
+    </div>
   `;
 };
 
@@ -91,18 +95,21 @@ export const ControlledGlMap = () => {
       title="Max Y"
     ></osl-slider>
     <br /><br />
-    <osl-glmap
-      center="[60, 22]"
-      zoom="2"
-      mapStyle="https://demotiles.maplibre.org/style.json"
-    >
-      <osl-map-layer
-        type="scatter"
-        getPosition="(d) => [d.x, d.y]"
-        data="http://localhost:6006/data/interaction.json"
+
+    <div style="height: 500px; width: 100%">
+      <osl-glmap
+        center="[60, 22]"
+        zoom="2"
+        mapStyle="https://demotiles.maplibre.org/style.json"
       >
-      </osl-map-layer>
-    </osl-glmap>
+        <osl-map-layer
+          type="scatter"
+          getPosition="(d) => [d.x, d.y]"
+          data="http://localhost:6006/data/interaction.json"
+        >
+        </osl-map-layer>
+      </osl-glmap>
+    </div>
 
     <br /><br />
   `;
