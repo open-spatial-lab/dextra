@@ -3,7 +3,6 @@ import { customElement, property } from "lit/decorators.js";
 import { OslData } from "../../data/src/Data";
 import * as Plot from "@observablehq/plot";
 import { interpretFuncJsonOrString } from "../../core/utils/converters";
-import { styleMap } from "lit/directives/style-map.js";
 
 export type MarkFunction = (data: any, overrideOptions: any) => any;
 

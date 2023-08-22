@@ -11,6 +11,7 @@ export const Table = () => {
   return html`
     <osl-table
       data="http://localhost:6006/data/household.json"
+      columns='["State","FIPS"]'
     ></osl-table>
   `;
 };
