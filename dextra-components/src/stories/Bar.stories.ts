@@ -9,24 +9,23 @@ export default {
 
 export const Bar = () => {
   return html`
+  <div style="width: 100%; height: 500px">
   <osl-plot
-      width = 1000
-      height = 500
-      marginLeft = 180
+      marginLeft="180"
       data="http://localhost:6006/data/pesticide.json"
       xAxisScaling="sqrt"     
     >
     <osl-bar y="Active_Ingredient" x="Ingredient_Used_lb_per_acre" direction="horizontal"></osl-bar>
     </osl-plot>
+    </div>
     `
 }
 
 export const GroupedBar = () => {
   return html`
+  <div style="height: 500px;width:700px;">
   <osl-plot
-      width = 1000
-      height = 500
-      marginLeft = 60
+      marginLeft="80"
       colorLegend="true" 
       xAxisAnchor="null"
       data="http://localhost:6006/data/population-state-age.json"    
@@ -39,15 +38,14 @@ export const GroupedBar = () => {
       fx="state"
     ></osl-bar>
     </osl-plot>
+</div>
     `
 }
 
 export const StackedBar = () => {
   return html`
   <osl-plot
-      width = 1000 
-      height = 500 
-      marginLeft = 65 
+      marginLeft="65"
       colorLegend="true" 
       data="http://localhost:6006/data/population-state-age.json"     
     >

@@ -1,13 +1,34 @@
-import { html } from "lit";
+import { html, css } from "lit";
 import { customElement, property } from "lit/decorators.js";
 import { OslData } from "../../data/src/Data";
 import * as Plot from "@observablehq/plot";
 import { interpretFuncJsonOrString } from "../../core/utils/converters";
+import { styleMap } from "lit/directives/style-map.js";
 
 export type MarkFunction = (data: any, overrideOptions: any) => any;
 
 @customElement("osl-plot")
 export class OslPlot extends OslData {
+  @property({ type: Number })
+  containerWidth?: number;
+
+  @property({ type: Number })
+  containerHeight?: number;
+
+  static get styles() {
+    return css`
+      .container {
+        width: 100%;
+        height: 100%;
+        position: relative;
+        svg {
+          width: 100%;
+          max-height: ${(this as any).containerHeight || 200}px;
+        }
+      }
+    `;
+  }
+
   get childMarks(): Array<ChildNode> {
     const children = Array.from(this.childNodes);
     return children.filter((node) => "mark" in node);
@@ -37,6 +58,8 @@ export class OslPlot extends OslData {
   connectedCallback() {
     super.connectedCallback();
     this.markSources.forEach((source) => this.initDataset(source));
+    this.updateContainerSize();
+    window.addEventListener("resize", () => this.updateContainerSize());
   }
 
   @property({ type: Number })
@@ -61,10 +84,10 @@ export class OslPlot extends OslData {
   marginRight = 20;
 
   @property({ type: Number })
-  width = 600;
+  width?: number;
 
   @property({ type: Number })
-  height = 400;
+  height?: number;
 
   @property({ type: String })
   projection?: Plot.PlotOptions["projection"];
@@ -100,6 +123,7 @@ export class OslPlot extends OslData {
   yAxisScaling?: Plot.ScaleOptions["type"];
 
   protected plot() {
+    this.updateContainerSize();
     const {
       inset,
       marks,
@@ -111,13 +135,19 @@ export class OslPlot extends OslData {
       height,
       projection,
     } = this;
+
+    const plotWidth = width || this.containerWidth;
+    const plotHeight = height || this.containerHeight;
+    if (!plotWidth || !plotHeight) {
+      return `Loading...`;
+    }
     const plot = Plot.plot({
       marginTop,
       marginLeft,
       marginBottom,
       marginRight,
-      width,
-      height,
+      width: width || this.containerWidth,
+      height: height || this.containerHeight,
       grid: this.grid,
       color: {
         legend: this.colorLegend,
@@ -136,7 +166,14 @@ export class OslPlot extends OslData {
     return plot;
   }
   render() {
-    return html` <div>${this.plot()}</div> `;
+    return html` <div class="container">${this.plot()}</div> `;
+  }
+  updateContainerSize() {
+    const container = this.shadowRoot?.querySelector("div");
+    if (container) {
+      this.containerWidth = container.clientWidth;
+      this.containerHeight = container.clientHeight;
+    }
   }
 }
 
