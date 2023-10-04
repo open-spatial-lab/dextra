@@ -8,6 +8,7 @@ import 'valtio';
 import * as Chips from "../../components/Chips/src/Chips";
 import * as Checkbox from "../../components/Checkbox/src/Checkbox";
 import * as GlMap from "../../components/GlMap/src/GlMap";
+import * as GlMapLayer from "../../components/GlMap/src/GlMapLayer";
 import * as Plot from "../../components/Plot/src/Plot";
 import * as Density from "../../components/Marks/Density/src/Density";
 import * as Heatmap from "../../components/Marks/Heatmap/src/Heatmap";
@@ -24,6 +25,7 @@ export {
   Chips,
   Checkbox,
   GlMap,
+  GlMapLayer,
   Density,
   Heatmap,
   Dot,

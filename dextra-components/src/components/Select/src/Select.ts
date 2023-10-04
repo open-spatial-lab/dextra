@@ -1,12 +1,25 @@
-import { html } from "lit";
-import { customElement } from "lit/decorators.js";
-import { OslControl } from "../../Interface/src/Interface";
+import { html, LitElement } from "lit";
+import { property } from "lit/decorators.js";
+import { safeCustomElement } from "../../core/decorators/safeCustomElement";
 import "@spectrum-web-components/picker/sp-picker.js";
 import "@spectrum-web-components/help-text/sp-help-text.js";
 import "@spectrum-web-components/menu/sp-menu-item.js";
 
-@customElement("osl-select")
-export class SelectControl extends OslControl {
+// Always used within other component 
+@safeCustomElement("osl-select")
+export class Select extends LitElement {
+  @property({ type: Array })
+  options?: string[];
+
+  @property({ type: String })
+  label?: string;
+
+  @property({ type: String })
+  value?: string;
+
+  @property({ type: Function })
+  onChange?: (value: string) => void;
+
   renderSelectOptions() {
     const options = this.options || [];
     return html`
@@ -36,14 +49,15 @@ export class SelectControl extends OslControl {
       : html``;
   }
 
-  template() {
+  render() {
     return html`
       ${this.renderTitle()}
       <sp-picker
         id="picker-${this.id}"
         size="m"
         label="Selection type"
-        @change=${this.handleChange}
+        @change=${(e: Event) =>
+          this.onChange?.((e.target as HTMLSelectElement).value)}
         value=${this.value as string}
       >
         ${this.renderSelectOptions()} ${this.renderDescription()}
@@ -54,6 +68,6 @@ export class SelectControl extends OslControl {
 
 declare global {
   interface HTMLElementTagNameMap {
-    "osl-select": SelectControl;
+    "osl-select": Select;
   }
 }

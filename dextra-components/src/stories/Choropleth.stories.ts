@@ -5,49 +5,27 @@ import "../components/Plot/src/Plot.ts";
 
 export default {
   title: "Marks",
-}
+};
 
 export const Choropleth = () => {
   return html`
     <osl-plot
-    width = 1000
-    height = 650
-    projection="identity" 
-    colorType="quantize"
-    colorScheme="blues"
-    colorLegend="true"
-    colorDomain="[1, 10]"
-    colorInterval="9"
-    colorLabel="Unemployment rate (%)"
-    data="http://localhost:6006/data/unemployment.json" 
+      height="650"
+      projection="albers"
+      colorType="quantize"
+      colorScheme="blues"
+      colorLegend="true"
+      colorDomain="[10000000, 500000000]"
+      colorInterval="4"
+      colorLabel="Area land"
+      data="http://localhost:6006/data/choropleth.json"
+      geoColumn="WKT"
+      geoType="WKT"
     >
       <osl-geo
-      fill="(d) => d.properties.rate"
-      tip="true"
+        fill="ALAND10"
+        tip="true"
       ></osl-geo>
     </osl-plot>
-    `
-}
-
-
-export const Choropleth2 = () => {
-  return html`
-    <osl-plot
-    width = 1000
-    height = 650
-    colorType="quantize"
-    projection="orthographic"
-    colorScheme="blues"
-    colorLegend="true"
-    colorInterval="9"
-    colorLabel="Vision Providers"
-    >
-    <osl-geo
-      geometry="WKT"
-      data="http://localhost:6006/data/choropleth.json" 
-      fill="(d) => d.properties.VISION_PROVIDERS"
-      tip="true"
-      ></osl-geo>
-    </osl-plot>
-    `
-}
+  `;
+};

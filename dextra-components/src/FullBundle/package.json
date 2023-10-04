@@ -1,6 +1,6 @@
 {
   "name": "@open-spatial-lab/full-bundle",
-  "version": "0.0.13",
+  "version": "0.0.17",
   "main": "dist/full-bundle.es.js",
   "exports": {
     ".": "./dist/full-bundle.es.js"
@@ -12,7 +12,6 @@
   "scripts": {
     "dev": "vite",
     "build": "vite build && node ./scripts/post-build.js",
-    "post-build": "node ./scripts/post-build.js",
     "serve": "http-server . -p 8080 --gzip",
     "build-n-test": "npm run build && npm run serve"
   },

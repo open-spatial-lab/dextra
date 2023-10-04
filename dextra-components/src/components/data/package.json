@@ -1,6 +1,6 @@
 {
   "name": "@open-spatial-lab/data",
-  "version": "0.0.13",
+  "version": "0.0.17",
   "main": "dist/index.js",
   "exports": {
     ".": "./dist/index.js"
@@ -15,8 +15,16 @@
     "build-n-test": "npm run build && npm run serve"
   },
   "dependencies": {
+    "@pieterprovoost/wkx": "^0.0.1",
+    "@turf/bbox": "^6.5.0",
+    "@types/tinycolor2": "^1.4.4",
+    "buffer": "^6.0.3",
+    "colorbrewer": "^1.5.3",
+    "geobuckets": "^0.0.3",
     "lit-element": "^2.4.0",
     "lit-html": "^2.7.0",
+    "mapbox-gl-sync-move": "^0.1.0",
+    "tinycolor2": "^1.6.0",
     "valtio": "^1.10.3"
   },
   "devDependencies": {

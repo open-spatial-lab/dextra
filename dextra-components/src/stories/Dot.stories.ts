@@ -1,4 +1,3 @@
-import { Meta } from "@storybook/web-components";
 import { html } from "lit";
 import "../components/Marks/Dot/src/Dot.ts";
 import "../components/Plot/src/Plot.ts";
@@ -10,10 +9,16 @@ export default {
 
 export const Dot = () => {
   return html`
-  <osl-plot
-    >
-      <osl-dot-plot data="http://localhost:6006/data/household.json" x="MedianHouseholdIncome" y="UnEmplyPrc"> </osl-dot-plot>
-    </osl-plot>
+    <div style="height:75vh;width:100%;">
+      <osl-plot>
+        <osl-dot-plot
+          data="http://localhost:6006/data/household.json"
+          x="MedianHouseholdIncome"
+          y="UnEmplyPrc"
+        >
+        </osl-dot-plot>
+      </osl-plot>
+    </div>
   `;
 };
 
@@ -45,9 +50,7 @@ export const ControlledDot = () => {
       initialValue="0"
     ></osl-slider>
 
-    <osl-plot
-      data="http://localhost:6006/data/household.json"
-    >
+    <osl-plot data="http://localhost:6006/data/household.json">
       <osl-dot-plot x="MedianHouseholdIncome" y="UnEmplyPrc"> </osl-dot-plot>
     </osl-plot>
   `;

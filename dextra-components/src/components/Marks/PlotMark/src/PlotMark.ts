@@ -156,7 +156,11 @@ export class PlotMark extends OslData {
     "target",
     "channels",
     "tip",
-  ];
+  ] as const;
+
+  protected converters?: Record<string, ((f:any) => any)> = {
+    fill: (fillParam: any) => typeof fillParam === "function" ? fillParam : (data: Record<string,unknown>) => this.getDeepValue(data, fillParam)
+  }
 
   markOptions: (keyof this)[] = [];
 
@@ -164,12 +168,14 @@ export class PlotMark extends OslData {
     const options: { [key: string]: any } = {};
     this.baseOptions.forEach((option) => {
       if (this[option] !== undefined) {
-        options[option as string] = this[option];
+        const converter = this.converters?.[option as string] || ((d:any) => d);
+        options[option as string] = converter(this[option]);
       }
     });
     this.markOptions.forEach((option) => {
+      const converter = this.converters?.[option as string] || ((d:any) => d);
       if (this[option] !== undefined) {
-        options[option as string] = this[option];
+        options[option as string] = converter(this[option]);
       }
     });
 

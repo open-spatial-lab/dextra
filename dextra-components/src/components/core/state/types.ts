@@ -6,7 +6,7 @@ export type StateSchema = {
       parameters: Record<string, any>;
       headless: boolean;
       status: 'loading' | 'error' | 'success'
-      results: Record<string, DataResult>;
+      results: Record<string, DataResult | GeoJSON.Feature[] | 'pending'>
     };
   };
 };

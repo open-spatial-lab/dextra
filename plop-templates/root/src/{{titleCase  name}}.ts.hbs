@@ -3,7 +3,7 @@ import { customElement, property } from "lit/decorators.js";
 import { ValtioElement } from '../../core/state'
 
 @customElement("osl-{{lowerCase name}}")
-export class Osl{{titleCase name}} extends ValtioElement {
+export class Osl{{titleCase name}} extends ValtioElement<StateSchema> {
   render() {
     return html`
       <div>

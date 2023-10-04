@@ -1,10 +1,11 @@
 import { html } from "lit";
-import { customElement, property } from "lit/decorators.js";
-// @ts-ignore
+import {  property } from "lit/decorators.js";
 import { ValtioElement } from "../../core/state";
+import { safeCustomElement } from "../../core/decorators/safeCustomElement";
+import { StateSchema } from "../../core/state/types";
 
-@customElement("osl-interface")
-export class OslControl extends ValtioElement {
+@safeCustomElement("osl-interface")
+export class OslControl extends ValtioElement<StateSchema> {
   @property({ type: String })
   data = "";
 

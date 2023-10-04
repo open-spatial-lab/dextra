@@ -3,8 +3,9 @@ import * as Plot from "@observablehq/plot";
 import { DotOptions } from "@observablehq/plot";
 import { PlotMark } from "../../PlotMark/src/PlotMark";
 import { interpretFuncJsonOrString } from "../../../core/utils/converters";
+import { safeCustomElement } from "../../../core/decorators/safeCustomElement";
 
-@customElement("osl-dot-plot")
+@safeCustomElement("osl-dot-plot")
 export class OslDotPlot extends PlotMark {
   mark = "dot";
 

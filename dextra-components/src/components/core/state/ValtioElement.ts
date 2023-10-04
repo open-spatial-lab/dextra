@@ -1,18 +1,19 @@
-import { css, html, LitElement } from "lit";
+import { html, LitElement } from "lit";
 import { subscribe } from "valtio";
 import { Sub } from "./Sub";
 import { store } from "./Store";
 // import "@spectrum-web-components/progress-bar/sp-progress-bar.js";
 import "@spectrum-web-components/theme/sp-theme.js";
 import "@spectrum-web-components/theme/src/themes.js";
-
 import { nanoid } from "nanoid";
-
-export class ValtioElement extends LitElement {
-  protected elementId = nanoid();
-  protected store = store;
+export class ValtioElement<T extends any> extends LitElement {
+  public elementId = nanoid();
+  
+  protected store: T = store as T;
   private subs: Array<Sub<typeof store>> = [];
   private rootSub: Sub<typeof store> | null = null;
+
+
 
   protected subscribe(
     selector: (state: typeof store) => any,
@@ -55,7 +56,7 @@ export class ValtioElement extends LitElement {
   }
   protected render(): unknown {
     return html`
-      <sp-theme scale="" color="light"> ${this.template()} </sp-theme>
+      <sp-theme scale="" color="light" style="height:100%; width:100%;"> ${this.template()} </sp-theme>
     `;
   }
 
