@@ -4,7 +4,7 @@ import { JSONLoader } from "@loaders.gl/json";
 import { load } from "@loaders.gl/core";
 import { CSVLoader } from "@loaders.gl/csv";
 
-export const syncedMaps: { [key: string]: { [id: string]: maplibregl.Map} } = {};
+export const syncedMaps: { [key: string]: maplibregl.Map} = {};
 
 export const initialState: StateSchema = {
   datasets: {}

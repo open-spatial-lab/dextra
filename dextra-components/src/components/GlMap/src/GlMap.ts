@@ -113,12 +113,9 @@ export class OslGlMap extends OslData {
     });
     if (this.mapGroup) {
       if (!syncedMaps[this.mapGroup]) {
-        syncedMaps[this.mapGroup] = {};
-      }
-      syncedMaps[this.mapGroup][this.elementId] = this.map;
-      const maps = Object.values(syncedMaps[this.mapGroup]);
-      if (maps.length > 1) {
-        syncMaps(...maps);
+        syncedMaps[this.mapGroup] = this.map;
+      } else {
+        syncMaps(this.map, syncedMaps[this.mapGroup]);
       }
     }
     this.map.addControl(

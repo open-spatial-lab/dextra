@@ -268,14 +268,14 @@ export class OslMapLayer extends OslData {
           typeof this.currentResults !== "string" &&
           this.currentResults?.length
       )
-    ) {
+      ) {
+      // @ts-ignore
+      this.parentNode.hasMovedToBbox = true;
       const bounds = bbox({
         type: "FeatureCollection",
         features: this.currentResults,
       }) as [number, number, number, number];
-      this.map?.fitBounds(bounds, { padding: 20 });
-      // @ts-ignore
-      this.parentNode.hasMovedToBbox = true;
+      this.map?.fitBounds(bounds, { padding: 20, duration: 0 });
     }
   }
 
