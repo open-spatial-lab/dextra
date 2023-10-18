@@ -60,7 +60,8 @@ export class OslGlMap extends OslData {
   showNavigation?: boolean = false;
 
   @property({ type: String })
-  legendPosition: "top-left" | "top-right" | "bottom-left" | "bottom-right" = "bottom-left";
+  legendPosition: "top-left" | "top-right" | "bottom-left" | "bottom-right" =
+    "bottom-left";
 
   public hasMovedToBbox: false = false;
   public map: maplibregl.Map | null = null;
@@ -81,7 +82,7 @@ export class OslGlMap extends OslData {
       this.childMapLayers.map((layer) =>
         "renderLayer" in layer ? layer.renderLayer() : null
       )
-    )
+    );
   }
 
   get customAttribution(): string {
@@ -125,13 +126,12 @@ export class OslGlMap extends OslData {
       })
     );
     this.getLayers().then((layers: LayerList) => {
-      console.log('LAYERS', layers)
       this.deck = new DeckOverlay({
         interleaved: true,
         layers,
         parameters: {
-          pickingRadius: 20
-        }
+          pickingRadius: 20,
+        },
       });
       if (this.showNavigation) {
         this.map!.addControl(new maplibregl.NavigationControl({}));
@@ -149,10 +149,10 @@ export class OslGlMap extends OslData {
         this.deck?.setProps({
           layers,
         });
-        
+
         this.requestUpdate();
         this.map?.redraw();
-      })
+      });
     }, 1);
   }
 
@@ -163,6 +163,20 @@ export class OslGlMap extends OslData {
 
   toggleLayer(key: string) {
     this.childMapLayers.find((l) => l.elementId === key)?.toggleVisibility();
+  }
+
+  debouncedResize: any; 
+
+  connectedCallback() {
+    super.connectedCallback();
+    const parentElement = this.parentElement;
+    const resizeObserver = new ResizeObserver(() => {
+      this.debouncedResize && clearTimeout(this.debouncedResize);
+      this.debouncedResize = setTimeout(() => {
+        this.map?.resize();
+      }, 100);
+    });
+    parentElement && resizeObserver.observe(parentElement);
   }
 
   template() {
