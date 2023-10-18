@@ -4,10 +4,11 @@ import { safeCustomElement } from "../../core/decorators/safeCustomElement";
 import "@spectrum-web-components/picker/sp-picker.js";
 import "@spectrum-web-components/help-text/sp-help-text.js";
 import "@spectrum-web-components/menu/sp-menu-item.js";
+import { OslControl } from "../../Interface/src/Interface";
 
 // Always used within other component 
 @safeCustomElement("osl-select")
-export class Select extends LitElement {
+export class Select extends OslControl {
   @property({ type: Array })
   options?: string[];
 
@@ -49,7 +50,7 @@ export class Select extends LitElement {
       : html``;
   }
 
-  render() {
+  template() {
     return html`
       ${this.renderTitle()}
       <sp-picker
