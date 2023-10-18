@@ -3,10 +3,11 @@ import {  property } from "lit/decorators.js";
 import { ValtioElement } from "../../core/state";
 import { safeCustomElement } from "../../core/decorators/safeCustomElement";
 import { StateSchema } from "../../core/state/types";
+import { interpretFuncJsonOrString } from "../../core/utils/converters";
 
 @safeCustomElement("osl-interface")
 export class OslControl extends ValtioElement<StateSchema> {
-  @property({ type: String })
+  @property({ converter: interpretFuncJsonOrString })
   data = "";
 
   @property({ type: String })
@@ -49,34 +50,37 @@ export class OslControl extends ValtioElement<StateSchema> {
     if (!this.data) {
       return
     }
-    if (!this.store.datasets[this.data] && this.data !== "") {
-      this.store.datasets[this.data] = {
-        parameters: {},
-        headless: true,
-        results: {},
-        status: "loading",
-      };
-    }
-    const currentParams = this.store.datasets[this.data].parameters;
-    if (
-      currentParams[this.option] === undefined &&
-      this.initialValue !== undefined
-    ) {
-      this.value = this.initialValue;
-      this.store.datasets[this.data].parameters[this.option] =
-        this.initialValue;
-    } else {
-      this.value = currentParams[this.option];
-    }
-    this.subscribe(
-      (store) => store.datasets[this.data].parameters,
-      () => {
-        // console.log('params changed')
-        this.value = this.store.datasets[this.data].parameters[this.option];
-        // console.log(this.value)
-        this.domUpdatesOnChange();
+    const datasets = Array.isArray(this.data) ? this.data : [this.data];
+    console.log(datasets)
+    datasets.forEach((dataset) => {
+      if (!this.store.datasets[dataset] && dataset !== "") {
+        this.store.datasets[dataset] = {
+          parameters: {},
+          headless: true,
+          results: {},
+          status: "loading",
+        };
       }
-    );
+      const currentParams = this.store.datasets[dataset].parameters;
+      if (
+        currentParams[this.option] === undefined &&
+        this.initialValue !== undefined
+      ) {
+        this.value = this.initialValue;
+        this.store.datasets[dataset].parameters[this.option] =
+          this.initialValue;
+      } else {
+        this.value = currentParams[this.option];
+      }
+      this.subscribe(
+        (store) => store.datasets[dataset].parameters,
+        () => {
+          // console.log('params changed')
+          this.value = this.store.datasets[dataset].parameters[this.option];
+          // console.log(this.value)
+          this.domUpdatesOnChange();
+        }
+      )})
   }
 
   protected domUpdatesOnChange(){
@@ -90,7 +94,10 @@ export class OslControl extends ValtioElement<StateSchema> {
 
   protected handleChange(event: Event) {
     const value = this.eventValueAccessor(event);
-    this.store.datasets[this.data].parameters[this.option] = value;
+    const datasets = Array.isArray(this.data) ? this.data : [this.data];
+    datasets.forEach((dataset) => {
+      this.store.datasets[dataset].parameters[this.option] = value;
+    })
   }
 
   connectedCallback() {
