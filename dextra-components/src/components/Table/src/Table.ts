@@ -1,6 +1,5 @@
 import { html } from "lit";
-import { customElement, property } from "lit/decorators.js";
-import { OslData } from "../../data/src/Data";
+import { property } from "lit/decorators.js";
 import "@spectrum-web-components/table/sp-table.js";
 import "@spectrum-web-components/table/sp-table-body.js";
 import "@spectrum-web-components/table/sp-table-cell.js";
@@ -9,11 +8,16 @@ import "@spectrum-web-components/table/sp-table-head.js";
 import "@spectrum-web-components/table/sp-table-head-cell.js";
 import "@spectrum-web-components/table/sp-table-row.js";
 import { interpretFuncJsonOrString } from "../../core/utils/converters";
+import { ValtioElement } from "../../core/state";
+import { safeCustomElement } from "../../core/decorators/safeCustomElement";
 
-@customElement("osl-table")
-export class OslTable extends OslData {
+@safeCustomElement("osl-table")
+export class OslTable extends ValtioElement<any> {
   @property({ converter: interpretFuncJsonOrString })
   columns?: string[];
+
+  @property({ converter: interpretFuncJsonOrString })
+  data?: any[];
 
   renderHeader(columns: string[]) {
     return html`
@@ -39,15 +43,15 @@ export class OslTable extends OslData {
   }
 
   template() {
-    if (!this.currentResults?.length) {
+    if (!this.data?.length || !this.columns?.length) {
       return this.preloader();
     }
-    const columns = this.columns || Object.keys(this.currentResults[0]);
-    return html`
+
+return html`
       <sp-table>
-        <sp-table-head> ${this.renderHeader(columns)} </sp-table-head>
+        <sp-table-head> ${this.renderHeader(this.columns)} </sp-table-head>
         <sp-table-body>
-          ${this.renderRows(this.currentResults, columns)}
+          ${this.renderRows(this.data, this.columns)}
         </sp-table-body>
       </sp-table>
     `;

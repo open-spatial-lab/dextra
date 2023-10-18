@@ -287,6 +287,72 @@ importers:
         specifier: ^2.1.3
         version: 2.1.3
 
+  dextra-components/src/components/DataTable:
+    dependencies:
+      lit-element:
+        specifier: ^2.4.0
+        version: 2.4.0
+      lit-html:
+        specifier: ^2.7.0
+        version: 2.7.0
+      valtio:
+        specifier: ^1.10.3
+        version: 1.10.3(react@18.2.0)
+    devDependencies:
+      '@types/node':
+        specifier: ^14.14.37
+        version: 14.14.37
+      typescript:
+        specifier: ^5.0
+        version: 5.0.2
+      vite:
+        specifier: ^2.1.3
+        version: 2.1.3
+
+  dextra-components/src/components/Download:
+    dependencies:
+      lit-element:
+        specifier: ^2.4.0
+        version: 2.4.0
+      lit-html:
+        specifier: ^2.7.0
+        version: 2.7.0
+      valtio:
+        specifier: ^1.10.3
+        version: 1.10.3(react@18.2.0)
+    devDependencies:
+      '@types/node':
+        specifier: ^14.14.37
+        version: 14.14.37
+      typescript:
+        specifier: ^5.0
+        version: 5.0.2
+      vite:
+        specifier: ^2.1.3
+        version: 2.1.3
+
+  dextra-components/src/components/FlexBox:
+    dependencies:
+      lit-element:
+        specifier: ^2.4.0
+        version: 2.4.0
+      lit-html:
+        specifier: ^2.7.0
+        version: 2.7.0
+      valtio:
+        specifier: ^1.10.3
+        version: 1.10.3(react@18.2.0)
+    devDependencies:
+      '@types/node':
+        specifier: ^14.14.37
+        version: 14.14.37
+      typescript:
+        specifier: ^5.0
+        version: 5.0.2
+      vite:
+        specifier: ^2.1.3
+        version: 2.1.3
+
   dextra-components/src/components/GlMap:
     dependencies:
       lit-element:
@@ -697,6 +763,53 @@ importers:
       lit-html:
         specifier: ^2.7.0
         version: 2.7.0
+      valtio:
+        specifier: ^1.10.3
+        version: 1.10.3(react@18.2.0)
+    devDependencies:
+      '@types/node':
+        specifier: ^14.14.37
+        version: 14.14.37
+      typescript:
+        specifier: ^5.0
+        version: 5.0.2
+      vite:
+        specifier: ^2.1.3
+        version: 2.1.3
+
+  dextra-components/src/components/Stat:
+    dependencies:
+      lit-element:
+        specifier: ^2.4.0
+        version: 2.4.0
+      lit-html:
+        specifier: ^2.7.0
+        version: 2.7.0
+      valtio:
+        specifier: ^1.10.3
+        version: 1.10.3(react@18.2.0)
+    devDependencies:
+      '@types/node':
+        specifier: ^14.14.37
+        version: 14.14.37
+      typescript:
+        specifier: ^5.0
+        version: 5.0.2
+      vite:
+        specifier: ^2.1.3
+        version: 2.1.3
+
+  dextra-components/src/components/StatTable:
+    dependencies:
+      lit-element:
+        specifier: ^2.4.0
+        version: 2.4.0
+      lit-html:
+        specifier: ^2.7.0
+        version: 2.8.0
+      simple-statistics:
+        specifier: ^7.8.2
+        version: 7.8.2
       valtio:
         specifier: ^1.10.3
         version: 1.10.3(react@18.2.0)
@@ -10537,7 +10650,7 @@ packages:
     dependencies:
       '@lit/reactive-element': 1.6.3
       lit-element: 3.3.3
-      lit-html: 2.7.0
+      lit-html: 2.8.0
 
   /load-tsconfig@0.2.5:
     resolution: {integrity: sha512-IXO6OCs9yg8tMKzfPZ1YmheJbZCiEsnBdcB03l0OcfK9prKnJb96siuHCr5Fl37/yo9DnKU+TLpxzTUspw9shg==}
@@ -12362,7 +12475,6 @@ packages:
 
   /simple-statistics@7.8.2:
     resolution: {integrity: sha512-evB7wiL4DSz6T9TdCTfRRqNcmnp0bllcUfZ4NBwtkdGMbXrYsZbrGxfunLPqdqCyT2Yz1NvLrKS7LVOoFBCxbA==}
-    dev: true
 
   /simple-update-notifier@2.0.0:
     resolution: {integrity: sha512-a2B9Y0KlNXl9u/vsW6sTIu9vGEpfKu2wRV6l1H3XEas/0gUIzGzBoP/IouTcUQbm9JWZLH3COxyn03TYlFax6w==}

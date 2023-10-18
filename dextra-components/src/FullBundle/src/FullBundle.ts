@@ -22,6 +22,8 @@ import * as Slider from "../../components/Slider/src/Slider";
 import * as Bar from "../../components/Marks/Bar/src/Bar";
 import * as Download from "../../components/Download/src/Download";
 import * as FlexBox from '../../components/FlexBox/src/FlexBox';
+import * as DataTable  from "../../components/DataTable/src/DataTable";
+import * as StatTable  from "../../components/StatTable/src/StatTable";
 
 export {
   Chips,
@@ -36,6 +38,8 @@ export {
   Select,
   Switch,
   Table,
+  DataTable,
+  StatTable,
   Slider,
   Bar,
   Plot,

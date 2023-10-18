@@ -1,6 +1,6 @@
 import { Meta } from "@storybook/web-components";
 import { html } from "lit";
-import "../components/Table/src/Table.ts";
+import "../components/DataTable/src/DataTable.ts";
 import "../components/Slider/src/Slider.ts";
 
 export default {
@@ -9,10 +9,10 @@ export default {
 
 export const Table = () => {
   return html`
-    <osl-table
+    <osl-data-table
       data="http://localhost:6006/data/household.json"
       columns='["State","FIPS"]'
-    ></osl-table>
+    ></osl-data-table>
   `;
 };
 
