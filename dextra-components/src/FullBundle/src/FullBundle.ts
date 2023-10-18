@@ -20,6 +20,8 @@ import * as Switch from "../../components/Switch/src/Switch";
 import * as Table from "../../components/Table/src/Table";
 import * as Slider from "../../components/Slider/src/Slider";
 import * as Bar from "../../components/Marks/Bar/src/Bar";
+import * as Download from "../../components/Download/src/Download";
+import * as FlexBox from '../../components/FlexBox/src/FlexBox';
 
 export {
   Chips,
@@ -36,5 +38,7 @@ export {
   Table,
   Slider,
   Bar,
-  Plot
+  Plot,
+  Download,
+  FlexBox
 }
