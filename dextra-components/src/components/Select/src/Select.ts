@@ -9,8 +9,8 @@ import { OslControl } from "../../Interface/src/Interface";
 // Always used within other component 
 @safeCustomElement("osl-select")
 export class Select extends OslControl {
-  @property({ type: Array })
-  options?: string[];
+  @property({ type: Array }) //@ts-ignore
+  options?: Array<string | { label: string; value: any }>;
 
   @property({ type: String })
   label?: string;
@@ -23,15 +23,22 @@ export class Select extends OslControl {
 
   renderSelectOptions() {
     const options = this.options || [];
-    return html`
-      ${options.map(
+    const renderSimple = typeof options[0] !== "object";
+    if (renderSimple) {
+      return html` ${(options as string[]).map(
+        (option) => html` <sp-menu-item name="${option}" value="${option}"
+          >${option}
+        </sp-menu-item>`
+      )}`;
+    } else {
+      return html`${(options as { label: string; value: string }[]).map(
         (option) => html`
-          <sp-menu-item name="${option}" value="${option}"
-            >${option}</sp-menu-item
+          <sp-menu-item name="${option.value}" value="${option.value}"
+            >${option.label}</sp-menu-item
           >
         `
-      )}
-    `;
+      )}`;
+    }
   }
 
   protected renderTitle() {
@@ -57,8 +64,7 @@ export class Select extends OslControl {
         id="picker-${this.id}"
         size="m"
         label="Selection type"
-        @change=${(e: Event) =>
-          this.onChange?.((e.target as HTMLSelectElement).value)}
+        @change=${this.onChange}
         value=${this.value as string}
       >
         ${this.renderSelectOptions()} ${this.renderDescription()}

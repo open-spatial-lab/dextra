@@ -8,10 +8,12 @@ export class SelectControl extends OslControl {
   template() {
     return html`
       <osl-select
+        .option=${this.option}
         .options=${this.options}
         .value=${this.value}
         .onChange=${this.handleChange}
         .label=${this.label}
+        .data=${this.data}
         .title=${this.title}
         .id=${this.elementId}
       ></osl-select>
