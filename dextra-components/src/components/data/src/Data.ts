@@ -21,8 +21,11 @@ const geomParsers = {
       Buffer.from(row[geoColumn] as any, "hex")
       ).toGeoJSON() as GeoJSON.Geometry
   },
-  GeoJSON: (geoColumn: string) => (row: Record<string, unknown>) =>
-    row[geoColumn],
+  GeoJSON: (geoColumn: string) => (row: Record<string, unknown>) => {
+    const v = row[geoColumn]
+    return typeof v === 'string' ? JSON.parse(v) as GeoJSON.Geometry : v as GeoJSON.Geometry
+  }
+    
 } as const;
 
 const buildGeomFunction = (

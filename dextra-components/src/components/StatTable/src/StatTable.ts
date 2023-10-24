@@ -5,10 +5,11 @@ import { safeCustomElement } from "../../core/decorators/safeCustomElement";
 import * as ss from "simple-statistics";
 import "../../Table/src/Table";
 import { getFormatter } from "../../core/utils/numberFormatter";
+import { interpretFuncJsonOrString } from "../../core/utils/converters";
 
 @safeCustomElement("osl-stat-table")
 export class OslTable extends OslData {
-  @property({ type: Array })
+  @property({ converter: interpretFuncJsonOrString })
   columns?: string[];
 
   @property({ type: Boolean })
@@ -23,14 +24,14 @@ export class OslTable extends OslData {
   stdev: boolean = false;
 
   formatter?: Intl.NumberFormat;
-  formatStat(stat:number){
+  formatStat(stat: number) {
     try {
       return this.formatter ? this.formatter.format(stat) : stat;
     } catch {
-      return stat
+      return stat;
     }
   }
-  
+
   calculateStats(values: any[], stat: string) {
     switch (stat) {
       case "average":
@@ -55,7 +56,10 @@ export class OslTable extends OslData {
     }, {} as { [key: string]: any[] });
     for (let i = 0; i < data.length; i++) {
       for (const property of columns) {
-        values[property][i] = data[i][property];
+        const val = data[i][property];
+        if (typeof val === "number" && !isNaN(val) && val !== null) {
+          values[property][i] = val;
+        }
       }
     }
     return values;
@@ -80,17 +84,20 @@ export class OslTable extends OslData {
     const values = this.getValues(this.currentResults, properties);
     let output = properties.map((property) => {
       const stats = columns.reduce((acc, stat) => {
-        acc[stat] = this.formatStat(this.calculateStats(values[property], stat));
+        acc[stat] = this.formatStat(
+          // @ts-ignore
+          this.calculateStats(values[property], stat)
+        );
         return acc;
       }, {} as { [key: string]: any });
       return {
-        property,
+        property: property.split("_").map((word) => word.charAt(0).toUpperCase() + word.slice(1)).join(" "),
         ...stats,
       };
     });
     return {
       data: output,
-      columns,
+      columns: ["property", ...columns],
     };
   }
 
@@ -100,7 +107,13 @@ export class OslTable extends OslData {
   }
   template() {
     const { data, columns } = this.getData();
-    return html` <osl-table .data=${data} .columns=${columns}></osl-table> `;
+    return html`
+      <osl-table
+        .data=${data}
+        .columns=${columns}
+        .title=${this.title}
+      ></osl-table>
+    `;
   }
 }
 

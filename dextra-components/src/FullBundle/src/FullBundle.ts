@@ -16,6 +16,7 @@ import * as Dot from "../../components/Marks/Dot/src/Dot";
 import * as Histogram from "../../components/Marks/Histogram/src/Histogram";
 import * as Radio from "../../components/Radio/src/Radio";
 import * as Select from "../../components/Select/src/Select";
+import * as SelectControl from "../../components/Select/src/SelectControl";
 import * as Switch from "../../components/Switch/src/Switch";
 import * as Table from "../../components/Table/src/Table";
 import * as Slider from "../../components/Slider/src/Slider";
@@ -36,6 +37,7 @@ export {
   Histogram,
   Radio,
   Select,
+  SelectControl,
   Switch,
   Table,
   DataTable,

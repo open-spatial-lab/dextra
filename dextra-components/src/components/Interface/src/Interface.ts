@@ -51,7 +51,6 @@ export class OslControl extends ValtioElement<StateSchema> {
       return
     }
     const datasets = Array.isArray(this.data) ? this.data : [this.data];
-    console.log(datasets)
     datasets.forEach((dataset) => {
       if (!this.store.datasets[dataset] && dataset !== "") {
         this.store.datasets[dataset] = {

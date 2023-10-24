@@ -1,6 +1,6 @@
 {
   "name": "@open-spatial-lab/download",
-  "version": "0.0.0",
+  "version": "0.0.20",
   "main": "dist/index.js",
   "exports": {
     ".": "./dist/index.js"
@@ -13,7 +13,6 @@
     "build": "vite build",
     "serve": "http-server . -p 8080 --gzip",
     "build-n-test": "npm run build && npm run serve"
-
   },
   "dependencies": {
     "lit-element": "^2.4.0",

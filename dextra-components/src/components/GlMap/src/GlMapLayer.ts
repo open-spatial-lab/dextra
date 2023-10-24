@@ -83,6 +83,12 @@ export class OslMapLayer extends OslData {
   @property({ type: Number })
   circleRadius: number = 5;
 
+  @property({ type: Number })
+  pointRadiusScale: number = 1;
+
+  @property({ type: Boolean })
+  fixedRadius: boolean = false;
+
   @property({ converter: interpretFuncJsonOrString })
   filled: boolean = true;
 
@@ -108,6 +114,10 @@ export class OslMapLayer extends OslData {
     this.visible = !this.visible;
     this.updateLayer();
   }
+  public setVisibility(visibility: boolean) {
+    this.visible = visibility;
+    this.updateLayer();
+  }
   
   setLegend(legend: LegendSpec) {
     legendStore.legends[this.elementId] = legend;
@@ -129,6 +139,7 @@ export class OslMapLayer extends OslData {
       data = this.tooltips(entry);
     } else if (this.tooltips.length) {
       data = this.tooltips.map((tooltip) => {
+        // console.log('tooltip', tooltip)
         const formatter = this.tooltipFormatters[tooltip.format || "nice"];
         const value = entry[tooltip.column];
         const formatted =
@@ -166,17 +177,6 @@ export class OslMapLayer extends OslData {
 
   tooltipFormatters: { [key: string]: ReturnType<typeof getFormatter> } = {};
 
-  constructor() {
-    super();
-    if (Array.isArray(this.tooltips)) {
-      this.tooltipFormatters["nice"] = getFormatter("nice");
-      for (const tooltip of this.tooltips) {
-        if (tooltip.format && !this.tooltipFormatters[tooltip.format]) {
-          this.tooltipFormatters[tooltip.format] = getFormatter(tooltip.format);
-        }
-      }
-    }
-  }
   layerProps: Partial<GeoJsonLayer["props"]> = {
     pickable: true,
     filled: this.filled,
@@ -194,7 +194,6 @@ export class OslMapLayer extends OslData {
   public async renderLayer(_data?: DataResult) {
     const id = this.elementId;
     const data = _data || this.currentResults || [];
-
     this.layerProps.data = data;
     this.layerProps.id = id;
     this.layerProps.visible = this.visible;
@@ -233,13 +232,14 @@ export class OslMapLayer extends OslData {
             break;
           case "circle":
             this.layerProps.getPointRadius =
-              this.type === "categorical"
+              this.type === "categorical" || this.fixedRadius
                 ? this.circleRadius
                 : (d: any) => {
                     const value = accessor(d);
                     return value;
                   };
             this.layerProps.pointRadiusUnits = this.radiusUnits || "meters";
+            this.layerProps.pointRadiusScale = this.pointRadiusScale || 1
 
             break;
           case "text":
@@ -270,7 +270,7 @@ export class OslMapLayer extends OslData {
       )
       ) {
       // @ts-ignore
-      this.parentNode.hasMovedToBbox = true;
+      !this.parentNode.moveEveryDataChange && (this.parentNode.hasMovedToBbox = true)
       const bounds = bbox({
         type: "FeatureCollection",
         features: this.currentResults,
@@ -286,7 +286,15 @@ export class OslMapLayer extends OslData {
 
   connectedCallback(): void {
     super.connectedCallback();
-    console.log('LAYER CONNECTED', this.elementId)
+
+    if (Array.isArray(this.tooltips)) {
+      this.tooltipFormatters["nice"] = getFormatter("nice");
+      for (const tooltip of this.tooltips) {
+        if (tooltip.format && !this.tooltipFormatters[tooltip.format]) {
+          this.tooltipFormatters[tooltip.format] = getFormatter(tooltip.format);
+        }
+      }
+    }
     this.updateLayer();
     this.subscribe(
       (store) => store.datasets[this.data].results,

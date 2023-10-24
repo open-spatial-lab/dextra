@@ -10,10 +10,25 @@ export class OslTable extends OslData {
   @property({ converter: interpretFuncJsonOrString })
   columns?: string[];
 
+  @property({ type: String })
+  maxw: string = "100%";
+
+  @property({ type: Boolean })
+  pagination: boolean = false;
+
+  @property({ type: Number })
+  pageSize: number = 10;
+
   template() {
-    console.log(this.currentResults)
     return html`
-    <osl-table .data=${this.currentResults} .columns=${this.columns}></osl-table>
+      <osl-table
+        .title=${this.title}
+        .maxw=${this.maxw}
+        .data=${this.currentResults}
+        .columns=${this.columns}
+        .pagination=${this.pagination}
+        .pageSize=${this.pageSize}
+      ></osl-table>
     `;
   }
 }

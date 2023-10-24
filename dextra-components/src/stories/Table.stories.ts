@@ -17,7 +17,7 @@ export const Table = () => {
 };
 
 export const ControlledTable = () => {
-  return html`
+return html`
     <p></p>
     <osl-slider
       data="http://localhost:6006/data/household.json"

@@ -6,6 +6,7 @@ import "@spectrum-web-components/card/sp-card.js";
 import "@spectrum-web-components/action-menu/sp-action-menu.js";
 import "@spectrum-web-components/menu/sp-menu-item.js";
 import "@spectrum-web-components/icons-workflow/icons/sp-icon-visibility.js";
+import "@spectrum-web-components/icons-workflow/icons/sp-icon-layers.js";
 import "@spectrum-web-components/icons-workflow/icons/sp-icon-visibility-off.js";
 import "../../Select/src/Select";
 import { legendStore } from "../../core/state/MapLegendStore";
@@ -23,6 +24,9 @@ export class MapLegend extends ValtioElement<LegendStoreSpec> {
 
   @property({ type: String })
   position: "top-left" | "top-right" | "bottom-left" | "bottom-right" = "bottom-left";
+
+  @property({ type: Boolean })
+  showSingleLayer?: boolean = false;
 
   static styles = css`
     .legend {
@@ -116,8 +120,8 @@ export class MapLegend extends ValtioElement<LegendStoreSpec> {
 
     return html`
       <sp-action-menu class="legend-actions" placement="bottom-end" quiet>
-        <sp-icon-visibility slot="icon"></sp-icon-visibility>
-        <sp-menu-item disabled>Show/Hide Layers</sp-menu-item>
+        ${this.showSingleLayer ? html`<sp-icon-layers slot="icon"></sp-icon-layers>`: html`<sp-icon-visibility slot="icon"></sp-icon-visibility>`}
+        <sp-menu-item disabled>${this.showSingleLayer ? "Select Layer" : "Show/Hide Layers"}</sp-menu-item>
         ${this.legends.map((key, i) => {
           return html`
             <sp-menu-item
@@ -125,7 +129,7 @@ export class MapLegend extends ValtioElement<LegendStoreSpec> {
               value="${key}"
               @click=${() => this.onLayerToggle?.(key)}
             >
-              ${legends[i]?.visible
+              ${this.showSingleLayer ? '' : legends[i]?.visible
                 ? html`<sp-icon-visibility slot="icon" />`
                 : html`<sp-icon-visibility-off />`}
               ${legends[i]?.title}

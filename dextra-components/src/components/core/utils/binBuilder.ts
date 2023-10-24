@@ -216,7 +216,7 @@ export class BinBuilder {
     return (d: Record<string, number>) => {
       const val = accessor(d) as number;
       for (let i = 1; i < bins.length; i++) {
-        if (val < bins[i]) {
+        if (val <= bins[i]) {
           return colors[i - 1];
         }
       }

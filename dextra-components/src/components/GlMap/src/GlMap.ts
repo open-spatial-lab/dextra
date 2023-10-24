@@ -59,6 +59,12 @@ export class OslGlMap extends OslData {
   @property({ type: Boolean })
   showNavigation?: boolean = false;
 
+  @property({ type: Boolean })
+  showSingleLayer?: boolean = false;
+
+  @property({ type: Boolean })
+  moveEveryDataChange?: boolean = false;
+
   @property({ type: String })
   legendPosition: "top-left" | "top-right" | "bottom-left" | "bottom-right" =
     "bottom-left";
@@ -162,10 +168,19 @@ export class OslGlMap extends OslData {
   }
 
   toggleLayer(key: string) {
-    this.childMapLayers.find((l) => l.elementId === key)?.toggleVisibility();
+    const filter = (l: any) => l.elementId === key;
+    const inverseFilter = (l: any) => l.elementId !== key;
+    if (this.showSingleLayer) {
+      this.childMapLayers.find(filter)?.setVisibility(true);
+      this.childMapLayers
+        .filter(inverseFilter)
+        ?.forEach((l) => l.setVisibility(false));
+    } else {
+      this.childMapLayers.find(filter)?.toggleVisibility();
+    }
   }
 
-  debouncedResize: any; 
+  debouncedResize: any;
 
   connectedCallback() {
     super.connectedCallback();
@@ -193,6 +208,7 @@ export class OslGlMap extends OslData {
           .legends=${this.childElementIds}
           .onLayerToggle=${(key: string) => this.toggleLayer(key)}
           .position=${this.legendPosition}
+          .showSingleLayer=${this.showSingleLayer}
         ></osl-map-legend>
         <osl-map-tooltip
           .tooltips=${this.childElementIds}

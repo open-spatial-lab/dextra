@@ -6,6 +6,7 @@ import "@spectrum-web-components/action-button/sp-action-button.js";
 import "@spectrum-web-components/action-group/sp-action-group.js";
 import "@spectrum-web-components/tooltip/sp-tooltip.js";
 import { property } from "lit/decorators.js";
+import { interpretFuncJsonOrString } from "../../core/utils/converters";
 
 const helpText = {
   json: "Download the data in JSON format (Web)",
@@ -33,6 +34,8 @@ export class OslDownload extends OslData {
   size: string = "s";
   @property({ type: String })
   filename: string = "data";
+  @property({ converter: interpretFuncJsonOrString })
+  parameterSuffixes?: string[];
 
   resultsToRowlike(separator: string = ",") {
     const data = JSON.parse(JSON.stringify(this.currentResults));
@@ -44,14 +47,24 @@ export class OslDownload extends OslData {
       rows,
     }
   }
+  getFileSuffixes(){
+    if(this.parameterSuffixes){
+      const parameters = this.store.datasets[this.data]?.parameters
+
+      return "-" + this.parameterSuffixes.map(suffix => parameters[suffix]).join("-")
+    } else {
+      return ""
+    }
+  }
   download(format: FORMATS) {
     const link = document.createElement("a");
+    const suffixes = this.getFileSuffixes()
     let blob;
     switch (format) {
       case "json": {
         const data = JSON.stringify(this.currentResults);
         blob = new Blob([data], { type: "application/json" });
-        link.download = `${this.filename}.json`;
+        link.download = `${this.filename}${suffixes}.json`;
         break;
       }
       case "csv": {
@@ -65,7 +78,7 @@ export class OslDownload extends OslData {
           ...rows
         ].join("\n");
         blob = new Blob([csv], { type: "text/csv" });
-        link.download = `${this.filename}.csv`;
+        link.download = `${this.filename}${suffixes}.csv`;
         break;
       }
       case "markdown": {
@@ -79,7 +92,7 @@ export class OslDownload extends OslData {
           ...rows,
         ].join("\n");
         blob = new Blob([markdown], { type: "text/markdown" });
-        link.download = `${this.filename}.md`;
+        link.download = `${this.filename}${suffixes}.md`;
         break
       }
       case "text": {
@@ -89,7 +102,7 @@ export class OslDownload extends OslData {
         } = this.resultsToRowlike();
         const text = `${keys.join(",")}\n${rows.join("\n")}`
         blob = new Blob([text], { type: "text/plain" });
-        link.download = `${this.filename}.txt`;
+        link.download = `${this.filename}${suffixes}.txt`;
         break
       }
       case "tsv": {
@@ -102,7 +115,7 @@ export class OslDownload extends OslData {
           ...rows
         ].join("\n");
         blob = new Blob([tsv], { type: "text/tsv" });
-        link.download = `${this.filename}.tsv`;
+        link.download = `${this.filename}${suffixes}.tsv`;
         break
       }
     }
@@ -128,7 +141,6 @@ export class OslDownload extends OslData {
   }
 
   template() {
-    console.log(this.markdown);
     return html`
       <div>
         <sp-help-text>${this.title || "Download Data"}</sp-help-text>
