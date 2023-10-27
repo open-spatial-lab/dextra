@@ -226,10 +226,11 @@ export class OslMapLayer extends OslData {
         } else if (this.filled) {
           this.layerProps.getFillColor = colorFunc;
         }
-
         switch (this.layer) {
           case "polygon":
             break;
+            // @ts-ignore
+          case "point":
           case "circle":
             this.layerProps.getPointRadius =
               this.type === "categorical" || this.fixedRadius
@@ -240,7 +241,6 @@ export class OslMapLayer extends OslData {
                   };
             this.layerProps.pointRadiusUnits = this.radiusUnits || "meters";
             this.layerProps.pointRadiusScale = this.pointRadiusScale || 1
-
             break;
           case "text":
             break;

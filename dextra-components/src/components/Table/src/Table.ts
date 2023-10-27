@@ -53,6 +53,9 @@ export class OslTable extends ValtioElement<any> {
     `;
   }
   renderRows(rows: any[], columns: string[]) {
+    if (!columns) {
+      return html``;
+    }
     return html`
       ${rows.map(
         (row) => html`

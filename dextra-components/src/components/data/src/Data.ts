@@ -17,9 +17,11 @@ const geomParsers = {
     Geometry.parse(row[geoColumn]).toGeoJSON(),
   WKB: (geoColumn: string) => (row: Record<string, unknown>) => {
     if (!row[geoColumn]) console.warn("No geometry found in row", row)
-    return Geometry._parseWkb(
+    const geom = Geometry._parseWkb(
       Buffer.from(row[geoColumn] as any, "hex")
       ).toGeoJSON() as GeoJSON.Geometry
+      // console.log('geom',geom)
+    return geom
   },
   GeoJSON: (geoColumn: string) => (row: Record<string, unknown>) => {
     const v = row[geoColumn]
@@ -214,7 +216,7 @@ export class OslData extends ValtioElement<StateSchema>{
     if (this.currentResults) {
       return html`<pre>${JSON.stringify(this.currentResults, null, 2)}</pre>`;
     } else {
-      return html`<div>Loading...</div>`;
+      return this.preloader();
     }
   }
 }

@@ -3,6 +3,7 @@ import { customElement, property } from "lit/decorators.js";
 import { OslData } from "../../data/src/Data";
 import * as Plot from "@observablehq/plot";
 import { interpretFuncJsonOrString } from "../../core/utils/converters";
+import "@spectrum-web-components/progress-bar/sp-progress-bar.js";
 
 export type MarkFunction = (data: any, overrideOptions: any) => any;
 
@@ -94,7 +95,7 @@ export class OslPlot extends OslData {
   @property({ type: String })
   colorType?: Plot.ScaleOptions["type"];
 
-  @property({ type: String })
+  @property({ type: String }) //@ts-ignore
   colorScheme?: Plot.ScaleOptions["scheme"];
 
   @property({ type: Array })
@@ -138,7 +139,7 @@ export class OslPlot extends OslData {
     const plotWidth = width || this.containerWidth;
     const plotHeight = height || this.containerHeight;
     if (!plotWidth || !plotHeight) {
-      return `Loading...`;
+      return this.preloader();
     }
     const plot = Plot.plot({
       marginTop,

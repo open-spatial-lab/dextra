@@ -957,3 +957,69 @@ export const ControlledGlMap = () => {
     <br /><br />
   `;
 };
+
+
+export const m3 = () => {
+  return html`
+  <div style="height:80vh; width:100%">
+  <osl-glmap 
+ mapStyle="https://basemaps.cartocdn.com/gl/voyager-gl-style/style.json" 
+ legendPosition="top-right" 
+ showNavigation='true'
+>
+<osl-map-layer 
+ source="653ab1816cb151000835ae06" 
+ legendTitle="-" 
+ visible='true' 
+ geoType="WKB" 
+ geoColumn="geom" 
+ dataColumn="STATION_ID" 
+ type="continuous" 
+ bins='5' 
+ colorScheme="RdYlGn" 
+ filled='true' 
+ layer="point" 
+ data="https://d1mix2z5lvvl4x.cloudfront.net/data-query/653ab1816cb151000835ae06"
+>
+
+</osl-map-layer>
+</osl-glmap>
+</div>
+  
+  `
+}
+
+
+// <osl-map-layer 
+//  source="653ab1816cb151000835ae06" 
+//  legendTitle="--" 
+//  visible='true' 
+//  geoType="WKB" 
+//  geoColumn="geom" 
+//  dataColumn="geom" 
+//  type="categorical" 
+//  bins='5' 
+//  colorScheme="d3-turbo" 
+//  filled='true' 
+//  layer="polygon" 
+//  attribution="CTA 2023" 
+//  data="https://d1mix2z5lvvl4x.cloudfront.net/data-query/653ab1816cb151000835ae06"
+// >
+
+// </osl-map-layer>
+// <osl-map-layer 
+//  source="653ab1816cb151000835ae06" 
+//  legendTitle="-" 
+//  visible='true' 
+//  geoType="WKB" 
+//  geoColumn="geom" 
+//  dataColumn="STATION_ID" 
+//  type="continuous" 
+//  bins='5' 
+//  colorScheme="RdYlGn" 
+//  filled='true' 
+//  layer="point" 
+//  data="https://d1mix2z5lvvl4x.cloudfront.net/data-query/653ab1816cb151000835ae06"
+// >
+
+// </osl-map-layer>
