@@ -1177,3 +1177,743 @@ export const m3 = () => {
 // >
 
 // </osl-map-layer>
+
+export const CirculateSanDiego = () => {
+  const raw311 =
+    "https://dcoszmf9no5hj.cloudfront.net/data-query/653be6b05ff01600085e5eef";
+  const walkAudits =
+    "https://dcoszmf9no5hj.cloudfront.net/data-query/653bf1235ecf29000896210d";
+    const months = [
+    "01",
+    "02",
+    "03",
+    "04",
+    "05",
+    "06",
+    "07",
+    "08",
+    "09",
+    "10",
+    "11",
+    "12",
+  ];
+  const years = [
+    "2016",
+    "2017",
+    "2018",
+    "2019",
+    "2020",
+    "2021",
+    "2022",
+    "2023",
+  ];
+  const complaints = [
+    "*",
+    "Other",
+    "Pavement Maintenance",
+    "Traffic Signal Timing",
+    "Encampment",
+    "Street Light Maintenance",
+    "Traffic Signal Issue",
+    "Street Flooded",
+    "Stormwater",
+    "Tree Maintenance",
+    "Pothole",
+    "Parking",
+    "Illegal Dumping",
+    "Graffiti - Public",
+    "Environmental Services Code Compliance",
+    "Missed Collection",
+    "Parks Issue",
+    "Street Sweeping",
+    "Traffic Sign Maintenance",
+    "ROW Maintenance",
+    "Graffiti - Code Enforcement",
+    "Stormwater Code Enforcement",
+    "Sidewalk Repair Issue",
+    "Parking Violation",
+    "Waste on Private Property",
+    "Shared Mobility Device",
+    "Traffic Engineering",
+    "Development Services - Code Enforcement",
+    "Dead Animal",
+    "Vegetation Encroachment",
+    "Trash/Recycling Collection",
+    "Weed Cleanup",
+    "Right-of-Way Code Enforcement",
+  ];
+  let dates: string[] = [];
+  years.forEach((year) => {
+    months.forEach((month) => {
+      dates.push(`${year}-${month}`);
+    });
+  });
+
+  return html`<div style="height:auto; width:100%">
+  <osl-flex-box breakpoint="md">
+
+<osl-select-control
+    data=${JSON.stringify([raw311])}
+    option="month"
+    options=${JSON.stringify(dates)}
+    title="311 Complaints Month"
+    initialValue="2023-01"
+  ></osl-select-control>
+<osl-select-control
+    data=${JSON.stringify([raw311])}
+    option="service"
+    options=${JSON.stringify(complaints)}
+    title="311 Complaints Type"
+    initialValue="*"
+  ></osl-select-control>
+</osl-flex-box>
+  <br/><br/>
+    <osl-flex-box breakpoint="xl">
+    <div style="height:80vh">
+
+    <osl-glmap 
+    mapGroup="1"
+      mapStyle="https://basemaps.cartocdn.com/gl/positron-gl-style/style.json" 
+      legendPosition="top-left" 
+      showNavigation='true'
+      center="[-117.2,32.7]"
+      zoom="11"
+      >
+
+<osl-map-layer
+          layer="circle"
+          data=${walkAudits}
+          geoColumn="geometry"
+          type="categorical"
+          staticColor="[255,0,0]"
+          geoType="WKB"
+          legendtitle="Walk Audits"
+          visible="true"
+          colorscheme="d3-sinebow"
+          circleRadius="30"
+          dataColumn="site"
+          pointRadiusMaxPixels="10"
+          pointRadiusMinPixels="2"
+        >
+        </osl-map-layer>
+
+        
+</osl-glmap>
+    </div>
+    <div style="height:80vh">
+
+    <osl-glmap 
+    mapGroup="1"
+      mapStyle="https://basemaps.cartocdn.com/gl/positron-gl-style/style.json" 
+      legendPosition="top-left" 
+      showNavigation='true'
+      center="[-117.2,32.7]"
+      zoom="11"
+      >
+
+<osl-map-layer
+          layer="circle"
+          data=${raw311}
+          geoColumn="geometry"
+          type="categorical"
+          staticColor="[255,0,0]"
+          geoType="WKB"
+          legendtitle="311 Complaints by Type"
+          visible="true"
+          colorscheme="d3-turbo"
+          circleRadius="30"
+          dataColumn="service_name"
+          pointRadiusMaxPixels="10"
+          pointRadiusMinPixels="2"
+        >
+        </osl-map-layer>
+
+        
+</osl-glmap>
+</osl-flex-box>
+    </div>
+  </div>
+  `;
+};
+
+
+export const CirculateSanDiego2 = () => {
+  const raw311 =
+    "https://dcoszmf9no5hj.cloudfront.net/data-query/653be6b05ff01600085e5eef";
+  const walkAudits =
+    "https://dcoszmf9no5hj.cloudfront.net/data-query/653bf1235ecf29000896210d";
+  const months = [
+    "01",
+    "02",
+    "03",
+    "04",
+    "05",
+    "06",
+    "07",
+    "08",
+    "09",
+    "10",
+    "11",
+    "12",
+  ];
+  const years = [
+    "2016",
+    "2017",
+    "2018",
+    "2019",
+    "2020",
+    "2021",
+    "2022",
+    "2023",
+  ];
+  const complaints = [
+    "*",
+    "Other",
+    "Pavement Maintenance",
+    "Traffic Signal Timing",
+    "Encampment",
+    "Street Light Maintenance",
+    "Traffic Signal Issue",
+    "Street Flooded",
+    "Stormwater",
+    "Tree Maintenance",
+    "Pothole",
+    "Parking",
+    "Illegal Dumping",
+    "Graffiti - Public",
+    "Environmental Services Code Compliance",
+    "Missed Collection",
+    "Parks Issue",
+    "Street Sweeping",
+    "Traffic Sign Maintenance",
+    "ROW Maintenance",
+    "Graffiti - Code Enforcement",
+    "Stormwater Code Enforcement",
+    "Sidewalk Repair Issue",
+    "Parking Violation",
+    "Waste on Private Property",
+    "Shared Mobility Device",
+    "Traffic Engineering",
+    "Development Services - Code Enforcement",
+    "Dead Animal",
+    "Vegetation Encroachment",
+    "Trash/Recycling Collection",
+    "Weed Cleanup",
+    "Right-of-Way Code Enforcement",
+  ];
+
+  const lineData = "https://dcoszmf9no5hj.cloudfront.net/data-query/653bf6dbc5ea2b0008cd63c0"
+  let dates: string[] = [];
+  years.forEach((year) => {
+    months.forEach((month) => {
+      dates.push(`${year}-${month}`);
+    });
+  });
+
+  return html`<div style="height:auto; width:100%">
+  <osl-flex-box breakpoint="md">
+
+<osl-select-control
+    data=${JSON.stringify([raw311])}
+    option="month"
+    options=${JSON.stringify(dates)}
+    title="311 Complaints Month"
+    initialValue="2023-01"
+  ></osl-select-control>
+<osl-select-control
+    data=${JSON.stringify([raw311])}
+    option="service"
+    options=${JSON.stringify(complaints)}
+    title="311 Complaints Type"
+    initialValue="*"
+  ></osl-select-control>
+</osl-flex-box>
+  <br/><br/>
+    <osl-flex-box breakpoint="xl">
+    <div style="height:80vh;width:50%;flex-grow:0;overflow-y:auto">
+    <div style="height:400vh;width:100%">
+
+    <osl-plot
+colorLegend="true" 
+data=${lineData}
+marginRight="150"
+>
+<osl-line 
+x="date"
+y="count"
+fy="service_name"
+colorScheme="accent"
+direction="horizontal"
+></osl-line>
+</osl-plot></div>
+    </div>
+    <div style="height:80vh">
+
+    <osl-glmap 
+    mapGroup="1"
+      mapStyle="https://basemaps.cartocdn.com/gl/positron-gl-style/style.json" 
+      legendPosition="top-left" 
+      showNavigation='true'
+      center="[-117.2,32.7]"
+      zoom="11"
+      >
+
+<osl-map-layer
+          layer="circle"
+          data=${raw311}
+          geoColumn="geometry"
+          type="categorical"
+          staticColor="[255,0,0]"
+          geoType="WKB"
+          legendtitle="311 Complaints by Type"
+          visible="true"
+          colorscheme="d3-turbo"
+          circleRadius="30"
+          dataColumn="service_name"
+          pointRadiusMaxPixels="10"
+          pointRadiusMinPixels="2"
+        >
+        </osl-map-layer>
+<osl-map-layer
+          layer="circle"
+          data=${walkAudits}
+          geoColumn="geometry"
+          type="categorical"
+          staticColor="[255,0,0]"
+          geoType="WKB"
+          legendtitle="Walk Audits"
+          visible="true"
+          colorscheme="d3-sinebow"
+          circleRadius="30"
+          dataColumn="site"
+          pointRadiusMaxPixels="10"
+          pointRadiusMinPixels="2"
+        >
+        </osl-map-layer>
+
+
+        
+</osl-glmap>
+</osl-flex-box>
+    </div>
+  </div>
+  <br/>
+  <hr/>
+  <br/>
+  <h3>311 Complaints table</h3>
+<osl-data-table
+  pagination="true"
+  data=${raw311}
+  columns='["service_name", "service_name_detail", "public_description", "street_address", "date", "status"]'
+></osl-data-table>
+  <br/>
+  <hr/>
+  <br/>
+  <h3>Walk Audits Table</h3>
+<osl-data-table
+  pagination="true"
+  data=${walkAudits}
+  columns='["Name", "site", "Description"]'
+></osl-data-table>
+  `;
+};
+
+
+
+export const CirculateSanDiego3 = () => {
+  const tractJoined ="https://dcoszmf9no5hj.cloudfront.net/data-query/653bfcc7a723810008c2c81e"
+    const months = [
+    "01",
+    "02",
+    "03",
+    "04",
+    "05",
+    "06",
+    "07",
+    "08",
+    "09",
+    "10",
+    "11",
+    "12",
+  ];
+  const years = [
+    "2016",
+    "2017",
+    "2018",
+    "2019",
+    "2020",
+    "2021",
+    "2022",
+    "2023",
+  ];
+  const complaints = [
+    "Other",
+    "Pavement Maintenance",
+    "Traffic Signal Timing",
+    "Encampment",
+    "Street Light Maintenance",
+    "Traffic Signal Issue",
+    "Street Flooded",
+    "Stormwater",
+    "Tree Maintenance",
+    "Pothole",
+    "Parking",
+    "Illegal Dumping",
+    "Graffiti - Public",
+    "Environmental Services Code Compliance",
+    "Missed Collection",
+    "Parks Issue",
+    "Street Sweeping",
+    "Traffic Sign Maintenance",
+    "ROW Maintenance",
+    "Graffiti - Code Enforcement",
+    "Stormwater Code Enforcement",
+    "Sidewalk Repair Issue",
+    "Parking Violation",
+    "Waste on Private Property",
+    "Shared Mobility Device",
+    "Traffic Engineering",
+    "Development Services - Code Enforcement",
+    "Dead Animal",
+    "Vegetation Encroachment",
+    "Trash/Recycling Collection",
+    "Weed Cleanup",
+    "Right-of-Way Code Enforcement",
+  ];
+  const walkAuditNames = ['"No Riding Bikes on Sidewalk" Sign, but no bike infrastructure',
+  '10 Second Crossing Window',
+  '10 second crossing window',
+  '12th & Imperial Transit Center',
+  '4-Way Stop',
+  '4394 Mayberry St, San Diego, CA 92113, USA',
+  '4853 Bunnell St, San Diego, CA 92113, USA',
+  '4855 Ocean View Blvd, San Diego, CA 92113, USA',
+  '932 Delta St, National City, CA 91950, USA',
+  'Aggressive Drivers',
+  'Audible Crossing',
+  'Audible Pedestrian Crossing Signal',
+  'Audible Pedestrian Signal',
+  'Audible RRFB',
+  'Audible Signal',
+  'Beg Button Obscured',
+  'Bicycle Lane',
+  'Bike Lane',
+  'Bike Lane Starts Here',
+  'Bike Parking',
+  'Bike Rack',
+  'Bike lanes',
+  'Broken Sidewalk',
+  'Broken/Narrow Sidewalks',
+  'Broken/Uneven Sidewalks',
+  'Broken/narrow Sidewalk',
+  'Bus Only Lane',
+  'Cars Parked on Curb',
+  'Cars Roll Stop',
+  'Cars do not yield to pedestrians',
+  'Chicano Park',
+  'Chicano Park Museum and Cultural Center',
+  'Construction',
+  'County Center/Little Italy Station',
+  'Cracked Sidewalk',
+  'Cracked Sidewalks',
+  'Crosswalks',
+  'Curb Extension',
+  'Curb Should be Painted Red',
+  'Cycle Track',
+  'Debris',
+  'Debris on Sidewalk',
+  'Diverters',
+  'Division St & Highland Av, National City, CA 91950, USA',
+  'Drivers Speeding',
+  'Empty Lot',
+  'Euclid Elementary School',
+  'Excess Litter',
+  'Faded Crosswalk',
+  'Faded Crosswalk Paint',
+  'Faded School Crosswalks',
+  'Faded crosswalk',
+  'Faded/ Missing Crosswalks',
+  'Faded/Missing Crosswalk',
+  'Faded/Missing Crosswalks',
+  "Father Joe's",
+  "Father Joe's\xa0",
+  'Flooding',
+  'Flooding Issues',
+  'Former car crash',
+  'Fridge in Curb Ramp',
+  'High Visibility Crosswalk',
+  'Hill',
+  'Insufficient Street Lighting',
+  'Intersection Mural',
+  'Keeler Court Apartments',
+  'Kennedy Neighborhood Park',
+  'Lack of Lighting',
+  'Las Serenas Apartments',
+  'Las Serenas Apartments, Delta Street, San Diego, CA, USA',
+  'Lincoln Senior High School',
+  'Litter',
+  'Little Italy',
+  'Long Light, hard to catch bus',
+  'Long Signals, Short Crossing Windows',
+  'Marriott Marquis San Diego Marina',
+  'Mayberry Street & South 44th Street, San Diego, CA, USA',
+  'Mayberry Townhomes',
+  'Memorial Dog Park',
+  'Mid-Block Crossing',
+  'Midblock Crossing',
+  'Missing Crosswalk',
+  'Missing Crosswalks',
+  'Missing Curb Ramp',
+  'Missing Sidewalk',
+  'Missing/Broken Sidewalks',
+  'Montgomery Middle School',
+  'Mural',
+  'Murals',
+  'Murals/Art',
+  'Narrow Sidewalk',
+  'Narrow Sidewalks',
+  'Narrow/ Broken Sidewalks',
+  'No Audible Pedestrian Crossing Signals',
+  'No Bench or Shade Bus Stop',
+  'No Crossing',
+  'No Crosswalk',
+  'No Crosswalks or Stoppages',
+  'No Crosswalk\xa0',
+  'No Curb Ramp',
+  'No Ramp',
+  'No Ramp or Crosswalk',
+  'No Ramps',
+  'No School Crossing Markings',
+  'No Shade',
+  'No Shade Bus Stop',
+  'No Sidewalk',
+  'No Truncated Domes',
+  'No crosswalk',
+  'Nobel Drive Station',
+  'Not Enough Time to Cross',
+  'Obstruction',
+  'Obstructions/Trash',
+  'Only one crosswalk, no vehicle stoppage',
+  'Overgrown Path',
+  'Pacific Beach Middle School',
+  'Pacific Beach Taylor Branch Library',
+  'Paradise Senior Center',
+  'Parking obscures line of sight during drop off and pick up, teachers would like no parking during x hours signage',
+  'Parklets',
+  'Pedestrian Median',
+  'Pedestrian Refuge Island',
+  'Pedestrian Scale Lighting',
+  'Point 20',
+  'Polk Avenue',
+  'Poor Lighting',
+  'Protected Pedestrian Promenade',
+  'Rapid Flashing Beacon',
+  'Rapid Flashing Beacon (RRFB)',
+  'Route',
+  'San Diego College of Continuing Education',
+  'San Diego Convention Center',
+  'Santa Fe Depot',
+  'School Entrance',
+  'Seaport Village',
+  'Separated Bike Lane',
+  'Shade',
+  'Shaded Sidewalk',
+  'Sharrow',
+  'Sheltered Bus Stop',
+  'Short Crossing Signal',
+  'Short Crossing Time',
+  'Sidewalk Obstruction',
+  'Sidewalk Obstructions',
+  'Speed Bump',
+  'Speeding Cars',
+  'Speeding Vehicles',
+  "St. Rita's Catholic School",
+  'Starting Point',
+  'Teralta Park',
+  'Traffic lights malfuctioning',
+  'Trash',
+  'Trash\xa0',
+  'Tree Cover, Wide Sidewalks',
+  'Trees',
+  'Trees/ Shade',
+  'Trees/Shade',
+  'Uneven Sidewalk',
+  'Uneven Sidewalks',
+  'University Avenue',
+  'Unusable Sidewalk',
+  'Walk Audit Route',
+  'Walk Audit Start Location',
+  'Walking Route',
+  'Walking route',
+  'Waterfront Park',
+  'Wayfinding Sign',
+  'Weeds and Graffiti',
+  'Wide Sidewalk',
+  'Wide Sidewalks',
+  'Witnessed Jaywalking',
+  'Yellow Crosswalk',
+  'Zebra Crosswalks']
+
+  let dates: string[] = [];
+  years.forEach((year) => {
+    months.forEach((month) => {
+      dates.push(`${year}-${month}`);
+    });
+  });
+
+  return html`<div style="height:auto; width:100%">
+  <osl-flex-box breakpoint="md">
+
+<osl-select-control
+    data=${JSON.stringify([tractJoined])}
+    option="month"
+    options=${JSON.stringify(dates)}
+    title="311 Complaints Month"
+    initialValue="2023-01"
+  ></osl-select-control>
+<osl-select-control
+    data=${JSON.stringify([tractJoined])}
+    option="service"
+    options=${JSON.stringify(complaints)}
+    title="311 Complaints Type"
+    initialValue="Sidewalk Repair Issue"
+  ></osl-select-control>
+<osl-select-control
+    data=${JSON.stringify([tractJoined])}
+    option="walkaudit_name"
+    options=${JSON.stringify(walkAuditNames)}
+    title="Walk Audit Issue Type"
+    initialValue=${walkAuditNames[0]}
+  ></osl-select-control>
+</osl-flex-box>
+  <br/><br/>
+  <div style="position:relative;width:100%;display:flex;flex-direcion:row;">
+  <div style="display:inline;width:100%;height:40vh">
+
+  <osl-glmap 
+
+      center="[-117.2,32.7]"
+      zoom="11"
+      mapStyle="https://basemaps.cartocdn.com/gl/positron-gl-style/style.json" 
+      legendPosition="top-left" 
+      showNavigation='true'
+    mapGroup="1"
+      >
+
+      <osl-map-layer 
+ legendTitle="Walk Audit Counts" 
+ visible='true' 
+ geoType="WKB" 
+ geoColumn="geometry" 
+ dataColumn="Walk Audit Count"
+ type="continuous" 
+ bins='5' 
+ colorScheme="RdPu" 
+ filled='true' 
+ layer="polygon" 
+ beforeId="water" 
+ method="QNT" 
+ geoId="GEOID" 
+ stroked='true' 
+ data=${tractJoined}
+>
+</osl-map-layer></div>
+  <div style="display:inline;width:100%;height:40vh">
+
+  <osl-glmap 
+
+      center="[-117.2,32.7]"
+      zoom="11"
+      mapStyle="https://basemaps.cartocdn.com/gl/positron-gl-style/style.json" 
+      legendPosition="top-left" 
+      showNavigation='true'
+    mapGroup="1"
+      >
+
+      <osl-map-layer 
+ legendTitle="311 Counts" 
+ visible='true' 
+ geoType="WKB" 
+ geoColumn="geometry" 
+ dataColumn="311 Service Count"
+ type="continuous" 
+ bins='5' 
+ colorScheme="d3-magma" 
+ filled='true' 
+ layer="polygon" 
+ beforeId="water" 
+ method="QNT" 
+ geoId="GEOID" 
+ stroked='true' 
+ data=${tractJoined}
+>
+</osl-map-layer>
+
+</div>
+</div>
+  <div style="position:relative;width:100%;display:flex;flex-direcion:row;">
+  <div style="display:inline;width:100%;height:40vh">
+
+  <osl-glmap 
+
+      center="[-117.2,32.7]"
+      zoom="11"
+      mapStyle="https://basemaps.cartocdn.com/gl/positron-gl-style/style.json" 
+      legendPosition="top-left" 
+      showNavigation='true'
+    mapGroup="1"
+      >
+
+      <osl-map-layer 
+ legendTitle="Population" 
+ visible='true' 
+ geoType="WKB" 
+ geoColumn="geometry" 
+ dataColumn="Population"
+ type="continuous" 
+ bins='5' 
+ colorScheme="RdPu" 
+ filled='true' 
+ layer="polygon" 
+ beforeId="water" 
+ method="QNT" 
+ geoId="GEOID" 
+ stroked='true' 
+ data=${tractJoined}
+>
+</osl-map-layer></div>
+  <div style="display:inline;width:100%;height:40vh">
+
+  <osl-glmap 
+
+      center="[-117.2,32.7]"
+      zoom="11"
+      mapStyle="https://basemaps.cartocdn.com/gl/positron-gl-style/style.json" 
+      legendPosition="top-left" 
+      showNavigation='true'
+    mapGroup="1"
+      >
+
+      <osl-map-layer 
+ legendTitle="Median Income" 
+ visible='true' 
+ geoType="WKB" 
+ geoColumn="geometry" 
+ dataColumn="Median Income"
+ type="continuous" 
+ bins='5' 
+ colorScheme="d3-viridis" 
+ filled='true' 
+ layer="polygon" 
+ beforeId="water" 
+ method="QNT" 
+ geoId="GEOID" 
+ stroked='true' 
+ data=${tractJoined}
+>
+</osl-map-layer>
+
+</div>
+</div>
+  `;
+};
