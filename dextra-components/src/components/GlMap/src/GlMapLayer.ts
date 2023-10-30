@@ -95,6 +95,16 @@ export class OslMapLayer extends OslData {
   @property({ converter: interpretFuncJsonOrString })
   stroked: boolean = false;
 
+  @property({ converter: interpretFuncJsonOrString })
+  staticColor?: Array<number>;
+
+  @property({ type: Number})
+  pointRadiusMaxPixels?: number;
+  
+  @property({ type: Number})
+  pointRadiusMinPixels?: number;
+
+
   binBuilder?: BinBuilder;
   colorStops?: any;
 
@@ -205,7 +215,6 @@ export class OslMapLayer extends OslData {
     if (this.dataColumn) {
       const column = this.dataColumn!;
       const accessor = (row: any) => row.properties?.[column];
-
       if (this.binBuilder && this.binBuilder.data !== data && data) {
         await this.binBuilder.ingestDataAndAccesor(data, accessor);
         let colorFunc: any;
@@ -239,6 +248,8 @@ export class OslMapLayer extends OslData {
                     const value = accessor(d);
                     return value;
                   };
+            this.layerProps.pointRadiusMinPixels = this.pointRadiusMinPixels || 1;
+            this.layerProps.pointRadiusMaxPixels = this.pointRadiusMaxPixels || 40;
             this.layerProps.pointRadiusUnits = this.radiusUnits || "meters";
             this.layerProps.pointRadiusScale = this.pointRadiusScale || 1
             break;
@@ -247,6 +258,34 @@ export class OslMapLayer extends OslData {
         }
 
         this.legendElements = this.binBuilder?.getLegend();
+      }
+    } else if (this.type === "static") {
+      const colorFunc = (_: any) => this.staticColor || [0, 0, 0];
+      // @ts-ignore
+      this.layerProps.getFillColor = colorFunc;
+      if (this.stroked && !this.filled) {
+        // @ts-ignore
+        this.layerProps.getLineColor = colorFunc;
+        this.layerProps.lineWidthUnits = "pixels";
+        this.layerProps.getLineWidth = 5;
+      } else if (this.filled) {
+        // @ts-ignore
+        this.layerProps.getFillColor = colorFunc;
+      }
+      switch (this.layer) {
+        case "polygon":
+          break;
+          // @ts-ignore
+        case "point":
+        case "circle":
+          this.layerProps.pointRadiusMinPixels = this.pointRadiusMinPixels || 1;
+          this.layerProps.pointRadiusMaxPixels = this.pointRadiusMaxPixels || 100;
+          this.layerProps.getPointRadius = this.circleRadius;
+          this.layerProps.pointRadiusUnits = this.radiusUnits || "meters";
+          this.layerProps.pointRadiusScale = this.pointRadiusScale || 1
+          break;
+        case "text":
+          break;
       }
     }
 

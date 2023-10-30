@@ -69,7 +69,7 @@ export class OslData extends ValtioElement<StateSchema>{
   colorScheme?: keyof typeof colorSchemes = "RdPu";
 
   @property({type: String})
-  type: 'categorical' | 'continuous' | 'ordinal' = 'continuous';
+  type: 'categorical' | 'continuous' | 'ordinal'|'static' = 'continuous';
 
   @property({converter: interpretFuncJsonOrString})
   labels?: Array<string>

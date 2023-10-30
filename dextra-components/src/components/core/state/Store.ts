@@ -26,6 +26,13 @@ const handleLoad = async (url: string) => {
   }
 };
 
+const datePatterns = [
+  /^\d{4}-\d{2}-\d{2}$/,
+  /^\d{4}-\d{2}$/,
+  /^\d{2}\/\d{2}\/\d{4}$/,
+  /^\d{2}\/\d{2}\/\d{2}$/,
+];
+
 const parseData = (data: Array<Record<string, unknown>>) => {
   const columns = Object.keys(data[0]);
   const parseRow = (row: Record<string, unknown>) => {
@@ -34,7 +41,7 @@ const parseData = (data: Array<Record<string, unknown>>) => {
       const value = row[key];
       if (typeof value === "string" && !isNaN(Number(value))) {
         row[key] = Number(value);
-      } else if (typeof value === "string" && !isNaN(Date.parse(value))) {
+      } else if (typeof value === "string" && datePatterns.some((pattern) => pattern.test(value))) {
         row[key] = new Date(value);
       }
     }
@@ -61,6 +68,7 @@ subscribe(store.datasets, async () => {
       });
       try {
         const data = await handleLoad(url.toString());
+        console.log('data', data)
         const parsedData = parseData(data);
         store.datasets[key].results[currentParamString] = parsedData;
       } catch (e) {

@@ -75,7 +75,7 @@ export class OslPlot extends OslData {
   marginTop = 20;
 
   @property({ type: Number })
-  marginLeft = 20;
+  marginLeft = 60;
 
   @property({ type: Number })
   marginBottom = 30;
