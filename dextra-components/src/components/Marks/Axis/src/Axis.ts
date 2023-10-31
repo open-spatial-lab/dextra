@@ -3,8 +3,9 @@ import { PlotMark } from "../../PlotMark/src/PlotMark";
 import * as Plot from "@observablehq/plot";
 import { property } from "lit/decorators.js";
 import { interpretFuncJsonOrString } from "../../../core/utils/converters";
+import { safeCustomElement } from "../../../core/decorators/safeCustomElement";
 
-@customElement("osl-axis")
+@safeCustomElement("osl-axis")
 export class OslAxis extends PlotMark {
   mark = "axis"
 

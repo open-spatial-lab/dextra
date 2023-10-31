@@ -5,13 +5,14 @@ import { GeoOptions } from "@observablehq/plot";
 import { interpretFuncJsonOrString } from "../../../core/utils/converters";
 //@ts-ignore
 import { parse as parseWkt } from "wkt";
+import { safeCustomElement } from "../../../core/decorators/safeCustomElement";
 
 const EMPTY_GEOJSON = {
   type: "FeatureCollection",
   features: [],
 };
 
-@customElement("osl-geo")
+@safeCustomElement("osl-geo")
 export class OslGeo extends PlotMark {
   mark = "geo";
 

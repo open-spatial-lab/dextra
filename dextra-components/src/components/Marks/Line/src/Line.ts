@@ -4,8 +4,9 @@ import * as Plot from "@observablehq/plot";
 import { property } from "lit/decorators.js";
 import { interpretFuncJsonOrString } from "../../../core/utils/converters";
 import { LineOptions } from "@observablehq/plot";
+import { safeCustomElement } from "../../../core/decorators/safeCustomElement";
 
-@customElement("osl-line")
+@safeCustomElement("osl-line")
 export class OslLine extends PlotMark {
   mark = "line"
 

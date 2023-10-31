@@ -5,9 +5,10 @@ import { RuleOptions } from "@observablehq/plot";
 import { RuleXOptions } from "@observablehq/plot";
 import { RuleYOptions } from "@observablehq/plot";
 import { interpretFuncJsonOrString } from "../../../core/utils/converters";
+import { safeCustomElement } from "../../../core/decorators/safeCustomElement";
 
 
-@customElement("osl-rule-plot")
+@safeCustomElement("osl-rule-plot")
 export class OslRule extends PlotMark {
   mark = "rule"
 

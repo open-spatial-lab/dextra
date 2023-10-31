@@ -5,8 +5,9 @@ import "@spectrum-web-components/dialog/sp-dialog-base.js";
 import "@spectrum-web-components/button/sp-button.js";
 import "@spectrum-web-components/overlay/overlay-trigger.js";
 import { ValtioElement } from "../../core/state";
+import { safeCustomElement } from "../../core/decorators/safeCustomElement";
 
-@customElement("osl-modal")
+@safeCustomElement("osl-modal")
 export class OslModal extends ValtioElement<any> {
   @property({ type: String })
   label: string = "Open Menu";
@@ -15,7 +16,7 @@ export class OslModal extends ValtioElement<any> {
   title: string = "Modal Title";
 
   @property({ type: String })
-  size: "s" | "m" | "lg" = "m";
+  size: "s" | "m" | "l" = "m";
 
   @property({ type: Boolean })
   isOpen: boolean = false;
@@ -29,7 +30,7 @@ export class OslModal extends ValtioElement<any> {
 
   template() {
     return html`<div></div>
-      <div style="position:fixed;
+      <button style="position:fixed;
         left:0;
         top:0;
         background: rgba(0,0,0,0.5);
@@ -39,8 +40,10 @@ export class OslModal extends ValtioElement<any> {
         opacity:${this.isOpen ? 1 : 0};
         pointer-events:${this.isOpen ? "auto" : "none"};
         transition: opacity 0.3s ease-in-out;
-        ">
-        </div>
+        "
+      @click=${this.toggleVisibility}
+        >
+        </button>
       <sp-dialog
         size="m"
         style="
@@ -49,11 +52,8 @@ export class OslModal extends ValtioElement<any> {
           left:50%;
           top:50%;
           z-index:9999;
-          min-width:40vw;
-          min-height:40vh;
-          width:auto;
-          height:auto;
-          max-height:60vh;
+          width: 90vw;
+          height: 90vh;
           transform:translate(-50%, -50%);
           opacity:${this.isOpen ? 1 : 0};
           pointer-events:${this.isOpen ? "auto" : "none"};

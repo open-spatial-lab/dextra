@@ -7,7 +7,11 @@ export class FlexBox extends LitElement {
   @property({ type: String })
   breakpoint: "sm" | "md" | "lg" | "xl" | "none" = "sm";
 
+  @property({ type: String })
+  gap: string = "0.5rem";
+
   static get styles() {
+
     return css`
       ::slotted(*) {
         flex-grow: 1;
@@ -17,6 +21,7 @@ export class FlexBox extends LitElement {
         display: flex;
         flex-direction: column;
         align-items: stretch;
+        gap: 0.5rem;
       }
 
       @media (min-width: 576px) {

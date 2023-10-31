@@ -20,7 +20,7 @@ export class OslControl extends ValtioElement<StateSchema> {
   value: string | number | Array<string | number> = 1;
 
   @property({ type: Array })
-  options?: Array<string | number> = [];
+  options?: Array<string | number | {value:string, label:string}> = [];
 
   @property({ type: Number })
   min?: number;

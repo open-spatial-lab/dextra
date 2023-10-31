@@ -2,13 +2,14 @@ import { customElement, property } from "lit/decorators.js";
 import { PlotMark } from "../../PlotMark/src/PlotMark";
 import * as Plot from "@observablehq/plot";
 import { ChannelValueBinSpec, BinOptions } from "@observablehq/plot";
+import { safeCustomElement } from "../../../core/decorators/safeCustomElement";
 
 type BinInputs = {
   x?: ChannelValueBinSpec;
   y?: ChannelValueBinSpec;
 } & BinOptions;
 
-@customElement("osl-heatmap-plot")
+@safeCustomElement("osl-heatmap-plot")
 export class HeatmapPlot extends PlotMark {
   mark = "heatmap";
 

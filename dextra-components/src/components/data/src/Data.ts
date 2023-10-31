@@ -143,6 +143,9 @@ export class OslData extends ValtioElement<StateSchema>{
     return tempObj;
   }
 
+  @property({ type: Boolean })
+  isReady = false;
+
   protected syncDataFromStore(data: string, useGeojsonData?: boolean) {
     const results = this.store.datasets[data].results;
     const currentParametersHash = JSON.stringify(
@@ -154,9 +157,11 @@ export class OslData extends ValtioElement<StateSchema>{
       currentResults === "pending" ||
       (Array.isArray(currentResults) && !currentResults?.length)
     ) {
+      this.isReady = false;
       return;
     }
     if (useGeojsonData) {
+      this.isReady = true;
       const geoResultsHash = currentParametersHash + "_geo";
       if (results[geoResultsHash] === undefined) {
         this.store.datasets[data].results[geoResultsHash] = "pending";
@@ -176,6 +181,7 @@ export class OslData extends ValtioElement<StateSchema>{
         }
       }
     } else {
+      this.isReady = true;
       this.currentResults = currentResults;
       this.currentParametersHash = currentParametersHash;
     }

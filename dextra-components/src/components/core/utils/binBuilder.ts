@@ -152,9 +152,16 @@ export class BinBuilder {
   }
 
   async generateContinuousBins() {
-    const { data, accessor } = this;
-    const values = data.map(accessor);
-    const { bins, method } = this;
+    const { data, accessor, bins, method } = this;
+    const modifiedAcessor = method === 'QNT' ? (d: DataResult[number]) => {
+      const val = accessor(d);
+      if (val === 0) {
+        return undefined
+      }
+      return val
+    } : accessor
+    const values = data.map(modifiedAcessor).filter(d => d !== undefined && d !== null) as number[];
+    
     const breaks = await generateBuckets(method, values, bins);
     return breaks;
   }

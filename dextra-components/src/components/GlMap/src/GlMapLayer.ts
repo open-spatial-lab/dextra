@@ -339,6 +339,10 @@ export class OslMapLayer extends OslData {
       (store) => store.datasets[this.data].results,
       () => this.updateLayer()
     );
+    this.subscribe(
+      (store) => store.datasets[this.data].parameters,
+      () => this.updateLayer()
+    );
     this.binBuilder = new BinBuilder({
       type: this.type,
       colorScheme: this.colorScheme,

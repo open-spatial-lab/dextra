@@ -1,11 +1,11 @@
-import { html } from "lit";
+import { html, css } from "lit";
 import { property, query } from "lit/decorators.js";
 import { OslData } from "../../data/src/Data";
 import * as maplibregl from "maplibre-gl";
 import { MapboxOverlay as DeckOverlay } from "@deck.gl/mapbox/typed";
 import "maplibre-gl/dist/maplibre-gl.css";
 import { styles } from "./mapStyles";
-import type { LayerList } from "@deck.gl/core/typed";
+import type { LayersList } from "@deck.gl/core/typed";
 // @ts-ignore
 import { parse as parseWkt } from "wkt";
 import { safeCustomElement } from "../../core/decorators/safeCustomElement";
@@ -39,7 +39,19 @@ const basicStyle = {
 
 @safeCustomElement("osl-glmap")
 export class OslGlMap extends OslData {
-  static styles = styles;
+  static styles = css`
+    ${styles}
+    .description {
+      position: absolute;
+      padding: 0;
+      margin: 0;
+      display: flex;
+      flex-direction: row;
+      max-height: 30vh;
+      border: 1px solid lightgray;
+      background-color: var(--spectrum-background-layer-2-color);
+    }
+  `;
 
   @property({ type: Array })
   center?: [number, number];
@@ -69,6 +81,13 @@ export class OslGlMap extends OslData {
   legendPosition: "top-left" | "top-right" | "bottom-left" | "bottom-right" =
     "bottom-left";
 
+  @property({ type: String })
+  descriptionPosition:
+    | "top-left"
+    | "top-right"
+    | "bottom-left"
+    | "bottom-right" = "top-right";
+
   public hasMovedToBbox: false = false;
   public map: maplibregl.Map | null = null;
   public deck: DeckOverlay | null = null;
@@ -78,17 +97,30 @@ export class OslGlMap extends OslData {
     [key: string]: LegendSpec;
   } = {};
 
+  @property({ type: Boolean })
+  public isReady: boolean = false;
+
   get childMapLayers(): Array<OslMapLayer> {
     const children = Array.from(this.childNodes);
     return children.filter((node) => "renderLayer" in node) as OslMapLayer[];
   }
 
-  async getLayers(): LayerList {
-    return await Promise.all(
-      this.childMapLayers.map((layer) =>
-        "renderLayer" in layer ? layer.renderLayer() : null
-      )
+  async getLayers(): Promise<LayersList> {
+    console.log('getting layers')
+    const layers = await Promise.all(
+      this.childMapLayers.map(async (l) => {
+        const isReady = Boolean(l.isReady);
+        console.log('l', l, l.isReady, l.currentResults)
+        const layer = "renderLayer" in l ? await l.renderLayer() : null;
+        return {
+          layer,
+          isReady,
+        };
+      })
     );
+    console.log(layers)
+    this.isReady = layers.every((l) => l.isReady);
+    return layers.map((l) => l.layer);
   }
 
   get customAttribution(): string {
@@ -131,7 +163,7 @@ export class OslGlMap extends OslData {
         compact: true,
       })
     );
-    this.getLayers().then((layers: LayerList) => {
+    this.getLayers().then((layers: LayersList) => {
       this.deck = new DeckOverlay({
         interleaved: true,
         layers,
@@ -151,7 +183,7 @@ export class OslGlMap extends OslData {
   updateLayers() {
     clearTimeout(this.updateTimeoutFunction);
     this.updateTimeoutFunction = setTimeout(() => {
-      this.getLayers().then((layers: LayerList) => {
+      this.getLayers().then((layers: LayersList) => {
         this.deck?.setProps({
           layers,
         });
@@ -194,9 +226,26 @@ export class OslGlMap extends OslData {
     parentElement && resizeObserver.observe(parentElement);
   }
 
+  renderDescription() {
+    return html``;
+  }
+
   template() {
+    const [yPosition, xPosition] = this.descriptionPosition.split("-");
     return html`
       <div style="padding:0;width:100%;height:100%;position:relative;">
+       
+      ${
+        !this.isReady
+          ? html`
+              <div
+                style="position:absolute;width:100%;height:100%;background:rgba(255,255,255,0.75);z-index:1000;top:0;left:0;display:flex;flex-direction:column;justify-content:center;align-items:center"
+              >
+                ${this.preloader()}
+              </div>
+            `
+          : null
+      }
         <div style="padding:0;width:100%;height:100%;position:relative;">
           <div
             id="map-canvas"

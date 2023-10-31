@@ -1,8 +1,9 @@
 import { customElement, property } from "lit/decorators.js";
 import { PlotMark } from "../../PlotMark/src/PlotMark";
 import * as Plot from "@observablehq/plot";
+import { safeCustomElement } from "../../../core/decorators/safeCustomElement";
 
-@customElement("osl-histogram-plot")
+@safeCustomElement("osl-histogram-plot")
 export class HistogramPlot extends PlotMark {
   mark = "histogram"
 

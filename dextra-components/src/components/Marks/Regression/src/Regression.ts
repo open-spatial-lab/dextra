@@ -3,9 +3,10 @@ import { PlotMark } from "../../PlotMark/src/PlotMark";
 import * as Plot from "@observablehq/plot";
 import { LinearRegressionOptions } from "@observablehq/plot";
 import { LinearRegressionYOptions } from "@observablehq/plot";
+import { safeCustomElement } from "../../../core/decorators/safeCustomElement";
 
 
-@customElement("osl-regression-plot")
+@safeCustomElement("osl-regression-plot")
 export class OslRegressionPlot extends PlotMark {
   mark = "regression"
 

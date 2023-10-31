@@ -6,8 +6,9 @@ import "@spectrum-web-components/tags/sp-tag.js";
 import "@spectrum-web-components/textfield/sp-textfield.js";
 import "@spectrum-web-components/action-button/sp-action-button.js";
 import "@spectrum-web-components/icons-workflow/icons/sp-icon-add-circle.js";
+import { safeCustomElement } from "../../core/decorators/safeCustomElement";
 
-@customElement("osl-chips")
+@safeCustomElement("osl-chips")
 export class OslChips extends OslControl {
   @property({ type: Object })
   initialValue: Array<string | number> = [];

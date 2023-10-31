@@ -1,8 +1,9 @@
 import { customElement, property } from "lit/decorators.js";
 import { PlotMark } from "../../PlotMark/src/PlotMark";
 import * as Plot from "@observablehq/plot";
+import { safeCustomElement } from "../../../core/decorators/safeCustomElement";
 
-@customElement("osl-density-plot")
+@safeCustomElement("osl-density-plot")
 export class OslPlotDensity extends PlotMark {
   mark = "density"
 

@@ -1,8 +1,9 @@
 import { customElement, property } from "lit/decorators.js";
 import { PlotMark } from "../../PlotMark/src/PlotMark";
 import * as Plot from "@observablehq/plot";
+import { safeCustomElement } from "../../../core/decorators/safeCustomElement";
 
-@customElement("osl-bar")
+@safeCustomElement("osl-bar")
 export class OslBar extends PlotMark {
   mark = "bar"
 

@@ -68,7 +68,7 @@ subscribe(store.datasets, async () => {
       });
       try {
         const data = await handleLoad(url.toString());
-        console.log('data', data)
+        // console.log('data', data)
         const parsedData = parseData(data);
         store.datasets[key].results[currentParamString] = parsedData;
       } catch (e) {

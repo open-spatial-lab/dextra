@@ -4,10 +4,11 @@ import { OslData } from "../../data/src/Data";
 import * as Plot from "@observablehq/plot";
 import { interpretFuncJsonOrString } from "../../core/utils/converters";
 import "@spectrum-web-components/progress-bar/sp-progress-bar.js";
+import { safeCustomElement } from "../../core/decorators/safeCustomElement";
 
 export type MarkFunction = (data: any, overrideOptions: any) => any;
 
-@customElement("osl-plot")
+@safeCustomElement("osl-plot")
 export class OslPlot extends OslData {
   @property({ type: Number })
   containerWidth?: number;

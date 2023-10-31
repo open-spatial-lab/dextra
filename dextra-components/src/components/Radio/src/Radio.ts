@@ -4,8 +4,9 @@ import { OslControl } from "../../Interface/src/Interface";
 import "@spectrum-web-components/radio/sp-radio.js";
 import "@spectrum-web-components/radio/sp-radio-group.js";
 import '@spectrum-web-components/help-text/sp-help-text.js';
+import { safeCustomElement } from "../../core/decorators/safeCustomElement";
 
-@customElement("osl-radio")
+@safeCustomElement("osl-radio")
 export class RadioControl extends OslControl {
   @property({ type: String })
   valueState: "None" | "Success" | "Warning" | "Error" | "Information" = "None";
@@ -14,14 +15,19 @@ export class RadioControl extends OslControl {
     const options = this.options || [];
     return html`
       ${options.map(
-        (option) => html`
+        (option) => {
+          // @ts-ignore
+          const value = option?.value ? option.value : option;
+          // @ts-ignore
+          const label = option?.label ? option.label : option;
+          return html`
           <sp-radio
             @click=${this.handleChange}
             @focus=${this.handleChange}
-            value="${option}"
-            >${option}</sp-radio
+            value="${value}"
+            >${label}</sp-radio
           >
-        `
+        `}
       )}
     `;
   }
