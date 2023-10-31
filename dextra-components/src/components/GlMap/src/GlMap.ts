@@ -106,11 +106,9 @@ export class OslGlMap extends OslData {
   }
 
   async getLayers(): Promise<LayersList> {
-    console.log('getting layers')
     const layers = await Promise.all(
       this.childMapLayers.map(async (l) => {
         const isReady = Boolean(l.isReady);
-        console.log('l', l, l.isReady, l.currentResults)
         const layer = "renderLayer" in l ? await l.renderLayer() : null;
         return {
           layer,
@@ -118,7 +116,6 @@ export class OslGlMap extends OslData {
         };
       })
     );
-    console.log(layers)
     this.isReady = layers.every((l) => l.isReady);
     return layers.map((l) => l.layer);
   }
