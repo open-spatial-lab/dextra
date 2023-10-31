@@ -12,6 +12,22 @@ import "../components/Stat/src/Stat.ts";
 import "../components/marks/Line/src/Line.ts";
 import "../components/marks/Axis/src/Axis.ts";
 import "../components/Plot/src/Plot.ts";
+import "../components/Modal/src/Modal.ts";
+import "../components/Radio/src/Radio.ts";
+import "../components/ParamView/src/ParamView.ts";
+
+import {
+  yearLabels,
+  siteLabels,
+  aiClassLabels,
+  aiTypeLabels,
+  aiTypeSpecificLabels,
+  zipCodeData,
+  zipCodeColumns,
+  demogZipCodeColumns,
+} from "./utils";
+
+import { CprFilterHeader } from "./Cpr";
 
 export default {
   title: "Data",
@@ -243,6 +259,7 @@ export const PreventBlindness = () => {
         legendPosition="top-left" 
         showNavigation='true'
         showSingleLayer='true'
+        center=[]
         >
 <osl-map-layer 
  source="65303b14fc2a290008152629" 
@@ -545,7 +562,8 @@ export const Equiticity = () => {
     "https://d14xp4vykd1up4.cloudfront.net/data-query/653267d6e26896000848fc3e";
   const redLightDot =
     "https://d14xp4vykd1up4.cloudfront.net/data-query/6532789178d66b0009321d78";
-  const speedDot = "https://d14xp4vykd1up4.cloudfront.net/data-query/653289411fc91e0008ec7996"
+  const speedDot =
+    "https://d14xp4vykd1up4.cloudfront.net/data-query/653289411fc91e0008ec7996";
   return html`
 <sp-theme>
   <div>
@@ -803,38 +821,39 @@ export const ChoroTest = () => {
 };
 
 export const ChoroplethMap = () => {
+  //   <osl-map-layer
+  //   layer="polygon"
+  //   data="http://localhost:6006/data/choropleth.json"
+  //   geoColumn="WKT"
+  //   geoType="WKT"
+  //   dataColumn="CITY"
+  //   type="categorical"
+  //   attribution="US Census 2020"
+  //   bins="4"
+  //   filled="false"
+  //   stroked="true"
+  //   method="JNK"
+  //   colorScheme="d3-turbo"
+  // >
+  // </osl-map-layer>
+  // <osl-map-layer
+  //   layer="polygon"
+  //   data="http://localhost:6006/data/choropleth.json"
+  //   geoColumn="WKT"
+  //   geoType="WKT"
+  //   dataColumn="VISION_PROVIDERS"
+  //   type="continuous"
+  //   attribution="US Census 2020"
+  //   colorScheme="d3-turbo"
+  // >
+  // </osl-map-layer>
   return html`
     <div style="height: 500px; width: 100%">
       <osl-glmap
         mapStyle="https://basemaps.cartocdn.com/gl/positron-gl-style/style.json"
         legendPosition="top-left"
       >
-        <osl-map-layer
-          layer="polygon"
-          data="http://localhost:6006/data/choropleth.json"
-          geoColumn="WKT"
-          geoType="WKT"
-          dataColumn="CITY"
-          type="categorical"
-          attribution="US Census 2020"
-          bins="4"
-          filled="false"
-          stroked="true"
-          method="JNK"
-          colorScheme="d3-turbo"
-        >
-        </osl-map-layer>
-        <osl-map-layer
-          layer="polygon"
-          data="http://localhost:6006/data/choropleth.json"
-          geoColumn="WKT"
-          geoType="WKT"
-          dataColumn="VISION_PROVIDERS"
-          type="continuous"
-          attribution="US Census 2020"
-          colorScheme="d3-turbo"
-        >
-        </osl-map-layer>
+        <div slot="description">asdf</div>
       </osl-glmap>
       <br /><br />
     </div>
@@ -961,53 +980,65 @@ export const ControlledGlMap = () => {
   `;
 };
 
-
 export const Wisconsin = () => {
   const dates = [
-  
-  '2021-03',
-  '2021-05',
-  '2021-07',
-  '2021-08',
-  '2021-09',
-  '2021-11',
-  '2022-01',
-  '2022-02',
-  '2022-03',
-  '2022-05',
-  '2022-06',
-  '2022-07',
-  '2022-08',
-  '2022-09',
-  '2022-10',
-  '2022-11',
-  '2022-12',
-  '2023-01',
-  '2023-02',
-  '2023-03',
-  '2023-04',
-  '2023-05',
-  '2023-06',
-  '2023-07',
-  '2023-08',
-  '2023-09',]
-  const cccStatDataset = "https://d27ouidsqnp6r.cloudfront.net/data-query/653bc5df7ac484000866bdd4"
-  const lccStatDataset = "https://d27ouidsqnp6r.cloudfront.net/data-query/653bc7487ac484000866bdd5"
-  const tableDataset = "https://d27ouidsqnp6r.cloudfront.net/data-query/653baba66c4cd800085af0b2"
-  const lineDataset = "https://d27ouidsqnp6r.cloudfront.net/data-query/653b1772972e0e0008812306"
-  const allDatasets = JSON.stringify([cccStatDataset, lccStatDataset, tableDataset])
-  const allAndLineDataset = JSON.stringify([cccStatDataset, lccStatDataset, tableDataset, lineDataset])
-  const starOptions = ['*','1','2','3','4','5']
-  const congressionalDistricts = ["*", "1", "2", "3", "4", "5", "6", "7", "8"]
+    "2021-03",
+    "2021-05",
+    "2021-07",
+    "2021-08",
+    "2021-09",
+    "2021-11",
+    "2022-01",
+    "2022-02",
+    "2022-03",
+    "2022-05",
+    "2022-06",
+    "2022-07",
+    "2022-08",
+    "2022-09",
+    "2022-10",
+    "2022-11",
+    "2022-12",
+    "2023-01",
+    "2023-02",
+    "2023-03",
+    "2023-04",
+    "2023-05",
+    "2023-06",
+    "2023-07",
+    "2023-08",
+    "2023-09",
+  ];
+  const cccStatDataset =
+    "https://d27ouidsqnp6r.cloudfront.net/data-query/653bc5df7ac484000866bdd4";
+  const lccStatDataset =
+    "https://d27ouidsqnp6r.cloudfront.net/data-query/653bc7487ac484000866bdd5";
+  const tableDataset =
+    "https://d27ouidsqnp6r.cloudfront.net/data-query/653baba66c4cd800085af0b2";
+  const lineDataset =
+    "https://d27ouidsqnp6r.cloudfront.net/data-query/653b1772972e0e0008812306";
+  const allDatasets = JSON.stringify([
+    cccStatDataset,
+    lccStatDataset,
+    tableDataset,
+  ]);
+  const allAndLineDataset = JSON.stringify([
+    cccStatDataset,
+    lccStatDataset,
+    tableDataset,
+    lineDataset,
+  ]);
+  const starOptions = ["*", "1", "2", "3", "4", "5"];
+  const congressionalDistricts = ["*", "1", "2", "3", "4", "5", "6", "7", "8"];
 
-// <sp-help-text>Star Rating</sp-help-text>
-// <osl-select-control
-// data=${allDatasets}
-// options=${JSON.stringify(starOptions)}
-// option="star"
-// initialValue="*"
-// >
-// </osl-select-control>
+  // <sp-help-text>Star Rating</sp-help-text>
+  // <osl-select-control
+  // data=${allDatasets}
+  // options=${JSON.stringify(starOptions)}
+  // option="star"
+  // initialValue="*"
+  // >
+  // </osl-select-control>
   return html`
   <div style="display:flex;flex-direction:row;gap:1rem;">
   <div style="display:flex;flex-direction:column">
@@ -1110,69 +1141,66 @@ direction="horizontal"
     ></osl-data-table>
     
   <div>
-</div></div>`
-}
+</div></div>`;
+};
 
 export const m3 = () => {
   return html`
-  <div style="height:80vh; width:100%">
-  <osl-glmap 
- mapStyle="https://basemaps.cartocdn.com/gl/voyager-gl-style/style.json" 
- legendPosition="top-right" 
- showNavigation='true'
->
-<osl-map-layer 
- source="653ab1816cb151000835ae06" 
- legendTitle="-" 
- visible='true' 
- geoType="WKB" 
- geoColumn="geom" 
- dataColumn="STATION_ID" 
- type="continuous" 
- bins='5' 
- colorScheme="RdYlGn" 
- filled='true' 
- layer="point" 
- data="https://d1mix2z5lvvl4x.cloudfront.net/data-query/653ab1816cb151000835ae06"
->
+    <div style="height:80vh; width:100%">
+      <osl-glmap
+        mapStyle="https://basemaps.cartocdn.com/gl/voyager-gl-style/style.json"
+        legendPosition="top-right"
+        showNavigation="true"
+      >
+        <osl-map-layer
+          source="653ab1816cb151000835ae06"
+          legendTitle="-"
+          visible="true"
+          geoType="WKB"
+          geoColumn="geom"
+          dataColumn="STATION_ID"
+          type="continuous"
+          bins="5"
+          colorScheme="RdYlGn"
+          filled="true"
+          layer="point"
+          data="https://d1mix2z5lvvl4x.cloudfront.net/data-query/653ab1816cb151000835ae06"
+        >
+        </osl-map-layer>
+      </osl-glmap>
+    </div>
+  `;
+};
 
-</osl-map-layer>
-</osl-glmap>
-</div>
-  
-  `
-}
-
-
-// <osl-map-layer 
-//  source="653ab1816cb151000835ae06" 
-//  legendTitle="--" 
-//  visible='true' 
-//  geoType="WKB" 
-//  geoColumn="geom" 
-//  dataColumn="geom" 
-//  type="categorical" 
-//  bins='5' 
-//  colorScheme="d3-turbo" 
-//  filled='true' 
-//  layer="polygon" 
-//  attribution="CTA 2023" 
+// <osl-map-layer
+//  source="653ab1816cb151000835ae06"
+//  legendTitle="--"
+//  visible='true'
+//  geoType="WKB"
+//  geoColumn="geom"
+//  dataColumn="geom"
+//  type="categorical"
+//  bins='5'
+//  colorScheme="d3-turbo"
+//  filled='true'
+//  layer="polygon"
+//  attribution="CTA 2023"
 //  data="https://d1mix2z5lvvl4x.cloudfront.net/data-query/653ab1816cb151000835ae06"
 // >
 
 // </osl-map-layer>
-// <osl-map-layer 
-//  source="653ab1816cb151000835ae06" 
-//  legendTitle="-" 
-//  visible='true' 
-//  geoType="WKB" 
-//  geoColumn="geom" 
-//  dataColumn="STATION_ID" 
-//  type="continuous" 
-//  bins='5' 
-//  colorScheme="RdYlGn" 
-//  filled='true' 
-//  layer="point" 
+// <osl-map-layer
+//  source="653ab1816cb151000835ae06"
+//  legendTitle="-"
+//  visible='true'
+//  geoType="WKB"
+//  geoColumn="geom"
+//  dataColumn="STATION_ID"
+//  type="continuous"
+//  bins='5'
+//  colorScheme="RdYlGn"
+//  filled='true'
+//  layer="point"
 //  data="https://d1mix2z5lvvl4x.cloudfront.net/data-query/653ab1816cb151000835ae06"
 // >
 
@@ -1183,7 +1211,7 @@ export const CirculateSanDiego = () => {
     "https://dcoszmf9no5hj.cloudfront.net/data-query/653be6b05ff01600085e5eef";
   const walkAudits =
     "https://dcoszmf9no5hj.cloudfront.net/data-query/653bf1235ecf29000896210d";
-    const months = [
+  const months = [
     "01",
     "02",
     "03",
@@ -1336,7 +1364,6 @@ export const CirculateSanDiego = () => {
   `;
 };
 
-
 export const CirculateSanDiego2 = () => {
   const raw311 =
     "https://dcoszmf9no5hj.cloudfront.net/data-query/653be6b05ff01600085e5eef";
@@ -1402,7 +1429,8 @@ export const CirculateSanDiego2 = () => {
     "Right-of-Way Code Enforcement",
   ];
 
-  const lineData = "https://dcoszmf9no5hj.cloudfront.net/data-query/653bf6dbc5ea2b0008cd63c0"
+  const lineData =
+    "https://dcoszmf9no5hj.cloudfront.net/data-query/653bf6dbc5ea2b0008cd63c0";
   let dates: string[] = [];
   years.forEach((year) => {
     months.forEach((month) => {
@@ -1518,11 +1546,10 @@ direction="horizontal"
   `;
 };
 
-
-
 export const CirculateSanDiego3 = () => {
-  const tractJoined ="https://dcoszmf9no5hj.cloudfront.net/data-query/653bfcc7a723810008c2c81e"
-    const months = [
+  const tractJoined =
+    "https://dcoszmf9no5hj.cloudfront.net/data-query/653bfcc7a723810008c2c81e";
+  const months = [
     "01",
     "02",
     "03",
@@ -1580,179 +1607,181 @@ export const CirculateSanDiego3 = () => {
     "Weed Cleanup",
     "Right-of-Way Code Enforcement",
   ];
-  const walkAuditNames = ['"No Riding Bikes on Sidewalk" Sign, but no bike infrastructure',
-  '10 Second Crossing Window',
-  '10 second crossing window',
-  '12th & Imperial Transit Center',
-  '4-Way Stop',
-  '4394 Mayberry St, San Diego, CA 92113, USA',
-  '4853 Bunnell St, San Diego, CA 92113, USA',
-  '4855 Ocean View Blvd, San Diego, CA 92113, USA',
-  '932 Delta St, National City, CA 91950, USA',
-  'Aggressive Drivers',
-  'Audible Crossing',
-  'Audible Pedestrian Crossing Signal',
-  'Audible Pedestrian Signal',
-  'Audible RRFB',
-  'Audible Signal',
-  'Beg Button Obscured',
-  'Bicycle Lane',
-  'Bike Lane',
-  'Bike Lane Starts Here',
-  'Bike Parking',
-  'Bike Rack',
-  'Bike lanes',
-  'Broken Sidewalk',
-  'Broken/Narrow Sidewalks',
-  'Broken/Uneven Sidewalks',
-  'Broken/narrow Sidewalk',
-  'Bus Only Lane',
-  'Cars Parked on Curb',
-  'Cars Roll Stop',
-  'Cars do not yield to pedestrians',
-  'Chicano Park',
-  'Chicano Park Museum and Cultural Center',
-  'Construction',
-  'County Center/Little Italy Station',
-  'Cracked Sidewalk',
-  'Cracked Sidewalks',
-  'Crosswalks',
-  'Curb Extension',
-  'Curb Should be Painted Red',
-  'Cycle Track',
-  'Debris',
-  'Debris on Sidewalk',
-  'Diverters',
-  'Division St & Highland Av, National City, CA 91950, USA',
-  'Drivers Speeding',
-  'Empty Lot',
-  'Euclid Elementary School',
-  'Excess Litter',
-  'Faded Crosswalk',
-  'Faded Crosswalk Paint',
-  'Faded School Crosswalks',
-  'Faded crosswalk',
-  'Faded/ Missing Crosswalks',
-  'Faded/Missing Crosswalk',
-  'Faded/Missing Crosswalks',
-  "Father Joe's",
-  "Father Joe's\xa0",
-  'Flooding',
-  'Flooding Issues',
-  'Former car crash',
-  'Fridge in Curb Ramp',
-  'High Visibility Crosswalk',
-  'Hill',
-  'Insufficient Street Lighting',
-  'Intersection Mural',
-  'Keeler Court Apartments',
-  'Kennedy Neighborhood Park',
-  'Lack of Lighting',
-  'Las Serenas Apartments',
-  'Las Serenas Apartments, Delta Street, San Diego, CA, USA',
-  'Lincoln Senior High School',
-  'Litter',
-  'Little Italy',
-  'Long Light, hard to catch bus',
-  'Long Signals, Short Crossing Windows',
-  'Marriott Marquis San Diego Marina',
-  'Mayberry Street & South 44th Street, San Diego, CA, USA',
-  'Mayberry Townhomes',
-  'Memorial Dog Park',
-  'Mid-Block Crossing',
-  'Midblock Crossing',
-  'Missing Crosswalk',
-  'Missing Crosswalks',
-  'Missing Curb Ramp',
-  'Missing Sidewalk',
-  'Missing/Broken Sidewalks',
-  'Montgomery Middle School',
-  'Mural',
-  'Murals',
-  'Murals/Art',
-  'Narrow Sidewalk',
-  'Narrow Sidewalks',
-  'Narrow/ Broken Sidewalks',
-  'No Audible Pedestrian Crossing Signals',
-  'No Bench or Shade Bus Stop',
-  'No Crossing',
-  'No Crosswalk',
-  'No Crosswalks or Stoppages',
-  'No Crosswalk\xa0',
-  'No Curb Ramp',
-  'No Ramp',
-  'No Ramp or Crosswalk',
-  'No Ramps',
-  'No School Crossing Markings',
-  'No Shade',
-  'No Shade Bus Stop',
-  'No Sidewalk',
-  'No Truncated Domes',
-  'No crosswalk',
-  'Nobel Drive Station',
-  'Not Enough Time to Cross',
-  'Obstruction',
-  'Obstructions/Trash',
-  'Only one crosswalk, no vehicle stoppage',
-  'Overgrown Path',
-  'Pacific Beach Middle School',
-  'Pacific Beach Taylor Branch Library',
-  'Paradise Senior Center',
-  'Parking obscures line of sight during drop off and pick up, teachers would like no parking during x hours signage',
-  'Parklets',
-  'Pedestrian Median',
-  'Pedestrian Refuge Island',
-  'Pedestrian Scale Lighting',
-  'Point 20',
-  'Polk Avenue',
-  'Poor Lighting',
-  'Protected Pedestrian Promenade',
-  'Rapid Flashing Beacon',
-  'Rapid Flashing Beacon (RRFB)',
-  'Route',
-  'San Diego College of Continuing Education',
-  'San Diego Convention Center',
-  'Santa Fe Depot',
-  'School Entrance',
-  'Seaport Village',
-  'Separated Bike Lane',
-  'Shade',
-  'Shaded Sidewalk',
-  'Sharrow',
-  'Sheltered Bus Stop',
-  'Short Crossing Signal',
-  'Short Crossing Time',
-  'Sidewalk Obstruction',
-  'Sidewalk Obstructions',
-  'Speed Bump',
-  'Speeding Cars',
-  'Speeding Vehicles',
-  "St. Rita's Catholic School",
-  'Starting Point',
-  'Teralta Park',
-  'Traffic lights malfuctioning',
-  'Trash',
-  'Trash\xa0',
-  'Tree Cover, Wide Sidewalks',
-  'Trees',
-  'Trees/ Shade',
-  'Trees/Shade',
-  'Uneven Sidewalk',
-  'Uneven Sidewalks',
-  'University Avenue',
-  'Unusable Sidewalk',
-  'Walk Audit Route',
-  'Walk Audit Start Location',
-  'Walking Route',
-  'Walking route',
-  'Waterfront Park',
-  'Wayfinding Sign',
-  'Weeds and Graffiti',
-  'Wide Sidewalk',
-  'Wide Sidewalks',
-  'Witnessed Jaywalking',
-  'Yellow Crosswalk',
-  'Zebra Crosswalks']
+  const walkAuditNames = [
+    '"No Riding Bikes on Sidewalk" Sign, but no bike infrastructure',
+    "10 Second Crossing Window",
+    "10 second crossing window",
+    "12th & Imperial Transit Center",
+    "4-Way Stop",
+    "4394 Mayberry St, San Diego, CA 92113, USA",
+    "4853 Bunnell St, San Diego, CA 92113, USA",
+    "4855 Ocean View Blvd, San Diego, CA 92113, USA",
+    "932 Delta St, National City, CA 91950, USA",
+    "Aggressive Drivers",
+    "Audible Crossing",
+    "Audible Pedestrian Crossing Signal",
+    "Audible Pedestrian Signal",
+    "Audible RRFB",
+    "Audible Signal",
+    "Beg Button Obscured",
+    "Bicycle Lane",
+    "Bike Lane",
+    "Bike Lane Starts Here",
+    "Bike Parking",
+    "Bike Rack",
+    "Bike lanes",
+    "Broken Sidewalk",
+    "Broken/Narrow Sidewalks",
+    "Broken/Uneven Sidewalks",
+    "Broken/narrow Sidewalk",
+    "Bus Only Lane",
+    "Cars Parked on Curb",
+    "Cars Roll Stop",
+    "Cars do not yield to pedestrians",
+    "Chicano Park",
+    "Chicano Park Museum and Cultural Center",
+    "Construction",
+    "County Center/Little Italy Station",
+    "Cracked Sidewalk",
+    "Cracked Sidewalks",
+    "Crosswalks",
+    "Curb Extension",
+    "Curb Should be Painted Red",
+    "Cycle Track",
+    "Debris",
+    "Debris on Sidewalk",
+    "Diverters",
+    "Division St & Highland Av, National City, CA 91950, USA",
+    "Drivers Speeding",
+    "Empty Lot",
+    "Euclid Elementary School",
+    "Excess Litter",
+    "Faded Crosswalk",
+    "Faded Crosswalk Paint",
+    "Faded School Crosswalks",
+    "Faded crosswalk",
+    "Faded/ Missing Crosswalks",
+    "Faded/Missing Crosswalk",
+    "Faded/Missing Crosswalks",
+    "Father Joe's",
+    "Father Joe's\xa0",
+    "Flooding",
+    "Flooding Issues",
+    "Former car crash",
+    "Fridge in Curb Ramp",
+    "High Visibility Crosswalk",
+    "Hill",
+    "Insufficient Street Lighting",
+    "Intersection Mural",
+    "Keeler Court Apartments",
+    "Kennedy Neighborhood Park",
+    "Lack of Lighting",
+    "Las Serenas Apartments",
+    "Las Serenas Apartments, Delta Street, San Diego, CA, USA",
+    "Lincoln Senior High School",
+    "Litter",
+    "Little Italy",
+    "Long Light, hard to catch bus",
+    "Long Signals, Short Crossing Windows",
+    "Marriott Marquis San Diego Marina",
+    "Mayberry Street & South 44th Street, San Diego, CA, USA",
+    "Mayberry Townhomes",
+    "Memorial Dog Park",
+    "Mid-Block Crossing",
+    "Midblock Crossing",
+    "Missing Crosswalk",
+    "Missing Crosswalks",
+    "Missing Curb Ramp",
+    "Missing Sidewalk",
+    "Missing/Broken Sidewalks",
+    "Montgomery Middle School",
+    "Mural",
+    "Murals",
+    "Murals/Art",
+    "Narrow Sidewalk",
+    "Narrow Sidewalks",
+    "Narrow/ Broken Sidewalks",
+    "No Audible Pedestrian Crossing Signals",
+    "No Bench or Shade Bus Stop",
+    "No Crossing",
+    "No Crosswalk",
+    "No Crosswalks or Stoppages",
+    "No Crosswalk\xa0",
+    "No Curb Ramp",
+    "No Ramp",
+    "No Ramp or Crosswalk",
+    "No Ramps",
+    "No School Crossing Markings",
+    "No Shade",
+    "No Shade Bus Stop",
+    "No Sidewalk",
+    "No Truncated Domes",
+    "No crosswalk",
+    "Nobel Drive Station",
+    "Not Enough Time to Cross",
+    "Obstruction",
+    "Obstructions/Trash",
+    "Only one crosswalk, no vehicle stoppage",
+    "Overgrown Path",
+    "Pacific Beach Middle School",
+    "Pacific Beach Taylor Branch Library",
+    "Paradise Senior Center",
+    "Parking obscures line of sight during drop off and pick up, teachers would like no parking during x hours signage",
+    "Parklets",
+    "Pedestrian Median",
+    "Pedestrian Refuge Island",
+    "Pedestrian Scale Lighting",
+    "Point 20",
+    "Polk Avenue",
+    "Poor Lighting",
+    "Protected Pedestrian Promenade",
+    "Rapid Flashing Beacon",
+    "Rapid Flashing Beacon (RRFB)",
+    "Route",
+    "San Diego College of Continuing Education",
+    "San Diego Convention Center",
+    "Santa Fe Depot",
+    "School Entrance",
+    "Seaport Village",
+    "Separated Bike Lane",
+    "Shade",
+    "Shaded Sidewalk",
+    "Sharrow",
+    "Sheltered Bus Stop",
+    "Short Crossing Signal",
+    "Short Crossing Time",
+    "Sidewalk Obstruction",
+    "Sidewalk Obstructions",
+    "Speed Bump",
+    "Speeding Cars",
+    "Speeding Vehicles",
+    "St. Rita's Catholic School",
+    "Starting Point",
+    "Teralta Park",
+    "Traffic lights malfuctioning",
+    "Trash",
+    "Trash\xa0",
+    "Tree Cover, Wide Sidewalks",
+    "Trees",
+    "Trees/ Shade",
+    "Trees/Shade",
+    "Uneven Sidewalk",
+    "Uneven Sidewalks",
+    "University Avenue",
+    "Unusable Sidewalk",
+    "Walk Audit Route",
+    "Walk Audit Start Location",
+    "Walking Route",
+    "Walking route",
+    "Waterfront Park",
+    "Wayfinding Sign",
+    "Weeds and Graffiti",
+    "Wide Sidewalk",
+    "Wide Sidewalks",
+    "Witnessed Jaywalking",
+    "Yellow Crosswalk",
+    "Zebra Crosswalks",
+  ];
 
   let dates: string[] = [];
   years.forEach((year) => {
@@ -1915,5 +1944,412 @@ export const CirculateSanDiego3 = () => {
 
 </div>
 </div>
+  `;
+};
+
+export const CPR = () => {
+  return html`
+    <div style="width:100%;height:auto">
+      ${CprFilterHeader()}
+      <br />
+      <div style="width:100%;height:80vh;position:relative">
+        <osl-flex-box breakpoint="lg" style="height:100%;">
+          <div style="flex-basis:25%; flex-grow:0;">
+            <div>
+              <osl-param-view
+                data=${zipCodeData}
+                parameters=${JSON.stringify([
+                  "start",
+                  "end",
+                  "ai_class",
+                  "ai_type",
+                  "ai_type_specific",
+                  "site",
+                  "agtype",
+                ])}
+                parameterTitle="Filter"
+                title="Current Data Filters"
+              ></osl-param-view>
+            </div>
+
+            <div>
+              <br />
+              <osl-modal
+                label="Data Description"
+                title="Data Description"
+                variant="secondary"
+                size="s"
+              >
+                <div>
+                  <ul>
+                    <li>
+                      <b>Pesticide Use Reporting (PUR) data:</b>
+                      PUR data was accessed in Fall 2023. Data from 2010 to 2021
+                      (the most recent data year) are available in this tool.
+                    </li>
+                    <li>
+                      <b>Census Demographic Data:</b>
+                      ACS 2021 5-year estimates, via Social Explorer
+                    </li>
+                    <li>
+                      <b>Census Administrative Boundaries:</b>
+                      ACS 2021 and 2020 boundaries, via census.gov
+                    </li>
+                  </ul>
+                </div>
+              </osl-modal>
+            </div>
+          </div>
+          <div>
+            <osl-glmap
+              mapStyle="https://basemaps.cartocdn.com/gl/positron-gl-style/style.json"
+              legendPosition="bottom-left"
+              showNavigation="true"
+              showSingleLayer="true"
+              center="[-120.1,36.9]"
+              zoom="5"
+            >
+              <osl-map-layer
+                legendTitle="Pounds of Chemical Used (Zip Code)"
+                visible="true"
+                geoType="WKB"
+                geoColumn="geometry"
+                dataColumn="lbs_chm_used"
+                type="continuous"
+                bins="7"
+                colorScheme="d3-magma"
+                filled="true"
+                attribution="California Pesticide Use Reporting (PUR)"
+                layer="polygon"
+                beforeId="water"
+                method="QNT"
+                geoId="ZIP"
+                data=${zipCodeData}
+              >
+              </osl-map-layer>
+              <osl-map-layer
+                legendTitle="Pounds of Product Used (Zip Code)"
+                geoType="WKB"
+                geoColumn="geometry"
+                dataColumn="lbs_prd_used"
+                type="continuous"
+                bins="7"
+                colorScheme="d3-turbo"
+                filled="true"
+                attribution="California Pesticide Use Reporting (PUR)"
+                layer="polygon"
+                beforeId="water"
+                method="QNT"
+                geoId="ZIP"
+                data=${zipCodeData}
+                visible="false"
+              >
+              </osl-map-layer>
+            </osl-glmap>
+          </div>
+        </osl-flex-box>
+        <br /><br />
+        <osl-data-table
+          title="Zip Code Data"
+          maxw="200vw"
+          data=${zipCodeData}
+          columns=${zipCodeColumns}
+          pagination="true"
+        ></osl-data-table>
+        <osl-download
+          title="Download Zip Code Summary Data"
+          filename="zip-code-summary"
+          parameterSuffixes=${JSON.stringify([
+            "start",
+            "end",
+            "ai_class",
+            "ai_type",
+            "ai_type_specific",
+            "site",
+            "agtype",
+          ])}
+          data=${zipCodeColumns}
+        ></osl-download>
+      </div>
+    </div>
+  `;
+};
+export const CPR2 = () => {
+  return html`
+    <div style="width:100%;height:auto">
+      ${CprFilterHeader()}
+      <br />
+      <div style="width:100%;height:80vh;position:relative">
+        <osl-flex-box breakpoint="lg" style="height:100%;">
+          <div>
+            <osl-glmap
+              mapStyle="https://basemaps.cartocdn.com/gl/positron-gl-style/style.json"
+              legendPosition="bottom-left"
+              showNavigation="true"
+              showSingleLayer="true"
+              center="[-120.1,36.9]"
+              zoom="5"
+              mapGroup="1"
+            >
+              <osl-map-layer
+                legendTitle="Pounds of Chemical Used (Zip Code)"
+                visible="true"
+                geoType="WKB"
+                geoColumn="geometry"
+                dataColumn="lbs_chm_used"
+                type="continuous"
+                bins="7"
+                colorScheme="d3-magma"
+                filled="true"
+                attribution="California Pesticide Use Reporting (PUR)"
+                layer="polygon"
+                beforeId="water"
+                method="QNT"
+                geoId="ZIP"
+                data=${zipCodeData}
+              >
+              </osl-map-layer>
+              <osl-map-layer
+                legendTitle="Pounds of Product Used (Zip Code)"
+                geoType="WKB"
+                geoColumn="geometry"
+                dataColumn="lbs_prd_used"
+                type="continuous"
+                bins="7"
+                colorScheme="d3-turbo"
+                filled="true"
+                attribution="California Pesticide Use Reporting (PUR)"
+                layer="polygon"
+                beforeId="water"
+                method="QNT"
+                geoId="ZIP"
+                data=${zipCodeData}
+                visible="false"
+              >
+              </osl-map-layer>
+            </osl-glmap>
+          </div>
+          <div>
+            <osl-glmap
+              mapStyle="https://basemaps.cartocdn.com/gl/positron-gl-style/style.json"
+              legendPosition="bottom-left"
+              showNavigation="true"
+              showSingleLayer="true"
+              center="[-120.1,36.9]"
+              zoom="5"
+              mapGroup="1"
+            >
+              <osl-map-layer
+                legendTitle="Total Population"
+                visible="true"
+                geoType="WKB"
+                geoColumn="geometry"
+                dataColumn="Total Population"
+                type="continuous"
+                bins="7"
+                colorScheme="PuBu"
+                filled="true"
+                attribution="American Community Survey (ACS) 2021 5-year estimates"
+                layer="polygon"
+                beforeId="water"
+                method="QNT"
+                geoId="ZIP"
+                data=${zipCodeData}
+              >
+              </osl-map-layer>
+
+              <osl-map-layer
+                legendTitle="Non Hispanic White Population"
+                visible="false"
+                geoType="WKB"
+                geoColumn="geometry"
+                dataColumn="NH White"
+                type="continuous"
+                bins="7"
+                colorScheme="PuBu"
+                filled="true"
+                attribution="American Community Survey (ACS) 2021 5-year estimates"
+                layer="polygon"
+                beforeId="water"
+                method="QNT"
+                geoId="ZIP"
+                data=${zipCodeData}
+              >
+              </osl-map-layer>
+              <osl-map-layer
+                legendTitle="Non Hispanic Black Population"
+                visible="false"
+                geoType="WKB"
+                geoColumn="geometry"
+                dataColumn="NH Black"
+                type="continuous"
+                bins="7"
+                colorScheme="PuBu"
+                filled="true"
+                attribution="American Community Survey (ACS) 2021 5-year estimates"
+                layer="polygon"
+                beforeId="water"
+                method="QNT"
+                geoId="ZIP"
+                data=${zipCodeData}
+              >
+              </osl-map-layer>
+
+              <osl-map-layer
+                legendTitle="Non Hispanic American Indian and Alaska Native Population"
+                visible="false"
+                geoType="WKB"
+                geoColumn="geometry"
+                dataColumn="NH AIAN"
+                type="continuous"
+                bins="7"
+                colorScheme="PuBu"
+                filled="true"
+                attribution="American Community Survey (ACS) 2021 5-year estimates"
+                layer="polygon"
+                beforeId="water"
+                method="QNT"
+                geoId="ZIP"
+                data=${zipCodeData}
+              >
+              </osl-map-layer>
+              <osl-map-layer
+                legendTitle="Non Hispanic Asian Population"
+                visible="false"
+                geoType="WKB"
+                geoColumn="geometry"
+                dataColumn="NH Asian"
+                type="continuous"
+                bins="7"
+                colorScheme="PuBu"
+                filled="true"
+                attribution="American Community Survey (ACS) 2021 5-year estimates"
+                layer="polygon"
+                beforeId="water"
+                method="QNT"
+                geoId="ZIP"
+                data=${zipCodeData}
+              >
+              </osl-map-layer>
+              <osl-map-layer
+                legendTitle="Non Hispanic Native Hawaiian and Pacific Islander Population"
+                visible="false"
+                geoType="WKB"
+                geoColumn="geometry"
+                dataColumn="NH NHPI"
+                type="continuous"
+                bins="7"
+                colorScheme="PuBu"
+                filled="true"
+                attribution="American Community Survey (ACS) 2021 5-year estimates"
+                layer="polygon"
+                beforeId="water"
+                method="QNT"
+                geoId="ZIP"
+                data=${zipCodeData}
+              >
+              </osl-map-layer>
+
+              <osl-map-layer
+                legendTitle="Non Hispanic Another Race Population"
+                visible="false"
+                geoType="WKB"
+                geoColumn="geometry"
+                dataColumn="NH Other"
+                type="continuous"
+                bins="7"
+                colorScheme="PuBu"
+                filled="true"
+                attribution="American Community Survey (ACS) 2021 5-year estimates"
+                layer="polygon"
+                beforeId="water"
+                method="QNT"
+                geoId="ZIP"
+                data=${zipCodeData}
+              >
+              </osl-map-layer>
+
+              <osl-map-layer
+                legendTitle="Non Hispanic Two or More Races Population"
+                visible="false"
+                geoType="WKB"
+                geoColumn="geometry"
+                dataColumn="NH Two or More"
+                type="continuous"
+                bins="7"
+                colorScheme="PuBu"
+                filled="true"
+                attribution="American Community Survey (ACS) 2021 5-year estimates"
+                layer="polygon"
+                beforeId="water"
+                method="QNT"
+                geoId="ZIP"
+                data=${zipCodeData}
+              >
+              </osl-map-layer>
+
+              <osl-map-layer
+                legendTitle="Hispanic or Latinx Population"
+                visible="false"
+                geoType="WKB"
+                geoColumn="geometry"
+                dataColumn="Pop Hispanic or Latino"
+                type="continuous"
+                bins="7"
+                colorScheme="PuBu"
+                filled="true"
+                attribution="American Community Survey (ACS) 2021 5-year estimates"
+                layer="polygon"
+                beforeId="water"
+                method="QNT"
+                geoId="ZIP"
+                data=${zipCodeData}
+              >
+              </osl-map-layer>
+              <osl-map-layer
+                legendTitle="Median Income"
+                visible="false"
+                geoType="WKB"
+                geoColumn="geometry"
+                dataColumn="Median Income"
+                type="continuous"
+                bins="7"
+                colorScheme="YlGn"
+                filled="true"
+                attribution="American Community Survey (ACS) 2021 5-year estimates"
+                layer="polygon"
+                beforeId="water"
+                method="QNT"
+                geoId="ZIP"
+                data=${zipCodeData}
+              >
+              </osl-map-layer>
+            </osl-glmap>
+          </div>
+        </osl-flex-box>
+        <br /><br />
+        <osl-data-table
+          title="Zip Code Data"
+          maxw="300vw"
+          data=${zipCodeData}
+          columns=${demogZipCodeColumns}
+          pagination="true"
+        ></osl-data-table>
+        <osl-download
+          title="Download Zip Code Summary Data"
+          filename="zip-code-summary"
+          parameterSuffixes=${JSON.stringify([
+            "start",
+            "end",
+            "ai_class",
+            "ai_type",
+            "ai_type_specific",
+            "site",
+            "agtype",
+          ])}
+          data=${zipCodeColumns}
+        ></osl-download>
+      </div>
+    </div>
   `;
 };
