@@ -14,6 +14,14 @@ export class OslParamView extends OslControl {
   @property({ type: Boolean })
   pagination: boolean = false;
 
+  connectedCallback(): void {
+    super.connectedCallback();
+    this.subscribe(
+      (store) => store.datasets[this.data].parameters,
+      () => this.requestUpdate()
+    );
+  }
+
   template() {
     const params = this.store.datasets[this.data].parameters
     const data = this.parameters.map((param) => ({
