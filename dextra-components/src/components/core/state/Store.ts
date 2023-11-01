@@ -5,6 +5,9 @@ import { load } from "@loaders.gl/core";
 import { CSVLoader } from "@loaders.gl/csv";
 import {unpack} from 'msgpackr/unpack';
 import { convertToGeojsonLike } from "../utils/parseGeo";
+// import * as Comlink from "comlink"
+// const geoWorker = Comlink.wrap(new Worker("/osl-geo-worker.umd.cjs")) as any;
+
 
 export const syncedMaps: { [key: string]: maplibregl.Map} = {};
 
@@ -136,7 +139,7 @@ const buildGeoPromise = async (
       geoType,
       geoColumn,
       geoId
-    ).then((geoData) => {
+    ).then((geoData: any) => {
       dataset['results'][geoKey] = geoData;
       const t1 = performance.now()
       console.log(`Geojson conversion took ${t1 - t0} milliseconds.`)
@@ -162,5 +165,6 @@ subscribe(store.datasets, async () => {
 });
 
 subscribe(store.geoListeners, async () => {
+  console.log('geo listeners changed', Object.keys(store.datasets), store.geoListeners)
   parseGeoDatasets()
 });

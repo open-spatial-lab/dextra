@@ -3,3 +3,4 @@ packages:
   - 'dextra-components/src/components/**'
   - 'dextra-components/**'
   - 'dextra-utils'
+  - 'geo-worker'
