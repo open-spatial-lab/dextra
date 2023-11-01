@@ -97,9 +97,6 @@ export class OslGlMap extends OslData {
     [key: string]: LegendSpec;
   } = {};
 
-  @property({ type: Boolean })
-  public isReady: boolean = false;
-
   get childMapLayers(): Array<OslMapLayer> {
     const children = Array.from(this.childNodes);
     return children.filter((node) => "renderLayer" in node) as OslMapLayer[];
@@ -231,18 +228,6 @@ export class OslGlMap extends OslData {
     const [yPosition, xPosition] = this.descriptionPosition.split("-");
     return html`
       <div style="padding:0;width:100%;height:100%;position:relative;">
-       
-      ${
-        !this.isReady
-          ? html`
-              <div
-                style="position:absolute;width:100%;height:100%;background:rgba(255,255,255,0.75);z-index:1000;top:0;left:0;display:flex;flex-direction:column;justify-content:center;align-items:center"
-              >
-                ${this.preloader()}
-              </div>
-            `
-          : null
-      }
         <div style="padding:0;width:100%;height:100%;position:relative;">
           <div
             id="map-canvas"

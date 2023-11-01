@@ -24,6 +24,7 @@
     "kill-port": "^2.0.1",
     "lit": "^2.7.0",
     "maplibre-gl": "^2.4.0",
+    "msgpackr": "^1.9.9",
     "nanoid": "^4.0.2",
     "sql-bricks": "^3.0.0",
     "threads": "^1.7.0",

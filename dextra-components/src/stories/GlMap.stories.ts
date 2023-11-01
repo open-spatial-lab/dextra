@@ -1960,11 +1960,11 @@ export const CirculateSanDiego3 = () => {
 
 export const CPR = () => {
   return html`
-    <div style="width:100%;height:auto;">
+    <div style="width:100%;padding-bottom:10vh;display:block;">
       ${CprFilterHeader()}
       <br />
-      <div style="width:100%;height:80vh;position:relative">
-        <osl-flex-box breakpoint="lg" style="height:100%;">
+      <div style="width:100%;height:100vh;position:relative">
+        <osl-flex-box breakpoint="lg">
           <div style="flex-basis:25%; flex-grow:0;">
             <div>
               <sp-theme>
@@ -2039,7 +2039,7 @@ export const CPR = () => {
               ${CprDataDescription()}
             </div>
           </div>
-          <div>
+          <div style="max-height:80vh">
             <osl-glmap
               mapStyle="https://basemaps.cartocdn.com/gl/positron-gl-style/style.json"
               legendPosition="bottom-left"
@@ -2089,6 +2089,7 @@ export const CPR = () => {
         </osl-flex-box>
         </div></div>
         <br /><br />
+        </div>
         <div>
           <br /><br />
           <hr/>
@@ -2182,7 +2183,7 @@ export const CPR2 = () => {
       <br />
       <hr/>
       <br />
-      <div style="width:100%;height:80vh;position:relative">
+      <div style="width:100%;height:60vh;position:relative">
         <osl-flex-box breakpoint="lg" style="height:100%;">
           <div>
             <osl-glmap

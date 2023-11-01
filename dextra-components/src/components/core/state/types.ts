@@ -9,4 +9,14 @@ export type StateSchema = {
       results: Record<string, DataResult | GeoJSON.Feature[] | 'pending'>
     };
   };
+  geoListeners: Array<
+  {
+    dataset: string;
+    geoType: 'WKT' | 'WKB' | 'GeoJSON';
+    geoColumn: string;
+    geoId?: string;
+  }
+  >
+  
+  usingMsgPack: boolean;
 };

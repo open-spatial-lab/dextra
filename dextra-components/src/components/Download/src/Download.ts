@@ -36,6 +36,9 @@ export class OslDownload extends OslData {
   filename: string = "data";
   @property({ converter: interpretFuncJsonOrString })
   parameterSuffixes?: string[];
+  
+  isReady = true;
+  
 
   resultsToRowlike(separator: string = ",") {
     const data = JSON.parse(JSON.stringify(this.currentResults));
@@ -139,8 +142,8 @@ export class OslDownload extends OslData {
     }
     return html``;
   }
-
-  template() {
+  
+  render() {
     return html`
       <div>
         <sp-help-text>${this.title || "Download Data"}</sp-help-text>
