@@ -5,6 +5,8 @@ import { safeCustomElement } from "../../core/decorators/safeCustomElement";
 import { StateSchema } from "../../core/state/types";
 import { interpretFuncJsonOrString } from "../../core/utils/converters";
 
+export type OptionSpec = { value: string | number, label: string | number }
+export type OptionList = Array<string | number | OptionSpec>
 @safeCustomElement("osl-interface")
 export class OslControl extends ValtioElement<StateSchema> {
   @property({ converter: interpretFuncJsonOrString })
@@ -20,7 +22,7 @@ export class OslControl extends ValtioElement<StateSchema> {
   value: string | number | Array<string | number> = 1;
 
   @property({ type: Array })
-  options?: Array<string | number | {value:string, label:string}> = [];
+  options?: OptionList = [];
 
   @property({ type: Number })
   min?: number;
@@ -84,6 +86,18 @@ export class OslControl extends ValtioElement<StateSchema> {
 
   protected domUpdatesOnChange(){
     // const value = this.value;
+  }
+
+  getOptionText(option: string | number) {
+    if (!this.options || !this.options.length || typeof this?.options?.[0] !== 'object' ) {
+      return option;
+    } else {
+      const options = this.options as Array<{value:string|number,label:string|number}>
+      const optionSpec = options.find(
+        (optionSpec) => optionSpec.value === option
+      );
+      return optionSpec ? optionSpec.label : option;
+    }
   }
 
   protected eventValueAccessor(event: Event) {

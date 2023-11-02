@@ -1,4 +1,4 @@
-import { Meta } from "@storybook/web-components";
+// import { Meta } from "@storybook/web-components";
 import { html } from "lit";
 import "../components/GlMap/src/GlMap.ts";
 import "../components/GlMap/src/GlMapLayer.ts";
@@ -20,8 +20,8 @@ import {
   aiClassLabels,
   aiTypeLabels,
   aiTypeSpecificLabels,
-  zipCodeData,
-  zipCodeColumns,
+  // zipCodeData,
+  // zipCodeColumns,
   filteredDatasets,
   timeSeriesData,
   zipCodes,

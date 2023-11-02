@@ -108,7 +108,9 @@ const buildDatasetPromise = async (key: string) => {
         url.searchParams.set("format", "json");
         const data = await handleLoad(url.toString(), signal);
         // console.log('data', data)
+        const t0 = performance.now()
         const parsedData = parseData(data);
+        console.log('parsed data in', performance.now() - t0, 'ms')
         store.datasets[key].results[currentParamString] = parsedData;
         store.usingMsgPack = false;
         return
@@ -158,6 +160,7 @@ const parseGeoDatasets = async () => {
 
 subscribe(store.datasets, async () => {
   const allDatasets = Object.keys(store.datasets);
+  console.log(store)
   const fetchAllDatasets = allDatasets.map(buildDatasetPromise);
   await Promise.all(fetchAllDatasets).then(() => {
     parseGeoDatasets()
@@ -165,6 +168,5 @@ subscribe(store.datasets, async () => {
 });
 
 subscribe(store.geoListeners, async () => {
-  console.log('geo listeners changed', Object.keys(store.datasets), store.geoListeners)
   parseGeoDatasets()
 });

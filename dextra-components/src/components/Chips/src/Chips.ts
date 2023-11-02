@@ -1,17 +1,21 @@
 import { LitElement, html } from "lit";
 import { customElement, property } from "lit/decorators.js";
-import { OslControl } from "../../Interface/src/Interface";
+import { OptionList, OptionSpec, OslControl } from "../../Interface/src/Interface";
 import "@spectrum-web-components/tags/sp-tags.js";
 import "@spectrum-web-components/tags/sp-tag.js";
 import "@spectrum-web-components/textfield/sp-textfield.js";
 import "@spectrum-web-components/action-button/sp-action-button.js";
 import "@spectrum-web-components/icons-workflow/icons/sp-icon-add-circle.js";
 import { safeCustomElement } from "../../core/decorators/safeCustomElement";
+import { filter } from "lodash";
 
 @safeCustomElement("osl-chips")
 export class OslChips extends OslControl {
   @property({ type: Object })
   initialValue: Array<string | number> = [];
+
+  @property({ type: Array })
+  filteredOptions: OptionList = [];
 
   renderTags() {
     if (!Array.isArray(this.value) || this.value.length === 0) {
@@ -25,7 +29,7 @@ export class OslChips extends OslControl {
             deleteable
             value="${option}"
             @click=${() => this.handleRemove(option)}
-            >${option}</sp-tag
+            >${this.getOptionText(option)}</sp-tag
           >
         `
       )}
@@ -41,16 +45,14 @@ export class OslChips extends OslControl {
   protected get spectrumTextfield() {
     return this.renderRoot.querySelector(
       `.chips-${this.elementId}`
-    ) as LitElement;
+    ) as LitElement & {value:string};
   }
 
   protected get inputValue(): string {
-    // @ts-ignore
     return this.spectrumTextfield.value!;
   }
 
   resetText() {
-    // @ts-ignore
     this.spectrumTextfield.value = "";
   }
   protected eventValueAccessor(event: any): string {
@@ -75,14 +77,34 @@ export class OslChips extends OslControl {
     this.resetText();
   }
 
+  filterOptions(filterValue: string) {
+    const options = this.options || [];
+    if (typeof options[0] === 'object') {
+      const filteredOptions = options.filter((option) =>
+        `${(option as OptionSpec).label}`.toLowerCase().includes(`${filterValue}`.toLowerCase())
+      );
+      this.filteredOptions = filteredOptions;
+    } else {
+      const filteredOptions = options.filter((option) =>
+        `${option}`.toLowerCase().includes(`${filter}`.toLowerCase())
+      );
+      this.filteredOptions = filteredOptions;
+    }
+  }
+  
   handleTextEnter(event: KeyboardEvent): void {
     const isEnter = event.key === "Enter";
     if (isEnter) this.handleAdd();
+    if (this.options && this.options.length > 0) {
+      const currentValue = this.spectrumTextfield.value;
+      console.log(currentValue)
+      const options = this.filterOptions(currentValue);
+      console.log(options)
+    }
   }
 
   template() {
     return html`
-      <!-- <sp-tags> </sp-tags><br /> -->
       <div style="max-width:"100%">
       ${this.renderTags()} 
       </div>

@@ -20,7 +20,7 @@ The value is:
     <br/>
     <osl-checkbox
       options="[1,2,3]"
-      initialValue="[1,2]"
+      initialValue="[]"
       option="mag"
       data="http://localhost:6006/data/interaction.json"
 
