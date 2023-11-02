@@ -23,6 +23,10 @@ import type {
   TooltipEntry,
 } from "../../core/state/MapTooltipStore/types";
 import { tooltipStore } from "../../core/state/MapTooltipStore";
+import { html } from "lit";
+import { PickingInfo } from "@deck.gl/core/typed";
+import { MjolnirEvent } from "mjolnir.js"
+
 const LayerTypes = {
   scatter: ScatterplotLayer,
   // polygon: PolygonLayer,
@@ -105,9 +109,22 @@ export class OslMapLayer extends OslData {
   pointRadiusMinPixels?: number;
 
 
+  @property({ type: String })
+  layer: "polygon" | "circle" | "text" = "polygon";
+
+  tooltipFormatters: { [key: string]: ReturnType<typeof getFormatter> } = {};
   binBuilder?: BinBuilder;
   colorStops?: any;
+  layerProps: Partial<GeoJsonLayer["props"]> = {
+    pickable: true,
+    filled: this.filled,
+    stroked: this.stroked,
+    onHover: this.handleMapHover.bind(this),
+    onClick: this.handleMapClick.bind(this),
+    visible: this.visible,
+  };
 
+  legendElements: any = [];
   public get map(): maplibregl.Map | null {
     return this.parent.map;
   }
@@ -181,24 +198,19 @@ export class OslMapLayer extends OslData {
       data,
     };
   }
+  
+  handleMapClick(pickingInfo: PickingInfo, _event: MjolnirEvent) {
+    const { object } = pickingInfo || {};
+    if (object?.properties) {
+      this.handleChange(object.properties)
+    }
+  }
 
-  @property({ type: String })
-  layer: "polygon" | "circle" | "text" = "polygon";
-
-  tooltipFormatters: { [key: string]: ReturnType<typeof getFormatter> } = {};
-
-  layerProps: Partial<GeoJsonLayer["props"]> = {
-    pickable: true,
-    filled: this.filled,
-    stroked: this.stroked,
-    onHover: (info) => {
-      const { x, y, object } = info || {};
+  handleMapHover(pickingInfo: PickingInfo, _event: MjolnirEvent) {
+      const { x, y, object } = pickingInfo || {};
       const data = object?.properties || object;
       this.setTooltip(data, x || null, y || null);
-    },
-    visible: this.visible,
-  };
-  legendElements: any = [];
+  }
 
   // @ts-ignore
   public async renderLayer(_data?: DataResult) {
@@ -358,7 +370,7 @@ export class OslMapLayer extends OslData {
   }
 
   render() {
-    return null;
+    return html``;
   }
 }
 

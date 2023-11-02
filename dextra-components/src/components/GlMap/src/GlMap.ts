@@ -16,6 +16,7 @@ import { OslMapLayer } from "./GlMapLayer";
 import { LegendSpec } from "./types";
 import "./MapLegend";
 import "./MapTooltip";
+import { interpretFuncJsonOrString } from "../../core/utils/converters";
 
 const basicStyle = {
   version: 8,
@@ -88,18 +89,33 @@ export class OslGlMap extends OslData {
     | "bottom-left"
     | "bottom-right" = "top-right";
 
-  public hasMovedToBbox: false = false;
-  public map: maplibregl.Map | null = null;
-  public deck: DeckOverlay | null = null;
-
   @property({ type: Object })
   public legend: {
     [key: string]: LegendSpec;
   } = {};
 
+  public hasMovedToBbox: false = false;
+  public map: maplibregl.Map | null = null;
+  public deck: DeckOverlay | null = null;
+  debouncedResize: any;
+
   get childMapLayers(): Array<OslMapLayer> {
     const children = Array.from(this.childNodes);
     return children.filter((node) => "renderLayer" in node) as OslMapLayer[];
+  }
+
+  get customAttribution(): string {
+    return this.childMapLayers
+      .map((layer) => layer.attribution || false)
+      .filter(Boolean)
+      .filter(this.utils.filterUnique)
+      .join(", ");
+  }
+
+  get childElementIds() {
+    return this.childMapLayers
+      .map((layer) => layer["elementId"] || "")
+      .filter((f) => f.length);
   }
 
   async getLayers(): Promise<LayersList> {
@@ -116,18 +132,52 @@ export class OslGlMap extends OslData {
     this.isReady = layers.every((l) => l.isReady);
     return layers.map((l) => l.layer);
   }
-
-  get customAttribution(): string {
-    return this.childMapLayers
-      .map((layer) => layer.attribution || false)
-      .filter(Boolean)
-      .filter(this.utils.filterUnique)
-      .join(", ");
+  // @ts-ignore
+  handleChange(mapView: {
+    minLng: number;
+    minLat: number;
+    maxLng: number;
+    maxLat: number;
+    centerLng: number;
+    centerLat: number;
+    zoom: number;
+  }) {
+    if (!this.onInteractDataset) {
+      return;
+    }
+    const datasets = Array.isArray(this.onInteractDataset)
+      ? this.onInteractDataset
+      : [this.onInteractDataset];
+    datasets.forEach((dataset) => {
+      Object.entries(mapView).forEach(([key, value]) => {
+        this.store.datasets[dataset].parameters[key] = value;
+      });
+    });
   }
-  get childElementIds() {
-    return this.childMapLayers
-      .map((layer) => layer["elementId"] || "")
-      .filter((f) => f.length);
+
+  handleMapMove() {
+    if (!this.onInteractDataset) {
+      return;
+    }
+    const bounds = this.map?.getBounds();
+    const center = this.map?.getCenter();
+    const zoom = this.map?.getZoom();
+    if (bounds && center && zoom) {
+      const {
+        _sw: { lng: minLng, lat: minLat },
+        _ne: { lng: maxLng, lat: maxLat },
+      } = bounds;
+      const { lng: centerLng, lat: centerLat } = center;
+      this.handleChange({
+        minLng,
+        minLat,
+        maxLng,
+        maxLat,
+        centerLng,
+        centerLat,
+        zoom: Math.floor(zoom)
+      });
+    }
   }
 
   initializeMap() {
@@ -150,6 +200,11 @@ export class OslGlMap extends OslData {
       } else {
         syncMaps(this.map, syncedMaps[this.mapGroup]);
       }
+    }
+    if (!this.mapGroup || syncedMaps[this.mapGroup] === this.map) {
+      this.map.on("moveend", () => {
+        this.handleMapMove();
+      });
     }
     this.map.addControl(
       new maplibregl.AttributionControl({
@@ -205,8 +260,6 @@ export class OslGlMap extends OslData {
       this.childMapLayers.find(filter)?.toggleVisibility();
     }
   }
-
-  debouncedResize: any;
 
   connectedCallback() {
     super.connectedCallback();

@@ -44,7 +44,9 @@ export class OslData extends ValtioElement<StateSchema> {
   mapping?: {
     [key: string]: string;
   };
-  // inner
+  
+  @property({ type: String })
+  option: string = "";
 
   @property({ type: Boolean })
   useGeojsonData = Boolean(this.geoType && this.geoColumn);
@@ -66,6 +68,12 @@ export class OslData extends ValtioElement<StateSchema> {
 
   @property({ type: String })
   legendTitle?: string;
+
+  @property({ converter: interpretFuncJsonOrString })
+  onInteractDataset?: string | string[]; 
+
+  @property({ type: String })
+  onInteractProperty?: string = ""
 
   protected getDeepValue(obj: Record<string, any>, path: string) {
     const pathParts = path.split(".");
@@ -120,6 +128,20 @@ export class OslData extends ValtioElement<StateSchema> {
       (store) => store.datasets[data].parameters,
       () => this.syncDataFromStore(data, useGeojsonData)
     );
+  }
+
+  protected eventValueAccessor(feature: any) {
+    if (!this.onInteractProperty) return;
+    return feature[this.onInteractProperty]
+  }
+
+  protected handleChange(event: Event) {
+    if (!this.onInteractDataset || !this.option || !this.onInteractProperty) return;
+    const value = this.eventValueAccessor(event);
+    const datasets = Array.isArray(this.onInteractDataset) ? this.onInteractDataset : [this.onInteractDataset];
+    datasets.forEach((dataset) => {
+      this.store.datasets[dataset].parameters[this.option] = value;
+    })
   }
 
   connectedCallback() {
