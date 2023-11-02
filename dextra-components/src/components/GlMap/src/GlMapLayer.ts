@@ -336,7 +336,7 @@ export class OslMapLayer extends OslData {
     }
     this.updateLayer();
     this.subscribe(
-      (store) => store.datasets[this.data].results,
+      (store) => store.datasets[this.data].statuses,
       () => this.updateLayer()
     );
     this.subscribe(
@@ -344,6 +344,7 @@ export class OslMapLayer extends OslData {
       () => this.updateLayer()
     );
     this.binBuilder = new BinBuilder({
+      // @ts-ignore
       type: this.type,
       colorScheme: this.colorScheme,
       colorStops: this.colorStops,

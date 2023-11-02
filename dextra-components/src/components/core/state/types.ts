@@ -4,9 +4,7 @@ export type StateSchema = {
   datasets: {
     [key: string]: {
       parameters: Record<string, any>;
-      headless: boolean;
-      status: 'loading' | 'error' | 'success'
-      results: Record<string, DataResult | GeoJSON.Feature[] | 'pending'>
+      statuses: Record<string, 'pending' | 'error' | 'success'>
     };
   };
   geoListeners: Array<
@@ -20,3 +18,5 @@ export type StateSchema = {
   
   usingMsgPack: boolean;
 };
+
+export type nonReactiveStoreSchema = Record<string, Record<string, DataResult | GeoJSON.Feature[]>>

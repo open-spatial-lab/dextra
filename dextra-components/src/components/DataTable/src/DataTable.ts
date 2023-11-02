@@ -20,7 +20,6 @@ export class OslTable extends OslData {
   pageSize: number = 10;
 
   template() {
-    console.log(this.currentResults)
     return html`
       <osl-table
         .title=${this.title}

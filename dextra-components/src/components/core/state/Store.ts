@@ -1,5 +1,5 @@
 import { proxy, subscribe } from "valtio/vanilla";
-import { DataResult, StateSchema } from "./types";
+import { DataResult, StateSchema, nonReactiveStoreSchema } from "./types";
 import { JSONLoader } from "@loaders.gl/json";
 import { load } from "@loaders.gl/core";
 import { CSVLoader } from "@loaders.gl/csv";
@@ -18,6 +18,7 @@ export const initialState: StateSchema = {
 };
 
 export const store = proxy<StateSchema>(initialState);
+export const nonReactiveStore: nonReactiveStoreSchema = {}
 
 const handleLoad = async (url: string, signal: AbortSignal) => {
   const filetype = url.split(".").pop();
@@ -65,17 +66,15 @@ let queryControllers: {
 } = {}
 
 const buildDatasetPromise = async (key: string) => {
-  // console.log('BUILDING PROMISE...', key)
-    const dataset = store.datasets[key];
-    const currentParams = dataset.parameters;
+    const statuses = store.datasets[key].statuses;
+    const currentParams = store.datasets[key].parameters;
     const currentParamString = JSON.stringify(currentParams);
     const currentControllerParamString = queryControllers[key]?.paramstring;
     const queryIsDuplicate = currentParamString === currentControllerParamString;
-    // todo add abort logic
-    const shouldQuery = dataset.results[currentParamString] === undefined && !queryIsDuplicate;
-    // const datasetId = JSON.stringify(key).split('/').pop();
-    // console.log('DATASET PARAMS', datasetId, JSON.parse(JSON.stringify(currentParams)))
+    const shouldQuery = statuses?.[currentParamString] === undefined && !queryIsDuplicate;
+    // console.log(key, shouldQuery)
     if (shouldQuery) {
+      statuses[currentParamString] = 'pending';
       queryControllers?.[key]?.controller?.abort();
       queryControllers[key] = {
         paramstring: currentParamString,
@@ -98,7 +97,8 @@ const buildDatasetPromise = async (key: string) => {
           });
           // @ts-ignore
           const data = unpack(buffer);
-          store.datasets[key].results[currentParamString] = data;
+          nonReactiveStore[key][currentParamString] = data;
+          statuses[currentParamString] = 'success';
           return 
         } catch (e) {
           console.error(e);
@@ -110,8 +110,9 @@ const buildDatasetPromise = async (key: string) => {
         // console.log('data', data)
         const t0 = performance.now()
         const parsedData = parseData(data);
-        console.log('parsed data in', performance.now() - t0, 'ms')
-        store.datasets[key].results[currentParamString] = parsedData;
+        // console.log('parsed data in', performance.now() - t0, 'ms')
+        nonReactiveStore[key][currentParamString] = parsedData;
+        statuses[currentParamString] = 'success';
         store.usingMsgPack = false;
         return
       } catch (e) {
@@ -126,15 +127,21 @@ const buildGeoPromise = async (
   geoType: 'WKT' | 'WKB' | 'GeoJSON',
   geoId?: string
 ) => {
-  const dataset = store.datasets[key];
-  const currentParamString = JSON.stringify(dataset.parameters);
+  
+  const storeDataset = store.datasets[key];
+  const statuses = storeDataset.statuses
+  const currentParamString = JSON.stringify(storeDataset.parameters);
   const geoKey = `${currentParamString}/geo/${geoColumn}`
-  const currentResults = dataset.results[currentParamString]
-  const shouldParse = currentResults !== undefined && 
-    dataset.results[geoKey] === undefined;
+  const status = statuses[currentParamString];
+
+  const dataset = nonReactiveStore[key];
+  const currentResults = dataset[currentParamString]
+  
+  const shouldParse = status === "success" && statuses[geoKey] === undefined;
+
   if (shouldParse) {
-    dataset['results'][geoKey] = 'pending'
-    const t0 = performance.now()
+    statuses[geoKey] = 'pending'
+    // const t0 = performance.now()
     convertToGeojsonLike(
       key,
       currentResults as DataResult,
@@ -142,9 +149,10 @@ const buildGeoPromise = async (
       geoColumn,
       geoId
     ).then((geoData: any) => {
-      dataset['results'][geoKey] = geoData;
-      const t1 = performance.now()
-      console.log(`Geojson conversion took ${t1 - t0} milliseconds.`)
+      dataset[geoKey] = geoData;
+      statuses[geoKey] = 'success'
+      // const t1 = performance.now()
+      // console.log(`Geojson conversion took ${t1 - t0} milliseconds.`)
     })
   }
 }
@@ -159,8 +167,11 @@ const parseGeoDatasets = async () => {
 }
 
 subscribe(store.datasets, async () => {
+  // const datasets = Object.keys(store.datasets)
+  // console.log('PARAMETERS', JSON.stringify(datasets.map((dataset) => store.datasets[dataset].parameters)))
+  // console.log('STATUSES', JSON.stringify(datasets.map((dataset) => store.datasets[dataset].statuses)))
+  // console.log('DATA', JSON.stringify(datasets.map((dataset) => Object.keys(nonReactiveStore[dataset]))))
   const allDatasets = Object.keys(store.datasets);
-  console.log(store)
   const fetchAllDatasets = allDatasets.map(buildDatasetPromise);
   await Promise.all(fetchAllDatasets).then(() => {
     parseGeoDatasets()

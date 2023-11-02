@@ -1,5 +1,3 @@
-
-import { Buffer } from "buffer";
 // @ts-ignore
 import { Geometry } from "@pieterprovoost/wkx";
 
@@ -14,10 +12,7 @@ const geomParsers = {
     Geometry.parse(row[geoColumn]).toGeoJSON(),
   WKB: (geoColumn: string) => (row: Record<string, unknown>) => {
     if (!row[geoColumn]) console.warn("No geometry found in row", row)
-    const geom = Geometry._parseWkb(
-      Buffer.from(row[geoColumn] as any, "hex")
-      ).toGeoJSON() as GeoJSON.Geometry
-      // console.log('geom',geom)
+    const geom = Geometry._parseWkb(row[geoColumn]).toGeoJSON() as GeoJSON.Geometry
     return geom
   },
   GeoJSON: (geoColumn: string) => (row: Record<string, unknown>) => {

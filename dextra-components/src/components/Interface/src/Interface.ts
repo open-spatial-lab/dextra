@@ -4,6 +4,7 @@ import { ValtioElement } from "../../core/state";
 import { safeCustomElement } from "../../core/decorators/safeCustomElement";
 import { StateSchema } from "../../core/state/types";
 import { interpretFuncJsonOrString } from "../../core/utils/converters";
+import { nonReactiveStore } from "../../core/state/Store";
 
 export type OptionSpec = { value: string | number, label: string | number }
 export type OptionList = Array<string | number | OptionSpec>
@@ -57,10 +58,9 @@ export class OslControl extends ValtioElement<StateSchema> {
       if (!this.store.datasets[dataset] && dataset !== "") {
         this.store.datasets[dataset] = {
           parameters: {},
-          headless: true,
-          results: {},
-          status: "loading",
+          statuses: {}
         };
+        nonReactiveStore[dataset] = {}
       }
       const currentParams = this.store.datasets[dataset].parameters;
       if (

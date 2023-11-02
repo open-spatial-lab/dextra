@@ -6,6 +6,7 @@ import { FormatterPresets } from "../../core/utils/numberFormatter";
 import { colorSchemes } from "../../core/utils/color";
 import { interpretFuncJsonOrString } from "../../core/utils/converters";
 import { utils } from "../../core/utils/utilsClass";
+import { nonReactiveStore } from "../../core/state/Store";
 export class OslData extends ValtioElement<StateSchema> {
   utils = utils;
 
@@ -55,7 +56,7 @@ export class OslData extends ValtioElement<StateSchema> {
   currentResults: DataResult | Array<GeoJSON.Feature> = [];
 
   @property({ type: String })
-  status = "loading";
+  status = "pending";
 
   @property({ type: String })
   currentParametersHash = "{}";
@@ -81,22 +82,19 @@ export class OslData extends ValtioElement<StateSchema> {
   isReady = false;
 
   protected syncDataFromStore(data: string, useGeojsonData?: boolean) {
-    const results = this.store.datasets[data].results;
+    const statuses = this.store.datasets[data].statuses;
     const parametersHash = JSON.stringify(this.store.datasets[data].parameters);
     const currentParametersHash = useGeojsonData
       ? `${parametersHash}/geo/${this.geoColumn}`
       : parametersHash;
-    const currentResults = results[currentParametersHash];
-    if (
-      !currentResults ||
-      currentResults === "pending"
-    ) {
-      this.isReady = false;
-      return;
-    } else {
-      this.currentResults = currentResults;
+    const currentStatus = statuses?.[currentParametersHash];
+
+    if (currentStatus === "success" && this.currentParametersHash !== currentParametersHash) {
+      this.currentResults = nonReactiveStore[data][currentParametersHash];
       this.currentParametersHash = currentParametersHash;
       this.isReady = true;
+    } else if (currentStatus !== "success" ){
+      this.isReady = false;
     }
   }
 
@@ -106,16 +104,15 @@ export class OslData extends ValtioElement<StateSchema> {
     if (!this.store.datasets[data] && data !== "") {
       this.store.datasets[data] = {
         parameters: {},
-        headless: true,
-        results: {},
-        status: "loading",
+        statuses: {}
       };
+      nonReactiveStore[data] = {};
     } else {
       this.syncDataFromStore(data, useGeojsonData);
     }
 
     this.subscribe(
-      (store) => store.datasets[data].results,
+      (store) => store.datasets[data].statuses,
       () => this.syncDataFromStore(data, useGeojsonData)
     );
 
