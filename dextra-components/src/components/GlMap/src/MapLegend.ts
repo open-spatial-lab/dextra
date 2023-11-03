@@ -101,7 +101,7 @@ export class MapLegend extends ValtioElement<LegendStoreSpec> {
     }
     return html`
       <!-- < -->
-      <svg width="1rem" height="1rem" viewBox="0 0 20 20">
+      <svg width="1rem" height="1rem" viewBox="0 0 20 20" style="min-width:1rem;">
         <rect x="0" y="0" width="20" height="20" fill="${symbol.color}" />
       </svg>
     `;
