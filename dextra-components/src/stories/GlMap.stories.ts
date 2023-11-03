@@ -20,27 +20,6 @@ import "../components/FlexBox/src/FlexBox.ts";
 export default {
   title: "Data",
 };
-import {PreventBlindness as _PreventBlindness} from './projects/PreventBlindness'
-import {EECRC as _EECRC} from './projects/EECRC'
-import { CPR as _CPR} from './projects/CPR1';
-import { CPR2 as _CPR2} from './projects/CPR2';
-import { CPR3 as _CPR3} from './projects/CPR3';
-import { CirculateSanDiego as _CirculateSanDiego } from './projects/CSD1'
-import { CirculateSanDiego2 as _CirculateSanDiego2 } from './projects/CSD2'
-import { CirculateSanDiego3 as _CirculateSanDiego3 } from './projects/CSD3'
-import { Wisconsin as _Wisconsin } from './projects/Wisconsin'
-import {Equiticity as _Equiticity} from './projects/Equiticity'
-
-export const PreventBlindness = () => _PreventBlindness()
-export const EECRC = () => _EECRC();
-export const Equiticity = () => _Equiticity();
-export const CPR1 = () => _CPR();
-export const CPR2 = () => _CPR2();
-export const CPR3 = () => _CPR3();
-export const CirculateSanDiego = () => _CirculateSanDiego();
-export const CirculateSanDiego2 = () => _CirculateSanDiego2();
-export const CirculateSanDiego3 = () => _CirculateSanDiego3();
-export const Wisconsin = () => _Wisconsin();
 
 export const GlMap = () => {
   return html`
