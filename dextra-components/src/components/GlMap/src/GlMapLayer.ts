@@ -151,12 +151,13 @@ export class OslMapLayer extends OslData {
   }
 
   setTooltip(entry: Record<string, any>, x: number | null, y: number | null) {
-    if (x === null || y === null) {
+    if (entry === undefined || x === -1 || y === -1) {
       tooltipStore.tooltips[this.elementId] = {
-        x,
-        y,
+        x: null,
+        y: null,
         data: [],
       };
+      return
     }
 
     let data: TooltipEntry["data"] = [];

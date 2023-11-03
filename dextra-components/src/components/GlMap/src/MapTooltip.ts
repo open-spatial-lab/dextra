@@ -49,12 +49,14 @@ export class MapTooltip extends ValtioElement<TooltipStore> {
   handleTooltipData() {
     for (const tooltipKey of this?.tooltips || []) {
       const tooltipData = this.store.tooltips[tooltipKey];
-      if (tooltipData && tooltipData.x !== null) {
+      if (tooltipData && tooltipData.x !== null && tooltipData.y !== null && tooltipData.data?.length ) {
         this.currentTooltip = tooltipData;
         this.requestUpdate();
         return;
       }
     }
+    this.currentTooltip = null;
+    this.requestUpdate();
   }
 
   connectedCallback(): void {
