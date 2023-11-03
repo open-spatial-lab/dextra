@@ -44,6 +44,7 @@ export class MapLegend extends ValtioElement<LegendStoreSpec> {
       padding: 0.5rem;
       overflow-y:auto;
       max-width: 15ch;
+      overflow-x: hidden;
     }
     .legend-card:not(:last-child) {
       border-right: none;
