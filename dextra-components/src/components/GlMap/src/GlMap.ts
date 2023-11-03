@@ -70,8 +70,12 @@ export class OslGlMap extends OslData {
   mapGroup?: string;
 
   @property({ type: Boolean })
-  showNavigation?: boolean = false;
+  showNavigation?: boolean = true;
 
+  @property({ type: Boolean })
+  showFullScreen?: boolean = true;
+
+  
   @property({ type: Boolean })
   showSingleLayer?: boolean = false;
 
@@ -222,6 +226,11 @@ export class OslGlMap extends OslData {
       });
       if (this.showNavigation) {
         this.map!.addControl(new maplibregl.NavigationControl({}));
+      }
+      if (this.showFullScreen) {
+        this.map!.addControl(new maplibregl.FullscreenControl({
+          container: this.parentElement!
+        }));
       }
       // @ts-ignore
       this.map.addControl(this.deck);
