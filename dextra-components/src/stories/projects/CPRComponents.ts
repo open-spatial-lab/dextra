@@ -1,18 +1,18 @@
 // import { Meta } from "@storybook/web-components";
 import { html } from "lit";
-import "../components/GlMap/src/GlMap.ts";
-import "../components/GlMap/src/GlMapLayer.ts";
-import "../components/Slider/src/Slider.ts";
-import "../components/Select/src/SelectControl.ts";
-import "../components/FlexBox/src/FlexBox.ts";
-import "../components/StatTable/src/StatTable.ts";
-import "../components/DataTable/src/DataTable.ts";
-import "../components/Download/src/Download.ts";
-import "../components/Stat/src/Stat.ts";
-import "../components/Plot/src/Plot.ts";
-import "../components/Modal/src/Modal.ts";
-import "../components/Radio/src/Radio.ts";
-import "../components/ParamView/src/ParamView.ts";
+import "../../components/GlMap/src/GlMap.js";
+import "../../components/GlMap/src/GlMapLayer.js";
+import "../../components/Slider/src/Slider.js";
+import "../../components/Select/src/SelectControl.js";
+import "../../components/FlexBox/src/FlexBox.js";
+import "../../components/StatTable/src/StatTable.js";
+import "../../components/DataTable/src/DataTable.js";
+import "../../components/Download/src/Download.js";
+import "../../components/Stat/src/Stat.js";
+import "../../components/Plot/src/Plot.js";
+import "../../components/Modal/src/Modal.js";
+import "../../components/Radio/src/Radio.js";
+import "../../components/ParamView/src/ParamView.js";
 
 import {
   yearLabels,
@@ -26,7 +26,7 @@ import {
   timeSeriesData,
   zipCodes,
   counties,
-} from "./utils";
+} from "./CPRUtils";
 
 export const CprFilterHeader = () => {
   return html`
