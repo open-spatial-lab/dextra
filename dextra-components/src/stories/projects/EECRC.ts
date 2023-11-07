@@ -54,7 +54,6 @@ export const EECRC = () => {
         <osl-glmap
               mapStyle="https://basemaps.cartocdn.com/gl/positron-gl-style/style.json"
               legendPosition="bottom-left"
-              showSingleLayer="false"
               center="[-122.67,45.5]"
               zoom="9"
             >
@@ -540,9 +539,7 @@ export const EECRC = () => {
           data=${pointData}
           geoColumn="geometry"
           geoType="WKB"
-          type="categorical"
-          dataColumn="Name"
-          colorScheme="Dark2"
+          type="static"
           legendtitle="Locations"
           radiusUnits="pixels"
           
@@ -552,7 +549,22 @@ export const EECRC = () => {
 </osl-glmap>
 </div>
         </div>
+
+        <br /><br />
+        <osl-data-table
+          title="Zip Code Data"
+          maxw="150vw"
+          data=${zipCodeData}
+          columns=${JSON.stringify(['Zip Code', 'Participants', 'Most Common Language','Foreign-Born Population: Africa',
+'Foreign-Born Population: Africa: Eastern Africa',
+'Foreign-Born Population: Africa: Eastern Africa: Ethiopia',
+'Foreign-Born Population: Africa: Eastern Africa: Kenya',
+'Foreign-Born Population: Africa: Eastern Africa: Other Eastern Africa', ])}
+          pagination="true"
+        ></osl-data-table></div>
       </div>
     </sp-theme>
   `;
 };
+
+
