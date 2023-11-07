@@ -161,9 +161,14 @@ export class BinBuilder {
       return val
     } : accessor
     const values = data.map(modifiedAcessor).filter(d => d !== undefined && d !== null) as number[];
-    
-    const breaks = await generateBuckets(method, values, bins);
-    return breaks;
+    const cleanBins = Math.min(bins!, values.length-1)
+    try {
+      const breaks = await generateBuckets(method, values, cleanBins);
+      return breaks;
+    } catch (e) {
+      console.error(e);
+      return [];
+    }
   }
 
   formatColor(color: Instance, format: ColorFormats = "RGB") {
