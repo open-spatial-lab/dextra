@@ -11,7 +11,8 @@
     "dev": "concurrently --kill-others \"pnpm dev:worker\"  \"pnpm dev:components\" \"pnpm serve:worker \"",
     "clean": "zx ./scripts/clean.mjs",
     "plop": "plop",
-    "set-version": "zx ./scripts/set-version.mjs"
+    "set-version": "zx ./scripts/set-version.mjs",
+    "build-publish": "pnpm -F=@open-spatial-lab/full-bundle build && pnpm -F=@open-spatial-lab/full-bundle publish"
   },
   "packageManager": "yarn@3.3.1",
   "devDependencies": {
@@ -32,5 +33,5 @@
     "esbuild": "^0.17.4",
     "http-server": "^14.1.1"
   },
-  "version": "0.0.21"
+  "version": "0.0.22"
 }

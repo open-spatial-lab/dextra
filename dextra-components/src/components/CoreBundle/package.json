@@ -1,6 +1,6 @@
 {
   "name": "@open-spatial-lab/core-bundle",
-  "version": "0.0.21",
+  "version": "0.0.22",
   "main": "dist/core-bundle.es.js",
   "exports": {
     ".": "./dist/core-bundle.es.js"

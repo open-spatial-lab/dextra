@@ -1,4 +1,5 @@
-import { html } from "lit";
+import { html } from "lit"
+import {html as staticHtml } from "lit/static-html.js";
 import {
   filterableDatasets,
   pointData,
@@ -7,6 +8,7 @@ import {
   projects,
   zipCodeData,
 } from "./EECRCUtils";
+import { getRenderString } from "../utils";
 
 export const EECRC = () => {
   // select with programs / populations
@@ -567,4 +569,4 @@ export const EECRC = () => {
   `;
 };
 
-
+console.log(getRenderString(EECRC()))

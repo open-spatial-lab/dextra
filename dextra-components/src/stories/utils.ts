@@ -44,3 +44,9 @@ export const demogTractColumns = JSON.stringify([
 
 ])
 
+export const getRenderString = (data: any) => {
+  const {strings, values} = data;
+  const v = [...values, ''] // + last emtpty part
+  // @ts-ignore
+  return strings.reduce((acc,s, i) => acc + s + v[i], '')
+}
