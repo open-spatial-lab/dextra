@@ -110,7 +110,7 @@ export class OslMapLayer extends OslData {
 
 
   @property({ type: String })
-  layer: "polygon" | "circle" | "text" = "polygon";
+  layer: "polygon" | "circle" | "text" | "line" = "polygon";
 
   tooltipFormatters: { [key: string]: ReturnType<typeof getFormatter> } = {};
   binBuilder?: BinBuilder;
@@ -266,6 +266,13 @@ export class OslMapLayer extends OslData {
             this.layerProps.pointRadiusUnits = this.radiusUnits || "meters";
             this.layerProps.pointRadiusScale = this.pointRadiusScale || 1
             break;
+          case "line":
+            this.layerProps.getLineWidth = this.circleRadius;
+            this.layerProps.lineWidthMinPixels = this.pointRadiusMinPixels || 1;
+            this.layerProps.lineWidthMaxPixels = this.pointRadiusMaxPixels || 40;
+            this.layerProps.lineWidthUnits = this.radiusUnits || "meters";
+            this.layerProps.lineWidthScale = this.pointRadiusScale || 1
+            break;
           case "text":
             break;
         }
@@ -280,7 +287,12 @@ export class OslMapLayer extends OslData {
         // @ts-ignore
         this.layerProps.getLineColor = colorFunc;
         this.layerProps.lineWidthUnits = "pixels";
-        this.layerProps.getLineWidth = 5;
+        this.layerProps.getLineWidth = this.circleRadius || 5;
+        this.layerProps.pointRadiusMinPixels = this.pointRadiusMinPixels || 1;
+        this.layerProps.pointRadiusMaxPixels = this.pointRadiusMaxPixels || 100;
+        this.layerProps.getPointRadius = this.circleRadius;
+        this.layerProps.pointRadiusUnits = this.radiusUnits || "meters";
+        this.layerProps.pointRadiusScale = this.pointRadiusScale || 1
       } else if (this.filled) {
         // @ts-ignore
         this.layerProps.getFillColor = colorFunc;

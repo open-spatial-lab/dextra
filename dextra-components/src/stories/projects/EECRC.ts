@@ -568,5 +568,3 @@ export const EECRC = () => {
     </sp-theme>
   `;
 };
-
-console.log(getRenderString(EECRC()))

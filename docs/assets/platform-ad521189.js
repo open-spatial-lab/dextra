@@ -1,0 +1,2 @@
+function t(n){return typeof window<"u"&&window.navigator!=null?n.test(window.navigator.userAgent):!1}function i(n){return typeof window<"u"&&window.navigator!=null?n.test(window.navigator.platform):!1}function o(){return i(/^Mac/)}function r(){return i(/^iPhone/)}function e(){return i(/^iPad/)||o()&&navigator.maxTouchPoints>1}function a(){return r()||e()}function u(){return t(/Android/)}export{u as a,a as b,r as i};
+//# sourceMappingURL=platform-ad521189.js.map

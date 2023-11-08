@@ -10,7 +10,7 @@ export default {
 export const Stat = () => {
   return html`
     <osl-flex-box
-      breakpoint="sm"
+      breakpoint="md"
     >
       <osl-stat
         title="Stat 1"

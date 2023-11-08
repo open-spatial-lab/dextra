@@ -1,0 +1,452 @@
+import{i as l,x as b}from"./lit-element-47511895.js";import{t as m,I as p,s as v,a as h}from"./ValtioElement-af4c0565.js";import{B as g}from"./ButtonBase-6b15501f.js";import{n as e}from"./safeCustomElement-f1504f3f.js";const f=l`
+:host{-webkit-font-smoothing:antialiased;-moz-osx-font-smoothing:grayscale;align-items:center;-webkit-appearance:button;border-style:solid;box-sizing:border-box;cursor:pointer;display:inline-flex;font-family:var(
+--mod-sans-font-family-stack,var(--spectrum-sans-font-family-stack)
+);justify-content:center;line-height:var(--mod-line-height-100,var(--spectrum-line-height-100));margin:0;overflow:visible;text-decoration:none;text-transform:none;transition:background var(
+--mod-animation-duration-100,var(--spectrum-animation-duration-100)
+) ease-out,border-color var(
+--mod-animation-duration-100,var(--spectrum-animation-duration-100)
+) ease-out,color var(
+--mod-animation-duration-100,var(--spectrum-animation-duration-100)
+) ease-out,box-shadow var(
+--mod-animation-duration-100,var(--spectrum-animation-duration-100)
+) ease-out;-webkit-user-select:none;user-select:none;vertical-align:top}:host(:focus){outline:none}:host([disabled]){cursor:default}::slotted([slot=icon]){max-block-size:100%}#label{place-self:center;text-align:center}#label:empty{display:none}:host{--spectrum-actionbutton-animation-duration:var(
+--spectrum-animation-duration-100
+);--spectrum-actionbutton-border-radius:var(--spectrum-corner-radius-100);--spectrum-actionbutton-border-width:var(--spectrum-border-width-100);--spectrum-actionbutton-focus-indicator-gap:var(
+--spectrum-focus-indicator-gap
+);--spectrum-actionbutton-focus-indicator-thickness:var(
+--spectrum-focus-indicator-thickness
+);--spectrum-actionbutton-focus-indicator-color:var(
+--spectrum-focus-indicator-color
+);--spectrum-actionbutton-focus-indicator-border-radius:calc(var(--spectrum-actionbutton-border-radius) + var(--spectrum-actionbutton-focus-indicator-gap))}:host([size=xs]){--spectrum-actionbutton-min-width:calc(var(--spectrum-component-edge-to-visual-only-75)*2 + var(--spectrum-workflow-icon-size-75));--spectrum-actionbutton-height:var(--spectrum-component-height-50);--spectrum-actionbutton-icon-size:var(--spectrum-workflow-icon-size-50);--spectrum-actionbutton-font-size:var(--spectrum-font-size-50);--spectrum-actionbutton-text-to-visual:var(--spectrum-text-to-visual-50);--spectrum-actionbutton-edge-to-hold-icon:var(
+--spectrum-action-button-edge-to-hold-icon-extra-small
+);--spectrum-actionbutton-edge-to-visual:calc(var(--spectrum-component-edge-to-visual-50) - var(--spectrum-actionbutton-border-width));--spectrum-actionbutton-edge-to-text:calc(var(--spectrum-component-edge-to-text-50) - var(--spectrum-actionbutton-border-width));--spectrum-actionbutton-edge-to-visual-only:calc(var(--spectrum-component-edge-to-visual-only-50) - var(--spectrum-actionbutton-border-width))}:host([size=s]){--spectrum-actionbutton-min-width:calc(var(--spectrum-component-edge-to-visual-only-75)*2 + var(--spectrum-workflow-icon-size-75));--spectrum-actionbutton-height:var(--spectrum-component-height-75);--spectrum-actionbutton-icon-size:var(--spectrum-workflow-icon-size-75);--spectrum-actionbutton-font-size:var(--spectrum-font-size-75);--spectrum-actionbutton-text-to-visual:var(--spectrum-text-to-visual-75);--spectrum-actionbutton-edge-to-hold-icon:var(
+--spectrum-action-button-edge-to-hold-icon-small
+);--spectrum-actionbutton-edge-to-visual:calc(var(--spectrum-component-edge-to-visual-75) - var(--spectrum-actionbutton-border-width));--spectrum-actionbutton-edge-to-text:calc(var(--spectrum-component-edge-to-text-75) - var(--spectrum-actionbutton-border-width));--spectrum-actionbutton-edge-to-visual-only:calc(var(--spectrum-component-edge-to-visual-only-75) - var(--spectrum-actionbutton-border-width))}:host([size=m]){--spectrum-actionbutton-min-width:calc(var(--spectrum-component-edge-to-visual-only-100)*2 + var(--spectrum-workflow-icon-size-100));--spectrum-actionbutton-height:var(--spectrum-component-height-100);--spectrum-actionbutton-icon-size:var(--spectrum-workflow-icon-size-100);--spectrum-actionbutton-font-size:var(--spectrum-font-size-100);--spectrum-actionbutton-text-to-visual:var(--spectrum-text-to-visual-100);--spectrum-actionbutton-edge-to-hold-icon:var(
+--spectrum-action-button-edge-to-hold-icon-medium
+);--spectrum-actionbutton-edge-to-visual:calc(var(--spectrum-component-edge-to-visual-100) - var(--spectrum-actionbutton-border-width));--spectrum-actionbutton-edge-to-text:calc(var(--spectrum-component-edge-to-text-100) - var(--spectrum-actionbutton-border-width));--spectrum-actionbutton-edge-to-visual-only:calc(var(--spectrum-component-edge-to-visual-only-100) - var(--spectrum-actionbutton-border-width))}:host([size=l]){--spectrum-actionbutton-min-width:calc(var(--spectrum-component-edge-to-visual-only-200)*2 + var(--spectrum-workflow-icon-size-200));--spectrum-actionbutton-height:var(--spectrum-component-height-200);--spectrum-actionbutton-icon-size:var(--spectrum-workflow-icon-size-200);--spectrum-actionbutton-font-size:var(--spectrum-font-size-200);--spectrum-actionbutton-text-to-visual:var(--spectrum-text-to-visual-200);--spectrum-actionbutton-edge-to-hold-icon:var(
+--spectrum-action-button-edge-to-hold-icon-large
+);--spectrum-actionbutton-edge-to-visual:calc(var(--spectrum-component-edge-to-visual-200) - var(--spectrum-actionbutton-border-width));--spectrum-actionbutton-edge-to-text:calc(var(--spectrum-component-edge-to-text-200) - var(--spectrum-actionbutton-border-width));--spectrum-actionbutton-edge-to-visual-only:calc(var(--spectrum-component-edge-to-visual-only-200) - var(--spectrum-actionbutton-border-width))}:host([size=xl]){--spectrum-actionbutton-min-width:calc(var(--spectrum-component-edge-to-visual-only-300)*2 + var(--spectrum-workflow-icon-size-300));--spectrum-actionbutton-height:var(--spectrum-component-height-300);--spectrum-actionbutton-icon-size:var(--spectrum-workflow-icon-size-300);--spectrum-actionbutton-font-size:var(--spectrum-font-size-300);--spectrum-actionbutton-text-to-visual:var(--spectrum-text-to-visual-300);--spectrum-actionbutton-edge-to-hold-icon:var(
+--spectrum-action-button-edge-to-hold-icon-extra-large
+);--spectrum-actionbutton-edge-to-visual:calc(var(--spectrum-component-edge-to-visual-300) - var(--spectrum-actionbutton-border-width));--spectrum-actionbutton-edge-to-text:calc(var(--spectrum-component-edge-to-text-300) - var(--spectrum-actionbutton-border-width));--spectrum-actionbutton-edge-to-visual-only:calc(var(--spectrum-component-edge-to-visual-only-300) - var(--spectrum-actionbutton-border-width))}@media (forced-colors:active){:host{--highcontrast-actionbutton-focus-indicator-color:ButtonText}:host:after{forced-color-adjust:none}:host([selected]){--highcontrast-actionbutton-background-color-default:Highlight;--highcontrast-actionbutton-background-color-hover:Highlight;--highcontrast-actionbutton-background-color-focus:Highlight;--highcontrast-actionbutton-background-color-down:Highlight;--highcontrast-actionbutton-background-color-disabled:ButtonFace;--highcontrast-actionbutton-border-color-default:HighlightText;--highcontrast-actionbutton-border-color-hover:HighlightText;--highcontrast-actionbutton-border-color-focus:HighlightText;--highcontrast-actionbutton-border-color-down:HighlightText;--highcontrast-actionbutton-border-color-disabled:GrayText;--highcontrast-actionbutton-content-color-default:HighlightText;--highcontrast-actionbutton-content-color-hover:HighlightText;--highcontrast-actionbutton-content-color-focus:HighlightText;--highcontrast-actionbutton-content-color-down:HighlightText;--highcontrast-actionbutton-content-color-disabled:GrayText}:host([selected]) #label,:host([selected]) .hold-affordance,:host([selected]) ::slotted([slot=icon]){forced-color-adjust:none}}:host{background-color:var(
+--highcontrast-actionbutton-background-color-default,var(
+--mod-actionbutton-background-color-default,var(--spectrum-actionbutton-background-color-default)
+)
+);border-color:var(
+--highcontrast-actionbutton-border-color-default,var(
+--mod-actionbutton-border-color-default,var(--spectrum-actionbutton-border-color-default)
+)
+);border-radius:var(
+--mod-actionbutton-border-radius,var(--spectrum-actionbutton-border-radius)
+);border-width:var(
+--mod-actionbutton-border-width,var(--spectrum-actionbutton-border-width)
+);color:var(
+--highcontrast-actionbutton-content-color-default,var(
+--mod-actionbutton-content-color-default,var(--spectrum-actionbutton-content-color-default)
+)
+);gap:calc(var(
+--mod-actionbutton-text-to-visual,
+var(--spectrum-actionbutton-text-to-visual)
+) + var(
+--mod-actionbutton-edge-to-text,
+var(--spectrum-actionbutton-edge-to-text)
+) - var(
+--mod-actionbutton-edge-to-visual-only,
+var(--spectrum-actionbutton-edge-to-visual-only)
+));height:var(--mod-actionbutton-height,var(--spectrum-actionbutton-height));min-inline-size:var(
+--mod-actionbutton-min-width,var(--spectrum-actionbutton-min-width)
+);padding-inline:var(
+--mod-actionbutton-edge-to-text,var(--spectrum-actionbutton-edge-to-text)
+);position:relative}:host(:hover){background-color:var(
+--highcontrast-actionbutton-background-color-hover,var(
+--mod-actionbutton-background-color-hover,var(--spectrum-actionbutton-background-color-hover)
+)
+);border-color:var(
+--highcontrast-actionbutton-border-color-hover,var(
+--mod-actionbutton-border-color-hover,var(--spectrum-actionbutton-border-color-hover)
+)
+);color:var(
+--highcontrast-actionbutton-content-color-hover,var(
+--mod-actionbutton-content-color-hover,var(--spectrum-actionbutton-content-color-hover)
+)
+)}:host(.focus-visible){background-color:var(
+--highcontrast-actionbutton-background-color-focus,var(
+--mod-actionbutton-background-color-focus,var(--spectrum-actionbutton-background-color-focus)
+)
+);border-color:var(
+--highcontrast-actionbutton-border-color-focus,var(
+--mod-actionbutton-border-color-focus,var(--spectrum-actionbutton-border-color-focus)
+)
+);color:var(
+--highcontrast-actionbutton-content-color-focus,var(
+--mod-actionbutton-content-color-focus,var(--spectrum-actionbutton-content-color-focus)
+)
+)}:host(.focus-visible){background-color:var(
+--highcontrast-actionbutton-background-color-focus,var(
+--mod-actionbutton-background-color-focus,var(--spectrum-actionbutton-background-color-focus)
+)
+);border-color:var(
+--highcontrast-actionbutton-border-color-focus,var(
+--mod-actionbutton-border-color-focus,var(--spectrum-actionbutton-border-color-focus)
+)
+);color:var(
+--highcontrast-actionbutton-content-color-focus,var(
+--mod-actionbutton-content-color-focus,var(--spectrum-actionbutton-content-color-focus)
+)
+)}:host(:focus-visible){background-color:var(
+--highcontrast-actionbutton-background-color-focus,var(
+--mod-actionbutton-background-color-focus,var(--spectrum-actionbutton-background-color-focus)
+)
+);border-color:var(
+--highcontrast-actionbutton-border-color-focus,var(
+--mod-actionbutton-border-color-focus,var(--spectrum-actionbutton-border-color-focus)
+)
+);color:var(
+--highcontrast-actionbutton-content-color-focus,var(
+--mod-actionbutton-content-color-focus,var(--spectrum-actionbutton-content-color-focus)
+)
+)}:host([active]){background-color:var(
+--highcontrast-actionbutton-background-color-down,var(
+--mod-actionbutton-background-color-down,var(--spectrum-actionbutton-background-color-down)
+)
+);border-color:var(
+--highcontrast-actionbutton-border-color-down,var(
+--mod-actionbutton-border-color-down,var(--spectrum-actionbutton-border-color-down)
+)
+);color:var(
+--highcontrast-actionbutton-content-color-down,var(
+--mod-actionbutton-content-color-down,var(--spectrum-actionbutton-content-color-down)
+)
+)}:host([disabled]){background-color:var(
+--highcontrast-actionbutton-background-color-disabled,var(
+--mod-actionbutton-background-color-disabled,var(--spectrum-actionbutton-background-color-disabled)
+)
+);border-color:var(
+--highcontrast-actionbutton-border-color-disabled,var(
+--mod-actionbutton-border-color-disabled,var(--spectrum-actionbutton-border-color-disabled)
+)
+);color:var(
+--highcontrast-actionbutton-content-color-disabled,var(
+--mod-actionbutton-content-color-disabled,var(--spectrum-actionbutton-content-color-disabled)
+)
+)}::slotted([slot=icon]){color:inherit;height:var(
+--mod-actionbutton-icon-size,var(--spectrum-actionbutton-icon-size)
+);margin-inline-end:calc(var(
+--mod-actionbutton-edge-to-visual-only,
+var(--spectrum-actionbutton-edge-to-visual-only)
+) - var(
+--mod-actionbutton-edge-to-text,
+var(--spectrum-actionbutton-edge-to-text)
+));margin-inline-start:calc(var(
+--mod-actionbutton-edge-to-visual,
+var(--spectrum-actionbutton-edge-to-visual)
+) - var(
+--mod-actionbutton-edge-to-text,
+var(--spectrum-actionbutton-edge-to-text)
+));width:var(
+--mod-actionbutton-icon-size,var(--spectrum-actionbutton-icon-size)
+)}.hold-affordance+::slotted([slot=icon]),[icon-only]::slotted([slot=icon]){margin-inline-start:calc(var(
+--mod-actionbutton-edge-to-visual-only,
+var(--spectrum-actionbutton-edge-to-visual-only)
+) - var(
+--mod-actionbutton-edge-to-text,
+var(--spectrum-actionbutton-edge-to-text)
+))}#label{color:inherit;font-size:var(
+--mod-actionbutton-font-size,var(--spectrum-actionbutton-font-size)
+);overflow:hidden;text-overflow:ellipsis;white-space:nowrap}:host([dir=rtl]) .hold-affordance{transform:matrix(-1,0,0,1,0,0)}.hold-affordance{color:inherit;inset-block-end:calc(var(
+--mod-actionbutton-edge-to-hold-icon,
+var(--spectrum-actionbutton-edge-to-hold-icon)
+) - var(
+--mod-actionbutton-border-width,
+var(--spectrum-actionbutton-border-width)
+));inset-inline-end:calc(var(
+--mod-actionbutton-edge-to-hold-icon,
+var(--spectrum-actionbutton-edge-to-hold-icon)
+) - var(
+--mod-actionbutton-border-width,
+var(--spectrum-actionbutton-border-width)
+));position:absolute}:host{transition:border-color var(
+--mod-actionbutton-animation-duration,var(--spectrum-actionbutton-animation-duration)
+) ease-in-out}:host:after{border-radius:var(
+--mod-actionbutton-focus-indicator-border-radius,var(--spectrum-actionbutton-focus-indicator-border-radius)
+);content:"";inset:0;margin:calc((var(
+--mod-actionbutton-focus-indicator-gap,
+var(--spectrum-actionbutton-focus-indicator-gap)
+) + var(
+--mod-actionbutton-border-width,
+var(--spectrum-actionbutton-border-width)
+))*-1);pointer-events:none;position:absolute;transition:box-shadow var(
+--mod-actionbutton-animation-duration,var(--spectrum-actionbutton-animation-duration)
+) ease-in-out}:host(.focus-visible){box-shadow:none}:host(.focus-visible){box-shadow:none}:host(:focus-visible){box-shadow:none}:host(.focus-visible):after{box-shadow:0 0 0 var(
+--mod-actionbutton-focus-indicator-thickness,var(--spectrum-actionbutton-focus-indicator-thickness)
+) var(
+--highcontrast-actionbutton-focus-indicator-color,var(
+--mod-actionbutton-focus-indicator-color,var(--spectrum-actionbutton-focus-indicator-color)
+)
+)}:host(.focus-visible):after{box-shadow:0 0 0 var(
+--mod-actionbutton-focus-indicator-thickness,var(--spectrum-actionbutton-focus-indicator-thickness)
+) var(
+--highcontrast-actionbutton-focus-indicator-color,var(
+--mod-actionbutton-focus-indicator-color,var(--spectrum-actionbutton-focus-indicator-color)
+)
+)}:host(:focus-visible):after{box-shadow:0 0 0 var(
+--mod-actionbutton-focus-indicator-thickness,var(--spectrum-actionbutton-focus-indicator-thickness)
+) var(
+--highcontrast-actionbutton-focus-indicator-color,var(
+--mod-actionbutton-focus-indicator-color,var(--spectrum-actionbutton-focus-indicator-color)
+)
+)}:host{--spectrum-actionbutton-background-color-default:var(
+--system-spectrum-actionbutton-background-color-default
+);--spectrum-actionbutton-background-color-hover:var(
+--system-spectrum-actionbutton-background-color-hover
+);--spectrum-actionbutton-background-color-down:var(
+--system-spectrum-actionbutton-background-color-down
+);--spectrum-actionbutton-background-color-focus:var(
+--system-spectrum-actionbutton-background-color-focus
+);--spectrum-actionbutton-border-color-default:var(
+--system-spectrum-actionbutton-border-color-default
+);--spectrum-actionbutton-border-color-hover:var(
+--system-spectrum-actionbutton-border-color-hover
+);--spectrum-actionbutton-border-color-down:var(
+--system-spectrum-actionbutton-border-color-down
+);--spectrum-actionbutton-border-color-focus:var(
+--system-spectrum-actionbutton-border-color-focus
+);--spectrum-actionbutton-content-color-default:var(
+--system-spectrum-actionbutton-content-color-default
+);--spectrum-actionbutton-content-color-hover:var(
+--system-spectrum-actionbutton-content-color-hover
+);--spectrum-actionbutton-content-color-down:var(
+--system-spectrum-actionbutton-content-color-down
+);--spectrum-actionbutton-content-color-focus:var(
+--system-spectrum-actionbutton-content-color-focus
+);--spectrum-actionbutton-background-color-disabled:var(
+--system-spectrum-actionbutton-background-color-disabled
+);--spectrum-actionbutton-border-color-disabled:var(
+--system-spectrum-actionbutton-border-color-disabled
+);--spectrum-actionbutton-content-color-disabled:var(
+--system-spectrum-actionbutton-content-color-disabled
+)}:host([quiet]){--spectrum-actionbutton-background-color-default:var(
+--system-spectrum-actionbutton-quiet-background-color-default
+);--spectrum-actionbutton-background-color-hover:var(
+--system-spectrum-actionbutton-quiet-background-color-hover
+);--spectrum-actionbutton-background-color-down:var(
+--system-spectrum-actionbutton-quiet-background-color-down
+);--spectrum-actionbutton-background-color-focus:var(
+--system-spectrum-actionbutton-quiet-background-color-focus
+);--spectrum-actionbutton-border-color-default:var(
+--system-spectrum-actionbutton-quiet-border-color-default
+);--spectrum-actionbutton-border-color-hover:var(
+--system-spectrum-actionbutton-quiet-border-color-hover
+);--spectrum-actionbutton-border-color-down:var(
+--system-spectrum-actionbutton-quiet-border-color-down
+);--spectrum-actionbutton-border-color-focus:var(
+--system-spectrum-actionbutton-quiet-border-color-focus
+);--spectrum-actionbutton-background-color-disabled:var(
+--system-spectrum-actionbutton-quiet-background-color-disabled
+);--spectrum-actionbutton-border-color-disabled:var(
+--system-spectrum-actionbutton-quiet-border-color-disabled
+)}:host([selected]){--spectrum-actionbutton-background-color-default:var(
+--system-spectrum-actionbutton-selected-background-color-default
+);--spectrum-actionbutton-background-color-hover:var(
+--system-spectrum-actionbutton-selected-background-color-hover
+);--spectrum-actionbutton-background-color-down:var(
+--system-spectrum-actionbutton-selected-background-color-down
+);--spectrum-actionbutton-background-color-focus:var(
+--system-spectrum-actionbutton-selected-background-color-focus
+);--spectrum-actionbutton-border-color-default:var(
+--system-spectrum-actionbutton-selected-border-color-default
+);--spectrum-actionbutton-border-color-hover:var(
+--system-spectrum-actionbutton-selected-border-color-hover
+);--spectrum-actionbutton-border-color-down:var(
+--system-spectrum-actionbutton-selected-border-color-down
+);--spectrum-actionbutton-border-color-focus:var(
+--system-spectrum-actionbutton-selected-border-color-focus
+);--spectrum-actionbutton-content-color-default:var(
+--system-spectrum-actionbutton-selected-content-color-default
+);--spectrum-actionbutton-content-color-hover:var(
+--system-spectrum-actionbutton-selected-content-color-hover
+);--spectrum-actionbutton-content-color-down:var(
+--system-spectrum-actionbutton-selected-content-color-down
+);--spectrum-actionbutton-content-color-focus:var(
+--system-spectrum-actionbutton-selected-content-color-focus
+);--spectrum-actionbutton-background-color-disabled:var(
+--system-spectrum-actionbutton-selected-background-color-disabled
+);--spectrum-actionbutton-border-color-disabled:var(
+--system-spectrum-actionbutton-selected-border-color-disabled
+)}:host([selected][emphasized]){--spectrum-actionbutton-background-color-default:var(
+--system-spectrum-actionbutton-selected-emphasized-background-color-default
+);--spectrum-actionbutton-background-color-hover:var(
+--system-spectrum-actionbutton-selected-emphasized-background-color-hover
+);--spectrum-actionbutton-background-color-down:var(
+--system-spectrum-actionbutton-selected-emphasized-background-color-down
+);--spectrum-actionbutton-background-color-focus:var(
+--system-spectrum-actionbutton-selected-emphasized-background-color-focus
+)}:host([variant=black][quiet]){--spectrum-actionbutton-border-color-default:var(
+--system-spectrum-actionbutton-staticblack-quiet-border-color-default
+);--spectrum-actionbutton-border-color-hover:var(
+--system-spectrum-actionbutton-staticblack-quiet-border-color-hover
+);--spectrum-actionbutton-border-color-down:var(
+--system-spectrum-actionbutton-staticblack-quiet-border-color-down
+);--spectrum-actionbutton-border-color-focus:var(
+--system-spectrum-actionbutton-staticblack-quiet-border-color-focus
+);--spectrum-actionbutton-border-color-disabled:var(
+--system-spectrum-actionbutton-staticblack-quiet-border-color-disabled
+)}:host([variant=white][quiet]){--spectrum-actionbutton-border-color-default:var(
+--system-spectrum-actionbutton-staticwhite-quiet-border-color-default
+);--spectrum-actionbutton-border-color-hover:var(
+--system-spectrum-actionbutton-staticwhite-quiet-border-color-hover
+);--spectrum-actionbutton-border-color-down:var(
+--system-spectrum-actionbutton-staticwhite-quiet-border-color-down
+);--spectrum-actionbutton-border-color-focus:var(
+--system-spectrum-actionbutton-staticwhite-quiet-border-color-focus
+);--spectrum-actionbutton-border-color-disabled:var(
+--system-spectrum-actionbutton-staticwhite-quiet-border-color-disabled
+)}:host([variant=black]){--spectrum-actionbutton-background-color-default:var(
+--system-spectrum-actionbutton-staticblack-background-color-default
+);--spectrum-actionbutton-background-color-hover:var(
+--system-spectrum-actionbutton-staticblack-background-color-hover
+);--spectrum-actionbutton-background-color-down:var(
+--system-spectrum-actionbutton-staticblack-background-color-down
+);--spectrum-actionbutton-background-color-focus:var(
+--system-spectrum-actionbutton-staticblack-background-color-focus
+);--spectrum-actionbutton-border-color-default:var(
+--system-spectrum-actionbutton-staticblack-border-color-default
+);--spectrum-actionbutton-border-color-hover:var(
+--system-spectrum-actionbutton-staticblack-border-color-hover
+);--spectrum-actionbutton-border-color-down:var(
+--system-spectrum-actionbutton-staticblack-border-color-down
+);--spectrum-actionbutton-border-color-focus:var(
+--system-spectrum-actionbutton-staticblack-border-color-focus
+);--spectrum-actionbutton-content-color-default:var(
+--system-spectrum-actionbutton-staticblack-content-color-default
+);--spectrum-actionbutton-content-color-hover:var(
+--system-spectrum-actionbutton-staticblack-content-color-hover
+);--spectrum-actionbutton-content-color-down:var(
+--system-spectrum-actionbutton-staticblack-content-color-down
+);--spectrum-actionbutton-content-color-focus:var(
+--system-spectrum-actionbutton-staticblack-content-color-focus
+);--spectrum-actionbutton-focus-indicator-color:var(
+--system-spectrum-actionbutton-staticblack-focus-indicator-color
+);--spectrum-actionbutton-background-color-disabled:var(
+--system-spectrum-actionbutton-staticblack-background-color-disabled
+);--spectrum-actionbutton-border-color-disabled:var(
+--system-spectrum-actionbutton-staticblack-border-color-disabled
+);--spectrum-actionbutton-content-color-disabled:var(
+--system-spectrum-actionbutton-staticblack-content-color-disabled
+)}:host([variant=black][selected]){--spectrum-actionbutton-background-color-default:var(
+--system-spectrum-actionbutton-staticblack-selected-background-color-default
+);--spectrum-actionbutton-background-color-hover:var(
+--system-spectrum-actionbutton-staticblack-selected-background-color-hover
+);--spectrum-actionbutton-background-color-down:var(
+--system-spectrum-actionbutton-staticblack-selected-background-color-down
+);--spectrum-actionbutton-background-color-focus:var(
+--system-spectrum-actionbutton-staticblack-selected-background-color-focus
+);--spectrum-actionbutton-border-color-disabled:var(
+--system-spectrum-actionbutton-staticblack-selected-border-color-disabled
+);--spectrum-actionbutton-content-color-default:var(
+--mod-actionbutton-static-content-color,var(
+--system-spectrum-actionbutton-staticblack-selected-content-color-default
+)
+);--spectrum-actionbutton-content-color-hover:var(
+--mod-actionbutton-static-content-color,var(
+--system-spectrum-actionbutton-staticblack-selected-content-color-hover
+)
+);--spectrum-actionbutton-content-color-down:var(
+--mod-actionbutton-static-content-color,var(
+--system-spectrum-actionbutton-staticblack-selected-content-color-down
+)
+);--spectrum-actionbutton-content-color-focus:var(
+--mod-actionbutton-static-content-color,var(
+--system-spectrum-actionbutton-staticblack-selected-content-color-focus
+)
+);--spectrum-actionbutton-background-color-disabled:var(
+--system-spectrum-actionbutton-staticblack-selected-background-color-disabled
+)}:host([variant=white]){--spectrum-actionbutton-background-color-default:var(
+--system-spectrum-actionbutton-staticwhite-background-color-default
+);--spectrum-actionbutton-background-color-hover:var(
+--system-spectrum-actionbutton-staticwhite-background-color-hover
+);--spectrum-actionbutton-background-color-down:var(
+--system-spectrum-actionbutton-staticwhite-background-color-down
+);--spectrum-actionbutton-background-color-focus:var(
+--system-spectrum-actionbutton-staticwhite-background-color-focus
+);--spectrum-actionbutton-border-color-default:var(
+--system-spectrum-actionbutton-staticwhite-border-color-default
+);--spectrum-actionbutton-border-color-hover:var(
+--system-spectrum-actionbutton-staticwhite-border-color-hover
+);--spectrum-actionbutton-border-color-down:var(
+--system-spectrum-actionbutton-staticwhite-border-color-down
+);--spectrum-actionbutton-border-color-focus:var(
+--system-spectrum-actionbutton-staticwhite-border-color-focus
+);--spectrum-actionbutton-content-color-default:var(
+--system-spectrum-actionbutton-staticwhite-content-color-default
+);--spectrum-actionbutton-content-color-hover:var(
+--system-spectrum-actionbutton-staticwhite-content-color-hover
+);--spectrum-actionbutton-content-color-down:var(
+--system-spectrum-actionbutton-staticwhite-content-color-down
+);--spectrum-actionbutton-content-color-focus:var(
+--system-spectrum-actionbutton-staticwhite-content-color-focus
+);--spectrum-actionbutton-focus-indicator-color:var(
+--system-spectrum-actionbutton-staticwhite-focus-indicator-color
+);--spectrum-actionbutton-background-color-disabled:var(
+--system-spectrum-actionbutton-staticwhite-background-color-disabled
+);--spectrum-actionbutton-border-color-disabled:var(
+--system-spectrum-actionbutton-staticwhite-border-color-disabled
+);--spectrum-actionbutton-content-color-disabled:var(
+--system-spectrum-actionbutton-staticwhite-content-color-disabled
+)}:host([variant=white][selected]){--spectrum-actionbutton-background-color-default:var(
+--system-spectrum-actionbutton-staticwhite-selected-background-color-default
+);--spectrum-actionbutton-background-color-hover:var(
+--system-spectrum-actionbutton-staticwhite-selected-background-color-hover
+);--spectrum-actionbutton-background-color-down:var(
+--system-spectrum-actionbutton-staticwhite-selected-background-color-down
+);--spectrum-actionbutton-background-color-focus:var(
+--system-spectrum-actionbutton-staticwhite-selected-background-color-focus
+);--spectrum-actionbutton-content-color-default:var(
+--mod-actionbutton-static-content-color,var(
+--system-spectrum-actionbutton-staticwhite-selected-content-color-default
+)
+);--spectrum-actionbutton-content-color-hover:var(
+--mod-actionbutton-static-content-color,var(
+--system-spectrum-actionbutton-staticwhite-selected-content-color-hover
+)
+);--spectrum-actionbutton-content-color-down:var(
+--mod-actionbutton-static-content-color,var(
+--system-spectrum-actionbutton-staticwhite-selected-content-color-down
+)
+);--spectrum-actionbutton-content-color-focus:var(
+--mod-actionbutton-static-content-color,var(
+--system-spectrum-actionbutton-staticwhite-selected-content-color-focus
+)
+);--spectrum-actionbutton-background-color-disabled:var(
+--system-spectrum-actionbutton-staticwhite-selected-background-color-disabled
+);--spectrum-actionbutton-border-color-disabled:var(
+--system-spectrum-actionbutton-staticwhite-selected-border-color-disabled
+)}::slotted([slot=icon]){flex-shrink:0}#label{flex-grow:var(--spectrum-actionbutton-label-flex-grow);text-align:var(--spectrum-actionbutton-label-text-align)}:host([size=xs]){min-width:var(--spectrum-actionbutton-height,0)}@media (forced-colors:active){:host{--highcontrast-actionbutton-border-color-disabled:GrayText;--highcontrast-actionbutton-content-color-disabled:GrayText}}
+`,w=f,k=l`
+.spectrum-UIIcon-CornerTriangle75{height:var(
+--spectrum-alias-ui-icon-cornertriangle-size-75,var(--spectrum-global-dimension-size-65)
+);width:var(
+--spectrum-alias-ui-icon-cornertriangle-size-75,var(--spectrum-global-dimension-size-65)
+)}.spectrum-UIIcon-CornerTriangle100{height:var(--spectrum-alias-ui-icon-cornertriangle-size-100);width:var(--spectrum-alias-ui-icon-cornertriangle-size-100)}.spectrum-UIIcon-CornerTriangle200{height:var(
+--spectrum-alias-ui-icon-cornertriangle-size-200,var(--spectrum-global-dimension-size-75)
+);width:var(
+--spectrum-alias-ui-icon-cornertriangle-size-200,var(--spectrum-global-dimension-size-75)
+)}.spectrum-UIIcon-CornerTriangle300{height:var(--spectrum-alias-ui-icon-cornertriangle-size-300);width:var(--spectrum-alias-ui-icon-cornertriangle-size-300)}
+`,y=k,x=({width:s=24,height:t=24,title:o="Corner Triangle300"}={})=>m`<svg
+    xmlns="http://www.w3.org/2000/svg"
+    viewBox="0 0 7 7"
+    aria-hidden="true"
+    role="img"
+    fill="currentColor"
+    aria-label=${o}
+    width=${s}
+    height=${t}
+  >
+    <path
+      d="M6.683.67a.315.315 0 00-.223.093l-5.7 5.7a.316.316 0 00.224.54h5.7A.316.316 0 007 6.687V.986A.316.316 0 006.684.67z"
+    />
+  </svg>`;class z extends p{render(){return v(b),x()}}customElements.define("sp-icon-corner-triangle300",z);var T=Object.defineProperty,q=Object.getOwnPropertyDescriptor,n=(s,t,o,r)=>{for(var a=r>1?void 0:r?q(t,o):t,i=s.length-1,u;i>=0;i--)(u=s[i])&&(a=(r?u(t,o,a):u(a))||a);return r&&a&&T(t,o,a),a};const I={xs:"spectrum-UIIcon-CornerTriangle75",s:"spectrum-UIIcon-CornerTriangle75",m:"spectrum-UIIcon-CornerTriangle100",l:"spectrum-UIIcon-CornerTriangle200",xl:"spectrum-UIIcon-CornerTriangle300"},C=300;let d;class c extends h(g,{validSizes:["xs","s","m","l","xl"]}){constructor(){super(),this.emphasized=!1,this.holdAffordance=!1,this.quiet=!1,this.role="button",this.selected=!1,this.toggles=!1,this._value="",this.onClick=()=>{this.toggles&&(this.selected=!this.selected,this.dispatchEvent(new Event("change",{cancelable:!0}))||(this.selected=!this.selected))},this.addEventListener("click",this.onClick),this.addEventListener("pointerdown",this.onPointerdown)}static get styles(){return[...super.styles,w,y]}get value(){return this._value||this.itemText}set value(t){t!==this._value&&(this._value=t||"",this._value?this.setAttribute("value",this._value):this.removeAttribute("value"))}get itemText(){return(this.textContent||"").trim()}onPointerdown(t){t.button===0&&(this.addEventListener("pointerup",this.onPointerup),this.addEventListener("pointercancel",this.onPointerup),d=setTimeout(()=>{this.dispatchEvent(new CustomEvent("longpress",{bubbles:!0,composed:!0,detail:{source:"pointer"}}))},C))}onPointerup(){clearTimeout(d),this.removeEventListener("pointerup",this.onPointerup),this.removeEventListener("pointercancel",this.onPointerup)}handleKeydown(t){if(!this.holdAffordance)return super.handleKeydown(t);const{code:o,altKey:r}=t;(o==="Space"||r&&o==="ArrowDown")&&(t.preventDefault(),o==="ArrowDown"&&(t.stopPropagation(),t.stopImmediatePropagation()),this.addEventListener("keyup",this.handleKeyup),this.active=!0)}handleKeyup(t){if(!this.holdAffordance)return super.handleKeyup(t);const{code:o,altKey:r}=t;(o==="Space"||r&&o==="ArrowDown")&&(t.stopPropagation(),this.dispatchEvent(new CustomEvent("longpress",{bubbles:!0,composed:!0,detail:{source:"keyboard"}})),this.active=!1)}get buttonContent(){const t=super.buttonContent;return this.holdAffordance&&t.unshift(b`
+                <sp-icon-corner-triangle300
+                    class="hold-affordance ${I[this.size]}"
+                ></sp-icon-corner-triangle300>
+            `),t}updated(t){super.updated(t);const o=this.role==="button"&&(this.selected||this.toggles);(t.has("selected")||t.has("role"))&&(o?this.setAttribute("aria-pressed",this.selected?"true":"false"):this.removeAttribute("aria-pressed"))}}n([e({type:Boolean,reflect:!0})],c.prototype,"emphasized",2),n([e({type:Boolean,reflect:!0,attribute:"hold-affordance"})],c.prototype,"holdAffordance",2),n([e({type:Boolean,reflect:!0})],c.prototype,"quiet",2),n([e({reflect:!0})],c.prototype,"role",2),n([e({type:Boolean,reflect:!0})],c.prototype,"selected",2),n([e({type:Boolean,reflect:!0})],c.prototype,"toggles",2),n([e({reflect:!0})],c.prototype,"variant",2),n([e({type:String})],c.prototype,"value",1);customElements.define("sp-action-button",c);
+//# sourceMappingURL=sp-action-button-d2a6278f.js.map

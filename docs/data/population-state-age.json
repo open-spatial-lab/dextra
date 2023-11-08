@@ -1,0 +1,166 @@
+[
+    {
+      "state": "CA",
+      "key": "Under 5 Years",
+      "population": 2704659
+    },
+    {
+      "state": "CA",
+      "key": "5 to 13 Years",
+      "population": 4499890
+    },
+    {
+      "state": "CA",
+      "key": "14 to 17 Years",
+      "population": 2159981
+    },
+    {
+      "state": "CA",
+      "key": "18 to 24 Years",
+      "population": 3853788
+    },
+    {
+      "state": "CA",
+      "key": "25 to 44 Years",
+      "population": 10604510
+    },
+    {
+      "state": "CA",
+      "key": "45 to 64 Years",
+      "population": 8819342
+    },
+    {
+      "state": "CA",
+      "key": "65 Years and Over",
+      "population": 4114496
+    },
+    {
+      "state": "TX",
+      "key": "Under 5 Years",
+      "population": 2027307
+    },
+    {
+      "state": "TX",
+      "key": "5 to 13 Years",
+      "population": 3277946
+    },
+    {
+      "state": "TX",
+      "key": "14 to 17 Years",
+      "population": 1420518
+    },
+    {
+      "state": "TX",
+      "key": "18 to 24 Years",
+      "population": 2454721
+    },
+    {
+      "state": "TX",
+      "key": "25 to 44 Years",
+      "population": 7017731
+    },
+    {
+      "state": "TX",
+      "key": "45 to 64 Years",
+      "population": 5656528
+    },
+    {
+      "state": "TX",
+      "key": "65 Years and Over",
+      "population": 2472223
+    },
+    {
+      "state": "NY",
+      "key": "Under 5 Years",
+      "population": 1208495
+    },
+    {
+      "state": "NY",
+      "key": "5 to 13 Years",
+      "population": 2141490
+    },
+    {
+      "state": "NY",
+      "key": "14 to 17 Years",
+      "population": 1058031
+    },
+    {
+      "state": "NY",
+      "key": "18 to 24 Years",
+      "population": 1999120
+    },
+    {
+      "state": "NY",
+      "key": "25 to 44 Years",
+      "population": 5355235
+    },
+    {
+      "state": "NY",
+      "key": "45 to 64 Years",
+      "population": 5120254
+    },
+    {
+      "state": "NY",
+      "key": "65 Years and Over",
+      "population": 2607672
+    },
+    {
+      "state": "FL",
+      "key": "Under 5 Years",
+      "population": 1140516
+    },
+    {
+      "state": "FL",
+      "key": "5 to 13 Years",
+      "population": 1938695
+    },
+    {
+      "state": "FL",
+      "key": "14 to 17 Years",
+      "population": 925060
+    },
+    {
+      "state": "FL",
+      "key": "18 to 24 Years",
+      "population": 1607297
+    },
+    {
+      "state": "FL",
+      "key": "25 to 44 Years",
+      "population": 4782119
+    },
+    {
+      "state": "FL",
+      "key": "45 to 64 Years",
+      "population": 4746856
+    },
+    {
+      "state": "FL",
+      "key": "65 Years and Over",
+      "population": 3187797
+    },
+    {
+      "state": "IL",
+      "key": "Under 5 Years",
+      "population": 894368
+    },
+    {
+      "state": "IL",
+      "key": "5 to 13 Years",
+      "population": 1558919
+    },
+    {
+      "state": "IL",
+      "key": "14 to 17 Years",
+      "population": 725973
+    },
+    {
+      "state": "IL",
+      "key": "18 to 24 Years",
+      "population": 1311479
+    },
+    {
+      "state": "IL",
+      "key": "25 to 44 Years",
+      "population": 3596343
+    }]  

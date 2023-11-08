@@ -1,7 +1,7 @@
 import { Meta } from "@storybook/web-components";
 import { html } from "lit";
-import "../components/marks/Density/src/Density.ts";
-import "../components/Plot/src/Plot.ts";
+import "../../components/marks/Density/src/Density.js";
+import "../../components/Plot/src/Plot.js";
 
 export default {
   title: "Marks",

@@ -175,6 +175,10 @@ subscribe(store.datasets, async () => {
   const fetchAllDatasets = allDatasets.map(buildDatasetPromise);
   await Promise.all(fetchAllDatasets).then(() => {
     parseGeoDatasets()
+  }).then(() => {
+    console.log('done')
+    console.log(store)
+    console.log(nonReactiveStore)
   })
 });
 

@@ -1,0 +1,2 @@
+const n={nice:{notation:"compact"},scientific:{notation:"scientific",maximumFractionDigits:2},full:{notation:"standard",maximumFractionDigits:2},percent:{style:"percent",maximumFractionDigits:2}},i=t=>t.startsWith("currency")?{style:"currency",currency:t.split(":")[1]}:n.hasOwnProperty(t)?n[t]:n.full,c=(t,r={})=>new Intl.NumberFormat("en-US",{...i(t),...r});export{c as g};
+//# sourceMappingURL=numberFormatter-30f4b9e1.js.map

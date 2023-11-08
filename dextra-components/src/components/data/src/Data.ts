@@ -61,7 +61,7 @@ export class OslData extends ValtioElement<StateSchema> {
   status = "pending";
 
   @property({ type: String })
-  currentParametersHash = "{}";
+  currentParametersHash = "";
 
   @property({ type: String })
   labelFormat: FormatterPresets = "nice";
@@ -96,7 +96,7 @@ export class OslData extends ValtioElement<StateSchema> {
       ? `${parametersHash}/geo/${this.geoColumn}`
       : parametersHash;
     const currentStatus = statuses?.[currentParametersHash];
-
+    console.log('syncDataFromStore', this.tagName, this.currentParametersHash, currentParametersHash)
     if (currentStatus === "success" && this.currentParametersHash !== currentParametersHash) {
       this.currentResults = nonReactiveStore[data][currentParametersHash];
       this.currentParametersHash = currentParametersHash;
