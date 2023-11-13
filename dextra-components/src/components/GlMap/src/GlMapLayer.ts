@@ -3,8 +3,8 @@ import { OslData } from "../../data/src/Data";
 import * as maplibregl from "maplibre-gl";
 import { MapboxOverlay as DeckOverlay } from "@deck.gl/mapbox/typed";
 import "maplibre-gl/dist/maplibre-gl.css";
-import { ScatterplotLayer, GeoJsonLayer } from "@deck.gl/layers/typed";
 import { interpretFuncJsonOrString } from "../../core/utils/converters";
+import { GeoJsonLayer } from "@deck.gl/layers/typed";
 // @ts-ignore
 import { parse as parseWkt } from "wkt";
 import { safeCustomElement } from "../../core/decorators/safeCustomElement";
@@ -26,45 +26,34 @@ import { tooltipStore } from "../../core/state/MapTooltipStore";
 import { html } from "lit";
 import { PickingInfo } from "@deck.gl/core/typed";
 import { MjolnirEvent } from "mjolnir.js"
+// import type {Feature, Geometry, GeoJsonProperties} from 'geojson';
 
-const LayerTypes = {
-  scatter: ScatterplotLayer,
-  // polygon: PolygonLayer,
-  polygon: GeoJsonLayer,
-};
+// const DEFAULT_QUINTILE_SCALE = [
+//   [237, 248, 251],
+//   [178, 226, 226],
+//   [102, 194, 164],
+//   [44, 162, 95],
+//   [0, 109, 44],
+// ];
 
-const DEFAULT_QUINTILE_SCALE = [
-  [237, 248, 251],
-  [178, 226, 226],
-  [102, 194, 164],
-  [44, 162, 95],
-  [0, 109, 44],
-];
-
-const NULL_GEOM = [
-  [0, 0],
-  [0, 0],
-  [0, 0],
-  [0, 0],
-  [0, 0],
-];
+// const NULL_GEOM = [
+//   [0, 0],
+//   [0, 0],
+//   [0, 0],
+//   [0, 0],
+//   [0, 0],
+// ];
 
 @safeCustomElement("osl-map-layer")
 export class OslMapLayer extends OslData {
   @property({ converter: interpretFuncJsonOrString })
   getPosition?: (d: any) => number[] | number[];
 
-  @property({ converter: interpretFuncJsonOrString })
-  fillColor?: Array<number> | ((row: any) => Array<number>);
+  @property({ type: String })
+  layer: "polygon" | "circle" | "point" /** I'm an idiot and duplicated this somewhere  */ | "text" | "line" = "polygon";
 
   @property({ type: String })
   geometryEncoding: string = "wkt";
-
-  @property({ converter: interpretFuncJsonOrString })
-  getPolygon?: (d: any) => any;
-
-  @property({ converter: interpretFuncJsonOrString })
-  choroplethColorScale?: string | Array<Array<number>> = DEFAULT_QUINTILE_SCALE;
 
   @property({ type: String })
   attribution?: string;
@@ -81,36 +70,96 @@ export class OslMapLayer extends OslData {
   @property({ converter: interpretFuncJsonOrString })
   tooltips: ManualTooltipSpec | TooltipSpec[] = [];
 
-  @property({ type: String })
-  radiusUnits: "meters" | "pixels" = "meters";
-
-  @property({ type: Number })
-  circleRadius: number = 5;
-
-  @property({ type: Number })
-  pointRadiusScale: number = 1;
-
-  @property({ type: Boolean })
-  fixedRadius: boolean = false;
-
   @property({ converter: interpretFuncJsonOrString })
   filled: boolean = true;
 
   @property({ converter: interpretFuncJsonOrString })
   stroked: boolean = false;
 
-  @property({ converter: interpretFuncJsonOrString })
-  staticColor?: Array<number>;
+  // units scaling
+  @property({ type: String })
+  radiusUnits: "meters" | "pixels" = "meters";
 
+  @property({ type: String })
+  lineWidthUnits: "meters" | "pixels" = "meters";
+
+  @property({ type: String })
+  textSizeUnits: "meters" | "pixels" = "meters";
+
+// scaling modifier
+  @property({ type: Number })
+  textSizeScale: number = 1;
+
+  @property({ type: Number })
+  pointRadiusScale: number = 1;
+
+  @property({ type: Number })
+  lineWidthScale: number = 1
+
+  // static props
+  @property({ type: Number })
+  staticRadius?: number
+
+  @property({ type: Number })
+  staticLineWidth?: number
+
+  @property({ type: Array })
+  staticFill?: Array<number>
+
+  @property({ type: Array })
+  staticStroke?: Array<number>
+
+  @property({ type: Array })
+  staticTextColor?: Array<number>
+
+// min/max pixels
   @property({ type: Number})
   pointRadiusMaxPixels?: number;
   
   @property({ type: Number})
   pointRadiusMinPixels?: number;
 
+  @property({ type: Number })
+  textSizeMinPixels: number = 1;
+
+  @property({ type: Number })
+  textSizeMaxPixels: number = 100;
+
+  @property({ type: Number })
+  lineWidthMinPixels: number = 1;
+
+  @property({ type: Number })
+  lineWidthMaxPixels: number = 40;
+
+  // text props
+  @property({ type: Number })
+  textSize: number = 32;
 
   @property({ type: String })
-  layer: "polygon" | "circle" | "text" | "line" = "polygon";
+  textColumn?: string;
+
+  @property({ type: Array })
+  textBorderColor?: Array<number>;
+  
+  @property({ type: Number })
+  textBorderWidth: number = 1;
+
+  @property({ type: Array })
+  textBackgroundColor?: Array<number>;
+
+  @property({ type: Array })
+  textBackgroundPadding: Array<number> = [0,0]
+
+  @property({ type: Array })
+  textOffset: Array<number> = [0,0]
+
+  @property({ type: Number})
+  textMaxWidth: number = -1
+
+  @property({ type: String })
+  textAnchor: "start" | "middle" | "end" = "middle";
+
+
 
   tooltipFormatters: { [key: string]: ReturnType<typeof getFormatter> } = {};
   binBuilder?: BinBuilder;
@@ -213,112 +262,117 @@ export class OslMapLayer extends OslData {
       this.setTooltip(data, x || null, y || null);
   }
 
-  // @ts-ignore
-  public async renderLayer(_data?: DataResult) {
-    const id = this.elementId;
-    const data = _data || this.currentResults || [];
-    this.layerProps.data = data;
-    this.layerProps.id = id;
-    this.layerProps.visible = this.visible;
-    if (this.beforeId) {
+  getColorFunc(){
+    switch (this.type) {
+      case "continuous":
+        return this.binBuilder?.generateContinuousColorFunc("RGB-Array");
+        case "categorical":
+          return this.binBuilder?.generateCategoricalColorFunc("RGB-Array");
+        default:
+        return (_: any) => [0, 0, 0];
+    }
+  }
+  
+  updateLayerProps(){
+    const colorFunc = this.getColorFunc() as typeof this.layerProps.getFillColor;
+    this.layerProps = {
+      ...this.layerProps,
+      id: this.elementId,
+      visible: this.visible,
+      // @ts-ignore for some reason not a valid prpoerty
+      beforeId: this.beforeId || undefined,
       // @ts-ignore
-      this.layerProps.beforeId = this.beforeId;
+      getLineColor: this.staticStroke || colorFunc || [0,0,0,255],
+      // @ts-ignore
+      getFillColor: this.staticFill || colorFunc || [0,0,0,255],
+      getLineWidth: this.staticLineWidth || 1,
+      filled: this.filled,
+      stroked: this.stroked,
+      pointRadiusMinPixels: this.pointRadiusMinPixels || 1,
+      pointRadiusMaxPixels: this.pointRadiusMaxPixels || 100,
+      lineWidthMinPixels: this.pointRadiusMinPixels || 1,
+      lineWidthMaxPixels: this.pointRadiusMaxPixels || 40,
+      lineWidthUnits: this.radiusUnits || "meters",
+      lineWidthScale: this.pointRadiusScale || 1,
+      getPointRadius: this.staticRadius,
+      pointRadiusUnits: this.radiusUnits || "meters",
+      pointRadiusScale: this.pointRadiusScale || 1,
     }
 
-    if (this.dataColumn) {
-      const column = this.dataColumn!;
-      const accessor = (row: any) => row.properties?.[column];
-      if (this.binBuilder && this.binBuilder.data !== data && data) {
-        await this.binBuilder.ingestDataAndAccesor(data, accessor);
-        let colorFunc: any;
-        switch (this.type) {
-          case "continuous":
-            colorFunc =
-              this.binBuilder?.generateContinuousColorFunc("RGB-Array");
-            break;
-          case "categorical":
-            colorFunc =
-              this.binBuilder?.generateCategoricalColorFunc("RGB-Array");
-            break;
-        }
-        if (this.stroked && !this.filled) {
-          this.layerProps.getLineColor = colorFunc;
-          this.layerProps.lineWidthUnits = "pixels";
-          this.layerProps.getLineWidth = 5;
-        } else if (this.filled) {
-          this.layerProps.getFillColor = colorFunc;
-        }
-        switch (this.layer) {
-          case "polygon":
-            break;
-            // @ts-ignore
-          case "point":
-          case "circle":
-            this.layerProps.getPointRadius =
-              this.type === "categorical" || this.fixedRadius
-                ? this.circleRadius
-                : (d: any) => {
-                    const value = accessor(d);
-                    return value;
-                  };
-            this.layerProps.pointRadiusMinPixels = this.pointRadiusMinPixels || 1;
-            this.layerProps.pointRadiusMaxPixels = this.pointRadiusMaxPixels || 40;
-            this.layerProps.pointRadiusUnits = this.radiusUnits || "meters";
-            this.layerProps.pointRadiusScale = this.pointRadiusScale || 1
-            break;
-          case "line":
-            this.layerProps.getLineWidth = this.circleRadius;
-            this.layerProps.lineWidthMinPixels = this.pointRadiusMinPixels || 1;
-            this.layerProps.lineWidthMaxPixels = this.pointRadiusMaxPixels || 40;
-            this.layerProps.lineWidthUnits = this.radiusUnits || "meters";
-            this.layerProps.lineWidthScale = this.pointRadiusScale || 1
-            break;
-          case "text":
-            break;
-        }
 
-        this.legendElements = this.binBuilder?.getLegend();
+    switch (this.layer) {
+      case "line": {
+        break
       }
-    } else if (this.type === "static") {
-      const colorFunc = (_: any) => this.staticColor || [0, 0, 0];
-      // @ts-ignore
-      this.layerProps.getFillColor = colorFunc;
-      if (this.stroked && !this.filled) {
-        // @ts-ignore
-        this.layerProps.getLineColor = colorFunc;
-        this.layerProps.lineWidthUnits = "pixels";
-        this.layerProps.getLineWidth = this.circleRadius || 5;
-        this.layerProps.pointRadiusMinPixels = this.pointRadiusMinPixels || 1;
-        this.layerProps.pointRadiusMaxPixels = this.pointRadiusMaxPixels || 100;
-        this.layerProps.getPointRadius = this.circleRadius;
-        this.layerProps.pointRadiusUnits = this.radiusUnits || "meters";
-        this.layerProps.pointRadiusScale = this.pointRadiusScale || 1
-      } else if (this.filled) {
-        // @ts-ignore
-        this.layerProps.getFillColor = colorFunc;
-      }
-      switch (this.layer) {
-        case "polygon":
-          break;
+      case "circle":
+      case "point": {
+        const accessor = this.binBuilder?.accessor;
+        const shouldScalePoints = (this.type !== "categorical" && this.staticRadius === undefined && accessor !== undefined)
+        if (shouldScalePoints) {
+          const scaleFunc =  (d: any) => {
+            const value = accessor(d);
+            return value;
+          };
           // @ts-ignore
-        case "point":
-        case "circle":
-          this.layerProps.pointRadiusMinPixels = this.pointRadiusMinPixels || 1;
-          this.layerProps.pointRadiusMaxPixels = this.pointRadiusMaxPixels || 100;
-          this.layerProps.getPointRadius = this.circleRadius;
-          this.layerProps.pointRadiusUnits = this.radiusUnits || "meters";
-          this.layerProps.pointRadiusScale = this.pointRadiusScale || 1
-          break;
-        case "text":
-          break;
+          this.layerProps.getPointRadius = scaleFunc;
+        }
       }
     }
+    if (this.textColumn !== undefined) {
+      this.layerProps.getText = (d: any) => d.properties[this.textColumn!];
+      this.layerProps.getTextAnchor = this.textAnchor
+      this.layerProps.getTextSize = this.textSize || 32;
+      this.layerProps.textSizeUnits = this.textSizeUnits || "meters";
+      this.layerProps.textSizeScale = this.textSizeScale || 1;
+      this.layerProps.textSizeMinPixels = this.textSizeMinPixels
+      this.layerProps.textSizeMaxPixels = this.textSizeMaxPixels
+      this.layerProps.pointType = 'circle+text'
+      this.layerProps.getTextPixelOffset = this.textOffset
+      this.layerProps.textMaxWidth = this.textMaxWidth
+      // @ts-ignore
+      this.layerProps.getTextColor = this.staticTextColor || colorFunc || [0,0,0,255];
+      if (this.textBorderColor) {
+        // @ts-ignore
+        this.layerProps.textOutlineColor = this.textBorderColor
+        this.layerProps.textOutlineWidth = this.textBorderWidth
+        this.layerProps.textFontSettings = {
+          sdf: true
+        }
+      } else if (this.textBackgroundColor) {
+        this.layerProps.textBackground = true
+        // @ts-ignore
+        this.layerProps.getTextBackgroundColor = this.textBackgroundColor
+        this.layerProps.textBackgroundPadding = this.textBackgroundPadding
+        this.layerProps.textFontSettings = {
+          sdf: true,
+          buffer: 0,
+          radius: 0
+        }
+      }
+    }
+  }
 
+  // @ts-ignore expect error 4053 
+  async public renderLayer(_data?: DataResult) {
+    const data = _data || this.currentResults || [];
+    this.layerProps.data = data
+    if (this.dataColumn !== undefined) {
+      const column = this.dataColumn;
+      const accessor = (row: Record<string, any>) => row.properties?.[column];
+      const shouldGenerateBins = Boolean(this.binBuilder) && this.binBuilder?.data !== data && data
+      if (shouldGenerateBins) {
+        await this.binBuilder!.ingestDataAndAccesor(data, accessor);
+      }
+    }
+    this.updateLayerProps()
     this.setLegend({
       title: this.legendTitle || this.dataColumn || 'Layer',
       visible: this.visible,
       elements: this.legendElements,
     });
+
+    console.log(this.layerProps)
+
     return new GeoJsonLayer(this.layerProps);
   }
 
