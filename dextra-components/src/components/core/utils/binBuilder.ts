@@ -40,16 +40,17 @@ export class BinBuilder {
   mapping?: Record<string, string>;
 
   // data
-  data: DataResult = [];
-  accessor: (d: DataResult[number]) => number | string = (_d: any) => 0;
-  current?: {
+  public data: DataResult = [];
+  public accessor: (d: DataResult[number]) => number | string = (_d: any) => 0;
+  public current?: {
     breaks: (number|string)[];
     labels: string[];
     colorStops?: Instance[];
   };
 
   // inner utils
-  formatter: ReturnType<typeof getFormatter> = getFormatter(this.labelFormat);
+  public formatter = getFormatter(this.labelFormat);
+
   constructor({
     type,
     colorScheme,
@@ -134,12 +135,17 @@ export class BinBuilder {
   async generateBins() {
     if (this.manualBreaks) {
       return this.manualBreaks;
-    } else if (this.type === "categorical") {
-      return this.generateCategoricalBins();
-    } else if (this.type === "continuous") {
-      return this.generateContinuousBins();
-    } else if (this.type === "ordinal") {
-      // return this.generateOrdinalBins(data);
+    }
+    switch (this.type) {
+      case "continuous":
+        return this.generateContinuousBins();
+      case "categorical":
+        return this.generateCategoricalBins();
+      case "ordinal":
+        // return this.generateOrdinalBins(data);
+        return [];
+      default:
+        return [];
     }
   }
 
@@ -239,8 +245,8 @@ export class BinBuilder {
   generateCategoricalColorFunc(
     format: ColorFormats = "RGB",
   ) {
-    const { accessor, mapping } = this;
-    const { breaks, colorStops} = this.current || {};
+    const { accessor, mapping, current } = this;
+    const { breaks, colorStops} = current|| {};
     const stops = colorStops
       ? (colorStops as Instance[])
       : [];

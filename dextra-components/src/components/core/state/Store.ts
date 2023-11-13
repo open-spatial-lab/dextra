@@ -72,7 +72,6 @@ const buildDatasetPromise = async (key: string) => {
     const currentControllerParamString = queryControllers[key]?.paramstring;
     const queryIsDuplicate = currentParamString === currentControllerParamString;
     const shouldQuery = statuses?.[currentParamString] === undefined && !queryIsDuplicate;
-    // console.log(key, shouldQuery)
     if (shouldQuery) {
       statuses[currentParamString] = 'pending';
       queryControllers?.[key]?.controller?.abort();
@@ -107,10 +106,7 @@ const buildDatasetPromise = async (key: string) => {
       try {
         url.searchParams.set("format", "json");
         const data = await handleLoad(url.toString(), signal);
-        // console.log('data', data)
-        const t0 = performance.now()
         const parsedData = parseData(data);
-        // console.log('parsed data in', performance.now() - t0, 'ms')
         nonReactiveStore[key][currentParamString] = parsedData;
         statuses[currentParamString] = 'success';
         store.usingMsgPack = false;
@@ -175,10 +171,6 @@ subscribe(store.datasets, async () => {
   const fetchAllDatasets = allDatasets.map(buildDatasetPromise);
   await Promise.all(fetchAllDatasets).then(() => {
     parseGeoDatasets()
-  }).then(() => {
-    console.log('done')
-    console.log(store)
-    console.log(nonReactiveStore)
   })
 });
 

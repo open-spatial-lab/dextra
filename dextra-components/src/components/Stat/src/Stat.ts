@@ -20,7 +20,7 @@ export class OslStat extends OslData {
   
 
   getStat() {
-    console.log('getStat', this.currentResults, this.property)
+    // console.log('getStat', this.currentResults, this.property)
     if ((Array.isArray(this.currentResults) && !this.currentResults?.length) || !this.property) return undefined;
     const data = Array.isArray(this.currentResults)
       ? this.currentResults[0]
