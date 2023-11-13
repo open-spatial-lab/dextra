@@ -143,9 +143,9 @@ export class OslDownload extends OslData {
     return html``;
   }
   
-  render() {
+  template() {
     return html`
-      <div>
+      <div style="position:relative">
         <sp-help-text>${this.title || "Download Data"}</sp-help-text>
         <sp-action-group size="${this.size}">
           ${formats.map(this.renderButton.bind(this))}
