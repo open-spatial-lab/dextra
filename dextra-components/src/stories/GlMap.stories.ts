@@ -58,6 +58,52 @@ export const ChoroTest = () => {
   `;
 };
 
+export const CommunityArea = () => {
+  return html`
+  <div style="width:100%;height:80vh;position:relative;">
+
+  <osl-glmap
+        mapstyle="https://basemaps.cartocdn.com/gl/positron-gl-style/style.json"
+        ><osl-map-layer
+        legendTitle="Community Areas"
+        visible="true"
+        stroked="true"
+        filled="false"
+        geoType="WKB"
+        geoColumn="geometry"
+        layer="line"
+        type="static"
+        staticStroke="[0,0,0]"
+        data="https://d14xp4vykd1up4.cloudfront.net/data-query/6553a12e0ec8e9000858d87a"
+        lineWidthMaxPixels="5"
+        lineWidthMinPixels="2"
+        ></osl-map-layer>
+        <osl-map-layer
+        legendTitle="Community Areas Labels"
+        visible="true"
+        stroked="false"
+        filled="false"
+        geoType="WKB"
+        geoColumn="geometry"
+        layer="text"
+        type="static"
+        staticRadius="100"
+        textColumn="community"
+        textSizeScale="5"
+        textSize="64"
+        textMaxWidth="400"
+
+
+        data="https://d14xp4vykd1up4.cloudfront.net/data-query/6553a12e0ec8e9000858d87a"
+        geoOperation="centroid"
+        ></osl-map-layer
+      >
+    
+    </osl-glmap>
+
+  </div>`
+}
+
 export const ChoroplethMap = () => {
   //   <osl-map-layer
   //   layer="polygon"

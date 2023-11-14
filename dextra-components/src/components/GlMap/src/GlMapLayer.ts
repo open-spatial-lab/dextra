@@ -216,7 +216,6 @@ export class OslMapLayer extends OslData {
       data = this.tooltips(entry);
     } else if (this.tooltips.length) {
       data = this.tooltips.map((tooltip) => {
-        // console.log('tooltip', tooltip)
         const formatter = this.tooltipFormatters[tooltip.format || "nice"];
         const value = entry[tooltip.column];
         const formatted =
@@ -362,6 +361,7 @@ export class OslMapLayer extends OslData {
       const shouldGenerateBins = Boolean(this.binBuilder) && this.binBuilder?.data !== data && data
       if (shouldGenerateBins) {
         await this.binBuilder!.ingestDataAndAccesor(data, accessor);
+        this.legendElements = this.binBuilder!.getLegend();
       }
     }
     this.updateLayerProps()
@@ -369,10 +369,11 @@ export class OslMapLayer extends OslData {
       title: this.legendTitle || this.dataColumn || 'Layer',
       visible: this.visible,
       elements: this.legendElements,
+      staticFill: this.staticFill,
+      staticStroke: this.staticStroke,
+      type: this.type,
+      hasText: Boolean(this.textColumn)
     });
-
-    console.log(this.layerProps)
-
     return new GeoJsonLayer(this.layerProps);
   }
 

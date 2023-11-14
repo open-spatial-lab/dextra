@@ -11,6 +11,10 @@ export type LegendElementSpec = {
 
 export type LegendSpec = {
   title: string;
-  visible?: boolean;
   elements: LegendElementSpec[]
+  visible?: boolean;
+  staticFill?: Array<number>;
+  staticStroke?: Array<number>;
+  type?: "categorical" | "continuous" | "ordinal" | "static";
+  hasText?: boolean
 };
