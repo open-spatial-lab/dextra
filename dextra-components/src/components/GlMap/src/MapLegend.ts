@@ -37,6 +37,7 @@ export class MapLegend extends ValtioElement<LegendStoreSpec> {
       display: flex;
       flex-direction: row;
       max-height: 30vh;
+      border-right: 1px solid lightgray;
     }
     .legend-card {
       position: relative;
@@ -55,8 +56,8 @@ export class MapLegend extends ValtioElement<LegendStoreSpec> {
     }
     .legend-actions {
       position: absolute;
-      top: -2px;
-      right: 0;
+      top: 3px;
+      right: 2px;
     }
     .legend-entry {
       display: flex;
@@ -140,7 +141,10 @@ export class MapLegend extends ValtioElement<LegendStoreSpec> {
             <sp-menu-item
               name="${key}"
               value="${key}"
-              @click=${() => this.onLayerToggle?.(key)}
+              @click=${(e: any) => {
+                e.preventDefault();
+                this.onLayerToggle?.(key)
+              }}
             >
               ${this.showSingleLayer
                 ? ""
@@ -186,7 +190,6 @@ export class MapLegend extends ValtioElement<LegendStoreSpec> {
 
       <sp-help-text>${legend.title}</sp-help-text>
         </div>
-      ${this.renderLayerControl()}
   </div>
     `
       )}
@@ -199,7 +202,13 @@ export class MapLegend extends ValtioElement<LegendStoreSpec> {
       <div class="legend-card ${showLayerControl && "extra-padding"}">
         <sp-help-text>${legend.title}</sp-help-text>
         ${legend.elements?.map((_, i) => this.renderLegendEntry(key, i))}
-        ${showLayerControl ? this.renderLayerControl() : null}
+      </div>
+    `;
+  }
+  renderFallbackInterface() {
+    return html`
+      <div class="legend-card extra-padding">
+        <sp-help-text>Layers</sp-help-text>
       </div>
     `;
   }
@@ -218,6 +227,7 @@ export class MapLegend extends ValtioElement<LegendStoreSpec> {
       const legend = this.getLegend?.(key);
       return legend?.visible && legend?.type !== "static";
     });
+    const noLegends = staticLegends.length ===0 && dynamicLegends.length === 0;
 
     return html`
       <div class="legend" style="${yPosition}: 0; ${xPosition}: 0;}">
@@ -230,6 +240,8 @@ export class MapLegend extends ValtioElement<LegendStoreSpec> {
           );
         })}
         ${this.renderStaticLegends(staticLegends)}
+        ${noLegends ? this.renderFallbackInterface() : ``}
+        ${this.renderLayerControl()}
       </div>
     `;
   }
