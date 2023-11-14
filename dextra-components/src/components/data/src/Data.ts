@@ -75,6 +75,9 @@ export class OslData extends ValtioElement<StateSchema> {
   @property({ type: String })
   onInteractProperty?: string = ""
 
+  @property({type: String})
+  geoOperation?: string
+
   protected getDeepValue(obj: Record<string, any>, path: string) {
     const pathParts = path.split(".");
     let tempObj = obj;
@@ -93,10 +96,11 @@ export class OslData extends ValtioElement<StateSchema> {
     const statuses = this.store.datasets[data].statuses;
     const parametersHash = JSON.stringify(this.store.datasets[data].parameters);
     const currentParametersHash = useGeojsonData
-      ? `${parametersHash}/geo/${this.geoColumn}`
+      ? `${parametersHash}/geo/${this.geoColumn}${this.geoOperation ? `/${this.geoOperation}`: ''}`
       : parametersHash;
-    const currentStatus = statuses?.[currentParametersHash];
-    if (currentStatus === "success" && this.currentParametersHash !== currentParametersHash) {
+      const currentStatus = statuses?.[currentParametersHash];
+
+      if (currentStatus === "success" && this.currentParametersHash !== currentParametersHash) {
       this.currentResults = nonReactiveStore[data][currentParametersHash];
       this.currentParametersHash = currentParametersHash;
       this.isReady = true;
@@ -153,7 +157,8 @@ export class OslData extends ValtioElement<StateSchema> {
         (listener) =>
           listener.geoColumn === this.geoColumn &&
           listener.geoType === this.geoType &&
-          listener.dataset === this.data
+          listener.dataset === this.data &&
+          listener.operation === this.geoOperation
       );
     if (shouldRegister) {
       this.store.geoListeners.push({
@@ -161,6 +166,7 @@ export class OslData extends ValtioElement<StateSchema> {
         geoType: this.geoType,
         geoId: this.geoId,
         dataset: this.data,
+        operation: this.geoOperation
       });
     }
   }

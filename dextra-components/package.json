@@ -20,6 +20,7 @@
     "@rollup/plugin-replace": "^5.0.2",
     "@spectrum-web-components/bundle": "^0.29.3",
     "@storybook/builder-vite": "^7.5.2",
+    "@turf/centroid": "^6.5.0",
     "comlink": "^4.3.1",
     "deck.gl": "^8.8.24",
     "kill-port": "^2.0.1",

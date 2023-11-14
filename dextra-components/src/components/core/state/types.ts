@@ -13,6 +13,7 @@ export type StateSchema = {
     geoType: 'WKT' | 'WKB' | 'GeoJSON';
     geoColumn: string;
     geoId?: string;
+    operation?: string
   }
   >
   

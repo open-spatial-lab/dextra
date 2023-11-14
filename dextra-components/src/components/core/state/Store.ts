@@ -121,13 +121,14 @@ const buildGeoPromise = async (
   key: string,
   geoColumn: string,
   geoType: 'WKT' | 'WKB' | 'GeoJSON',
-  geoId?: string
+  geoId?: string,
+  operation?: string
 ) => {
   
   const storeDataset = store.datasets[key];
   const statuses = storeDataset.statuses
   const currentParamString = JSON.stringify(storeDataset.parameters);
-  const geoKey = `${currentParamString}/geo/${geoColumn}`
+  const geoKey = `${currentParamString}/geo/${geoColumn}${operation ? `/${operation}`: ''}`
   const status = statuses[currentParamString];
 
   const dataset = nonReactiveStore[key];
@@ -143,7 +144,8 @@ const buildGeoPromise = async (
       currentResults as DataResult,
       geoType,
       geoColumn,
-      geoId
+      geoId,
+      operation
     ).then((geoData: any) => {
       dataset[geoKey] = geoData;
       statuses[geoKey] = 'success'
@@ -156,8 +158,8 @@ const buildGeoPromise = async (
 const parseGeoDatasets = async () => {
   const geoListeners = store.geoListeners;
   const allGeoListeners = geoListeners.map((listener) => {
-    const { dataset, geoColumn, geoType, geoId } = listener;
-    return buildGeoPromise(dataset, geoColumn, geoType, geoId);
+    const { dataset, geoColumn, geoType, geoId, operation } = listener;
+    return buildGeoPromise(dataset, geoColumn, geoType, geoId, operation);
   })
   await Promise.all(allGeoListeners);
 }
@@ -171,9 +173,15 @@ subscribe(store.datasets, async () => {
   const fetchAllDatasets = allDatasets.map(buildDatasetPromise);
   await Promise.all(fetchAllDatasets).then(() => {
     parseGeoDatasets()
+  }).then(() => {
+    // console.log(store.geoListeners)
+    // console.log(nonReactiveStore)
   })
 });
 
 subscribe(store.geoListeners, async () => {
-  parseGeoDatasets()
+  parseGeoDatasets().then(() => {
+    // console.log(store.geoListeners)
+    // console.log(nonReactiveStore)
+  })
 });
