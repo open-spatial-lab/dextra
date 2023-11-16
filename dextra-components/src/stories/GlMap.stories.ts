@@ -92,6 +92,7 @@ export const CommunityArea = () => {
         textSizeScale="5"
         textSize="64"
         textMaxWidth="400"
+        textSizeMaxPixels="16"
 
 
         data="https://d14xp4vykd1up4.cloudfront.net/data-query/6553a12e0ec8e9000858d87a"

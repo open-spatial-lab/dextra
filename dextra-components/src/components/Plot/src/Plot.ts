@@ -123,6 +123,9 @@ export class OslPlot extends OslData {
   @property({ converter: interpretFuncJsonOrString })
   yAxisScaling?: Plot.ScaleOptions["type"];
 
+  @property({ converter: interpretFuncJsonOrString })
+  _unsafePlotSettings?: Plot.PlotOptions = {}
+
   protected plot() {
     this.updateContainerSize();
     const {
@@ -163,6 +166,7 @@ export class OslPlot extends OslData {
       y: { axis: this.yAxisAnchor, type: this.yAxisScaling },
       marks,
       projection,
+      ...this._unsafePlotSettings
     });
     return plot;
   }

@@ -31,6 +31,7 @@ import { CirculateSanDiego3 as _CirculateSanDiego3 } from './projects/CSD3'
 import { Wisconsin as _Wisconsin } from './projects/Wisconsin'
 import {Equiticity as _Equiticity} from './projects/Equiticity'
 import {m3 as _M3} from './projects/M3'
+import {GWBP1, GWBP2} from './projects/GWBP'
 
 export const PreventBlindness = () => _PreventBlindness()
 export const EECRC = () => _EECRC();
@@ -43,3 +44,5 @@ export const CirculateSanDiego2 = () => _CirculateSanDiego2();
 export const CirculateSanDiego3 = () => _CirculateSanDiego3();
 export const Wisconsin = () => _Wisconsin();
 export const M3 = () => _M3();
+export const GroundworkBridgeportView1 = () => GWBP1();
+export const GroundworkBridgeportView2 = () => GWBP2();
