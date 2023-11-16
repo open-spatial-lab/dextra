@@ -9,7 +9,7 @@ import { safeCustomElement } from "../../../core/decorators/safeCustomElement";
 export class OslAxis extends PlotMark {
   mark = "axis"
 
-  markOptions: (keyof this)[] = ['axis', 'anchor','ticks','tickFormat', 'tickSize', 'tickPadding', 'tickRotate'];
+  markOptions: (keyof this)[] = ['axis', 'anchor','ticks','tickFormat', 'tickSize', 'tickPadding', 'tickRotate', "label"];
 
   @property({ type: String })
   axis?: "x" | "y" = "x";
@@ -32,6 +32,8 @@ export class OslAxis extends PlotMark {
   @property({type: Number})
   tickRotate?: Plot.AxisOptions["tickRotate"];
 
+  @property({ type: String })
+  label?: string;
 
   public get plot() {
     const innerData = this?.currentResults;

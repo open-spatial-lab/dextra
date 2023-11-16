@@ -162,8 +162,8 @@ export class OslPlot extends OslData {
         label: this.colorLabel,
       },
       inset,
-      x: { axis: this.xAxisAnchor, type: this.xAxisScaling },
-      y: { axis: this.yAxisAnchor, type: this.yAxisScaling },
+      // x: { axis: this.xAxisAnchor, type: this.xAxisScaling },
+      // y: { axis: this.yAxisAnchor, type: this.yAxisScaling },
       marks,
       projection,
       ...this._unsafePlotSettings
