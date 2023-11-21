@@ -10,6 +10,7 @@ import { parse as parseWkt } from "wkt";
 import { safeCustomElement } from "../../core/decorators/safeCustomElement";
 // @ts-ignore
 import syncMaps from "mapbox-gl-sync-move";
+// @ts-ignore
 import bbox from "@turf/bbox";
 import { getFormatter } from "../../core/utils/numberFormatter";
 import { OslGlMap } from "./GlMap";
@@ -159,7 +160,8 @@ export class OslMapLayer extends OslData {
   @property({ type: String })
   textAnchor: "start" | "middle" | "end" = "middle";
 
-
+  @property({ type: Number })
+  opacity: number = 1;
 
   tooltipFormatters: { [key: string]: ReturnType<typeof getFormatter> } = {};
   binBuilder?: BinBuilder;
@@ -296,6 +298,7 @@ export class OslMapLayer extends OslData {
       getPointRadius: this.staticRadius,
       pointRadiusUnits: this.radiusUnits || "meters",
       pointRadiusScale: this.pointRadiusScale || 1,
+      opacity: this.opacity || 1,
     }
 
 

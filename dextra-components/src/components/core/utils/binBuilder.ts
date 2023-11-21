@@ -63,7 +63,6 @@ export class BinBuilder {
     labelFormat,
   }: Partial<BinBuilder>) {
     this.type = type || "continuous";
-
     if (colorStops) {
       this.colorStops = this.asTinyColor(colorStops as any);
     } else {
@@ -213,7 +212,7 @@ export class BinBuilder {
       case "continuous":
         return colorStops.map((c, i) => ({
           symbol: { color: this.formatColor(c, format) },
-          text: `${labels[i]}-${labels[i + 1]}`,
+          text: `${labels[i]} - ${labels[i + 1]}`,
         }));
       case "categorical":
         return breaks.map((b, i) => ({
