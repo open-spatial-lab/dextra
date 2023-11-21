@@ -3,6 +3,7 @@ import "../components/GlMap/src/GlMap.ts";
 import "../components/GlMap/src/GlMapLayer.ts";
 import "../components/Slider/src/Slider.ts";
 import "../components/Select/src/SelectControl.ts";
+import "../components/Checkbox/src/Checkbox.ts";
 import "../components/FlexBox/src/FlexBox.ts";
 import "../components/StatTable/src/StatTable.ts";
 import "../components/DataTable/src/DataTable.ts";
@@ -16,6 +17,7 @@ import "../components/Radio/src/Radio.ts";
 import "../components/ParamView/src/ParamView.ts";
 import "../components/Stat/src/Stat.ts";
 import "../components/FlexBox/src/FlexBox.ts";
+import "../components/Tabs/src/Tabs.ts";
 
 export default {
   title: "Projects",

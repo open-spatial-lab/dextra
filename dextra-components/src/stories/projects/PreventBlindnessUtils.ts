@@ -58,58 +58,58 @@ export const abbrs = [
 ];
 export const specialties = [
   { value: "*", label: "All" },
-  { value: "%207W00000X%", label: "Ophthalmology: " },
+  { value: "%207W00000X%", label: "All Ophthalmology Specializations" },
   {
     value: "%207WX0120X%",
-    label: "Ophthalmology: Cornea and External Diseases Specialist",
+    label: "- Cornea and External Diseases Specialist",
   },
-  { value: "%207WX0009X%", label: "Ophthalmology: Glaucoma Specialist" },
-  { value: "%207WX0109X%", label: "Ophthalmology: Neuro-ophthalmology" },
+  { value: "%207WX0009X%", label: "- Glaucoma Specialist" },
+  { value: "%207WX0109X%", label: "- Neuro-ophthalmology" },
   {
     value: "%207WX0200X%",
-    label: "Ophthalmology: Ophthalmic Plastic and Reconstructive Surgery",
+    label: "- Ophthalmic Plastic and Reconstructive Surgery",
   },
   {
     value: "%207WX0110X%",
-    label: "Ophthalmology: Pediatric Ophthalmology and Strabismus Specialist",
+    label: "- Pediatric Ophthalmology and Strabismus Specialist",
   },
-  { value: "%207WX0107X%", label: "Ophthalmology: Retina Specialist" },
+  { value: "%207WX0107X%", label: "- Retina Specialist" },
   {
     value: "%207WX0108X%",
-    label: "Ophthalmology: Uveitis and Ocular Inflammatory Disease",
+    label: "- Uveitis and Ocular Inflammatory Disease",
   },
-  { value: "%152W00000X%", label: "Optometrist: " },
+  { value: "%152W00000X%", label: "All Optometrist Specializations" },
   {
     value: "%152WC0802X%",
-    label: "Optometrist: Corneal and Contact Management",
+    label: "- Corneal and Contact Management",
   },
-  { value: "%152WL0500X%", label: "Optometrist: Low Vision Rehabilitation" },
-  { value: "%152WX0102X%", label: "Optometrist: Occupational Vision" },
-  { value: "%152WP0200X%", label: "Optometrist: Pediatrics" },
-  { value: "%152WS0006X%", label: "Optometrist: Sports Vision" },
-  { value: "%152WV0400X%", label: "Optometrist: Vision Therapy" },
-  { value: "%156F00000X%", label: "Technician\\/Technologist: " },
-  { value: "%156FC0800X%", label: "Technician\\/Technologist: Contact Lens" },
+  { value: "%152WL0500X%", label: "- Low Vision Rehabilitation" },
+  { value: "%152WX0102X%", label: "- Occupational Vision" },
+  { value: "%152WP0200X%", label: "- Pediatrics" },
+  { value: "%152WS0006X%", label: "- Sports Vision" },
+  { value: "%152WV0400X%", label: "- Vision Therapy" },
+  { value: "%156F00000X%", label: "All Technician/Technologist Specializations" },
+  { value: "%156FC0800X%", label: "- Contact Lens" },
   {
     value: "%156FC0801X%",
-    label: "Technician\\/Technologist: Contact Lens Fitter",
+    label: "- Contact Lens Fitter",
   },
-  { value: "%156FX1700X%", label: "Technician\\/Technologist: Ocularist" },
-  { value: "%156FX1100X%", label: "Technician\\/Technologist: Ophthalmic" },
+  { value: "%156FX1700X%", label: "- Ocularist" },
+  { value: "%156FX1100X%", label: "- Ophthalmic" },
   {
     value: "%156FX1101X%",
-    label: "Technician\\/Technologist: Ophthalmic Assistant",
+    label: "- Ophthalmic Assistant",
   },
-  { value: "%156FX1800X%", label: "Technician\\/Technologist: Optician" },
+  { value: "%156FX1800X%", label: "- Optician" },
   {
     value: "%156FX1201X%",
-    label: "Technician\\/Technologist: Optometric Assistant",
+    label: "- Optometric Assistant",
   },
   {
     value: "%156FX1202X%",
-    label: "Technician\\/Technologist: Optometric Technician",
+    label: "- Optometric Technician",
   },
-  { value: "%156FX1900X%", label: "Technician\\/Technologist: Orthoptist" },
+  { value: "%156FX1900X%", label: "- Orthoptist" },
 ];
 export const statTable = JSON.stringify([
   "providers_per_100k",
@@ -119,7 +119,7 @@ export const statTable = JSON.stringify([
   "Percent Less than High School",
   "Total Population",
 ]);
-export const bothDatasets = JSON.stringify([
+export const allDatasets = JSON.stringify([
   "https://d36q6zt0rhsb35.cloudfront.net/data-query/65303831181b4500089e4fe6",
   "https://d36q6zt0rhsb35.cloudfront.net/data-query/65303b14fc2a290008152629",
 ]);

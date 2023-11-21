@@ -46,6 +46,10 @@ const DATASETS = {
     "https://d148axxp71p64w.cloudfront.net/data-query/655636c8d2d81200086f7694",
 };
 
+const maxDbh = [
+  "*",
+  1, 2,3,4,5,10,15,20,30,40,50,60
+]
 const filterDatasets = JSON.stringify([
   DATASETS.treesMainView,
   DATASETS.treeSummary,
@@ -78,12 +82,19 @@ export const GWBP1 = () => {
                   initialValue="2023-12"
                 ></osl-select-control>
               </div>
+                <osl-select-control
+                  data=${filterDatasets}
+                  option="max_dbh"
+                  options=${JSON.stringify(maxDbh)}
+                  title="Max DBH"
+                  initialValue="*"
+                ></osl-select-control>
             </osl-flex-box>
             <br />
             <osl-flex-box breakpoint="sm">
               <osl-stat
                 statSize="1.5rem"
-                title="Total Trees Planted"
+                title="Total Trees"
                 subtitle="From selected dates"
                 property="count"
                 data=${DATASETS.treeSummary}
@@ -213,7 +224,7 @@ export const GWBP1 = () => {
               </osl-glmap>
             </div>
             <div style="position:relative;height:40vh;width:100%;">
-              <h3>Tree Planting Over Time</h3>
+              <h3>Trees Over Time</h3>
               <osl-plot
                 colorLegend="true"
                 data=${DATASETS.treesOverTime}
@@ -286,7 +297,7 @@ export const GWBP2 = () => {
                 <osl-stat
                   statSize="1rem"
                   subtitle="Simpson's Index"
-                  title="Most Common Species"
+                  title="Genus Diversity"
                   property="diversity"
                   format="nice"
                   data=${DATASETS.genusDiversity}
@@ -425,8 +436,8 @@ function MapSnippet(activeLayer: string = "Tracts: Total Population") {
               attribution="Groundwork Bridfgeport"
               layer="polygon"
               type="continuous"
-              staticStroke="[255,255,255, 120]"
-              lineWidthMaxPixels="1"
+              staticStroke="[0,0,0]"
+              lineWidthMaxPixels="2"
               beforeId="water"
               lineWidthMinPixels="0"
               stroked="true"
