@@ -9,12 +9,10 @@ export default {
 export const Tabs = () => {
   return html`
   <div style="width:100%;height:100vh;position:relative;">
-    <osl-tabs
-      tabs="[1,2]"
-    >
-  <div slot="1">asdf</div>
-  <div slot="2">asdfasdf</div>
-  </osl-tabs>
+    <osl-tabs>
+      <div data-tab="Tab 1">asdf</div>
+      <div data-tab="Tab 2"> asdfasdf</div>
+    </osl-tabs>
 </div>
     `
 }

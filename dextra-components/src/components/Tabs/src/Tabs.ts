@@ -1,29 +1,45 @@
-import { html } from "lit";
-import {  property } from "lit/decorators.js";
+import { css, html } from "lit";
+import { property } from "lit/decorators.js";
 import { ValtioElement } from "../../core/state";
 import { safeCustomElement } from "../../core/decorators/safeCustomElement";
-import "@spectrum-web-components/tabs/sp-tabs.js"
-import "@spectrum-web-components/tabs/sp-tab-panel.js"
+import "@spectrum-web-components/button/sp-button.js";
+import "@spectrum-web-components/button-group/sp-button-group.js";
+import "@spectrum-web-components/tabs/sp-tabs.js";
+import "@spectrum-web-components/tabs/sp-tab.js";
+import "@spectrum-web-components/tabs/sp-tab-panel.js";
 
 @safeCustomElement("osl-tabs")
 export class OslTabs extends ValtioElement<any> {
   @property({ type: Array })
-  tabs: string[] = [];
+  tabs: any[] = [];
 
-  template() {
-    console.log(this.tabs)
+  firstUpdated(): void {
+    this.tabs = Array.from(this.children).map((child) =>
+      child.getAttribute("data-tab")
+    );
+  }
+  getTabContent(tab: string) {
+    return this.querySelector(`[data-tab="${tab}"]`);
+  }
+  renderTabs() {
     return html`
-      <sp-tabs selected="1" size="m">
-        ${this.tabs.map(
-          (label, index) =>
-            html`<sp-tab label="${label}" value="${index}"></sp-tab>`
-        )}
-        ${this.tabs.map(
-          (_, index) => html` <sp-tab-panel value="${index}">
-          asdf
-            <slot name="${index}"></slot>
-          </sp-tab-panel>`
-        )}
+      ${this.tabs.map((tab) => {
+        return html`
+          <sp-tab-panel value=${tab}>${this.getTabContent(tab)}</sp-tab-panel>
+        `;
+      })}
+    `;
+  }
+  template() {
+    if (!this.tabs.length) {
+      return html``;
+    }
+    return html`
+      <sp-tabs selected=${this.tabs[0]} size="m" style="height:100%;width:100%;">
+        ${this.tabs.map((tab) => {
+          return html` <sp-tab value=${tab}>${tab}</sp-tab> `;
+        })}
+        ${this.renderTabs()}
       </sp-tabs>
     `;
   }
