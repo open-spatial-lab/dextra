@@ -25,6 +25,7 @@ import * as Download from "../../components/Download/src/Download";
 import * as FlexBox from '../../components/FlexBox/src/FlexBox';
 import * as DataTable  from "../../components/DataTable/src/DataTable";
 import * as StatTable  from "../../components/StatTable/src/StatTable";
+import * as Tabs from "../../components/Tabs/src/Tabs";
 
 export {
   Chips,
@@ -46,5 +47,6 @@ export {
   Bar,
   Plot,
   Download,
-  FlexBox
+  FlexBox,
+  Tabs
 }
