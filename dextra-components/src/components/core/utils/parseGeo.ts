@@ -46,6 +46,11 @@ const buildGeomFunction = (
   if (id) {
     return (row: Record<string, unknown>) => {
       const rowId = row[id] as string;
+      if (rowId === undefined) {
+        console.warn("No id found in data", id)
+        return operationParser(geomParser(row));
+
+      }
       if (!GEOM_CACHE[combinedKey][rowId]) {
         GEOM_CACHE[combinedKey][rowId] = operationParser(geomParser(row));
       }
