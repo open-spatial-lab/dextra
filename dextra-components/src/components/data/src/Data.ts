@@ -78,6 +78,18 @@ export class OslData extends ValtioElement<StateSchema> {
   @property({type: String})
   geoOperation?: string
 
+  @property({ type: String })
+  suffixParam?: string;
+
+  @property({ type: String })
+  prefixParam?: string;
+
+  protected getTitle(){
+    const prefix = this.prefixParam ? this.getDeepValue(this.store.datasets[this.data].parameters, this.prefixParam) : ""
+    const suffix = this.suffixParam ? this.getDeepValue(this.store.datasets[this.data].parameters, this.suffixParam) : ""
+    return `${prefix} ${this.title} ${suffix}`
+  }
+
   protected getDeepValue(obj: Record<string, any>, path: string) {
     const pathParts = path.split(".");
     let tempObj = obj;
