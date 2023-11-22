@@ -22,7 +22,7 @@ export class OslTable extends OslData {
   template() {
     return html`
       <osl-table
-        .title=${this.title}
+        .title=${this.getTitle()}
         .maxw=${this.maxw}
         .data=${this.currentResults}
         .columns=${this.columns}
