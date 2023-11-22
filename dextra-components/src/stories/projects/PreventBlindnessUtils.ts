@@ -61,7 +61,7 @@ export const specialties = [
   { value: "%207W00000X%", label: "All Ophthalmology Specializations" },
   {
     value: "%207WX0120X%",
-    label: "- Cornea and External Diseases Specialist",
+    label: "	- Cornea and External Diseases Specialist",
   },
   { value: "%207WX0009X%", label: "- Glaucoma Specialist" },
   { value: "%207WX0109X%", label: "- Neuro-ophthalmology" },
@@ -88,7 +88,10 @@ export const specialties = [
   { value: "%152WP0200X%", label: "- Pediatrics" },
   { value: "%152WS0006X%", label: "- Sports Vision" },
   { value: "%152WV0400X%", label: "- Vision Therapy" },
-  { value: "%156F00000X%", label: "All Technician/Technologist Specializations" },
+  {
+    value: "%156F00000X%",
+    label: "All Technician/Technologist Specializations",
+  },
   { value: "%156FC0800X%", label: "- Contact Lens" },
   {
     value: "%156FC0801X%",
@@ -111,7 +114,7 @@ export const specialties = [
   },
   { value: "%156FX1900X%", label: "- Orthoptist" },
 ];
-export const statTable = JSON.stringify([
+export const countyStatTable = JSON.stringify([
   "providers_per_100k",
   "providers_count",
   "Vision Difficulty Rate",
@@ -119,10 +122,37 @@ export const statTable = JSON.stringify([
   "Percent Less than High School",
   "Total Population",
 ]);
-export const allDatasets = JSON.stringify([
-  "https://d36q6zt0rhsb35.cloudfront.net/data-query/65303831181b4500089e4fe6",
-  "https://d36q6zt0rhsb35.cloudfront.net/data-query/65303b14fc2a290008152629",
+export const zipStatTable = JSON.stringify([
+  "Providers Per 100k",
+  "providers_count",
+  "Vision Difficulty Rate",
+  "Percent Without Health Insurance",
+  "Percent Less than High School",
+  "Total Population",
 ]);
+export const congressStatTable = JSON.stringify([
+  "Providers Per 100k",
+  "providers_count",
+  "Vision Difficulty Rate",
+  "Percent Without Health Insurance",
+  "Percent Less than High School",
+  "Total Population",
+]);
+export const countyData =
+  "https://d36q6zt0rhsb35.cloudfront.net/data-query/655e3148b52ed80008d79518";
+export const zipData =
+  "https://d36q6zt0rhsb35.cloudfront.net/data-query/655d2a1d6a8a3000080b3050";
+export const CongressionalDistrictData =
+  "https://d36q6zt0rhsb35.cloudfront.net/data-query/655d301777b38300088750c7";
+export const visionProvidersData =
+  "https://d36q6zt0rhsb35.cloudfront.net/data-query/65303831181b4500089e4fe6";
+export const allDatasets = JSON.stringify([
+  countyData,
+  zipData,
+  CongressionalDistrictData,
+  visionProvidersData,
+]);
+
 export const tableColumns = JSON.stringify([
   "NPI",
   "Provider First Name",
@@ -135,6 +165,7 @@ export const tableColumns = JSON.stringify([
   "Zip Code (ZCTA)",
   "County GEOID",
 ]);
+
 export const tooltipSpec = JSON.stringify([
   {
     column: "NAME",
