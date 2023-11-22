@@ -60,7 +60,6 @@ export class OslCheckbox extends OslControl {
 
   handleChange(inputValue: any) {
     const storeValue = this.value as Array<string | number>;
-    console.log("store value", storeValue);
     const datasets = Array.isArray(this.data) ? this.data : [this.data];
     datasets.forEach((dataset) => {
       if (inputValue === "*") {
