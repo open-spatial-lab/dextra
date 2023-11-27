@@ -25,14 +25,18 @@ export class OslChips extends OslControl {
   filteredOptions: OptionList = [];
 
   @property({ type: Boolean })
-  showFilteredOptions = true;
+  showFilteredOptions = false;
+
+  @property({ type: Number })
+  maxOptions: number = 50;
+
+  @property({ type: Boolean })
+  showAllOptions: boolean = false;
 
   renderTags() {
     if (!Array.isArray(this.value) || this.value.length === 0) {
       return null;
     }
-    console.log(this.value)
-
     return html`
       ${this.value.map(
         (option: string | number) => html`
@@ -53,6 +57,7 @@ export class OslChips extends OslControl {
       ? html` <sp-help-text slot="help-text"> ${this.label} </sp-help-text>`
       : html``;
   }
+
   renderOption(option: OptionSpec | string | number) {
     const value = this.getOptionValue(option);
     const label = this.getOptionText(option);
@@ -63,7 +68,6 @@ export class OslChips extends OslControl {
       fullWidth
       @click=${(e: any) => {
         e.preventDefault();
-        console.log(value);
         this.handleAdd(`${value}`);
       }}
       >${label}</sp-action-button
@@ -71,16 +75,23 @@ export class OslChips extends OslControl {
   }
 
   renderFilteredOptions() {
-    if (this.filteredOptions.length === 0 || !this.showFilteredOptions) {
+    if (!this.showFilteredOptions || !this.options) {
       return null;
     }
+
+    if (this.filteredOptions.length === 0 && !this.showAllOptions) {
+      return null;
+    } 
+
+    const options = this.filteredOptions.length === 0 && this.showAllOptions ? this.options : this.filteredOptions;
+    console.log(options, this.filteredOptions, this.showAllOptions, this.showFilteredOptions)
+
     return html`
       <div
-        style="position:absolute; top:100%; left:0; width:100%;padding:0.25rem; max-height:30vh; overflow-y:auto;box-shadow: 0 1px 4px 0 rgba(0, 0, 0, 0.5);
-        "
+        style="position:absolute; top:100%; left:0; width:100%;padding:0.25rem; max-height:30vh; overflow-y:auto;box-shadow: 0 1px 4px 0 rgba(0, 0, 0, 0.5);background:white;z-index:50000;"
       >
-        ${this.filteredOptions
-          .slice(0, 50)
+        ${options
+          .slice(0, this.maxOptions)
           .map((option) => this.renderOption(option))}
       </div>
     `;
@@ -116,9 +127,12 @@ export class OslChips extends OslControl {
   handleAdd(inputValue?: string) {
     const isValidText = inputValue && inputValue.length > 0;
     if (!isValidText) return;
-    const storeValue = this.value as Array<string | number>;
+    const storeValue = Array.isArray(this.value) ? this.value : [];
     const newValues = [...storeValue, inputValue];
-    this.store.datasets[this.data].parameters[this.option] = newValues;
+    const datasets = Array.isArray(this.data) ? this.data : [this.data];
+    datasets.forEach((dataset) => {
+      this.store.datasets[dataset].parameters[this.option] = newValues;
+    })
     this.filterOptions(this.inputValue);
   }
   getOptionText(option: OptionList[number]) {
@@ -142,21 +156,21 @@ export class OslChips extends OslControl {
       return value;
     } else {
       const option = options.find((option) => {
-        const optionValue = `${this.getOptionValue(option)}`
+        const optionValue = `${this.getOptionValue(option)}`;
         return optionValue === value;
       });
-      console.log(option, options, value)
       return option ? this.getOptionText(option) : value;
     }
   }
 
   filterOptions(filterValue: string) {
+    const value = Boolean(this.value) ? this.value : [];
     const options = this.options || [];
     const searchText = `${filterValue}`.toLowerCase();
     const filteredOptions = options.filter((option) => {
       const optionValue = `${this.getOptionValue(option)}`;
       const optionLabel = this.getOptionText(option);
-      const isInCurrentOptions = (this.value as any[]).includes(optionValue);
+      const isInCurrentOptions = (value as any[]).includes(optionValue);
       const containsText = optionLabel.toLowerCase().includes(searchText);
       const containsValue = optionValue.toLowerCase().includes(searchText);
 
@@ -173,7 +187,6 @@ export class OslChips extends OslControl {
     }
     if (event.key === "Escape") {
       this.resetText();
-      console.log("cleared");
     }
     if (this.options && this.options.length > 0 && this.inputValue.length > 0) {
       this.filterOptions(this.inputValue);
@@ -186,6 +199,28 @@ export class OslChips extends OslControl {
   }
   handleLoseFocus() {
     this.showFilteredOptions = false;
+  }
+  connectedCallback(): void {
+    super.connectedCallback();
+    // alphabetize options
+    if (this.options) {
+      this.options = this.options.sort((a, b) => {
+        const aText = this.getOptionText(a);
+        const bText = this.getOptionText(b);
+        return aText.localeCompare(bText);
+      });
+    }
+
+    const handleClickOutside = (event: any) => {
+      if (!this.contains(event.target)) {
+        this.handleLoseFocus();
+      }
+    };
+    document.addEventListener("click", handleClickOutside);
+  }
+  disconnectedCallback(): void {
+    super.disconnectedCallback();
+    document.removeEventListener("click", this.handleLoseFocus);
   }
 
   template() {

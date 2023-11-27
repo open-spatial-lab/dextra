@@ -28,6 +28,7 @@ export const AutocompleteChips = () => {
       option="product_in"
       label="Add Products To Query"
       options=${JSON.stringify(autocompleteOptions)}
+      showAllOptions="true"
     >
     </osl-chips>
     <div style="width:100%;height:50vh;">
