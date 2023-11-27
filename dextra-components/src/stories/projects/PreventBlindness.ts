@@ -2,7 +2,6 @@ import { html } from "lit";
 import {
   abbrs,
   specialties,
-  statTable,
   countyData,
   zipData,
   visionProvidersData,
@@ -14,6 +13,7 @@ import {
   congressStatTable,
   zipStatTable,
 } from "./PreventBlindnessUtils";
+import { renderTemplateAsString } from "../../utils/renderTemplateAsString";
 export const PreventBlindness = () => {
   return html`
   <sp-theme>
@@ -598,3 +598,5 @@ export const PreventBlindness = () => {
             </div></div>
   `;
 };
+
+// console.log(renderTemplateAsString(PreventBlindness()))
