@@ -214,6 +214,7 @@ export const Equiticity = () => {
           circleRadius="5"
           radiusUnits="pixels"
           fixedRadius="true"
+          pointRadiusMaxPixels="5"
           dataColumn="violations"
           legendtitle="Speed Camera Locations and Violations"
           visible="true"
