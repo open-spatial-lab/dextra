@@ -84,7 +84,7 @@ const buildDatasetPromise = async (key: string) => {
       Object.entries(currentParams).forEach(([key, value]) => {
         url.searchParams.set(
           key,
-          Array.isArray(value) ? value.join(",") : value.toString()
+          value ? Array.isArray(value) ? value.join(",") : value.toString() : "*"
         );
       });
       if (store.usingMsgPack) {

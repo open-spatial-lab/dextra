@@ -1,5 +1,5 @@
 import { html } from "lit";
-import { customElement, property } from "lit/decorators.js";
+import { property } from "lit/decorators.js";
 import { OslControl } from '../../Interface/src/Interface';
 import { safeCustomElement } from "../../core/decorators/safeCustomElement";
 
@@ -14,6 +14,7 @@ export class OslParamView extends OslControl {
   @property({ type: Boolean })
   pagination: boolean = false;
 
+
   connectedCallback(): void {
     super.connectedCallback();
     this.subscribe(
@@ -26,7 +27,7 @@ export class OslParamView extends OslControl {
     const params = this.store.datasets[this.data].parameters
     const data = this.parameters.map((param) => ({
       [this.parameterTitle]: param,
-      Value: params[param]
+      Value: params[param] === undefined || params[param] === "*" || !Boolean(params[param]) ? 'Any' : params[param].toString()
     }))
 
     return html`
