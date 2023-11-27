@@ -13,7 +13,7 @@ import "../../components/Plot/src/Plot.js";
 import "../../components/Modal/src/Modal.js";
 import "../../components/Radio/src/Radio.js";
 import "../../components/ParamView/src/ParamView.js";
-
+import "../../components/Chips/src/Chips";
 import {
   yearLabels,
   siteLabels,
@@ -63,13 +63,16 @@ export const CprFilterHeader = () => {
         <div style="min-width:80vw;min-height:80vh; overflow-y:auto;">
           <h3>Active Ingredients</h3>
           <osl-flex-box breakpoint="lg">
-            <osl-select-control
+            <osl-chips
               data=${filteredDatasets}
               option="ai_class"
               options=${JSON.stringify(aiClassLabels)}
               title="Active Ingredient Class"
+              label="Click to search for active Ingredient classes"
               initialValue="*"
-            ></osl-select-control>
+              maxOptions="999"
+              showAllOptions="true"
+            ></osl-chips>
             <osl-select-control
               data=${filteredDatasets}
               option="ai_type"
