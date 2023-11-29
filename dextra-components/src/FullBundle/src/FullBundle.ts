@@ -26,6 +26,7 @@ import * as FlexBox from '../../components/FlexBox/src/FlexBox';
 import * as DataTable  from "../../components/DataTable/src/DataTable";
 import * as StatTable  from "../../components/StatTable/src/StatTable";
 import * as Tabs from "../../components/Tabs/src/Tabs";
+import * as EqGrid from "../../components/EqualSpacingGrid/src/EqualSpacingGrid";
 
 export {
   Chips,
@@ -48,5 +49,6 @@ export {
   Plot,
   Download,
   FlexBox,
-  Tabs
+  Tabs,
+  EqGrid
 }
