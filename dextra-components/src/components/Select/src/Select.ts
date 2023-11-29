@@ -1,50 +1,102 @@
-import { html, LitElement } from "lit";
+import { css, html } from "lit";
 import { property } from "lit/decorators.js";
 import { safeCustomElement } from "../../core/decorators/safeCustomElement";
-import "@spectrum-web-components/picker/sp-picker.js";
 import "@spectrum-web-components/help-text/sp-help-text.js";
+import "@spectrum-web-components/menu/sp-menu.js";
 import "@spectrum-web-components/menu/sp-menu-item.js";
-import { OslControl } from "../../Interface/src/Interface";
+import "@spectrum-web-components/action-button/sp-action-button.js";
+import "@spectrum-web-components/overlay/overlay-trigger.js";
+import "@spectrum-web-components/tooltip/sp-tooltip.js";
+import "@spectrum-web-components/popover/sp-popover.js";
+import "@spectrum-web-components/dialog/sp-dialog.js";
+import '@spectrum-web-components/icons-ui/icons/sp-icon-chevron100.js';
 
-// Always used within other component 
+import { OslControl } from "../../Interface/src/Interface";
+import { query } from "lit-element";
+
+// Always used within other component
 @safeCustomElement("osl-select")
 export class Select extends OslControl {
   @property({ type: Array }) //@ts-ignore
   options?: Array<string | { label: string; value: any }>;
 
-  @property({ type: String })
-  label?: string;
+  @query("#label")
+  selectLabel?: HTMLElement;
 
-  @property({ type: String })
-  value?: string;
+  @query("#toggle")
+  toggleButton?: HTMLElement;
 
-  @property({ type: Function })
-  onChange?: (value: string) => void;
+  toggleOpen() {
+    const toggleButton = this.toggleButton;
+    if (!toggleButton) return;
+    toggleButton.click();
+  }
 
-  renderSelectOptions() {
-    const options = this.options || [];
-    const renderSimple = typeof options[0] !== "object";
-    if (renderSimple) {
-      return html` ${(options as string[]).map(
-        (option) => html` <sp-menu-item name="${option}" value="${option}"
-          >${option}
-        </sp-menu-item>`
-      )}`;
-    } else {
-      return html`${(options as { label: string; value: string }[]).map(
-        (option) => html`
-          <sp-menu-item name="${option.value}" value="${option.value}"
-            >${option.label}</sp-menu-item
-          >
-        `
-      )}`;
+  renderButton() {
+    const valueLabel = this.getValueLabel();
+    return html`
+      <sp-action-button slot="trigger" id="toggle" style="max-width:100%;">
+        ${valueLabel}
+        <sp-icon-chevron100 size="s" style="margin-left:0.5rem;transform:scale(0.75) rotate(90deg);"></sp-icon-chevron100>
+      </sp-action-button>
+    `;
+  }
+
+  get buttonDimensions() {
+    const dims = this.toggleButton?.getBoundingClientRect();
+    if (!dims) return { width: 0, height: 0 };
+    return dims;
+  }
+
+  handleChange(event: Event){
+    super.handleChange(event);
+    if (!this.multipleSelect) {
+      this.toggleOpen();
     }
+  }
+  renderPopover() {
+    const value = this.value || "";
+    return html`
+      <sp-popover slot="click-content" direction="bottom-start">
+        <sp-menu
+          @click=${this.handleChange}
+        > 
+          ${this.renderDropdownOptions(value)} 
+        </sp-menu>
+      </sp-popover>
+    `;
+  }
+  renderSelectedOption(label: string | number, value?: string | number) {
+    return html`<sp-menu-item name="${label}" value="${value}" selected="true"
+      >${label}
+    </sp-menu-item>`;
+  }
+
+  renderUnselectedOption(label: string | number, value?: string | number) {
+    return html`<sp-menu-item name="${label}" value="${value}"
+      >${label}
+    </sp-menu-item>`;
+  }
+
+  renderDropdownOptions(value: string | number | Array<string | number>) {
+    const options = this.options || [];
+    const getValue = (v: string | number) => {
+      return Array.isArray(value) ? value.includes(v) : value === v;
+    };
+    return html`${options.map((option) => {
+      const label = this.getOptionText(option);
+      const value = this.getOptionValue(option);
+      const isSelected = getValue(value);
+      return isSelected
+        ? this.renderSelectedOption(label, value)
+        : this.renderUnselectedOption(label, value);
+    })}`;
   }
 
   protected renderTitle() {
     const title = this.title || "";
     return title.length
-      ? html`<sp-field-label for="picker-${this.id}" size="m"
+      ? html`<sp-field-label for="picker-${this.elementId}" size="m"
           >${title}</sp-field-label
         >`
       : html``;
@@ -57,18 +109,28 @@ export class Select extends OslControl {
       : html``;
   }
 
+  eventValueAccessor(event: Event) {
+    const eventValue = (event.target as HTMLInputElement).value;
+    if (this.multipleSelect) {
+      const storeValue = Array.isArray(this.value) ? this.value : [];
+      return storeValue.includes(eventValue)
+        ? storeValue.filter((v) => v !== eventValue)
+        : [...storeValue, eventValue];
+    } else {
+      return eventValue;
+    }
+  }
+
+  protected domUpdatesOnChange() {
+    if (!this.selectLabel) return;
+    this.selectLabel.innerHTML = `${this.getValueLabel()}`;
+  }
   template() {
     return html`
       ${this.renderTitle()}
-      <sp-picker
-        id="picker-${this.id}"
-        size="m"
-        label="Selection type"
-        @change=${this.onChange}
-        value=${this.value as string}
-      >
-        ${this.renderSelectOptions()} ${this.renderDescription()}
-      </sp-picker>
+      <overlay-trigger id="trigger" placement="bottom" offset="6">
+        ${this.renderButton()} ${this.renderPopover()}
+      </overlay-trigger>
     `;
   }
 }
