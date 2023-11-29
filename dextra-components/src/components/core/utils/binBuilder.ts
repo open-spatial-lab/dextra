@@ -38,12 +38,15 @@ export class BinBuilder {
   manualBreaks?: number[];
   // categorical
   mapping?: Record<string, string>;
+  // config isolated values
+  isolatedValues?: Array<any>;
+  isolatedColor?: string;
 
   // data
   public data: DataResult = [];
   public accessor: (d: DataResult[number]) => number | string = (_d: any) => 0;
   public current?: {
-    breaks: (number|string)[];
+    breaks: (number | string)[];
     labels: string[];
     colorStops?: Instance[];
   };
@@ -61,8 +64,13 @@ export class BinBuilder {
     mapping,
     labels,
     labelFormat,
+    isolatedValues,
+    isolatedColor,
   }: Partial<BinBuilder>) {
     this.type = type || "continuous";
+    this.isolatedValues = isolatedValues || [];
+    this.isolatedColor = isolatedColor || "";
+
     if (colorStops) {
       this.colorStops = this.asTinyColor(colorStops as any);
     } else {
@@ -102,7 +110,9 @@ export class BinBuilder {
   applyColorScheme(colorScheme: keyof typeof colorSchemes, bins: number) {
     const colorSeries = colorSchemes[colorScheme];
     const stops = colorSeries?.[bins as keyof typeof colorSeries];
-    const mostColors = Math.max(...(Object.keys(colorSeries||[]).map(f => +f))) as number
+    const mostColors = Math.max(
+      ...Object.keys(colorSeries || []).map((f) => +f)
+    ) as number;
     if (stops) {
       this.colorStops = this.asTinyColor(stops as string[]);
       this.colorScheme = colorScheme;
@@ -158,15 +168,20 @@ export class BinBuilder {
 
   async generateContinuousBins() {
     const { data, accessor, bins, method } = this;
-    const modifiedAcessor = method === 'QNT' ? (d: DataResult[number]) => {
-      const val = accessor(d);
-      if (val === 0) {
-        return undefined
-      }
-      return val
-    } : accessor
-    const values = data.map(modifiedAcessor).filter(d => d !== undefined && d !== null) as number[];
-    const cleanBins = Math.min(bins!, values.length-1)
+    const modifiedAcessor =
+      method === "QNT"
+        ? (d: DataResult[number]) => {
+            const val = accessor(d);
+            if (val === 0) {
+              return undefined;
+            }
+            return val;
+          }
+        : accessor;
+    const values = data
+      .map(modifiedAcessor)
+      .filter((d) => d !== undefined && d !== null) as number[];
+    const cleanBins = Math.min(bins!, values.length - 1);
     try {
       const breaks = await generateBuckets(method, values, cleanBins);
       return breaks;
@@ -208,20 +223,35 @@ export class BinBuilder {
     if (!labels || !colorStops || !breaks) {
       return [];
     }
+    const legendEntries = [];
+    if (this.isolatedValues?.length && this.isolatedColor) {
+      legendEntries.push({
+        symbol: { color: this.formatColor(tinycolor(this.isolatedColor), format) },
+        text: this.isolatedValues.join(", ")
+      });
+    }
+
     switch (this.type) {
       case "continuous":
-        return colorStops.map((c, i) => ({
-          symbol: { color: this.formatColor(c, format) },
-          text: `${labels[i]} - ${labels[i + 1]}`,
-        }));
+        colorStops.forEach((c, i) => {
+          legendEntries.push({
+            symbol: { color: this.formatColor(c, format) },
+            text: `${labels[i]} - ${labels[i + 1]}`,
+          });
+        });
+        break;
       case "categorical":
-        return breaks.map((b, i) => ({
-          symbol: { color: this.formatColor(colorStops[i], format) },
-          text: labels[i],
-        }))
+        colorStops.forEach((_, i) => {
+          legendEntries.push({
+            symbol: { color: this.formatColor(colorStops[i], format) },
+            text: labels[i],
+          });
+        });
+        break;
       default:
-        return [];
+        break
     }
+    return legendEntries;
   }
   generateContinuousColorFunc(format: ColorFormats = "RGB") {
     const accessor = this.accessor;
@@ -230,8 +260,12 @@ export class BinBuilder {
       : [];
     const colors = stops.map((c) => this.formatColor(c, format));
     const bins = (this.current?.breaks || []) as number[];
+    const isolatedColor = this.formatColor(tinycolor(this.isolatedColor), format);
     return (d: Record<string, number>) => {
       const val = accessor(d) as number;
+      if (this.isolatedValues?.includes(val)) {
+        return isolatedColor
+      }
       for (let i = 1; i < bins.length; i++) {
         if (val <= bins[i]) {
           return colors[i - 1];
@@ -241,22 +275,25 @@ export class BinBuilder {
     };
   }
 
-  generateCategoricalColorFunc(
-    format: ColorFormats = "RGB",
-  ) {
+  generateCategoricalColorFunc(format: ColorFormats = "RGB") {
     const { accessor, mapping, current } = this;
-    const { breaks, colorStops} = current|| {};
-    const stops = colorStops
-      ? (colorStops as Instance[])
-      : [];
+    const { breaks, colorStops } = current || {};
+    const stops = colorStops ? (colorStops as Instance[]) : [];
     const colors = stops.map((c) => this.formatColor(c, format));
+    const isolatedColor = this.formatColor(tinycolor(this.isolatedColor), format);
     if (!breaks?.length || !colorStops?.length) {
-      return () => null
+      return () => null;
     }
-    const innerAccessor = mapping ? (d: Record<string,any>) => mapping[accessor(d)] : accessor
-    
+    const innerAccessor = mapping
+      ? (d: Record<string, any>) => mapping[accessor(d)]
+      : accessor;
+
     return (d: Record<string, string | number>) => {
       const entry = innerAccessor(d);
+
+      if (this.isolatedValues?.includes(entry)) {
+        return isolatedColor
+      }
       const idx = breaks.indexOf(entry);
       return idx === -1 ? null : colors[idx];
     };
@@ -275,7 +312,7 @@ export class BinBuilder {
       this.data = data;
       this.accessor = accessor;
       const breaks = await this.generateBins();
-      const labels = isContinuous ?  breaks.map(this.formatter.format) : breaks;
+      const labels = isContinuous ? breaks.map(this.formatter.format) : breaks;
       const count = isContinuous ? bins : breaks.length;
       this.current = {
         breaks,

@@ -163,6 +163,14 @@ export class OslMapLayer extends OslData {
   @property({ type: Number })
   opacity: number = 1;
 
+  @property({ converter: interpretFuncJsonOrString })
+  isolatedValues: any[] = [];
+  
+  @property({ type: String })
+  isolatedColor?: string;
+
+  
+
   tooltipFormatters: { [key: string]: ReturnType<typeof getFormatter> } = {};
   binBuilder?: BinBuilder;
   colorStops?: any;
@@ -437,6 +445,8 @@ export class OslMapLayer extends OslData {
       bins: this.bins,
       manualBreaks: this.manualBreaks,
       mapping: this.mapping,
+      isolatedValues:this.isolatedValues,
+      isolatedColor:this.isolatedColor
     });
   }
 
