@@ -50,7 +50,6 @@ export class OslEqualSpacingGrid extends ValtioElement<any> {
     if (slot) {
       const childCount = slot.assignedElements().length;
       const amoritizedGap = Math.floor((0.5 / childCount) * 1000) / 1000;
-      console.log(amoritizedGap);
       this.style.gridTemplateColumns = `repeat(${childCount}, calc(${
         Math.round(10000 / childCount) / 100
       }% - 0.5rem + ${amoritizedGap}rem)`;
