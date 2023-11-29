@@ -49,6 +49,9 @@ export class OslControl extends ValtioElement<StateSchema> {
   @property({ type: String })
   unit?: string;
 
+  @property({ type: Boolean })
+  multipleSelect?: boolean;
+
   protected initDataset() {
     if (!this.data) {
       return
@@ -84,25 +87,61 @@ export class OslControl extends ValtioElement<StateSchema> {
       )})
   }
 
+  updated(){
+    this.domUpdatesOnChange();
+  }
+
   protected domUpdatesOnChange(){
     // const value = this.value;
   }
+  
 
-  getOptionText(option: string | number) {
-    if (!this.options || !this.options.length || typeof this?.options?.[0] !== 'object' ) {
-      return option;
+  findOption(value: string | number) {
+    const options = this.options || [];
+    if (!options.length) {
+      return value;
     } else {
-      const options = this.options as Array<{value:string|number,label:string|number}>
-      const optionSpec = options.find(
-        (optionSpec) => optionSpec.value === option
-      );
-      return optionSpec ? optionSpec.label : option;
+      const option = options.find((option) => {
+        const optionValue = `${this.getOptionValue(option)}`;
+        return optionValue === value;
+      });
+      return option ? this.getOptionText(option) : value;
     }
   }
 
-  protected eventValueAccessor(event: Event) {
+  getValueLabel(){
+    const value = this.value;
+    if (value === undefined) {
+      return value;
+    }
+    if (Array.isArray(value)) {
+      if (!value.length) {
+        return this.label || this.title || "Choose an option(s)"
+      }
+      return value.map((v) => this.findOption(v)).join(", ");
+    }
+    return this.findOption(value);
+  }
+
+  getOptionText(option: OptionList[number]) {
+    if (typeof option === "string" || typeof option === "number") {
+      return `${option}`;
+    } else {
+      return `${option.label}`;
+    }
+  }
+
+  getOptionValue = (option: OptionList[number]) => {
+    if (typeof option === "string" || typeof option === "number") {
+      return `${option}`;
+    } else {
+      return option.value;
+    }
+  };
+
+  protected eventValueAccessor(event: Event | any): string | number | Array<string | number> {
     const target = event.target as HTMLInputElement;
-    return target.value;
+    return target.value 
   }
 
   protected handleChange(event: Event) {
@@ -119,7 +158,7 @@ export class OslControl extends ValtioElement<StateSchema> {
   }
 
   template() {
-    return html`${this.value}`;
+    return html`${this.getValueLabel()}`;
   }
 }
 

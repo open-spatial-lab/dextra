@@ -84,7 +84,6 @@ export class OslChips extends OslControl {
     } 
 
     const options = this.filteredOptions.length === 0 && this.showAllOptions ? this.options : this.filteredOptions;
-    console.log(options, this.filteredOptions, this.showAllOptions, this.showFilteredOptions)
 
     return html`
       <div
@@ -129,38 +128,8 @@ export class OslChips extends OslControl {
     if (!isValidText) return;
     const storeValue = Array.isArray(this.value) ? this.value : [];
     const newValues = [...storeValue, inputValue];
-    const datasets = Array.isArray(this.data) ? this.data : [this.data];
-    datasets.forEach((dataset) => {
-      this.store.datasets[dataset].parameters[this.option] = newValues;
-    })
+    this.handleChange(newValues as any);
     this.filterOptions(this.inputValue);
-  }
-  getOptionText(option: OptionList[number]) {
-    if (typeof option === "string" || typeof option === "number") {
-      return `${option}`;
-    } else {
-      return `${option.label}`;
-    }
-  }
-
-  getOptionValue = (option: OptionList[number]) => {
-    if (typeof option === "string" || typeof option === "number") {
-      return `${option}`;
-    } else {
-      return option.value;
-    }
-  };
-  findOption(value: string | number) {
-    const options = this.options || [];
-    if (!options.length) {
-      return value;
-    } else {
-      const option = options.find((option) => {
-        const optionValue = `${this.getOptionValue(option)}`;
-        return optionValue === value;
-      });
-      return option ? this.getOptionText(option) : value;
-    }
   }
 
   filterOptions(filterValue: string) {
