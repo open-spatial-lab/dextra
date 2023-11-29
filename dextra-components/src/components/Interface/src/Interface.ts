@@ -1,13 +1,13 @@
 import { html } from "lit";
-import {  property } from "lit/decorators.js";
+import { property } from "lit/decorators.js";
 import { ValtioElement } from "../../core/state";
 import { safeCustomElement } from "../../core/decorators/safeCustomElement";
 import { StateSchema } from "../../core/state/types";
 import { interpretFuncJsonOrString } from "../../core/utils/converters";
 import { nonReactiveStore } from "../../core/state/Store";
 
-export type OptionSpec = { value: string | number, label: string | number }
-export type OptionList = Array<string | number | OptionSpec>
+export type OptionSpec = { value: string | number; label: string | number };
+export type OptionList = Array<string | number | OptionSpec>;
 @safeCustomElement("osl-interface")
 export class OslControl extends ValtioElement<StateSchema> {
   @property({ converter: interpretFuncJsonOrString })
@@ -52,19 +52,32 @@ export class OslControl extends ValtioElement<StateSchema> {
   @property({ type: Boolean })
   multipleSelect?: boolean;
 
-  protected initDataset() {
+  @property({ type: String })
+  optionsData?: string;
+
+  @property({ type: String })
+  optionsDataLabelColumn?: string;
+
+  @property({ type: String })
+  optionsDataValueColumn?: string;
+
+  registerData(dataset: string) {
+    if (!this.store.datasets[dataset] && dataset !== "") {
+      this.store.datasets[dataset] = {
+        parameters: {},
+        statuses: {},
+      };
+      nonReactiveStore[dataset] = {};
+    }
+  }
+
+  protected initialize() {
     if (!this.data) {
-      return
+      return;
     }
     const datasets = Array.isArray(this.data) ? this.data : [this.data];
     datasets.forEach((dataset) => {
-      if (!this.store.datasets[dataset] && dataset !== "") {
-        this.store.datasets[dataset] = {
-          parameters: {},
-          statuses: {}
-        };
-        nonReactiveStore[dataset] = {}
-      }
+      this.registerData(dataset);
       const currentParams = this.store.datasets[dataset].parameters;
       if (
         currentParams[this.option] === undefined &&
@@ -79,22 +92,57 @@ export class OslControl extends ValtioElement<StateSchema> {
       this.subscribe(
         (store) => store.datasets[dataset].parameters,
         () => {
-          // console.log('params changed')
           this.value = this.store.datasets[dataset].parameters[this.option];
-          // console.log(this.value)
           this.domUpdatesOnChange();
         }
-      )})
+      );
+    });
+    if (
+      this.optionsData !== undefined &&
+      this.optionsDataValueColumn !== undefined
+    ) {
+      this.registerData(this.optionsData);
+      this.subscribe(
+        (store) => store.datasets[this.optionsData!].statuses,
+        () => {
+          this.updateOptionsFromData();
+        }
+      );
+    }
   }
 
-  updated(){
+  updateOptionsFromData() {
+    const optionsDataStatus = this.store.datasets[this.optionsData!].statuses;
+    const currentParams = this.store.datasets[this.optionsData!].parameters
+    
+    const currentParamString = JSON.stringify(currentParams);
+    const currentStatus = optionsDataStatus[currentParamString];
+    
+    const valueColumn = this.optionsDataValueColumn!;
+    const labelColumn = this.optionsDataLabelColumn || valueColumn;
+
+    if (currentStatus === "success" && valueColumn) {
+      const data = nonReactiveStore[this.optionsData!][currentParamString];
+      let options = []
+      for (const row of data) {
+        if ((row as any)[valueColumn] !== undefined || (row as any)[labelColumn] !== undefined) {
+          options.push({
+            value: (row as any)[valueColumn],
+            label: (row as any)[labelColumn],
+          })
+        }
+      }
+      this.options = options;
+    }
+  }
+
+  updated() {
     this.domUpdatesOnChange();
   }
 
-  protected domUpdatesOnChange(){
+  protected domUpdatesOnChange() {
     // const value = this.value;
   }
-  
 
   findOption(value: string | number) {
     const options = this.options || [];
@@ -109,14 +157,17 @@ export class OslControl extends ValtioElement<StateSchema> {
     }
   }
 
-  getValueLabel(){
+  getValueLabel() {
     const value = this.value;
+    if (value === "*"){
+      return "All / Any"
+    }
     if (value === undefined) {
       return value;
     }
     if (Array.isArray(value)) {
       if (!value.length) {
-        return this.label || this.title || "Choose an option(s)"
+        return this.label || this.title || "Choose an option(s)";
       }
       return value.map((v) => this.findOption(v)).join(", ");
     }
@@ -139,9 +190,11 @@ export class OslControl extends ValtioElement<StateSchema> {
     }
   };
 
-  protected eventValueAccessor(event: Event | any): string | number | Array<string | number> {
+  protected eventValueAccessor(
+    event: Event | any
+  ): string | number | Array<string | number> {
     const target = event.target as HTMLInputElement;
-    return target.value 
+    return target.value;
   }
 
   protected handleChange(event: Event) {
@@ -149,12 +202,12 @@ export class OslControl extends ValtioElement<StateSchema> {
     const datasets = Array.isArray(this.data) ? this.data : [this.data];
     datasets.forEach((dataset) => {
       this.store.datasets[dataset].parameters[this.option] = value;
-    })
+    });
   }
 
   connectedCallback() {
     super.connectedCallback();
-    this.initDataset();
+    this.initialize();
   }
 
   template() {
