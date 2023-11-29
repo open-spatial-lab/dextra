@@ -18,7 +18,7 @@
     "@observablehq/plot": "^0.6.8",
     "@okikio/sharedworker": "^1.0.4",
     "@rollup/plugin-replace": "^5.0.2",
-    "@spectrum-web-components/bundle": "^0.29.3",
+    "@spectrum-web-components/bundle": "^0.40.0",
     "@storybook/builder-vite": "^7.5.2",
     "@turf/centroid": "^6.5.0",
     "comlink": "^4.3.1",
