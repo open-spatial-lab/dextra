@@ -14,6 +14,7 @@ import "../../components/Modal/src/Modal.js";
 import "../../components/Radio/src/Radio.js";
 import "../../components/ParamView/src/ParamView.js";
 import "../../components/Chips/src/Chips";
+import "../../components/EqualSpacingGrid/src/EqualSpacingGrid";
 import {
   yearLabels,
   siteLabels,
@@ -62,21 +63,21 @@ export const CprFilterHeader = () => {
       <osl-modal label="Additional Filters" title="Filter Data" size="l">
         <div style="min-width:80vw;min-height:80vh; overflow-y:auto;">
           <h3>Active Ingredients</h3>
-          <osl-flex-box breakpoint="lg">
-            <osl-chips
+          <osl-eq-grid breakpoint="lg">
+            <osl-select-control
               data=${filteredDatasets}
               option="ai_class"
               options=${JSON.stringify(aiClassLabels)}
+              multipleSelect="true"
               title="Active Ingredient Class"
-              label="Click to search for active Ingredient classes"
+              label="Search for AI classes"
               initialValue="*"
-              maxOptions="999"
-              showAllOptions="true"
-            ></osl-chips>
+            ></osl-select-control>
             <osl-select-control
               data=${filteredDatasets}
               option="ai_type"
               options=${JSON.stringify(aiTypeLabels)}
+              multipleSelect="true"
               title="Active Ingredient Type"
               initialValue="*"
             ></osl-select-control>
@@ -84,10 +85,11 @@ export const CprFilterHeader = () => {
               data=${filteredDatasets}
               option="ai_type_specific"
               options=${JSON.stringify(aiTypeSpecificLabels)}
+              multipleSelect="true"
               title="Active Ingredient Type (Specific)"
               initialValue="*"
             ></osl-select-control
-          ></osl-flex-box>
+          ></osl-eq-grid>
           <br />
           <br />
           <hr />
@@ -100,6 +102,7 @@ export const CprFilterHeader = () => {
             options=${JSON.stringify(siteLabels)}
             title="Active Ingredient Type (Specific)"
             initialValue="*"
+            multipleSelect
           ></osl-select-control>
           <br />
           <br />

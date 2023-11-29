@@ -2,11 +2,13 @@ import { Meta } from "@storybook/web-components";
 import { html } from "lit";
 import "../components/Select/src/SelectControl.ts";
 import "../components/Interface/src/Interface.ts";
-
+import "@spectrum-web-components/help-text/sp-help-text.js";
+import "@spectrum-web-components/menu/sp-menu-item.js";
+import "@spectrum-web-components/action-menu/sp-action-menu.js";
 
 export default {
   title: "Interface",
-}
+};
 
 export const Select = () => {
   const complexOptions = JSON.stringify([
@@ -23,31 +25,40 @@ export const Select = () => {
       value: "time",
     },
   ]);
-  const options = JSON.stringify(["http://localhost:6006/data/interaction.json","http://localhost:6006/data/interaction2.json"])
+  const options = JSON.stringify([
+    "http://localhost:6006/data/interaction.json",
+    "http://localhost:6006/data/interaction2.json",
+  ]);
   return html`
     The value is:
     <osl-interface
       data="http://localhost:6006/data/interaction.json"
       option="mag"
       initialValue="7"
-    > </osl-interface>
+    >
+    </osl-interface>
     <br />
     <br />
     <osl-select-control
       data=${options}
       option="mag"
+      multipleSelect="true"
       options="[5,6,7,8]"
+      multipleSelect="true"
+      title="Magnitude"
+      label="Select a magnitude"
     >
     </osl-select-control>
     <br />
-    <hr/>
+    <hr />
     <br />
     The value is:
     <osl-interface
       data="http://localhost:6006/data/interaction.json"
       option="mag2"
       initialValue="mag"
-    > </osl-interface>
+    >
+    </osl-interface>
     <br />
     <br />
     <osl-select-control
@@ -57,4 +68,4 @@ export const Select = () => {
     >
     </osl-select-control>
   `;
-}
+};
