@@ -60,6 +60,9 @@ importers:
       '@lit-labs/context':
         specifier: ^0.3.0
         version: 0.3.0
+      '@lit-labs/virtualizer':
+        specifier: ^2.0.11
+        version: 2.0.11
       '@loaders.gl/core':
         specifier: ^3.3.3
         version: 3.3.3
@@ -349,6 +352,28 @@ importers:
       lit-html:
         specifier: ^2.7.0
         version: 2.7.0
+      valtio:
+        specifier: ^1.10.3
+        version: 1.10.3(react@18.2.0)
+    devDependencies:
+      '@types/node':
+        specifier: ^14.14.37
+        version: 14.14.37
+      typescript:
+        specifier: ^5.0
+        version: 5.0.2
+      vite:
+        specifier: ^2.1.3
+        version: 2.1.3
+
+  dextra-components/src/components/EqualSpacingGrid:
+    dependencies:
+      lit-element:
+        specifier: ^2.4.0
+        version: 2.4.0
+      lit-html:
+        specifier: ^2.7.0
+        version: 2.8.0
       valtio:
         specifier: ^1.10.3
         version: 1.10.3(react@18.2.0)
@@ -3770,7 +3795,7 @@ packages:
   /@lit-labs/observers@2.0.2:
     resolution: {integrity: sha512-eZb5+W9Cb0e/Y5m1DNxBSGTvGB2TAVTGMnTxL/IzFhPQEcZIAHewW1eVBhN8W07A5tirRaAmmF6fGL1V20p3gQ==}
     dependencies:
-      '@lit/reactive-element': 1.6.3
+      '@lit/reactive-element': 2.0.2
     dev: false
 
   /@lit-labs/ssr-dom-shim@1.1.1:
