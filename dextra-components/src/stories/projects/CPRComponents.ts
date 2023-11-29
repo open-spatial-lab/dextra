@@ -17,16 +17,26 @@ import "../../components/Chips/src/Chips";
 import "../../components/EqualSpacingGrid/src/EqualSpacingGrid";
 import {
   yearLabels,
-  siteLabels,
-  aiClassLabels,
-  aiTypeLabels,
-  aiTypeSpecificLabels,
+  // siteLabels,
+  // aiClassLabels,
+  // aiTypeLabels,
+  // aiTypeSpecificLabels,
   // zipCodeData,
   // zipCodeColumns,
   filteredDatasets,
   timeSeriesData,
-  zipCodes,
-  counties,
+  // zipCodes,
+  // counties,
+  productOptionsData,
+  chemicalOptionsData,
+  siteLocationOptionsData,
+  aiTypeSpecificOptionsData,
+  aiTypeOptionsData,
+  aiClassOptionsData,
+  zipCodesOptionsData,
+  countiesOptionsData,
+  censusTractsOptionsData,
+  schoolDistrictOptionsData,
 } from "./CPRUtils";
 
 export const CprFilterHeader = () => {
@@ -67,68 +77,152 @@ export const CprFilterHeader = () => {
             <osl-select-control
               data=${filteredDatasets}
               option="ai_class"
-              options=${JSON.stringify(aiClassLabels)}
               multipleSelect="true"
               title="Active Ingredient Class"
               label="Search for AI classes"
+              optionsData=${aiClassOptionsData}
+              optionsDataValueColumn="ai_class"
               initialValue="*"
             ></osl-select-control>
             <osl-select-control
               data=${filteredDatasets}
               option="ai_type"
-              options=${JSON.stringify(aiTypeLabels)}
               multipleSelect="true"
               title="Active Ingredient Type"
+              optionsData=${aiTypeOptionsData}
+              optionsDataValueColumn="ai_type"
               initialValue="*"
             ></osl-select-control>
             <osl-select-control
               data=${filteredDatasets}
               option="ai_type_specific"
-              options=${JSON.stringify(aiTypeSpecificLabels)}
+              optionsData=${aiTypeSpecificOptionsData}
+              optionsDataValueColumn="ai_type_specific"
               multipleSelect="true"
               title="Active Ingredient Type (Specific)"
               initialValue="*"
             ></osl-select-control
           ></osl-eq-grid>
-          <br />
-          <br />
-          <hr />
-          <br />
-          <h3>Commodity Type</h3>
+          <hr style="margin:2rem 0 1rem 0" />
+          <osl-eq-grid breakpoint="lg">
+            <div>
+              <h3>Commodity Type</h3>
 
-          <osl-select-control
-            data=${filteredDatasets}
-            option="site"
-            options=${JSON.stringify(siteLabels)}
-            title="Active Ingredient Type (Specific)"
-            initialValue="*"
-            multipleSelect
-          ></osl-select-control>
-          <br />
-          <br />
-          <hr />
-          <br />
-          <h3>Application Site Type</h3>
-          <osl-radio
-            data=${filteredDatasets}
-            option="agtype"
-            initialValue="ag"
-            options=${JSON.stringify([
-              {
-                label: "Agricultural",
-                value: "ag",
-              },
-              {
-                label: "Non-Agricultural (County Only)",
-                value: "nonag",
-              },
-              {
-                label: "Both  (County Only)",
-                value: "*",
-              },
-            ])}
-          >
-          </osl-radio>
+              <osl-select-control
+                data=${filteredDatasets}
+                option="site"
+                title="Location that pesticide was applied to"
+                initialValue="*"
+                multipleSelect
+                optionsData=${siteLocationOptionsData}
+                optionsDataLabelColumn="site_name"
+                optionsDataValueColumn="site_code"
+              ></osl-select-control>
+            </div>
+            <div>
+              <h3>Application Site Type</h3>
+              <osl-radio
+                data=${filteredDatasets}
+                option="agtype"
+                initialValue="ag"
+                options=${JSON.stringify([
+                  {
+                    label: "Agricultural",
+                    value: "ag",
+                  },
+                  {
+                    label: "Non-Agricultural (County Only)",
+                    value: "nonag",
+                  },
+                  {
+                    label: "Both  (County Only)",
+                    value: "*",
+                  },
+                ])}
+              >
+              </osl-radio>
+            </div>
+          </osl-eq-grid>
+          <hr style="margin:2rem 0 1rem 0" />
+          <osl-eq-grid breakpoint="lg">
+            <div>
+              <h3>Specific Chemical(s)</h3>
+
+              <osl-select-control
+                data=${filteredDatasets}
+                option="chemical"
+                multipleSelect="true"
+                title="Specific Chemical(s)"
+                initialValue="*"
+                optionsData=${chemicalOptionsData}
+                optionsDataLabelColumn="chem_name"
+                optionsDataValueColumn="chem_code"
+              ></osl-select-control>
+              <!-- chemical -->
+            </div>
+            <div>
+              <h3>Specific Product(s)</h3>
+
+              <osl-select-control
+                data=${filteredDatasets}
+                option="product"
+                multipleSelect="true"
+                title="Specific Chemical(s)"
+                initialValue="*"
+                optionsData=${productOptionsData}
+                optionsDataLabelColumn="product_name"
+                optionsDataValueColumn="product_code"
+              ></osl-select-control>
+            </div>
+          </osl-eq-grid>
+          <hr style="margin:2rem 0 1rem 0" />
+          <osl-eq-grid breakpoint="lg">
+            <div>
+              <h3>Filter by Census Tract</h3>
+              <osl-chips
+                data="https://d3lsdszfx9jqxt.cloudfront.net/data-query/6542775ca570c6000898f983"
+                initialValue="[]"
+                title="Tract"
+                option="tract"
+                label="Enter tract ID to filter options"
+                optionsData=${censusTractsOptionsData}
+                optionsDataValueColumn="FIPS"
+                showAllOptions="true"
+                maxOptions="50"
+              ></osl-chips>
+
+            </div>
+            <div>
+              <h3>Filter by Zip Code</h3>
+              <osl-chips
+                data="https://d3lsdszfx9jqxt.cloudfront.net/data-query/6542775ca570c6000898f983"
+                initialValue="[]"
+                title="Zip"
+                option="zip"
+                label="Enter zip code to filter options"
+                optionsData=${zipCodesOptionsData}
+                optionsDataValueColumn="GEOID"
+                showAllOptions="true"
+                maxOptions="50"
+              ></osl-chips>
+          </div>
+            <div>
+              <h3>Filter by School District</h3>
+
+              <osl-chips
+                data="https://d3lsdszfx9jqxt.cloudfront.net/data-query/6542775ca570c6000898f983"
+                initialValue="[]"
+                title="Zip"
+                option="zip"
+                label="Enter zip code to filter options"
+                optionsData=${schoolDistrictOptionsData}
+                optionsDataValueColumn="FIPS"
+                optionsDataLabelColumn="Area Name"
+                showAllOptions="true"
+                maxOptions="50"
+              ></osl-chips>
+            </div>
+          </osl-eq-grid>
         </div>
       </osl-modal>
     </osl-flex-box>
@@ -163,21 +257,24 @@ export const CprTimeSeriesHeader = () => {
             <osl-select-control
               data=${timeSeriesData}
               option="ai_class"
-              options=${JSON.stringify(aiClassLabels)}
+              optionsData=${aiClassOptionsData}
+              optionsDataValueColumn="ai_class"
               title="Active Ingredient Class"
               initialValue="*"
             ></osl-select-control>
             <osl-select-control
               data=${timeSeriesData}
               option="ai_type"
-              options=${JSON.stringify(aiTypeLabels)}
+              optionsData=${aiTypeOptionsData}
+              optionsDataValueColumn="ai_type"
               title="Active Ingredient Type"
               initialValue="*"
             ></osl-select-control>
             <osl-select-control
               data=${timeSeriesData}
               option="ai_type_specific"
-              options=${JSON.stringify(aiTypeSpecificLabels)}
+              optionsData=${aiTypeSpecificOptionsData}
+              optionsDataValueColumn="ai_type_specific"
               title="Active Ingredient Type (Specific)"
               initialValue="*"
             ></osl-select-control
@@ -190,14 +287,17 @@ export const CprTimeSeriesHeader = () => {
             <osl-select-control
               data=${timeSeriesData}
               option="zip"
-              options=${JSON.stringify(zipCodes)}
+              optionsData=${zipCodesOptionsData}
+              optionsDataValueColumn="GEOID"
               title="Zip Code"
               initialValue="*"
             ></osl-select-control>
             <osl-select-control
               data=${timeSeriesData}
               option="county"
-              options=${JSON.stringify(counties)}
+              optionsData=${countiesOptionsData}
+              optionsDataValueColumn="FIPS"
+              optionsDataLabelColumn="Area Name"
               title="County"
               initialValue="*"
             ></osl-select-control
@@ -232,8 +332,9 @@ export const CprDataDescription = () => {
           parameters.
         </p>
         <p>
-        PUR data was accessed in Fall 2023. Data from 2010 to 2021
-                      (the most recent data year) are available in this tool.</p>
+          PUR data was accessed in Fall 2023. Data from 2010 to 2021 (the most
+          recent data year) are available in this tool.
+        </p>
         <ul>
           <li>Year (start and end), months</li>
           <li>Active ingredient</li>
@@ -251,8 +352,9 @@ export const CprDataDescription = () => {
           or spatial units:
         </p>
         <p>
-                      <b>Census Administrative Boundaries:</b>
-                      ACS 2021 and 2020 boundaries, via census.gov</p>
+          <b>Census Administrative Boundaries:</b>
+          ACS 2021 and 2020 boundaries, via census.gov
+        </p>
         <ul>
           <li>Counties</li>
           <li>Zip codes</li>
@@ -270,8 +372,9 @@ export const CprDataDescription = () => {
           include:
         </p>
         <p>
-                      <b>Census Demographic Data:</b>
-                      ACS 2021 5-year estimates, via Social Explorer</p>
+          <b>Census Demographic Data:</b>
+          ACS 2021 5-year estimates, via Social Explorer
+        </p>
         <ul>
           <li>Population</li>
           <li>Race and ethnicity</li>

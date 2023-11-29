@@ -6,13 +6,11 @@ import {
   filteredDatasets,
   censusTractData,
   censusTractColumns,
+  countyData,
+  schoolDistrictData,
 } from "./CPRUtils";
 
-import {
-  CprDataDescription,
-  CprFilterHeader,
-} from "./CPRComponents";
-
+import { CprDataDescription, CprFilterHeader } from "./CPRComponents";
 
 export const CPR = () => {
   return html`
@@ -96,51 +94,127 @@ export const CPR = () => {
             </div>
           </div>
           <div style="max-height:80vh">
-            <osl-glmap
-              mapStyle="https://basemaps.cartocdn.com/gl/positron-gl-style/style.json"
-              legendPosition="bottom-left"
-              showNavigation="true"
-              showSingleLayer="true"
-              center="[-120.1,36.9]"
-              zoom="5"
-            >
-              <osl-map-layer
-                legendTitle="Pounds of Chemical Used (Zip Code)"
-                visible="true"
-                geoType="WKB"
-                geoColumn="geometry"
-                dataColumn="lbs_chm_used"
-                type="continuous"
-                bins="5"
-                colorScheme="Reds"
-                filled="true"
-                attribution="California Pesticide Use Reporting (PUR)"
-                layer="polygon"
-                beforeId="water"
-                method="JNK"
-                geoId="ZIP"
-                data=${zipCodeData}
+          <osl-tabs>
+
+            <div data-tab="Tract" style="width:100%;height:100%;">
+              <osl-glmap
+                mapStyle="https://basemaps.cartocdn.com/gl/positron-gl-style/style.json"
+                legendPosition="bottom-left"
+                showNavigation="true"
+                showSingleLayer="true"
+                center="[-120.1,36.9]"
+                zoom="5"
               >
-              </osl-map-layer>
-              <osl-map-layer
-                legendTitle="Pounds of Chemical Used (Census Tract)"
-                geoType="WKB"
-                geoColumn="geometry"
-                dataColumn="lbs_chm_used"
-                type="continuous"
-                bins="5"
-                colorScheme="Reds"
-                filled="true"
-                attribution="California Pesticide Use Reporting (PUR)"
-                layer="polygon"
-                beforeId="water"
-                method="JNK"
-                geoId="FIPS"
-                data=${censusTractData}
-                visible="false"
+                <osl-map-layer
+                  legendTitle="Pounds of Chemical Used"
+                  geoType="WKB"
+                  geoColumn="geometry"
+                  dataColumn="lbs_chm_used"
+                  type="continuous"
+                  bins="5"
+                  colorScheme="Reds"
+                  filled="true"
+                  attribution="California Pesticide Use Reporting (PUR)"
+                  layer="polygon"
+                  beforeId="water"
+                  method="JNK"
+                  geoId="FIPS"
+                  data=${censusTractData}
+                  visible="true"
+                >
+                </osl-map-layer>
+              </osl-glmap>
+            </div>
+
+          <div data-tab="County" style="width:100%;height:100%;">
+              <osl-glmap
+                mapStyle="https://basemaps.cartocdn.com/gl/positron-gl-style/style.json"
+                legendPosition="bottom-left"
+                showNavigation="true"
+                showSingleLayer="true"
+                center="[-120.1,36.9]"
+                zoom="5"
               >
-              </osl-map-layer>
-            </osl-glmap>
+                <osl-map-layer
+                  legendTitle="Pounds of Chemical Used"
+                  geoType="WKB"
+                  geoColumn="geometry"
+                  dataColumn="lbs_chm_used"
+                  type="continuous"
+                  bins="5"
+                  colorScheme="Reds"
+                  filled="true"
+                  attribution="California Pesticide Use Reporting (PUR)"
+                  layer="polygon"
+                  beforeId="water"
+                  method="JNK"
+                  data=${countyData}
+                  visible="true"
+                >
+                </osl-map-layer>
+              </osl-glmap>
+            </div>
+
+            <div data-tab="School District" style="width:100%;height:100%;">
+              <osl-glmap
+                mapStyle="https://basemaps.cartocdn.com/gl/positron-gl-style/style.json"
+                legendPosition="bottom-left"
+                showNavigation="true"
+                showSingleLayer="true"
+                center="[-120.1,36.9]"
+                zoom="5"
+              >
+                <osl-map-layer
+                  legendTitle="Pounds of Chemical Used"
+                  geoType="WKB"
+                  geoColumn="geometry"
+                  dataColumn="lbs_chm_used"
+                  type="continuous"
+                  bins="5"
+                  colorScheme="Reds"
+                  filled="true"
+                  attribution="California Pesticide Use Reporting (PUR)"
+                  layer="polygon"
+                  beforeId="water"
+                  method="JNK"
+                  geoId="SCID"
+                  data=${schoolDistrictData}
+                  visible="true"
+                >
+                </osl-map-layer>
+              </osl-glmap>
+            </div>
+
+            <div data-tab="Zip Code" style="width:100%;height:100%;">
+              <osl-glmap
+                mapStyle="https://basemaps.cartocdn.com/gl/positron-gl-style/style.json"
+                legendPosition="bottom-left"
+                showNavigation="true"
+                showSingleLayer="true"
+                center="[-120.1,36.9]"
+                zoom="5"
+              >
+                <osl-map-layer
+                  legendTitle="Pounds of Chemical Used"
+                  visible="true"
+                  geoType="WKB"
+                  geoColumn="geometry"
+                  dataColumn="lbs_chm_used"
+                  type="continuous"
+                  bins="5"
+                  colorScheme="Reds"
+                  filled="true"
+                  attribution="California Pesticide Use Reporting (PUR)"
+                  layer="polygon"
+                  beforeId="water"
+                  method="JNK"
+                  geoId="ZIP"
+                  data=${zipCodeData}
+                >
+                </osl-map-layer>
+              </osl-glmap>
+            </div>
+          </osl-tabs>
           </div>
         </osl-flex-box>
         </div></div>
