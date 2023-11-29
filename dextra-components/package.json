@@ -12,6 +12,7 @@
   "dependencies": {
     "@duckdb/duckdb-wasm": "^1.20.0",
     "@lit-labs/context": "^0.3.0",
+    "@lit-labs/virtualizer": "^2.0.11",
     "@loaders.gl/core": "^3.3.3",
     "@loaders.gl/csv": "^3.3.3",
     "@loaders.gl/json": "^3.3.3",
