@@ -33,7 +33,7 @@ import {
   aiTypeSpecificOptionsData,
   aiTypeOptionsData,
   aiClassOptionsData,
-  zipCodesOptionsData,
+  townshipCodesOptionsData,
   countiesOptionsData,
   censusTractsOptionsData,
   schoolDistrictOptionsData,
@@ -177,10 +177,58 @@ export const CprFilterHeader = () => {
           </osl-eq-grid>
           <hr style="margin:2rem 0 1rem 0" />
           <osl-eq-grid breakpoint="lg">
+
+          <div>
+              <h3>Filter by County</h3>
+              <osl-chips
+                data=${filteredDatasets}
+                initialValue="[]"
+                title="County"
+                option="county"
+                label="Enter county name to filter options"
+                optionsData=${countiesOptionsData}
+                optionsDataValueColumn="FIPS"
+                optionsDataLabelColumn="Area Name"
+                showAllOptions="true"
+                maxOptions="50"
+              ></osl-chips>
+
+            </div>
+            <div>
+              <h3>Filter by Township</h3>
+              <osl-chips
+                data=${filteredDatasets}
+                initialValue="[]"
+                title="Township"
+                option="townshiprange"
+                label="Enter township ID to filter options"
+                optionsData=${townshipCodesOptionsData}
+                optionsDataValueColumn="TownshipRange"
+                showAllOptions="true"
+                maxOptions="50"
+              ></osl-chips>
+          </div>
+            <div>
+              <h3>Filter by School District</h3>
+
+              <osl-chips
+                data=${filteredDatasets}
+                initialValue="[]"
+                title="School District"
+                option="schooldistrict"
+                label="Enter zip code to filter options"
+                optionsData=${schoolDistrictOptionsData}
+                optionsDataValueColumn="FIPS"
+                optionsDataLabelColumn="Area Name"
+                showAllOptions="true"
+                maxOptions="50"
+              ></osl-chips>
+            </div>
+
             <div>
               <h3>Filter by Census Tract</h3>
               <osl-chips
-                data="https://d3lsdszfx9jqxt.cloudfront.net/data-query/6542775ca570c6000898f983"
+                data=${filteredDatasets}
                 initialValue="[]"
                 title="Tract"
                 option="tract"
@@ -192,37 +240,49 @@ export const CprFilterHeader = () => {
               ></osl-chips>
 
             </div>
-            <div>
-              <h3>Filter by Zip Code</h3>
-              <osl-chips
-                data="https://d3lsdszfx9jqxt.cloudfront.net/data-query/6542775ca570c6000898f983"
-                initialValue="[]"
-                title="Zip"
-                option="zip"
-                label="Enter zip code to filter options"
-                optionsData=${zipCodesOptionsData}
-                optionsDataValueColumn="GEOID"
-                showAllOptions="true"
-                maxOptions="50"
-              ></osl-chips>
-          </div>
-            <div>
-              <h3>Filter by School District</h3>
+          </osl-eq-grid>
 
-              <osl-chips
-                data="https://d3lsdszfx9jqxt.cloudfront.net/data-query/6542775ca570c6000898f983"
-                initialValue="[]"
-                title="Zip"
-                option="zip"
-                label="Enter zip code to filter options"
-                optionsData=${schoolDistrictOptionsData}
-                optionsDataValueColumn="FIPS"
-                optionsDataLabelColumn="Area Name"
-                showAllOptions="true"
-                maxOptions="50"
-              ></osl-chips>
+          <hr style="margin:2rem 0 1rem 0" />
+          <osl-eq-grid breakpoint="lg">
+            <div>
+              Percent Black
+
+              <osl-slider
+                data="${filteredDatasets}"
+                option="pctblack"
+                min="0"
+                max="1"
+                step=".01"
+                initialValue="0"
+                title="Percent Non-hispanic Black or African American (ACS Race/Ethnicity)"
+              ></osl-slider>
+            </div>
+            <div>
+              Percent Hispanic
+              <osl-slider
+                data="${filteredDatasets}"
+                option="pcthispanic"
+                min="0"
+                max="1"
+                step=".01"
+                initialValue="0"
+                title="Percent Hispanic or Latino (ACS Race/Ethnicity)"
+              ></osl-slider>
+            </div>
+            <div>
+              Median Income
+              <osl-slider
+                data="${filteredDatasets}"
+                option="income"
+                min="0"
+                max="120000"
+                step="1000"
+                initialValue="0"
+                title="Median Household Income (2021 Dollars)"
+              ></osl-slider>
             </div>
           </osl-eq-grid>
+
         </div>
       </osl-modal>
     </osl-flex-box>
@@ -251,7 +311,7 @@ export const CprTimeSeriesHeader = () => {
         initialValue="2021-12"
       ></osl-select-control>
       <osl-modal label="Additional Filters" title="Filter Data" size="l">
-        <div style="min-width:80vw;min-height:80vh; overflow-y:auto;">
+        <div style="min-width:80vw;min-height:80vh;">
           <h3>Active Ingredients</h3>
           <osl-flex-box breakpoint="lg">
             <osl-select-control

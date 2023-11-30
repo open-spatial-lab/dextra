@@ -1,6 +1,6 @@
 import { html } from "lit";
 import {
-  zipCodeData,
+  townshipData,
   zipCodeColumns,
   demogZipCodeColumns,
   filteredDatasets,
@@ -92,24 +92,6 @@ export const CPR2 = () => {
               mapGroup="1"
             >
               <osl-map-layer
-                legendTitle="Pounds of Chemical Used (Zip Code)"
-                visible="true"
-                geoType="WKB"
-                geoColumn="geometry"
-                dataColumn="lbs_chm_used"
-                type="continuous"
-                bins="7"
-                colorScheme="d3-magma"
-                filled="true"
-                attribution="California Pesticide Use Reporting (PUR)"
-                layer="polygon"
-                beforeId="water"
-                method="QNT"
-                geoId="ZIP"
-                data=${zipCodeData}
-              >
-              </osl-map-layer>
-              <osl-map-layer
                 legendTitle="Pounds of Chemical Used (Census Tract)"
                 geoType="WKB"
                 geoColumn="geometry"
@@ -139,191 +121,6 @@ export const CPR2 = () => {
               zoom="5"
               mapGroup="1"
             >
-              <osl-map-layer
-                legendTitle="Total Population (Zip Code)"
-                visible="true"
-                geoType="WKB"
-                geoColumn="geometry"
-                dataColumn="Total Population"
-                type="continuous"
-                bins="7"
-                colorScheme="PuBu"
-                filled="true"
-                attribution="American Community Survey (ACS) 2021 5-year estimates"
-                layer="polygon"
-                beforeId="water"
-                method="QNT"
-                geoId="ZIP"
-                data=${zipCodeData}
-              >
-              </osl-map-layer>
-
-              <osl-map-layer
-                legendTitle="Non Hispanic White Population (Zip Code)"
-                visible="false"
-                geoType="WKB"
-                geoColumn="geometry"
-                dataColumn="NH White"
-                type="continuous"
-                bins="7"
-                colorScheme="PuBu"
-                filled="true"
-                attribution="American Community Survey (ACS) 2021 5-year estimates"
-                layer="polygon"
-                beforeId="water"
-                method="QNT"
-                geoId="ZIP"
-                data=${zipCodeData}
-              >
-              </osl-map-layer>
-              <osl-map-layer
-                legendTitle="Non Hispanic Black Population (Zip Code)"
-                visible="false"
-                geoType="WKB"
-                geoColumn="geometry"
-                dataColumn="NH Black"
-                type="continuous"
-                bins="7"
-                colorScheme="PuBu"
-                filled="true"
-                attribution="American Community Survey (ACS) 2021 5-year estimates"
-                layer="polygon"
-                beforeId="water"
-                method="QNT"
-                geoId="ZIP"
-                data=${zipCodeData}
-              >
-              </osl-map-layer>
-
-              <osl-map-layer
-                legendTitle="Non Hispanic American Indian and Alaska Native Population (Zip Code)"
-                visible="false"
-                geoType="WKB"
-                geoColumn="geometry"
-                dataColumn="NH AIAN"
-                type="continuous"
-                bins="7"
-                colorScheme="PuBu"
-                filled="true"
-                attribution="American Community Survey (ACS) 2021 5-year estimates"
-                layer="polygon"
-                beforeId="water"
-                method="QNT"
-                geoId="ZIP"
-                data=${zipCodeData}
-              >
-              </osl-map-layer>
-              <osl-map-layer
-                legendTitle="Non Hispanic Asian Population (Zip Code)"
-                visible="false"
-                geoType="WKB"
-                geoColumn="geometry"
-                dataColumn="NH Asian"
-                type="continuous"
-                bins="7"
-                colorScheme="PuBu"
-                filled="true"
-                attribution="American Community Survey (ACS) 2021 5-year estimates"
-                layer="polygon"
-                beforeId="water"
-                method="QNT"
-                geoId="ZIP"
-                data=${zipCodeData}
-              >
-              </osl-map-layer>
-              <osl-map-layer
-                legendTitle="Non Hispanic Native Hawaiian and Pacific Islander Population (Zip Code)"
-                visible="false"
-                geoType="WKB"
-                geoColumn="geometry"
-                dataColumn="NH NHPI"
-                type="continuous"
-                bins="7"
-                colorScheme="PuBu"
-                filled="true"
-                attribution="American Community Survey (ACS) 2021 5-year estimates"
-                layer="polygon"
-                beforeId="water"
-                method="QNT"
-                geoId="ZIP"
-                data=${zipCodeData}
-              >
-              </osl-map-layer>
-
-              <osl-map-layer
-                legendTitle="Non Hispanic Another Race Population (Zip Code)"
-                visible="false"
-                geoType="WKB"
-                geoColumn="geometry"
-                dataColumn="NH Other"
-                type="continuous"
-                bins="7"
-                colorScheme="PuBu"
-                filled="true"
-                attribution="American Community Survey (ACS) 2021 5-year estimates"
-                layer="polygon"
-                beforeId="water"
-                method="QNT"
-                geoId="ZIP"
-                data=${zipCodeData}
-              >
-              </osl-map-layer>
-
-              <osl-map-layer
-                legendTitle="Non Hispanic Two or More Races Population (Zip Code)"
-                visible="false"
-                geoType="WKB"
-                geoColumn="geometry"
-                dataColumn="NH Two or More"
-                type="continuous"
-                bins="7"
-                colorScheme="PuBu"
-                filled="true"
-                attribution="American Community Survey (ACS) 2021 5-year estimates"
-                layer="polygon"
-                beforeId="water"
-                method="QNT"
-                geoId="ZIP"
-                data=${zipCodeData}
-              >
-              </osl-map-layer>
-
-              <osl-map-layer
-                legendTitle="Hispanic or Latinx Population (Zip Code)"
-                visible="false"
-                geoType="WKB"
-                geoColumn="geometry"
-                dataColumn="Pop Hispanic or Latino"
-                type="continuous"
-                bins="7"
-                colorScheme="PuBu"
-                filled="true"
-                attribution="American Community Survey (ACS) 2021 5-year estimates"
-                layer="polygon"
-                beforeId="water"
-                method="QNT"
-                geoId="ZIP"
-                data=${zipCodeData}
-              >
-              </osl-map-layer>
-              <osl-map-layer
-                legendTitle="Median Income (Zip Code)"
-                visible="false"
-                geoType="WKB"
-                geoColumn="geometry"
-                dataColumn="Median Income"
-                type="continuous"
-                bins="7"
-                colorScheme="YlGn"
-                filled="true"
-                attribution="American Community Survey (ACS) 2021 5-year estimates"
-                layer="polygon"
-                beforeId="water"
-                method="QNT"
-                geoId="ZIP"
-                data=${zipCodeData}
-              >
-              </osl-map-layer>
 
               <osl-map-layer
                 legendTitle="Total Population (Census Tract)"
@@ -515,13 +312,6 @@ export const CPR2 = () => {
         </osl-flex-box>
         <br /><br />
         <div>
-          <osl-data-table
-            title="Zip Code Data"
-            maxw="300vw"
-            data=${zipCodeData}
-            columns=${demogZipCodeColumns}
-            pagination="true"
-          ></osl-data-table>
         </div>
         <div>
           <osl-data-table

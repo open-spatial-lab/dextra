@@ -24,8 +24,8 @@ const getCprYears = () => {
 export const yearLabels = getCprYears();
 
 // DATA
-export const zipCodeData =
-  "https://d3lsdszfx9jqxt.cloudfront.net/data-query/65405b33c1356c000878d9f7";
+export const townshipData =
+  "https://d3lsdszfx9jqxt.cloudfront.net/data-query/6568f4ca16faa30008555613";
 export const censusTractData =
   "https://d3lsdszfx9jqxt.cloudfront.net/data-query/65405d96c1356c000878d9f8";
 export const schoolDistrictData =
@@ -50,8 +50,8 @@ export const aiTypeSpecificOptionsData =
   "https://d3lsdszfx9jqxt.cloudfront.net/data-query/656763b1aeb11300087fbd83";
 export const siteLocationOptionsData =
   "https://d3lsdszfx9jqxt.cloudfront.net/data-query/65676456aeb11300087fbd85";
-export const zipCodesOptionsData =
-  "https://d3lsdszfx9jqxt.cloudfront.net/data-query/656762a8aeb11300087fbd7f";
+export const townshipCodesOptionsData =
+  "https://d3lsdszfx9jqxt.cloudfront.net/data-query/6569009ee5a32a0008930614";
 export const censusTractsOptionsData =
   "https://d3lsdszfx9jqxt.cloudfront.net/data-query/656763f6aeb11300087fbd84";
 export const countiesOptionsData =
@@ -61,11 +61,15 @@ export const productOptionsData =
 export const chemicalOptionsData =
   "https://d3lsdszfx9jqxt.cloudfront.net/data-query/65675fb7b041550008c7b6ba";
 export const schoolDistrictOptionsData = "https://d3lsdszfx9jqxt.cloudfront.net/data-query/656789dcb678c50008c54a00";
+
 export const filteredDatasets = JSON.stringify([
-  zipCodeData,
+  townshipData,
   overTimeByAiClass,
   censusTractData,
+  schoolDistrictData,
+  countyData
 ]);
+
 export const timeSeriesData = JSON.stringify([
   overTimeByAiClass,
   overTimeByAiType,
@@ -126,3 +130,6 @@ export const demogTractColumns = JSON.stringify([
   "Pct Hispanic",
   "Pct Black",
 ]);
+
+
+export const zeroPesticideColor = "#95d599";

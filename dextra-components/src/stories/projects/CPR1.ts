@@ -1,13 +1,14 @@
 import { html } from "lit";
 
 import {
-  zipCodeData,
+  townshipData,
   zipCodeColumns,
   filteredDatasets,
   censusTractData,
   censusTractColumns,
   countyData,
   schoolDistrictData,
+  zeroPesticideColor,
 } from "./CPRUtils";
 
 import { CprDataDescription, CprFilterHeader } from "./CPRComponents";
@@ -69,7 +70,7 @@ export const CPR = () => {
             "site",
             "agtype",
           ])}
-          data=${zipCodeData}
+          data=${townshipData}
         ></osl-download>
         <osl-download
           title="Download Census Tract Code Summary Data"
@@ -83,7 +84,7 @@ export const CPR = () => {
             "site",
             "agtype",
           ])}
-          data=${zipCodeData}
+          data=${townshipData}
         ></osl-download>
         </div>
             </div>
@@ -121,6 +122,10 @@ export const CPR = () => {
                   geoId="FIPS"
                   data=${censusTractData}
                   visible="true"
+                  stroked="true"
+                  staticStroke="[255,255,255,120]"
+                  isolatedValues="[0, null]"
+                  isolatedColor="${zeroPesticideColor}"
                 >
                 </osl-map-layer>
               </osl-glmap>
@@ -140,6 +145,8 @@ export const CPR = () => {
                   geoType="WKB"
                   geoColumn="geometry"
                   dataColumn="lbs_chm_used"
+                  stroked="true"
+                  staticStroke="[255,255,255,120]"
                   type="continuous"
                   bins="5"
                   colorScheme="Reds"
@@ -150,6 +157,8 @@ export const CPR = () => {
                   method="JNK"
                   data=${countyData}
                   visible="true"
+                  isolatedValues="[0, null]"
+                  isolatedColor="${zeroPesticideColor}"
                 >
                 </osl-map-layer>
               </osl-glmap>
@@ -178,14 +187,18 @@ export const CPR = () => {
                   beforeId="water"
                   method="JNK"
                   geoId="SCID"
+                  stroked="true"
+                  staticStroke="[255,255,255,120]"
                   data=${schoolDistrictData}
                   visible="true"
+                  isolatedValues="[0, null]"
+                  isolatedColor="${zeroPesticideColor}"
                 >
                 </osl-map-layer>
               </osl-glmap>
             </div>
 
-            <div data-tab="Zip Code" style="width:100%;height:100%;">
+            <div data-tab="Townships" style="width:100%;height:100%;">
               <osl-glmap
                 mapStyle="https://basemaps.cartocdn.com/gl/positron-gl-style/style.json"
                 legendPosition="bottom-left"
@@ -199,6 +212,8 @@ export const CPR = () => {
                   visible="true"
                   geoType="WKB"
                   geoColumn="geometry"
+                  stroked="true"
+                  staticStroke="[255,255,255,120]"
                   dataColumn="lbs_chm_used"
                   type="continuous"
                   bins="5"
@@ -209,7 +224,9 @@ export const CPR = () => {
                   beforeId="water"
                   method="JNK"
                   geoId="ZIP"
-                  data=${zipCodeData}
+                  data=${townshipData}
+                  isolatedValues="[0, null]"
+                  isolatedColor="${zeroPesticideColor}"
                 >
                 </osl-map-layer>
               </osl-glmap>
@@ -218,21 +235,14 @@ export const CPR = () => {
           </div>
         </osl-flex-box>
         </div></div>
-        <br /><br />
         </div>
-        <div>
-          <br /><br />
-          <hr/>
-          <br /><br />
-        <osl-data-table
+        <!-- <osl-data-table
           title="Zip Code Data"
           maxw="200vw"
-          data=${zipCodeData}
+          data=${townshipData}
           columns=${zipCodeColumns}
           pagination="true"
-        ></osl-data-table></div>
-        <br/><br/>
-        <div>
+        ></osl-data-table> -->
 
         <osl-data-table
           title="Census Tract Data"
@@ -241,7 +251,6 @@ export const CPR = () => {
           columns=${censusTractColumns}
           pagination="true"
         ></osl-data-table>
-        </div>
 
       </div>
     </div>
