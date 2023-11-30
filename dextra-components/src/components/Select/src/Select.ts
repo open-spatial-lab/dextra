@@ -49,7 +49,14 @@ export class Select extends OslControl {
       max-height: 100vh;
     }
     :host sp-menu-item {
-      background: red !important;
+      width: 100%;
+    }
+    :host sp-icon-chevron100 {
+      margin-left: 0.5rem;
+      transform: scale(0.75) rotate(90deg);
+    }
+    :host sp-action-button {
+      max-width: 100%;
     }
   `;
 
@@ -69,14 +76,10 @@ export class Select extends OslControl {
       <sp-action-button
         slot="trigger"
         id="toggle"
-        style="max-width:100%;"
         @click=${this.forceVirtualListInitialize}
       >
         ${valueLabel}
-        <sp-icon-chevron100
-          size="s"
-          style="margin-left:0.5rem;transform:scale(0.75) rotate(90deg);"
-        ></sp-icon-chevron100>
+        <sp-icon-chevron100 size="s"></sp-icon-chevron100>
       </sp-action-button>
     `;
   }

@@ -7,6 +7,7 @@ import { colorSchemes } from "../../core/utils/color";
 import { interpretFuncJsonOrString } from "../../core/utils/converters";
 import { utils } from "../../core/utils/utilsClass";
 import { nonReactiveStore } from "../../core/state/Store";
+import { css } from "lit";
 export class OslData extends ValtioElement<StateSchema> {
   utils = utils;
 
@@ -44,7 +45,7 @@ export class OslData extends ValtioElement<StateSchema> {
   mapping?: {
     [key: string]: string;
   };
-  
+
   @property({ type: String })
   option: string = "";
 
@@ -70,13 +71,13 @@ export class OslData extends ValtioElement<StateSchema> {
   legendTitle?: string;
 
   @property({ converter: interpretFuncJsonOrString })
-  onInteractDataset?: string | string[]; 
+  onInteractDataset?: string | string[];
 
   @property({ type: String })
-  onInteractProperty?: string = ""
+  onInteractProperty?: string = "";
 
-  @property({type: String})
-  geoOperation?: string
+  @property({ type: String })
+  geoOperation?: string;
 
   @property({ type: String })
   suffixParam?: string;
@@ -84,10 +85,38 @@ export class OslData extends ValtioElement<StateSchema> {
   @property({ type: String })
   prefixParam?: string;
 
-  protected getTitle(){
-    const prefix = this.prefixParam ? this.getDeepValue(this.store.datasets[this.data].parameters, this.prefixParam) : ""
-    const suffix = this.suffixParam ? this.getDeepValue(this.store.datasets[this.data].parameters, this.suffixParam) : ""
-    return `${prefix} ${this.title} ${suffix}`
+  showPreloader = true;
+
+  static styles = css`
+    .preloader {
+      position: absolute;
+      width: 100%;
+      height: 100%;
+      background: rgba(255, 255, 255, 0.75);
+      z-index: 10;
+      top: 0;
+      left: 0;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+    }
+  `;
+
+  protected getTitle() {
+    const prefix = this.prefixParam
+      ? this.getDeepValue(
+          this.store.datasets[this.data].parameters,
+          this.prefixParam
+        )
+      : "";
+    const suffix = this.suffixParam
+      ? this.getDeepValue(
+          this.store.datasets[this.data].parameters,
+          this.suffixParam
+        )
+      : "";
+    return `${prefix} ${this.title} ${suffix}`;
   }
 
   protected getDeepValue(obj: Record<string, any>, path: string) {
@@ -108,15 +137,20 @@ export class OslData extends ValtioElement<StateSchema> {
     const statuses = this.store.datasets[data].statuses;
     const parametersHash = JSON.stringify(this.store.datasets[data].parameters);
     const currentParametersHash = useGeojsonData
-      ? `${parametersHash}/geo/${this.geoColumn}${this.geoOperation ? `/${this.geoOperation}`: ''}`
+      ? `${parametersHash}/geo/${this.geoColumn}${
+          this.geoOperation ? `/${this.geoOperation}` : ""
+        }`
       : parametersHash;
-      const currentStatus = statuses?.[currentParametersHash];
+    const currentStatus = statuses?.[currentParametersHash];
 
-      if (currentStatus === "success" && this.currentParametersHash !== currentParametersHash) {
+    if (
+      currentStatus === "success" &&
+      this.currentParametersHash !== currentParametersHash
+    ) {
       this.currentResults = nonReactiveStore[data][currentParametersHash];
       this.currentParametersHash = currentParametersHash;
       this.isReady = true;
-    } else if (currentStatus !== "success" ){
+    } else if (currentStatus !== "success") {
       this.isReady = false;
     }
   }
@@ -127,7 +161,7 @@ export class OslData extends ValtioElement<StateSchema> {
     if (!this.store.datasets[data] && data !== "") {
       this.store.datasets[data] = {
         parameters: {},
-        statuses: {}
+        statuses: {},
       };
       nonReactiveStore[data] = {};
     } else {
@@ -147,16 +181,19 @@ export class OslData extends ValtioElement<StateSchema> {
 
   protected eventValueAccessor(feature: any) {
     if (!this.onInteractProperty) return;
-    return feature[this.onInteractProperty]
+    return feature[this.onInteractProperty];
   }
 
   protected handleChange(event: Event) {
-    if (!this.onInteractDataset || !this.option || !this.onInteractProperty) return;
+    if (!this.onInteractDataset || !this.option || !this.onInteractProperty)
+      return;
     const value = this.eventValueAccessor(event);
-    const datasets = Array.isArray(this.onInteractDataset) ? this.onInteractDataset : [this.onInteractDataset];
+    const datasets = Array.isArray(this.onInteractDataset)
+      ? this.onInteractDataset
+      : [this.onInteractDataset];
     datasets.forEach((dataset) => {
       this.store.datasets[dataset].parameters[this.option] = value;
-    })
+    });
   }
 
   connectedCallback() {
@@ -178,7 +215,7 @@ export class OslData extends ValtioElement<StateSchema> {
         geoType: this.geoType,
         geoId: this.geoId,
         dataset: this.data,
-        operation: this.geoOperation
+        operation: this.geoOperation,
       });
     }
   }
@@ -190,21 +227,15 @@ ${JSON.stringify(this.currentResults || [], null, 2)}</pre
   }
 
   preloader() {
-    if (this.isReady) {
+    if (this.isReady || !this.showPreloader) {
       return html``;
     }
-    return html`
-      <div
-        style="position:absolute;width:100%;height:100%;background:rgba(255,255,255,0.75);z-index:1000;top:0;left:0;display:flex;flex-direction:column;justify-content:center;align-items:center"
-      >
-        ${super.preloader()}
-      </div>
-    `;
+    return html` <div class="preloader">${super.preloader()}</div> `;
   }
 
   render() {
     return html`
-      <sp-theme scale="" color="light" style="height:100%; width:100%;">
+      <sp-theme scale="" color="light" style="height:100%; width:100%;position:relative;">
         ${this.preloader()} ${this.template()}
       </sp-theme>
     `;
