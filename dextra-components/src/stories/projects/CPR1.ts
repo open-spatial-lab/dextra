@@ -186,7 +186,7 @@ export const CPR = () => {
                   layer="polygon"
                   beforeId="water"
                   method="JNK"
-                  geoId="SCID"
+                  geoId="FIPS"
                   stroked="true"
                   staticStroke="[255,255,255,120]"
                   data=${schoolDistrictData}
