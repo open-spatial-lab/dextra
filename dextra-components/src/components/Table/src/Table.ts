@@ -85,6 +85,7 @@ export class OslTable extends ValtioElement<any> {
       </sp-action-group>
     `;
   }
+
   template() {
     if (!this.data?.length || !this.columns?.length) {
       return this.preloader();
@@ -97,7 +98,7 @@ export class OslTable extends ValtioElement<any> {
       : this.data;
     const pages = Math.ceil(this.data.length / this.pageSize);
     return html`
-      <div>
+      <div style="position:relative;">
         <osl-flex-box breakpoint="xl"><div>
         <h3>${this.title}</h3></div>
         <div>

@@ -53,15 +53,16 @@ export class OslModal extends ValtioElement<any> {
           top:50%;
           z-index:9999;
           width: 90vw;
-          height: 90vh;
           transform:translate(-50%, -50%);
           opacity:${this.isOpen ? 1 : 0};
           pointer-events:${this.isOpen ? "auto" : "none"};
-        transition: opacity 0.3s ease-in-out;
+          transition: opacity 0.3s ease-in-out;
 
         ">
         <h2 slot="heading">${this.title}</h2>
-        <slot>Fallback content</slot>
+        <div style="max-height:70vh;overflow-y:auto;">
+          <slot>Fallback content</slot>
+        </div>
         <div>
 
       <sp-button

@@ -38,6 +38,7 @@ export class OslDownload extends OslData {
   parameterSuffixes?: string[];
   
   isReady = true;
+  showPreloader = false;
   
 
   resultsToRowlike(separator: string = ",") {

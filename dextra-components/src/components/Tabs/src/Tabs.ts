@@ -13,11 +13,13 @@ export class OslTabs extends ValtioElement<any> {
   @property({ type: Array })
   tabs: any[] = [];
 
-  firstUpdated(): void {
+  connectedCallback(): void {
+    super.connectedCallback();
     this.tabs = Array.from(this.children).map((child) =>
       child.getAttribute("data-tab")
     );
   }
+ 
   getTabContent(tab: string) {
     return this.querySelector(`[data-tab="${tab}"]`);
   }
