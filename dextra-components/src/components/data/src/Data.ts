@@ -230,7 +230,20 @@ ${JSON.stringify(this.currentResults || [], null, 2)}</pre
     if (this.isReady || !this.showPreloader) {
       return html``;
     }
-    return html` <div class="preloader">${super.preloader()}</div> `;
+    return html` <div class="preloader"
+    style="
+      position: absolute;
+      width: 100%;
+      height: 100%;
+      background: rgba(255, 255, 255, 0.75);
+      z-index: 10;
+      top: 0;
+      left: 0;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;"
+    >${super.preloader()}</div> `;
   }
 
   render() {
