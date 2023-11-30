@@ -227,7 +227,7 @@ export class BinBuilder {
     if (this.isolatedValues?.length && this.isolatedColor) {
       legendEntries.push({
         symbol: { color: this.formatColor(tinycolor(this.isolatedColor), format) },
-        text: this.isolatedValues.join(", ")
+        text: this.isolatedValues.filter((f:any) => !([null,undefined].includes(f))).join(", ")
       });
     }
 
