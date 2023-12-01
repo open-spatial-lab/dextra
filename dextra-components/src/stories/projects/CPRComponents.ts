@@ -38,9 +38,10 @@ import {
   censusTractsOptionsData,
   schoolDistrictOptionsData,
   monthlyData,
+  demographyFilteredDatasets,
 } from "./CPRUtils";
 
-const filterModal = (datasetsToFilter: string, showDemog: boolean = false) => {
+const filterModal = (datasetsToFilter: string, demographicDatasetsToFilter: string, showDemog: boolean = false) => {
   return html` <osl-modal
     label="Additional Filters"
     title="Filter Data"
@@ -221,7 +222,7 @@ const filterModal = (datasetsToFilter: string, showDemog: boolean = false) => {
               Percent Black
 
               <osl-slider
-                data="${datasetsToFilter}"
+                data="${demographicDatasetsToFilter}"
                 option="pctblack"
                 min="0"
                 max="1"
@@ -233,7 +234,7 @@ const filterModal = (datasetsToFilter: string, showDemog: boolean = false) => {
             <div>
               Percent Hispanic
               <osl-slider
-                data="${datasetsToFilter}"
+                data="${demographicDatasetsToFilter}"
                 option="pcthispanic"
                 min="0"
                 max="1"
@@ -245,7 +246,7 @@ const filterModal = (datasetsToFilter: string, showDemog: boolean = false) => {
             <div>
               Median Income
               <osl-slider
-                data="${datasetsToFilter}"
+                data="${demographicDatasetsToFilter}"
                 option="income"
                 min="0"
                 max="120000"
@@ -291,7 +292,7 @@ export const CprFilterHeader = () => {
         initialValue="2021-12"
       ></osl-select-control>
     </osl-flex-box>
-    ${filterModal(filteredDatasets, true)}
+    ${filterModal(filteredDatasets, demographyFilteredDatasets, true)}
   `;
 };
 
@@ -301,7 +302,7 @@ export const CprTimeSeriesHeader = () => {
       <h1>California Pesticide Use Data Explorer</h1>
     </sp-theme>
     <osl-eq-grid>
-      <div>${filterModal(timeSeriesData)}</div>
+      <div>${filterModal(timeSeriesData, "[]")}</div>
       <div>
         <osl-param-view
           data=${JSON.parse(monthlyData)[0]}

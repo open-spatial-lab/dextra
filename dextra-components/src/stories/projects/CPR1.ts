@@ -250,7 +250,6 @@ export const CPR = () => {
                     layer="polygon"
                     beforeId="water"
                     method="JNK"
-                    geoId="ZIP"
                     data=${townshipData}
                     isolatedValues="[0, null]"
                     isolatedColor="${zeroPesticideColor}"

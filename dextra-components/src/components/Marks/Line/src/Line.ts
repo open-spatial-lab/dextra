@@ -30,7 +30,6 @@ export class OslLine extends PlotMark {
   public get plot() {
     const innerData = this?.currentResults;
     const options = this.allOptions;
-    console.log(options)
     const plotFn = this.direction === "horizontal" ? Plot.lineY : Plot.lineX;
 
     return (overrideData?: any, overrideOptions?: {}) => {

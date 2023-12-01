@@ -26,25 +26,7 @@ import type {
 import { tooltipStore } from "../../core/state/MapTooltipStore";
 import { html } from "lit";
 import { PickingInfo } from "@deck.gl/core/typed";
-import { MjolnirEvent } from "mjolnir.js"
-// import type {Feature, Geometry, GeoJsonProperties} from 'geojson';
-
-// const DEFAULT_QUINTILE_SCALE = [
-//   [237, 248, 251],
-//   [178, 226, 226],
-//   [102, 194, 164],
-//   [44, 162, 95],
-//   [0, 109, 44],
-// ];
-
-// const NULL_GEOM = [
-//   [0, 0],
-//   [0, 0],
-//   [0, 0],
-//   [0, 0],
-//   [0, 0],
-// ];
-
+import { type MjolnirEvent } from "mjolnir.js"
 @safeCustomElement("osl-map-layer")
 export class OslMapLayer extends OslData {
   @property({ converter: interpretFuncJsonOrString })

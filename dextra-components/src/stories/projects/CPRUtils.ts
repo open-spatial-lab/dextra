@@ -74,6 +74,11 @@ export const filteredDatasets = JSON.stringify([
   schoolDistrictData,
   countyData
 ]);
+export const demographyFilteredDatasets = JSON.stringify([
+  censusTractData,
+  schoolDistrictData,
+  countyData
+]);
 
 export const timeSeriesData = JSON.stringify([
   monthlyByAiClass,
