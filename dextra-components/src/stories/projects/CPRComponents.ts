@@ -37,8 +37,228 @@ import {
   countiesOptionsData,
   censusTractsOptionsData,
   schoolDistrictOptionsData,
+  monthlyData,
 } from "./CPRUtils";
 
+const filterModal = (datasetsToFilter: string, showDemog: boolean = false) => {
+  return html` <osl-modal
+    label="Additional Filters"
+    title="Filter Data"
+    size="l"
+  >
+    <div style="min-width:80vw;min-height:80vh; overflow-y:auto;">
+      <h3>Active Ingredients</h3>
+      <osl-eq-grid breakpoint="lg">
+        <osl-select-control
+          data=${datasetsToFilter}
+          option="ai_class"
+          multipleSelect="true"
+          title="Active Ingredient Class"
+          label="Search for AI classes"
+          optionsData=${aiClassOptionsData}
+          optionsDataValueColumn="ai_class"
+          initialValue="*"
+        ></osl-select-control>
+        <osl-select-control
+          data=${datasetsToFilter}
+          option="ai_type"
+          multipleSelect="true"
+          title="Active Ingredient Type"
+          optionsData=${aiTypeOptionsData}
+          optionsDataValueColumn="ai_type"
+          initialValue="*"
+        ></osl-select-control>
+        <osl-select-control
+          data=${datasetsToFilter}
+          option="ai_type_specific"
+          optionsData=${aiTypeSpecificOptionsData}
+          optionsDataValueColumn="ai_type_specific"
+          multipleSelect="true"
+          title="Active Ingredient Type (Specific)"
+          initialValue="*"
+        ></osl-select-control
+      ></osl-eq-grid>
+      <hr style="margin:2rem 0 1rem 0" />
+      <osl-eq-grid breakpoint="lg">
+        <div>
+          <h3>Commodity Type</h3>
+
+          <osl-select-control
+            data=${datasetsToFilter}
+            option="site"
+            title="Location that pesticide was applied to"
+            initialValue="*"
+            multipleSelect
+            optionsData=${siteLocationOptionsData}
+            optionsDataLabelColumn="site_name"
+            optionsDataValueColumn="site_code"
+          ></osl-select-control>
+        </div>
+        <div>
+          <h3>Application Site Type</h3>
+          <osl-radio
+            data=${datasetsToFilter}
+            option="usetype"
+            initialValue="ag"
+            options=${JSON.stringify([
+              {
+                label: "Agricultural",
+                value: "ag",
+              },
+              {
+                label: "Non-Agricultural (County Only)",
+                value: "nonag",
+              },
+              {
+                label: "Both  (County Only)",
+                value: "*",
+              },
+            ])}
+          >
+          </osl-radio>
+        </div>
+      </osl-eq-grid>
+      <hr style="margin:2rem 0 1rem 0" />
+      <osl-eq-grid breakpoint="lg">
+        <div>
+          <h3>Specific Chemical(s)</h3>
+
+          <osl-select-control
+            data=${datasetsToFilter}
+            option="chemical"
+            multipleSelect="true"
+            title="Specific Chemical(s)"
+            initialValue="*"
+            optionsData=${chemicalOptionsData}
+            optionsDataLabelColumn="chem_name"
+            optionsDataValueColumn="chem_code"
+          ></osl-select-control>
+          <!-- chemical -->
+        </div>
+        <div>
+          <h3>Specific Product(s)</h3>
+
+          <osl-select-control
+            data=${datasetsToFilter}
+            option="product"
+            multipleSelect="true"
+            title="Specific Chemical(s)"
+            initialValue="*"
+            optionsData=${productOptionsData}
+            optionsDataLabelColumn="product_name"
+            optionsDataValueColumn="product_code"
+          ></osl-select-control>
+        </div>
+      </osl-eq-grid>
+      <hr style="margin:2rem 0 1rem 0" />
+      <osl-eq-grid breakpoint="lg">
+        <div>
+          <h3>Filter by County</h3>
+          <osl-chips
+            data=${datasetsToFilter}
+            initialValue="[]"
+            title="County"
+            option="county"
+            label="Enter county name to filter options"
+            optionsData=${countiesOptionsData}
+            optionsDataValueColumn="FIPS"
+            optionsDataLabelColumn="Area Name"
+            showAllOptions="true"
+            maxOptions="50"
+          ></osl-chips>
+        </div>
+        <div>
+          <h3>Filter by Township</h3>
+          <osl-chips
+            data=${datasetsToFilter}
+            initialValue="[]"
+            title="Township"
+            option="townshiprange"
+            label="Enter township ID to filter options"
+            optionsData=${townshipCodesOptionsData}
+            optionsDataValueColumn="TownshipRange"
+            showAllOptions="true"
+            maxOptions="50"
+          ></osl-chips>
+        </div>
+        <div>
+          <h3>Filter by School District</h3>
+
+          <osl-chips
+            data=${datasetsToFilter}
+            initialValue="[]"
+            title="School District"
+            option="schooldistrict"
+            label="Enter zip code to filter options"
+            optionsData=${schoolDistrictOptionsData}
+            optionsDataValueColumn="FIPS"
+            optionsDataLabelColumn="Area Name"
+            showAllOptions="true"
+            maxOptions="50"
+          ></osl-chips>
+        </div>
+
+        <div>
+          <h3>Filter by Census Tract</h3>
+          <osl-chips
+            data=${datasetsToFilter}
+            initialValue="[]"
+            title="Tract"
+            option="tract"
+            label="Enter tract ID to filter options"
+            optionsData=${censusTractsOptionsData}
+            optionsDataValueColumn="FIPS"
+            showAllOptions="true"
+            maxOptions="50"
+          ></osl-chips>
+        </div>
+      </osl-eq-grid>
+
+      <hr style="margin:2rem 0 1rem 0" />
+      ${showDemog
+        ? html`<osl-eq-grid breakpoint="lg">
+            <div>
+              Percent Black
+
+              <osl-slider
+                data="${datasetsToFilter}"
+                option="pctblack"
+                min="0"
+                max="1"
+                step=".01"
+                initialValue="0"
+                title="Percent Non-hispanic Black or African American (ACS Race/Ethnicity)"
+              ></osl-slider>
+            </div>
+            <div>
+              Percent Hispanic
+              <osl-slider
+                data="${datasetsToFilter}"
+                option="pcthispanic"
+                min="0"
+                max="1"
+                step=".01"
+                initialValue="0"
+                title="Percent Hispanic or Latino (ACS Race/Ethnicity)"
+              ></osl-slider>
+            </div>
+            <div>
+              Median Income
+              <osl-slider
+                data="${datasetsToFilter}"
+                option="income"
+                min="0"
+                max="120000"
+                step="1000"
+                initialValue="0"
+                title="Median Household Income (2021 Dollars)"
+              ></osl-slider>
+            </div>
+          </osl-eq-grid>`
+        : html``}
+    </div>
+  </osl-modal>`;
+};
 export const CprFilterHeader = () => {
   return html`
     <osl-flex-box breakpoint="lg">
@@ -57,314 +277,66 @@ export const CprFilterHeader = () => {
         </sp-theme>
       </div>
       <osl-select-control
-        data=${filteredDatasets}
+        data=${monthlyData}
         option="start"
         options=${JSON.stringify(yearLabels)}
         title="Start Date"
         initialValue="2021-01"
       ></osl-select-control>
       <osl-select-control
-        data=${filteredDatasets}
+        data=${monthlyData}
         option="end"
         options=${JSON.stringify(yearLabels)}
         title="End Date"
         initialValue="2021-12"
       ></osl-select-control>
-      <osl-modal label="Additional Filters" title="Filter Data" size="l">
-        <div style="min-width:80vw;min-height:80vh; overflow-y:auto;">
-          <h3>Active Ingredients</h3>
-          <osl-eq-grid breakpoint="lg">
-            <osl-select-control
-              data=${filteredDatasets}
-              option="ai_class"
-              multipleSelect="true"
-              title="Active Ingredient Class"
-              label="Search for AI classes"
-              optionsData=${aiClassOptionsData}
-              optionsDataValueColumn="ai_class"
-              initialValue="*"
-            ></osl-select-control>
-            <osl-select-control
-              data=${filteredDatasets}
-              option="ai_type"
-              multipleSelect="true"
-              title="Active Ingredient Type"
-              optionsData=${aiTypeOptionsData}
-              optionsDataValueColumn="ai_type"
-              initialValue="*"
-            ></osl-select-control>
-            <osl-select-control
-              data=${filteredDatasets}
-              option="ai_type_specific"
-              optionsData=${aiTypeSpecificOptionsData}
-              optionsDataValueColumn="ai_type_specific"
-              multipleSelect="true"
-              title="Active Ingredient Type (Specific)"
-              initialValue="*"
-            ></osl-select-control
-          ></osl-eq-grid>
-          <hr style="margin:2rem 0 1rem 0" />
-          <osl-eq-grid breakpoint="lg">
-            <div>
-              <h3>Commodity Type</h3>
-
-              <osl-select-control
-                data=${filteredDatasets}
-                option="site"
-                title="Location that pesticide was applied to"
-                initialValue="*"
-                multipleSelect
-                optionsData=${siteLocationOptionsData}
-                optionsDataLabelColumn="site_name"
-                optionsDataValueColumn="site_code"
-              ></osl-select-control>
-            </div>
-            <div>
-              <h3>Application Site Type</h3>
-              <osl-radio
-                data=${filteredDatasets}
-                option="agtype"
-                initialValue="ag"
-                options=${JSON.stringify([
-                  {
-                    label: "Agricultural",
-                    value: "ag",
-                  },
-                  {
-                    label: "Non-Agricultural (County Only)",
-                    value: "nonag",
-                  },
-                  {
-                    label: "Both  (County Only)",
-                    value: "*",
-                  },
-                ])}
-              >
-              </osl-radio>
-            </div>
-          </osl-eq-grid>
-          <hr style="margin:2rem 0 1rem 0" />
-          <osl-eq-grid breakpoint="lg">
-            <div>
-              <h3>Specific Chemical(s)</h3>
-
-              <osl-select-control
-                data=${filteredDatasets}
-                option="chemical"
-                multipleSelect="true"
-                title="Specific Chemical(s)"
-                initialValue="*"
-                optionsData=${chemicalOptionsData}
-                optionsDataLabelColumn="chem_name"
-                optionsDataValueColumn="chem_code"
-              ></osl-select-control>
-              <!-- chemical -->
-            </div>
-            <div>
-              <h3>Specific Product(s)</h3>
-
-              <osl-select-control
-                data=${filteredDatasets}
-                option="product"
-                multipleSelect="true"
-                title="Specific Chemical(s)"
-                initialValue="*"
-                optionsData=${productOptionsData}
-                optionsDataLabelColumn="product_name"
-                optionsDataValueColumn="product_code"
-              ></osl-select-control>
-            </div>
-          </osl-eq-grid>
-          <hr style="margin:2rem 0 1rem 0" />
-          <osl-eq-grid breakpoint="lg">
-
-          <div>
-              <h3>Filter by County</h3>
-              <osl-chips
-                data=${filteredDatasets}
-                initialValue="[]"
-                title="County"
-                option="county"
-                label="Enter county name to filter options"
-                optionsData=${countiesOptionsData}
-                optionsDataValueColumn="FIPS"
-                optionsDataLabelColumn="Area Name"
-                showAllOptions="true"
-                maxOptions="50"
-              ></osl-chips>
-
-            </div>
-            <div>
-              <h3>Filter by Township</h3>
-              <osl-chips
-                data=${filteredDatasets}
-                initialValue="[]"
-                title="Township"
-                option="townshiprange"
-                label="Enter township ID to filter options"
-                optionsData=${townshipCodesOptionsData}
-                optionsDataValueColumn="TownshipRange"
-                showAllOptions="true"
-                maxOptions="50"
-              ></osl-chips>
-          </div>
-            <div>
-              <h3>Filter by School District</h3>
-
-              <osl-chips
-                data=${filteredDatasets}
-                initialValue="[]"
-                title="School District"
-                option="schooldistrict"
-                label="Enter zip code to filter options"
-                optionsData=${schoolDistrictOptionsData}
-                optionsDataValueColumn="FIPS"
-                optionsDataLabelColumn="Area Name"
-                showAllOptions="true"
-                maxOptions="50"
-              ></osl-chips>
-            </div>
-
-            <div>
-              <h3>Filter by Census Tract</h3>
-              <osl-chips
-                data=${filteredDatasets}
-                initialValue="[]"
-                title="Tract"
-                option="tract"
-                label="Enter tract ID to filter options"
-                optionsData=${censusTractsOptionsData}
-                optionsDataValueColumn="FIPS"
-                showAllOptions="true"
-                maxOptions="50"
-              ></osl-chips>
-
-            </div>
-          </osl-eq-grid>
-
-          <hr style="margin:2rem 0 1rem 0" />
-          <osl-eq-grid breakpoint="lg">
-            <div>
-              Percent Black
-
-              <osl-slider
-                data="${filteredDatasets}"
-                option="pctblack"
-                min="0"
-                max="1"
-                step=".01"
-                initialValue="0"
-                title="Percent Non-hispanic Black or African American (ACS Race/Ethnicity)"
-              ></osl-slider>
-            </div>
-            <div>
-              Percent Hispanic
-              <osl-slider
-                data="${filteredDatasets}"
-                option="pcthispanic"
-                min="0"
-                max="1"
-                step=".01"
-                initialValue="0"
-                title="Percent Hispanic or Latino (ACS Race/Ethnicity)"
-              ></osl-slider>
-            </div>
-            <div>
-              Median Income
-              <osl-slider
-                data="${filteredDatasets}"
-                option="income"
-                min="0"
-                max="120000"
-                step="1000"
-                initialValue="0"
-                title="Median Household Income (2021 Dollars)"
-              ></osl-slider>
-            </div>
-          </osl-eq-grid>
-
-        </div>
-      </osl-modal>
     </osl-flex-box>
+    ${filterModal(filteredDatasets, true)}
   `;
 };
+
 export const CprTimeSeriesHeader = () => {
   return html`
-    <osl-flex-box breakpoint="lg">
+    <sp-theme>
+      <h1>California Pesticide Use Data Explorer</h1>
+    </sp-theme>
+    <osl-eq-grid>
+      <div>${filterModal(timeSeriesData)}</div>
       <div>
-        <sp-theme>
-          <h1>California Pesticide Use Data Explorer</h1>
-        </sp-theme>
+        <osl-param-view
+          data=${JSON.parse(monthlyData)[0]}
+          parameters=${JSON.stringify([
+            "start",
+            "end",
+            "ai_class",
+            "ai_type",
+            "ai_type_specific",
+            "site",
+            "usetype",
+            "county",
+            "township",
+            "schooldistrict",
+            "tract",
+          ])}
+          labels=${JSON.stringify([
+            "Start Date",
+            "End Date",
+            "Active Ingredient Class",
+            "Active Ingredient Type",
+            "Active Ingredient Type Specific",
+            "Site Type / Commodity",
+            "Use Type (ag/nonag)",
+            "County",
+            "Township",
+            "School District",
+            "Census Tract",
+          ])}
+          parameterTitle="Filter"
+          title="Current Data Filters"
+        ></osl-param-view>
       </div>
-      <osl-select-control
-        data=${timeSeriesData}
-        option="start"
-        options=${JSON.stringify(yearLabels)}
-        title="Start Date"
-        initialValue="2017-01"
-      ></osl-select-control>
-      <osl-select-control
-        data=${timeSeriesData}
-        option="end"
-        options=${JSON.stringify(yearLabels)}
-        title="End Date"
-        initialValue="2021-12"
-      ></osl-select-control>
-      <osl-modal label="Additional Filters" title="Filter Data" size="l">
-        <div style="min-width:80vw;min-height:80vh;">
-          <h3>Active Ingredients</h3>
-          <osl-flex-box breakpoint="lg">
-            <osl-select-control
-              data=${timeSeriesData}
-              option="ai_class"
-              optionsData=${aiClassOptionsData}
-              optionsDataValueColumn="ai_class"
-              title="Active Ingredient Class"
-              initialValue="*"
-            ></osl-select-control>
-            <osl-select-control
-              data=${timeSeriesData}
-              option="ai_type"
-              optionsData=${aiTypeOptionsData}
-              optionsDataValueColumn="ai_type"
-              title="Active Ingredient Type"
-              initialValue="*"
-            ></osl-select-control>
-            <osl-select-control
-              data=${timeSeriesData}
-              option="ai_type_specific"
-              optionsData=${aiTypeSpecificOptionsData}
-              optionsDataValueColumn="ai_type_specific"
-              title="Active Ingredient Type (Specific)"
-              initialValue="*"
-            ></osl-select-control
-          ></osl-flex-box>
-          <br /><br />
-          <hr />
-
-          <h3>Locations</h3>
-          <osl-flex-box breakpoint="lg">
-            <osl-select-control
-              data=${timeSeriesData}
-              option="zip"
-              optionsData=${zipCodesOptionsData}
-              optionsDataValueColumn="GEOID"
-              title="Zip Code"
-              initialValue="*"
-            ></osl-select-control>
-            <osl-select-control
-              data=${timeSeriesData}
-              option="county"
-              optionsData=${countiesOptionsData}
-              optionsDataValueColumn="FIPS"
-              optionsDataLabelColumn="Area Name"
-              title="County"
-              initialValue="*"
-            ></osl-select-control
-          ></osl-flex-box>
-        </div>
-      </osl-modal>
-    </osl-flex-box>
+    </osl-eq-grid>
+    <hr style="margin:2rem 0 1rem 0;"/>
   `;
 };
 

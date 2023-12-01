@@ -49,7 +49,30 @@ export const CPR = () => {
                   "ai_type",
                   "ai_type_specific",
                   "site",
-                  "agtype",
+                  "usetype",
+                  "county",
+                  "township",
+                  "schooldistrict",
+                  "tract",
+                  "pctblack",
+                  "pcthispanic",
+                  "income"
+                ])}
+                labels=${JSON.stringify([
+                  "Start Date",
+                  "End Date",
+                  "Active Ingredient Class",
+                  "Active Ingredient Type",
+                  "Active Ingredient Type Specific",
+                  "Site Type / Commodity",
+                  "Use Type (ag/nonag)",
+                  "County",
+                  "Township",
+                  "School District",
+                  "Census Tract",
+                  "Percent Black / African American Population",
+                  "Percent Hispanic Population",
+                  "Median Household Income (2021 dollars)"
                 ])}
                 parameterTitle="Filter"
                 title="Current Data Filters"
@@ -104,7 +127,7 @@ export const CPR = () => {
                     "ai_type",
                     "ai_type_specific",
                     "site",
-                    "agtype",
+                    "usetype",
                   ])}
                   data=${censusTractData}
                 ></osl-download>
@@ -150,7 +173,7 @@ export const CPR = () => {
                     "ai_type",
                     "ai_type_specific",
                     "site",
-                    "agtype",
+                    "usetype",
                   ])}
                   data=${countyData}
                 ></osl-download>
@@ -197,7 +220,7 @@ export const CPR = () => {
                     "ai_type",
                     "ai_type_specific",
                     "site",
-                    "agtype",
+                    "usetype",
                   ])}
                   data=${schoolDistrictData}
                 ></osl-download>
@@ -244,7 +267,7 @@ export const CPR = () => {
                     "ai_type",
                     "ai_type_specific",
                     "site",
-                    "agtype",
+                    "usetype",
                   ])}
                   data=${townshipData}
                 ></osl-download>

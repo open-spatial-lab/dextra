@@ -32,16 +32,22 @@ export const schoolDistrictData =
   "https://d3lsdszfx9jqxt.cloudfront.net/data-query/6567764c2aa95c0008fc60f5";
 export const countyData =
   "https://d3lsdszfx9jqxt.cloudfront.net/data-query/6567863eb678c50008c549ff";
-export const overTimeByAiClass =
+export const monthlyByAiClass =
   "https://d3lsdszfx9jqxt.cloudfront.net/data-query/65410c3b5c8aac0008d57dbf";
-export const overTimeByAiType =
+export const monthlyByAiType =
   "https://d3lsdszfx9jqxt.cloudfront.net/data-query/65411c780611480008f7ecd2";
-export const overTimeByAiProduct =
-  "https://d3lsdszfx9jqxt.cloudfront.net/data-query/65411d990611480008f7ecd4";
-export const overTimeByAgNonAg =
+// export const monthlyByAiProduct =
+//   "https://d3lsdszfx9jqxt.cloudfront.net/data-query/65411d990611480008f7ecd4";
+export const monthlyByAgNonAg =
   "https://d3lsdszfx9jqxt.cloudfront.net/data-query/65411d590611480008f7ecd3";
+export const yearlyByAiClass =
+  "https://d3lsdszfx9jqxt.cloudfront.net/data-query/656a184586ce4600082f1a4f";
+export const yearlyByAiType =
+  "https://d3lsdszfx9jqxt.cloudfront.net/data-query/656a1d0b7ec37d000880178e";
+export const yearlyByAgNonAg =
+  "https://d3lsdszfx9jqxt.cloudfront.net/data-query/656a1c9d0e307800080dbc9d";
 
-// LABELS / OPTIONS
+  // LABELS / OPTIONS
 export const aiClassOptionsData =
   "https://d3lsdszfx9jqxt.cloudfront.net/data-query/6567637aaeb11300087fbd82";
 export const aiTypeOptionsData =
@@ -64,17 +70,26 @@ export const schoolDistrictOptionsData = "https://d3lsdszfx9jqxt.cloudfront.net/
 
 export const filteredDatasets = JSON.stringify([
   townshipData,
-  overTimeByAiClass,
   censusTractData,
   schoolDistrictData,
   countyData
 ]);
 
 export const timeSeriesData = JSON.stringify([
-  overTimeByAiClass,
-  overTimeByAiType,
-  overTimeByAgNonAg,
+  monthlyByAiClass,
+  monthlyByAiType,
+  monthlyByAgNonAg,
+  yearlyByAiClass,
+  yearlyByAiType,
+  yearlyByAgNonAg,
 ]);
+
+export const monthlyData = JSON.stringify([
+  monthlyByAiClass,
+  monthlyByAiType,
+  monthlyByAgNonAg,
+]);
+
 export const censusTractColumns = JSON.stringify([
   "FIPS",
   "lbs_prd_used",

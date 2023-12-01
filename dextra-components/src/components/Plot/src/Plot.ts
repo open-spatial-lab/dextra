@@ -1,5 +1,5 @@
 import { html, css } from "lit";
-import { customElement, property } from "lit/decorators.js";
+import { property } from "lit/decorators.js";
 import { OslData } from "../../data/src/Data";
 import * as Plot from "@observablehq/plot";
 import { interpretFuncJsonOrString } from "../../core/utils/converters";
@@ -10,10 +10,7 @@ export type MarkFunction = (data: any, overrideOptions: any) => any;
 
 @safeCustomElement("osl-plot")
 export class OslPlot extends OslData {
-  @property({ type: Number })
   containerWidth?: number;
-
-  @property({ type: Number })
   containerHeight?: number;
 
   static get styles() {
@@ -61,6 +58,13 @@ export class OslPlot extends OslData {
     this.markSources.forEach((source) => this.initDataset(source));
     this.updateContainerSize();
     window.addEventListener("resize", () => this.updateContainerSize());
+    const observer = new IntersectionObserver((entries) => {
+      if (entries[0].isIntersecting) {
+        this.updateContainerSize();
+      }
+    })
+    observer.observe(this)
+
   }
 
   @property({ type: Number })
@@ -170,7 +174,7 @@ export class OslPlot extends OslData {
     });
     return plot;
   }
-  render() {
+  template() {
     return html` <div class="container">${this.plot()}</div> `;
   }
   updateContainerSize() {
@@ -178,8 +182,10 @@ export class OslPlot extends OslData {
     if (container) {
       this.containerWidth = container.clientWidth;
       this.containerHeight = container.clientHeight;
+      this.requestUpdate();
     }
   }
+  
 }
 
 declare global {

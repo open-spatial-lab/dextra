@@ -1,4 +1,3 @@
-import { customElement } from "lit/decorators.js";
 import { PlotMark } from "../../PlotMark/src/PlotMark";
 import * as Plot from "@observablehq/plot";
 import { property } from "lit/decorators.js";

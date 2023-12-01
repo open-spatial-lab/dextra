@@ -22,11 +22,15 @@ export class OslLine extends PlotMark {
   @property({ converter: interpretFuncJsonOrString })
   z?: LineOptions["z"];
 
-  markOptions: (keyof this)[] = ["x", "y", "direction"];
+  @property({type: Number})
+  strokeWidth: LineOptions["strokeWidth"] = 2.5;
+
+  markOptions: (keyof this)[] = ["x", "y", "direction", "strokeWidth"];
 
   public get plot() {
     const innerData = this?.currentResults;
     const options = this.allOptions;
+    console.log(options)
     const plotFn = this.direction === "horizontal" ? Plot.lineY : Plot.lineX;
 
     return (overrideData?: any, overrideOptions?: {}) => {

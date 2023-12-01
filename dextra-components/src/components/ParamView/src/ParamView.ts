@@ -8,6 +8,9 @@ export class OslParamView extends OslControl {
   @property({ type: Array })
   parameters: string[] = [];
 
+  @property({ type: Array })
+  labels: string[] = [];
+
   @property({ type: String })
   parameterTitle: string = "Parameter";
 
@@ -25,9 +28,9 @@ export class OslParamView extends OslControl {
 
   template() {
     const params = this.store.datasets[this.data].parameters
-    const data = this.parameters.map((param) => ({
-      [this.parameterTitle]: param,
-      Value: params[param] === undefined || params[param] === "*" || !Boolean(params[param]) ? 'Any' : params[param].toString()
+    const data = this.parameters.map((param, i) => ({
+      [this.parameterTitle]: this.labels[i] || param,
+      Value: params[param] === undefined || params[param] === "*" || !Boolean(params[param]) || (Array.isArray(params[param]) && params[param].length === 0) ? 'Any' : params[param].toString()
     }))
 
     return html`

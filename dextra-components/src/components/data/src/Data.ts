@@ -85,6 +85,9 @@ export class OslData extends ValtioElement<StateSchema> {
   @property({ type: String })
   prefixParam?: string;
 
+  @property({converter: interpretFuncJsonOrString})
+  columnFormatters: Record<string, FormatterPresets | string> = {};
+
   showPreloader = true;
 
   static styles = css`

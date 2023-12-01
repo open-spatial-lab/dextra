@@ -18,6 +18,7 @@ import "../components/ParamView/src/ParamView.ts";
 import "../components/Stat/src/Stat.ts";
 import "../components/FlexBox/src/FlexBox.ts";
 import "../components/Tabs/src/Tabs.ts";
+import "../components/marks/Axis/src/Axis.ts";
 
 export default {
   title: "Projects",
