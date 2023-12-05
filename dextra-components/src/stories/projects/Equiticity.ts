@@ -17,6 +17,7 @@ import {
   tractSummary,
   tractOptions,
   zipOptions,
+  CommunityAreaLabels,
 } from "./EquiticityUtils";
 
 export const Equiticity = () => {
@@ -314,7 +315,7 @@ export const Equiticity = () => {
       geoType="WKB" 
       geoColumn="geometry" 
       dataColumn="MEDINC"
-      labelFormat="percent"
+      labelFormat="currency:usd"
       type="continuous" 
       bins='5' 
       colorScheme="YlGn" 
@@ -329,6 +330,7 @@ export const Equiticity = () => {
     >
     </osl-map-layer>   
     ${CommunityAreaBoundaries}
+    ${CommunityAreaLabels}
   </osl-glmap></div>
 
   <div style="height:100%;width:100%">
@@ -339,7 +341,7 @@ export const Equiticity = () => {
     legendPosition="top-left" 
     showNavigation='true'
     >
-    ${CommunityAreaBoundaries}
+    ${CommunityAreaLabels}
     <osl-map-layer
       layer="circle"
       data="https://d14xp4vykd1up4.cloudfront.net/data-query/6532789178d66b0009321d78"
@@ -589,7 +591,7 @@ export const Equiticity = () => {
       geoType="WKB" 
       geoColumn="geometry" 
       dataColumn="median hh income"
-      labelFormat="percent"
+      labelFormat="currency:usd"
       type="continuous" 
       bins='5' 
       colorScheme="YlGn" 
@@ -603,7 +605,7 @@ export const Equiticity = () => {
       data=${tractData}
     >
     </osl-map-layer>   
-    ${CommunityAreaBoundaries}
+    ${CommunityAreaLabels}
   </osl-glmap></div>
 
   <div style="height:100%;width:100%">
@@ -614,7 +616,7 @@ export const Equiticity = () => {
     legendPosition="top-left" 
     showNavigation='true'
     >
-    ${CommunityAreaBoundaries}
+    ${CommunityAreaLabels}
     <osl-map-layer
       layer="circle"
       data="https://d14xp4vykd1up4.cloudfront.net/data-query/6532789178d66b0009321d78"
@@ -865,7 +867,7 @@ export const Equiticity = () => {
       geoType="WKB" 
       geoColumn="geometry" 
       dataColumn="median hh income"
-      labelFormat="percent"
+      labelFormat="currency:usd"
       type="continuous" 
       bins='5' 
       colorScheme="YlGn" 
@@ -878,8 +880,10 @@ export const Equiticity = () => {
       stroked='true' 
       data=${zipData}
     >
+    
+
     </osl-map-layer>   
-    ${CommunityAreaBoundaries}
+    ${CommunityAreaLabels}
   </osl-glmap></div>
 
   <div style="height:100%;width:100%">
@@ -890,7 +894,7 @@ export const Equiticity = () => {
     legendPosition="top-left" 
     showNavigation='true'
     >
-    ${CommunityAreaBoundaries}
+    ${CommunityAreaLabels}
     <osl-map-layer
       layer="circle"
       data="https://d14xp4vykd1up4.cloudfront.net/data-query/6532789178d66b0009321d78"
