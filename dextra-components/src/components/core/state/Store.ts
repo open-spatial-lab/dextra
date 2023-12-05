@@ -10,6 +10,22 @@ import { convertToGeojsonLike } from "../utils/parseGeo";
 
 export const syncedMaps: { [key: string]: maplibregl.Map } = {};
 
+function wait(delay: number){
+  return new Promise((resolve) => setTimeout(resolve, delay));
+}
+
+
+function fetchRetry(url: string, delay: number, tries: number, fetchOptions = {}): any {
+  function onError(err: any){
+      tries = tries - 1;
+      if(!tries){
+          throw err;
+      }
+      return wait(delay).then(() => fetchRetry(url, delay, tries  , fetchOptions));
+  }
+  return fetch(url,fetchOptions).catch(onError).then(r => r.ok ? r : onError(r));
+}
+
 export const initialState: StateSchema = {
   datasets: {},
   geoListeners: [],
@@ -104,9 +120,9 @@ const buildDatasetPromise = async (key: string) => {
     if (store.usingMsgPack) {
       try {
         url.searchParams.set("format", "msgpack");
-        const buffer = await fetch(url.toString(), { signal }).then((res) => {
-          return res.arrayBuffer();
-        });
+
+        const response = await fetchRetry(url.toString(), 500, 10, { signal });
+        const buffer = await response.arrayBuffer();
         // @ts-ignore
         const data = unpack(buffer);
         nonReactiveStore[key][currentParamString] = data;
