@@ -55,6 +55,10 @@ export const redLightDot =
 export const speedDot =
   "https://d14xp4vykd1up4.cloudfront.net/data-query/653289411fc91e0008ec7996";
 
+export const speedTicketsOverTime = "https://d14xp4vykd1up4.cloudfront.net/data-query/656f47483443a800080913be"
+export const redLightTicketsOverTime = "https://d14xp4vykd1up4.cloudfront.net/data-query/656f47d63443a800080913bf"
+export const crashesOverTime = "https://d14xp4vykd1up4.cloudfront.net/data-query/656f47203443a800080913bd"
+
 export const CommunityAreaBoundaries = html` <osl-map-layer
   legendTitle="Community Areas"
   visible="true"

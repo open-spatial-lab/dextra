@@ -18,6 +18,9 @@ import {
   tractOptions,
   zipOptions,
   CommunityAreaLabels,
+  crashesOverTime,
+  redLightTicketsOverTime,
+  speedTicketsOverTime,
 } from "./EquiticityUtils";
 
 export const Equiticity = () => {
@@ -42,6 +45,7 @@ export const Equiticity = () => {
       initialValue="*"
       optionsData=${dateOptions.url}
       optionsDataValueColumn=${dateOptions.valueCol}
+      showAny="true"
     ></osl-select-control>
     <osl-select-control
       data=${JSON.stringify([
@@ -59,6 +63,7 @@ export const Equiticity = () => {
       optionsDataValueColumn=${dateOptions.valueCol}
       title="End date"
       initialValue="*"
+      showAny="true"
     ></osl-select-control>
     <osl-select-control
       data=${JSON.stringify([
@@ -75,6 +80,7 @@ export const Equiticity = () => {
       title="Crash Type"
       multipleSelect="true"
       initialValue="*"
+      showAny="true"
     ></osl-select-control>
     <osl-select-control
       data=${JSON.stringify([
@@ -90,6 +96,7 @@ export const Equiticity = () => {
       subTitle="Number is start of hour, (eg, 0 is midnight, 13 is 1pm)"
       multipleSelect="true"
       initialValue="*"
+      showAny="true"
     ></osl-select-control>
     </div>
   </div>  
@@ -105,6 +112,7 @@ export const Equiticity = () => {
             optionsDataLabelColumn=${communityAreaOptions.labelCol}
             title="Select a Community Area"
             initialValue="43"
+            showAny="true"
         ></osl-select-control>
     </div>
     <div style="padding:1rem 0;">
@@ -344,24 +352,28 @@ export const Equiticity = () => {
     ${CommunityAreaLabels}
     <osl-map-layer
       layer="circle"
-      data="https://d14xp4vykd1up4.cloudfront.net/data-query/6532789178d66b0009321d78"
+      data="${redLightDot}"
       geoColumn="geometry"
       geoType="WKB"
-      dataColumn="violations"
+      circleRadius="10"
+      pointRadiusMaxPixels="10"
+      radiusUnits="pixels"
+      fixedRadius="true"
+      dataColumn="Red Light Violations"
       legendtitle="Red Light Camera Locations and Violations"
       visible="false"
     >
     </osl-map-layer>
     <osl-map-layer
       layer="circle"
-      data="https://d14xp4vykd1up4.cloudfront.net/data-query/653289411fc91e0008ec7996"
+      data="${speedDot}"
       geoColumn="geometry"
       geoType="WKB"
-      circleRadius="5"
+      circleRadius="10"
+      pointRadiusMaxPixels="10"
       radiusUnits="pixels"
       fixedRadius="true"
-      pointRadiusMaxPixels="5"
-      dataColumn="violations"
+      dataColumn="SPEED_VIOLATIONS"
       legendtitle="Speed Camera Locations and Violations"
       visible="true"
     >
@@ -381,6 +393,7 @@ export const Equiticity = () => {
       optionsDataValueColumn=${tractOptions.valueCol}
       title="Select a Census Tract"
       initialValue="17031839700"
+      showAny="true"
     ></osl-select-control>
   </div>
     <div style="padding:1rem 0;">
@@ -438,7 +451,7 @@ export const Equiticity = () => {
         bins='5' 
         colorScheme="OrRd" 
         geoType="WKB"
-        geoId="community"
+        geoId="FIPS"
         filled='true' 
         attribution="IDOT Crash Data" 
         beforeId="water" 
@@ -462,7 +475,7 @@ export const Equiticity = () => {
         layer="polygon" 
         beforeId="water" 
         method="JNK" 
-        geoId="community" 
+        geoId="FIPS" 
         stroked='true' 
         data=${tractData}
       >
@@ -481,7 +494,7 @@ export const Equiticity = () => {
         layer="polygon" 
         beforeId="water" 
         method="QNT" 
-        geoId="community" 
+        geoId="FIPS" 
         stroked='true' 
         data=${tractData}
       >
@@ -500,7 +513,7 @@ export const Equiticity = () => {
         layer="polygon" 
         beforeId="water" 
         method="QNT" 
-        geoId="community" 
+        geoId="FIPS" 
         stroked='true' 
         data=${tractData}
       >
@@ -519,7 +532,7 @@ export const Equiticity = () => {
       layer="polygon" 
       beforeId="water" 
       method="QNT" 
-      geoId="community" 
+      geoId="FIPS" 
       stroked='true' 
       data=${tractData}
     >
@@ -539,7 +552,7 @@ export const Equiticity = () => {
       layer="polygon" 
       beforeId="water" 
       method="QNT" 
-      geoId="community" 
+      geoId="FIPS" 
       stroked='true' 
       data=${tractData}
     >
@@ -559,7 +572,7 @@ export const Equiticity = () => {
       layer="polygon" 
       beforeId="water" 
       method="QNT" 
-      geoId="community" 
+      geoId="FIPS" 
       stroked='true' 
       data=${tractData}
     >
@@ -580,7 +593,7 @@ export const Equiticity = () => {
       layer="polygon" 
       beforeId="water" 
       method="QNT" 
-      geoId="community" 
+      geoId="FIPS" 
       stroked='true' 
       data=${tractData}
     >
@@ -600,7 +613,7 @@ export const Equiticity = () => {
       layer="polygon" 
       beforeId="water" 
       method="QNT" 
-      geoId="community" 
+      geoId="FIPS" 
       stroked='true' 
       data=${tractData}
     >
@@ -619,24 +632,28 @@ export const Equiticity = () => {
     ${CommunityAreaLabels}
     <osl-map-layer
       layer="circle"
-      data="https://d14xp4vykd1up4.cloudfront.net/data-query/6532789178d66b0009321d78"
+      data="${redLightDot}"
       geoColumn="geometry"
       geoType="WKB"
-      dataColumn="violations"
+      circleRadius="10"
+      pointRadiusMaxPixels="10"
+      radiusUnits="pixels"
+      fixedRadius="true"
+      dataColumn="Red Light Violations"
       legendtitle="Red Light Camera Locations and Violations"
       visible="false"
     >
     </osl-map-layer>
     <osl-map-layer
       layer="circle"
-      data="https://d14xp4vykd1up4.cloudfront.net/data-query/653289411fc91e0008ec7996"
+      data="${speedDot}"
       geoColumn="geometry"
       geoType="WKB"
-      circleRadius="5"
+      circleRadius="10"
+      pointRadiusMaxPixels="10"
       radiusUnits="pixels"
       fixedRadius="true"
-      pointRadiusMaxPixels="5"
-      dataColumn="violations"
+      dataColumn="SPEED_VIOLATIONS"
       legendtitle="Speed Camera Locations and Violations"
       visible="true"
     >
@@ -657,6 +674,7 @@ export const Equiticity = () => {
       optionsDataValueColumn=${zipOptions.valueCol}
       title="Select a Zip Code"
       initialValue="60640"
+      showAny="true"
     ></osl-select-control>
   </div>
     <div style="padding:1rem 0;">
@@ -714,7 +732,7 @@ export const Equiticity = () => {
         bins='5' 
         colorScheme="OrRd" 
         geoType="WKB"
-        geoId="community"
+        geoId="zip"
         filled='true' 
         attribution="IDOT Crash Data" 
         beforeId="water" 
@@ -738,7 +756,7 @@ export const Equiticity = () => {
         layer="polygon" 
         beforeId="water" 
         method="JNK" 
-        geoId="community" 
+        geoId="zip" 
         stroked='true' 
         data=${zipData}
       >
@@ -757,7 +775,7 @@ export const Equiticity = () => {
         layer="polygon" 
         beforeId="water" 
         method="QNT" 
-        geoId="community" 
+        geoId="zip" 
         stroked='true' 
         data=${zipData}
       >
@@ -776,7 +794,7 @@ export const Equiticity = () => {
         layer="polygon" 
         beforeId="water" 
         method="QNT" 
-        geoId="community" 
+        geoId="zip" 
         stroked='true' 
         data=${zipData}
       >
@@ -795,7 +813,7 @@ export const Equiticity = () => {
       layer="polygon" 
       beforeId="water" 
       method="QNT" 
-      geoId="community" 
+      geoId="zip" 
       stroked='true' 
       data=${zipData}
     >
@@ -815,7 +833,7 @@ export const Equiticity = () => {
       layer="polygon" 
       beforeId="water" 
       method="QNT" 
-      geoId="community" 
+      geoId="zip" 
       stroked='true' 
       data=${zipData}
     >
@@ -835,7 +853,7 @@ export const Equiticity = () => {
       layer="polygon" 
       beforeId="water" 
       method="QNT" 
-      geoId="community" 
+      geoId="zip" 
       stroked='true' 
       data=${zipData}
     >
@@ -856,7 +874,7 @@ export const Equiticity = () => {
       layer="polygon" 
       beforeId="water" 
       method="QNT" 
-      geoId="community" 
+      geoId="zip" 
       stroked='true' 
       data=${zipData}
     >
@@ -876,7 +894,7 @@ export const Equiticity = () => {
       layer="polygon" 
       beforeId="water" 
       method="QNT" 
-      geoId="community" 
+      geoId="zip" 
       stroked='true' 
       data=${zipData}
     >
@@ -897,24 +915,28 @@ export const Equiticity = () => {
     ${CommunityAreaLabels}
     <osl-map-layer
       layer="circle"
-      data="https://d14xp4vykd1up4.cloudfront.net/data-query/6532789178d66b0009321d78"
+      data="${redLightDot}"
       geoColumn="geometry"
       geoType="WKB"
-      dataColumn="violations"
+      dataColumn="Red Light Violations"
       legendtitle="Red Light Camera Locations and Violations"
       visible="false"
+      circleRadius="10"
+      pointRadiusMaxPixels="10"
+      radiusUnits="pixels"
+      fixedRadius="true"
     >
     </osl-map-layer>
     <osl-map-layer
       layer="circle"
-      data="https://d14xp4vykd1up4.cloudfront.net/data-query/653289411fc91e0008ec7996"
+      data="${speedDot}"
       geoColumn="geometry"
       geoType="WKB"
-      circleRadius="5"
+      circleRadius="10"
+      pointRadiusMaxPixels="10"
       radiusUnits="pixels"
       fixedRadius="true"
-      pointRadiusMaxPixels="5"
-      dataColumn="violations"
+      dataColumn="SPEED_VIOLATIONS"
       legendtitle="Speed Camera Locations and Violations"
       visible="true"
     >
@@ -925,6 +947,125 @@ export const Equiticity = () => {
   </div>
 </div>
 </div>
+<div data-tab="Over Time" style="width:100%;min-height:100vh;">\
+  <div>
+    <osl-eq-grid breakpoint="lg">
+      <osl-select-control
+        data=${JSON.stringify([crashesOverTime, redLightTicketsOverTime, speedTicketsOverTime])}
+        option="community"
+        optionsData=${communityAreaOptions.url}
+        optionsDataValueColumn=${communityAreaOptions.valueCol}
+        optionsDataLabelColumn=${communityAreaOptions.labelCol}
+        title="Filter by Community Area"
+        initialValue="*"
+        showAny="true"
+      ></osl-select-control>
+      <osl-select-control
+        data=${JSON.stringify([crashesOverTime, redLightTicketsOverTime, speedTicketsOverTime])}
+        option="tract"
+        optionsData=${tractOptions.url}
+        optionsDataValueColumn=${tractOptions.valueCol}
+        title="Filter by Census Tract"
+        initialValue="*"
+        showAny="true"
+      ></osl-select-control>
+      <osl-select-control
+          data=${JSON.stringify([crashesOverTime, redLightTicketsOverTime, speedTicketsOverTime])}
+        option="zip"
+        optionsData=${zipOptions.url}
+        optionsDataValueColumn=${zipOptions.valueCol}
+        title="Filter by Zip Code / Postal Code" 
+        initialValue="*"
+        showAny="true"
+      ></osl-select-control>
+    </osl-eq-grid>
+  </div>
+  <div style="height:50vh;">
+    <osl-plot
+      colorLegend="true"
+      data=${crashesOverTime}
+      marginBottom="80"
+      marginLeft="80"
+      marginRight="80"
+      title="Crash Count Over Time"
+      
+      colorScheme="turbo"
+    >
+      <osl-line
+        x="date"
+        y="CRASH_COUNT"
+      ></osl-line>
+    </osl-plot>
+  <div style="height:50vh;">
+    <osl-plot
+      colorLegend="true"
+      data=${crashesOverTime}
+      marginBottom="80"
+      marginLeft="80"
+      marginRight="80"
+      title="Crash Injuries Over Time"
+      
+      colorScheme="turbo"
+    >
+      <osl-line
+        x="date"
+        y="CRASH_INJURIES"
+      ></osl-line>
+    </osl-plot>
+  </div>
+  <div style="height:50vh;">
+    <osl-plot
+      colorLegend="true"
+      data=${crashesOverTime}
+      marginBottom="80"
+      marginLeft="80"
+      marginRight="80"
+      title="Crash Fatalities Over Time"
+      
+      colorScheme="turbo"
+    >
+      <osl-line
+        x="date"
+        y="CRASH_FATALITIES"
+      ></osl-line>
+    </osl-plot>
+  </div>
+  <div style="height:50vh;">
+    <osl-plot
+      colorLegend="true"
+      data=${speedTicketsOverTime}
+      marginBottom="80"
+      marginLeft="80"
+      marginRight="80"
+      title="Automated Speed Tickets Over Time"
+      
+      colorScheme="turbo"
+    >
+      <osl-line
+        x="date"
+      y="SPEED_VIOLATIONS"
+      ></osl-line>
+    </osl-plot>
+    <osl-plot
+      colorLegend="true"
+      data=${redLightTicketsOverTime}
+      marginBottom="80"
+      marginLeft="80"
+      marginRight="80"
+      title="Automated Red Light Tickets Over Time"
+    >
+      <osl-line
+        x="date"
+      y="RED_LIGHT_VIOLATIONS"
+      ></osl-line>
+    </osl-plot>
+    </div>
+  </div>
+  <div>
+  </div>
+  <div>
+  </div>
+</div> 
 </osl-tabs>
 `;
 };
