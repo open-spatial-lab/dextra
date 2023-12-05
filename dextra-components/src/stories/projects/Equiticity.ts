@@ -1,7 +1,7 @@
 import { html } from "lit";
 import {
-  summary,
-  geo,
+  // summary,
+  // geo,
   redLightDot,
   speedDot,
   communityAreasJoinedData,
@@ -22,6 +22,8 @@ import {
   redLightTicketsOverTime,
   speedTicketsOverTime,
 } from "./EquiticityUtils";
+import { renderTemplateAsString } from "../../utils/renderTemplateAsString";
+import { getRenderString } from "../utils";
 
 export const Equiticity = () => {
   return html`
@@ -45,7 +47,7 @@ export const Equiticity = () => {
       ])}
       option="start"
       title="Start date"
-      initialValue="*"
+      initialValue="2019-01"
       optionsData=${dateOptions.url}
       optionsDataValueColumn=${dateOptions.valueCol}
       showAny="true"
@@ -1081,3 +1083,5 @@ export const Equiticity = () => {
 </osl-tabs>
 `;
 };
+
+console.log(getRenderString(Equiticity()));
