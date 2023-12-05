@@ -5,7 +5,7 @@ import {
   redLightDot,
   speedDot,
   communityAreasJoinedData,
-  CommunityAreaBoundaries,
+  // CommunityAreaBoundaries,
   dateOptions,
   communityAreaOptions,
   communityAreaSummary,
@@ -17,12 +17,11 @@ import {
   tractSummary,
   tractOptions,
   zipOptions,
-  CommunityAreaLabels,
+  // CommunityAreaLabels,
   crashesOverTime,
   redLightTicketsOverTime,
   speedTicketsOverTime,
 } from "./EquiticityUtils";
-import { renderTemplateAsString } from "../../utils/renderTemplateAsString";
 import { getRenderString } from "../utils";
 
 export const Equiticity = () => {
@@ -32,7 +31,7 @@ export const Equiticity = () => {
     <div style="display:flex;flex-direction:row; gap:1rem;">
     <h1>Transit Equity Explorer</h1>
     <osl-select-control
-      data=${JSON.stringify([
+      data="${JSON.stringify([
         communityAreasJoinedData,
         communityAreaSummary,
         zipData,
@@ -43,17 +42,17 @@ export const Equiticity = () => {
         speedDot,
         crashesOverTime,
         speedTicketsOverTime,
-        redLightTicketsOverTime
-      ])}
+        redLightTicketsOverTime,
+      ])}"
       option="start"
       title="Start date"
       initialValue="2019-01"
-      optionsData=${dateOptions.url}
-      optionsDataValueColumn=${dateOptions.valueCol}
+      optionsData="${dateOptions.url}"
+      optionsDataValueColumn="${dateOptions.valueCol}"
       showAny="true"
     ></osl-select-control>
     <osl-select-control
-      data=${JSON.stringify([
+      data="${JSON.stringify([
         communityAreasJoinedData,
         communityAreaSummary,
         zipData,
@@ -64,17 +63,17 @@ export const Equiticity = () => {
         speedDot,
         crashesOverTime,
         speedTicketsOverTime,
-        redLightTicketsOverTime
-      ])}
+        redLightTicketsOverTime,
+      ])}"
       option="end"
-      optionsData=${dateOptions.url}
-      optionsDataValueColumn=${dateOptions.valueCol}
+      optionsData="${dateOptions.url}"
+      optionsDataValueColumn="${dateOptions.valueCol}"
       title="End date"
       initialValue="*"
       showAny="true"
     ></osl-select-control>
     <osl-select-control
-      data=${JSON.stringify([
+      data="${JSON.stringify([
         communityAreasJoinedData,
         communityAreaSummary,
         zipData,
@@ -83,29 +82,29 @@ export const Equiticity = () => {
         tractSummary,
         crashesOverTime,
         speedTicketsOverTime,
-        redLightTicketsOverTime
-      ])}
+        redLightTicketsOverTime,
+      ])}"
       option="crashtype"
-      optionsData=${crashTypeOptions.url}
-      optionsDataValueColumn=${crashTypeOptions.valueCol}
+      optionsData="${crashTypeOptions.url}"
+      optionsDataValueColumn="${crashTypeOptions.valueCol}"
       title="Crash Type"
       multipleSelect="true"
       initialValue="*"
       showAny="true"
     ></osl-select-control>
     <osl-select-control
-      data=${JSON.stringify([
+      data="${JSON.stringify([
         communityAreasJoinedData,
         communityAreaSummary,
         redLightDot,
         speedDot,
         crashesOverTime,
         speedTicketsOverTime,
-        redLightTicketsOverTime
-      ])}
+        redLightTicketsOverTime,
+      ])}"
       option="crashhour"
-      optionsData=${crashHourOptions.url}
-      optionsDataValueColumn=${crashHourOptions.valueCol}
+      optionsData="${crashHourOptions.url}"
+      optionsDataValueColumn="${crashHourOptions.valueCol}"
       title="Crash Hour"
       subTitle="Number is start of hour, (eg, 0 is midnight, 13 is 1pm)"
       multipleSelect="true"
@@ -119,11 +118,11 @@ export const Equiticity = () => {
   <div data-tab="Community Areas" style="height:80vh;width:100%;">
     <div>
       <osl-select-control
-            data=${JSON.stringify([communityAreaSummary])}
+            data="${JSON.stringify([communityAreaSummary])}"
             option="community"
-            optionsData=${communityAreaOptions.url}
-            optionsDataValueColumn=${communityAreaOptions.valueCol}
-            optionsDataLabelColumn=${communityAreaOptions.labelCol}
+            optionsData="${communityAreaOptions.url}"
+            optionsDataValueColumn="${communityAreaOptions.valueCol}"
+            optionsDataLabelColumn="${communityAreaOptions.labelCol}"
             title="Select a Community Area"
             initialValue="43"
             showAny="true"
@@ -190,7 +189,7 @@ export const Equiticity = () => {
         beforeId="water" 
         method="QNT" 
         stroked='true' 
-        data=${communityAreasJoinedData}
+        data="${communityAreasJoinedData}"
       >
       </osl-map-layer>     
 
@@ -210,7 +209,7 @@ export const Equiticity = () => {
         method="JNK" 
         geoId="community" 
         stroked='true' 
-        data=${communityAreasJoinedData}
+        data="${communityAreasJoinedData}"
       >
       </osl-map-layer>
       <osl-map-layer 
@@ -229,7 +228,7 @@ export const Equiticity = () => {
         method="QNT" 
         geoId="community" 
         stroked='true' 
-        data=${communityAreasJoinedData}
+        data="${communityAreasJoinedData}"
       >
       </osl-map-layer>
       <osl-map-layer 
@@ -248,7 +247,7 @@ export const Equiticity = () => {
         method="QNT" 
         geoId="community" 
         stroked='true' 
-        data=${communityAreasJoinedData}
+        data="${communityAreasJoinedData}"
       >
       </osl-map-layer>
      <osl-map-layer 
@@ -267,7 +266,7 @@ export const Equiticity = () => {
       method="QNT" 
       geoId="community" 
       stroked='true' 
-      data=${communityAreasJoinedData}
+      data="${communityAreasJoinedData}"
     >
     </osl-map-layer>   
      <osl-map-layer 
@@ -287,7 +286,7 @@ export const Equiticity = () => {
       method="QNT" 
       geoId="community" 
       stroked='true' 
-      data=${communityAreasJoinedData}
+      data="${communityAreasJoinedData}"
     >
     </osl-map-layer>   
      <osl-map-layer 
@@ -307,7 +306,7 @@ export const Equiticity = () => {
       method="QNT" 
       geoId="community" 
       stroked='true' 
-      data=${communityAreasJoinedData}
+      data="${communityAreasJoinedData}"
     >
     </osl-map-layer>   
 
@@ -328,7 +327,7 @@ export const Equiticity = () => {
       method="QNT" 
       geoId="community" 
       stroked='true' 
-      data=${communityAreasJoinedData}
+      data="${communityAreasJoinedData}"
     >
     </osl-map-layer>   
     <osl-map-layer 
@@ -348,7 +347,7 @@ export const Equiticity = () => {
       method="QNT" 
       geoId="community" 
       stroked='true' 
-      data=${communityAreasJoinedData}
+      data="${communityAreasJoinedData}"
     >
     </osl-map-layer>   
     <osl-map-layer
@@ -362,7 +361,7 @@ export const Equiticity = () => {
   type="static"
   staticStroke="[0,0,0]"
   geoId="community"
-  data=${communityAreasJoinedData}
+  data="${communityAreasJoinedData}"
   lineWidthMaxPixels="5"
   lineWidthMinPixels="2"
   fixed="true"
@@ -383,7 +382,7 @@ export const Equiticity = () => {
     textMaxWidth="400"
     textSizeMaxPixels="16"
     geoId="community"
-    data=${communityAreasJoinedData}
+    data="${communityAreasJoinedData}"
     geoOperation="centroid"
     fixed="true"
   ></osl-map-layer>
@@ -413,7 +412,7 @@ export const Equiticity = () => {
     textMaxWidth="400"
     textSizeMaxPixels="16"
     geoId="community"
-    data=${communityAreasJoinedData}
+    data="${communityAreasJoinedData}"
     geoOperation="centroid"
     fixed="true"
   ></osl-map-layer>
@@ -454,10 +453,10 @@ export const Equiticity = () => {
 <div data-tab="Census Tracts" style="height:80vh;width:100%;">
   <div>
     <osl-select-control
-      data=${JSON.stringify([tractSummary])}
+      data="${JSON.stringify([tractSummary])}"
       option="tract"
-      optionsData=${tractOptions.url}
-      optionsDataValueColumn=${tractOptions.valueCol}
+      optionsData="${tractOptions.url}"
+      optionsDataValueColumn="${tractOptions.valueCol}"
       title="Select a Census Tract"
       initialValue="17031839700"
       showAny="true"
@@ -524,7 +523,7 @@ export const Equiticity = () => {
         beforeId="water" 
         method="QNT" 
         stroked='true' 
-        data=${tractData}
+        data="${tractData}"
       >
       </osl-map-layer>     
 
@@ -544,7 +543,7 @@ export const Equiticity = () => {
         method="JNK" 
         geoId="FIPS" 
         stroked='true' 
-        data=${tractData}
+        data="${tractData}"
       >
       </osl-map-layer>
       <osl-map-layer 
@@ -563,7 +562,7 @@ export const Equiticity = () => {
         method="QNT" 
         geoId="FIPS" 
         stroked='true' 
-        data=${tractData}
+        data="${tractData}"
       >
       </osl-map-layer>
       <osl-map-layer 
@@ -582,7 +581,7 @@ export const Equiticity = () => {
         method="QNT" 
         geoId="FIPS" 
         stroked='true' 
-        data=${tractData}
+        data="${tractData}"
       >
       </osl-map-layer>
      <osl-map-layer 
@@ -601,7 +600,7 @@ export const Equiticity = () => {
       method="QNT" 
       geoId="FIPS" 
       stroked='true' 
-      data=${tractData}
+      data="${tractData}"
     >
     </osl-map-layer>   
      <osl-map-layer 
@@ -621,7 +620,7 @@ export const Equiticity = () => {
       method="QNT" 
       geoId="FIPS" 
       stroked='true' 
-      data=${tractData}
+      data="${tractData}"
     >
     </osl-map-layer>   
      <osl-map-layer 
@@ -641,7 +640,7 @@ export const Equiticity = () => {
       method="QNT" 
       geoId="FIPS" 
       stroked='true' 
-      data=${tractData}
+      data="${tractData}"
     >
     </osl-map-layer>   
 
@@ -662,7 +661,7 @@ export const Equiticity = () => {
       method="QNT" 
       geoId="FIPS" 
       stroked='true' 
-      data=${tractData}
+      data="${tractData}"
     >
     </osl-map-layer>   
     <osl-map-layer 
@@ -682,7 +681,7 @@ export const Equiticity = () => {
       method="QNT" 
       geoId="FIPS" 
       stroked='true' 
-      data=${tractData}
+      data="${tractData}"
     >
     </osl-map-layer>   
       <osl-map-layer
@@ -701,7 +700,7 @@ export const Equiticity = () => {
     textMaxWidth="400"
     textSizeMaxPixels="16"
     geoId="community"
-    data=${communityAreasJoinedData}
+    data="${communityAreasJoinedData}"
     geoOperation="centroid"
     fixed="true"
   ></osl-map-layer>
@@ -731,7 +730,7 @@ export const Equiticity = () => {
     textMaxWidth="400"
     textSizeMaxPixels="16"
     geoId="community"
-    data=${communityAreasJoinedData}
+    data="${communityAreasJoinedData}"
     geoOperation="centroid"
     fixed="true"
   ></osl-map-layer>
@@ -773,10 +772,10 @@ export const Equiticity = () => {
 <div data-tab="Zip Codes" style="height:80vh;width:100%;">
   <div>
     <osl-select-control
-      data=${JSON.stringify([zipSummary])}
+      data="${JSON.stringify([zipSummary])}"
       option="zip"
-      optionsData=${zipOptions.url}
-      optionsDataValueColumn=${zipOptions.valueCol}
+      optionsData="${zipOptions.url}"
+      optionsDataValueColumn="${zipOptions.valueCol}"
       title="Select a Zip Code"
       initialValue="60640"
       showAny="true"
@@ -843,7 +842,7 @@ export const Equiticity = () => {
         beforeId="water" 
         method="QNT" 
         stroked='true' 
-        data=${zipData}
+        data="${zipData}"
       >
       </osl-map-layer>     
 
@@ -863,7 +862,7 @@ export const Equiticity = () => {
         method="JNK" 
         geoId="zip" 
         stroked='true' 
-        data=${zipData}
+        data="${zipData}"
       >
       </osl-map-layer>
       <osl-map-layer 
@@ -882,7 +881,7 @@ export const Equiticity = () => {
         method="QNT" 
         geoId="zip" 
         stroked='true' 
-        data=${zipData}
+        data="${zipData}"
       >
       </osl-map-layer>
       <osl-map-layer 
@@ -901,7 +900,7 @@ export const Equiticity = () => {
         method="QNT" 
         geoId="zip" 
         stroked='true' 
-        data=${zipData}
+        data="${zipData}"
       >
       </osl-map-layer>
      <osl-map-layer 
@@ -920,7 +919,7 @@ export const Equiticity = () => {
       method="QNT" 
       geoId="zip" 
       stroked='true' 
-      data=${zipData}
+      data="${zipData}"
     >
     </osl-map-layer>   
      <osl-map-layer 
@@ -940,7 +939,7 @@ export const Equiticity = () => {
       method="QNT" 
       geoId="zip" 
       stroked='true' 
-      data=${zipData}
+      data="${zipData}"
     >
     </osl-map-layer>   
      <osl-map-layer 
@@ -960,7 +959,7 @@ export const Equiticity = () => {
       method="QNT" 
       geoId="zip" 
       stroked='true' 
-      data=${zipData}
+      data="${zipData}"
     >
     </osl-map-layer>   
 
@@ -981,7 +980,7 @@ export const Equiticity = () => {
       method="QNT" 
       geoId="zip" 
       stroked='true' 
-      data=${zipData}
+      data="${zipData}"
     >
     </osl-map-layer>   
     <osl-map-layer 
@@ -1001,7 +1000,7 @@ export const Equiticity = () => {
       method="QNT" 
       geoId="zip" 
       stroked='true' 
-      data=${zipData}
+      data="${zipData}"
     >
     
 
@@ -1022,7 +1021,7 @@ export const Equiticity = () => {
     textMaxWidth="400"
     textSizeMaxPixels="16"
     geoId="community"
-    data=${communityAreasJoinedData}
+    data="${communityAreasJoinedData}"
     geoOperation="centroid"
     fixed="true"
   ></osl-map-layer>
@@ -1052,7 +1051,7 @@ export const Equiticity = () => {
     textMaxWidth="400"
     textSizeMaxPixels="16"
     geoId="community"
-    data=${communityAreasJoinedData}
+    data="${communityAreasJoinedData}"
     geoOperation="centroid"
     fixed="true"
   ></osl-map-layer>
@@ -1094,29 +1093,41 @@ export const Equiticity = () => {
   <div>
     <osl-eq-grid breakpoint="lg">
       <osl-select-control
-        data=${JSON.stringify([crashesOverTime, redLightTicketsOverTime, speedTicketsOverTime])}
+        data="${JSON.stringify([
+          crashesOverTime,
+          redLightTicketsOverTime,
+          speedTicketsOverTime,
+        ])}"
         option="community"
-        optionsData=${communityAreaOptions.url}
-        optionsDataValueColumn=${communityAreaOptions.valueCol}
-        optionsDataLabelColumn=${communityAreaOptions.labelCol}
+        optionsData="${communityAreaOptions.url}"
+        optionsDataValueColumn="${communityAreaOptions.valueCol}"
+        optionsDataLabelColumn="${communityAreaOptions.labelCol}"
         title="Filter by Community Area"
         initialValue="*"
         showAny="true"
       ></osl-select-control>
       <osl-select-control
-        data=${JSON.stringify([crashesOverTime, redLightTicketsOverTime, speedTicketsOverTime])}
+        data="${JSON.stringify([
+          crashesOverTime,
+          redLightTicketsOverTime,
+          speedTicketsOverTime,
+        ])}"
         option="tract"
-        optionsData=${tractOptions.url}
-        optionsDataValueColumn=${tractOptions.valueCol}
+        optionsData="${tractOptions.url}"
+        optionsDataValueColumn="${tractOptions.valueCol}"
         title="Filter by Census Tract"
         initialValue="*"
         showAny="true"
       ></osl-select-control>
       <osl-select-control
-          data=${JSON.stringify([crashesOverTime, redLightTicketsOverTime, speedTicketsOverTime])}
+          data="${JSON.stringify([
+            crashesOverTime,
+            redLightTicketsOverTime,
+            speedTicketsOverTime,
+          ])}"
         option="zip"
-        optionsData=${zipOptions.url}
-        optionsDataValueColumn=${zipOptions.valueCol}
+        optionsData="${zipOptions.url}"
+        optionsDataValueColumn="${zipOptions.valueCol}"
         title="Filter by Zip Code / Postal Code" 
         initialValue="*"
         showAny="true"
@@ -1126,7 +1137,7 @@ export const Equiticity = () => {
   <div style="height:50vh;">
     <osl-plot
       colorLegend="true"
-      data=${crashesOverTime}
+      data="${crashesOverTime}"
       marginBottom="80"
       marginLeft="80"
       marginRight="80"
@@ -1142,7 +1153,7 @@ export const Equiticity = () => {
   <div style="height:50vh;">
     <osl-plot
       colorLegend="true"
-      data=${crashesOverTime}
+      data="${crashesOverTime}"
       marginBottom="80"
       marginLeft="80"
       marginRight="80"
@@ -1159,7 +1170,7 @@ export const Equiticity = () => {
   <div style="height:50vh;">
     <osl-plot
       colorLegend="true"
-      data=${crashesOverTime}
+      data="${crashesOverTime}"
       marginBottom="80"
       marginLeft="80"
       marginRight="80"
@@ -1176,7 +1187,7 @@ export const Equiticity = () => {
   <div style="height:50vh;">
     <osl-plot
       colorLegend="true"
-      data=${speedTicketsOverTime}
+      data="${speedTicketsOverTime}"
       marginBottom="80"
       marginLeft="80"
       marginRight="80"
@@ -1191,7 +1202,7 @@ export const Equiticity = () => {
     </osl-plot>
     <osl-plot
       colorLegend="true"
-      data=${redLightTicketsOverTime}
+      data="${redLightTicketsOverTime}"
       marginBottom="80"
       marginLeft="80"
       marginRight="80"
@@ -1213,4 +1224,4 @@ export const Equiticity = () => {
 `;
 };
 
-console.log(getRenderString(Equiticity()));
+// console.log(getRenderString(Equiticity()));
