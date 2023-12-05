@@ -61,6 +61,9 @@ export class OslControl extends ValtioElement<StateSchema> {
   @property({ type: String })
   optionsDataValueColumn?: string;
 
+  @property({type: Boolean})
+  showAny?: boolean = false;
+
   registerData(dataset: string) {
     if (!this.store.datasets[dataset] && dataset !== "") {
       this.store.datasets[dataset] = {
@@ -124,6 +127,12 @@ export class OslControl extends ValtioElement<StateSchema> {
     if (currentStatus === "success" && valueColumn) {
       const data = nonReactiveStore[this.optionsData!][currentParamString];
       let options = []
+      if (this.showAny) {
+        options.push({
+          value: "*",
+          label: "All / Any",
+        })
+      }
       for (const row of data) {
         if ((row as any)[valueColumn] !== undefined || (row as any)[labelColumn] !== undefined) {
           options.push({
