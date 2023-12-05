@@ -5,6 +5,9 @@ import {
   demogZipCodeColumns,
   filteredDatasets,
   censusTractData,
+  zeroPesticideColor,
+  countyData,
+  schoolDistrictData,
 } from "./CPRUtils";
 
 import {
@@ -58,20 +61,43 @@ export const CPR2 = () => {
           </div>
 
           <div style="flex-basis:50%">
-            <osl-param-view
-              data=${JSON.parse(filteredDatasets)[0]}
-              parameters=${JSON.stringify([
-                "start",
-                "end",
-                "ai_class",
-                "ai_type",
-                "ai_type_specific",
-                "site",
-                "agtype",
-              ])}
-              parameterTitle="Filter"
-              title="Current Data Filters"
-            ></osl-param-view>
+              <osl-param-view
+                data=${JSON.parse(filteredDatasets)[0]}
+                parameters=${JSON.stringify([
+                  "start",
+                  "end",
+                  "ai_class",
+                  "ai_type",
+                  "ai_type_specific",
+                  "site",
+                  "usetype",
+                  "county",
+                  "township",
+                  "schooldistrict",
+                  "tract",
+                  "pctblack",
+                  "pcthispanic",
+                  "income"
+                ])}
+                labels=${JSON.stringify([
+                  "Start Date",
+                  "End Date",
+                  "Active Ingredient Class",
+                  "Active Ingredient Type",
+                  "Active Ingredient Type Specific",
+                  "Site Type / Commodity",
+                  "Use Type (ag/nonag)",
+                  "County",
+                  "Township",
+                  "School District",
+                  "Census Tract",
+                  "Percent Black / African American Population",
+                  "Percent Hispanic Population",
+                  "Median Household Income (2021 dollars)"
+                ])}
+                parameterTitle="Filter"
+                title="Current Data Filters"
+              ></osl-param-view>
           </div>
         </div>
             </div>
@@ -79,280 +105,552 @@ export const CPR2 = () => {
       <br />
       <hr/>
       <br />
-      <div style="width:100%;height:60vh;position:relative">
-        <osl-flex-box breakpoint="lg" style="height:100%;">
-          <div>
-            <osl-glmap
-              mapStyle="https://basemaps.cartocdn.com/gl/positron-gl-style/style.json"
-              legendPosition="bottom-left"
-              showNavigation="true"
-              showSingleLayer="true"
-              center="[-120.1,36.9]"
-              zoom="5"
-              mapGroup="1"
-            >
-              <osl-map-layer
-                legendTitle="Pounds of Chemical Used (Census Tract)"
-                geoType="WKB"
-                geoColumn="geometry"
-                dataColumn="lbs_chm_used"
-                type="continuous"
-                bins="7"
-                colorScheme="d3-magma"
-                filled="true"
-                attribution="California Pesticide Use Reporting (PUR)"
-                layer="polygon"
-                beforeId="water"
-                method="QNT"
-                geoId="FIPS"
-                data=${censusTractData}
-                visible="false"
+      <div style="height:60vh;">
+        <osl-tabs>
+          <div data-tab="Census Tracts" style="width:100%">
+            <osl-eq-grid breakpoint="lg" style="height:100%;">
+            <div>
+              <osl-glmap
+                mapStyle="https://basemaps.cartocdn.com/gl/positron-gl-style/style.json"
+                legendPosition="bottom-left"
+                showNavigation="true"
+                showSingleLayer="true"
+                center="[-120.1,36.9]"
+                zoom="5"
+                mapGroup="1"
               >
-              </osl-map-layer>
-            </osl-glmap>
+                  <osl-map-layer
+                    legendTitle="Pounds of Chemical Used"
+                    geoType="WKB"
+                    geoColumn="geometry"
+                    dataColumn="lbs_chm_used"
+                    type="continuous"
+                    bins="5"
+                    colorScheme="Reds"
+                    filled="true"
+                    attribution="California Pesticide Use Reporting (PUR)"
+                    layer="polygon"
+                    beforeId="water"
+                    method="QNT"
+                    geoId="FIPS"
+                    data=${censusTractData}
+                    visible="true"
+                    stroked="true"
+                    staticStroke="[255,255,255,120]"
+                    isolatedValues="[0, null]"
+                    isolatedColor="${zeroPesticideColor}"
+                  >
+                  </osl-map-layer>
+              </osl-glmap>
+            </div>
+            <div>
+              <osl-glmap
+                mapStyle="https://basemaps.cartocdn.com/gl/positron-gl-style/style.json"
+                legendPosition="bottom-left"
+                showNavigation="true"
+                showSingleLayer="true"
+                center="[-120.1,36.9]"
+                zoom="5"
+                mapGroup="1"
+              >
+
+              <osl-map-layer
+                    legendtitle="Median Household Income (In 2021 Inflation Adjusted Dollars)"
+                    geoType="WKB"
+                    geoColumn="geometry"
+                    dataColumn="Median Income"
+                    type="continuous"
+                    bins="5"
+                    colorScheme="Greens"
+                    filled="true"
+                    attribution="American Community Survey 2021"
+                    layer="polygon"
+                    beforeId="water"
+                    method="QNT"
+                    geoId="FIPS"
+                    data=${censusTractData}
+                    visible="true"
+                    stroked="true"
+                    staticStroke="[255,255,255,120]"
+                  >
+                  </osl-map-layer>
+              <osl-map-layer
+                    legendtitle="Percent Non-Hispanic Black or African American Population"
+                    geoType="WKB"
+                    geoColumn="geometry"
+                    dataColumn="Pct Black"
+                    type="continuous"
+                    bins="5"
+                    colorScheme="GnBu"
+                    filled="true"
+                    labelFormat="percent"
+                    attribution="American Community Survey 2021"
+                    layer="polygon"
+                    beforeId="water"
+                    method="QNT"
+                    geoId="FIPS"
+                    data=${censusTractData}
+                    visible="false"
+                    stroked="true"
+                    staticStroke="[255,255,255,120]"
+                  >
+                  </osl-map-layer>
+              <osl-map-layer
+                    legendtitle="Percent Hispanic"
+                    geoType="WKB"
+                    geoColumn="geometry"
+                    dataColumn="Pct Hispanic"
+                    type="continuous"
+                    bins="5"
+                    colorScheme="GnBu"
+                    filled="true"
+                    attribution="American Community Survey 2021"
+                    layer="polygon"
+                    beforeId="water"
+                    method="QNT"
+                    geoId="FIPS"
+                    data=${censusTractData}
+                    visible="false"
+                    stroked="true"
+                    labelFormat="percent"
+                    staticStroke="[255,255,255,120]"
+                  >
+                  </osl-map-layer>
+              <osl-map-layer
+                    legendtitle="Percent without a high school degree"
+                    geoType="WKB"
+                    geoColumn="geometry"
+                    dataColumn="Pct No Hs"
+                    type="continuous"
+                    labelFormat="percent"
+                    bins="5"
+                    colorScheme="GnBu"
+                    filled="true"
+                    attribution="American Community Survey 2021"
+                    layer="polygon"
+                    beforeId="water"
+                    method="QNT"
+                    geoId="FIPS"
+                    data=${censusTractData}
+                    visible="false"
+                    stroked="true"
+                    staticStroke="[255,255,255,120]"
+                  >
+                  </osl-map-layer>
+              </osl-glmap>
+            </div>
+          </osl-eq-grid>
           </div>
-          <div>
-            <osl-glmap
-              mapStyle="https://basemaps.cartocdn.com/gl/positron-gl-style/style.json"
-              legendPosition="bottom-left"
-              showNavigation="true"
-              showSingleLayer="true"
-              center="[-120.1,36.9]"
-              zoom="5"
-              mapGroup="1"
-            >
+          <div data-tab="County" style="width:100%">
+
+          <osl-eq-grid breakpoint="lg" style="height:100%;">
+            <div>
+              <osl-glmap
+                mapStyle="https://basemaps.cartocdn.com/gl/positron-gl-style/style.json"
+                legendPosition="bottom-left"
+                showNavigation="true"
+                showSingleLayer="true"
+                center="[-120.1,36.9]"
+                zoom="5"
+                mapGroup="1"
+              >
+                  <osl-map-layer
+                    legendTitle="Pounds of Chemical Used"
+                    geoType="WKB"
+                    geoColumn="geometry"
+                    dataColumn="lbs_chm_used"
+                    type="continuous"
+                    bins="5"
+                    colorScheme="Reds"
+                    filled="true"
+                    attribution="California Pesticide Use Reporting (PUR)"
+                    layer="polygon"
+                    beforeId="water"
+                    method="QNT"
+                    geoId="county_cd"
+                    data=${countyData}
+                    visible="true"
+                    stroked="true"
+                    staticStroke="[255,255,255,120]"
+                    isolatedValues="[0, null]"
+                    isolatedColor="${zeroPesticideColor}"
+                  >
+                  </osl-map-layer>
+              </osl-glmap>
+            </div>
+            <div>
+          <osl-glmap
+                mapStyle="https://basemaps.cartocdn.com/gl/positron-gl-style/style.json"
+                legendPosition="bottom-left"
+                showNavigation="true"
+                showSingleLayer="true"
+                center="[-120.1,36.9]"
+                zoom="5"
+                mapGroup="1"
+              >
 
               <osl-map-layer
-                legendTitle="Total Population (Census Tract)"
-                visible="false"
-                geoType="WKB"
-                geoColumn="geometry"
-                dataColumn="Total Population"
-                type="continuous"
-                bins="7"
-                colorScheme="PuBu"
-                filled="true"
-                attribution="American Community Survey (ACS) 2021 5-year estimates"
-                layer="polygon"
-                beforeId="water"
-                method="QNT"
-                geoId="FIPS"
-                data=${censusTractData}
-              >
-              </osl-map-layer>
-
+                    legendtitle="Median Household Income (In 2021 Inflation Adjusted Dollars)"
+                    geoType="WKB"
+                    geoColumn="geometry"
+                    dataColumn="Median Household Income (In 2021 Inflation Adjusted Dollars)"
+                    type="continuous"
+                    bins="5"
+                    colorScheme="Greens"
+                    filled="true"
+                    attribution="American Community Survey 2021"
+                    layer="polygon"
+                    beforeId="water"
+                    method="QNT"
+                    geoId="county_cd"
+                    data=${countyData}
+                    visible="true"
+                    stroked="true"
+                    staticStroke="[255,255,255,120]"
+                  >
+                  </osl-map-layer>
               <osl-map-layer
-                legendTitle="Non Hispanic White Population (Census Tract)"
-                visible="false"
-                geoType="WKB"
-                geoColumn="geometry"
-                dataColumn="NH White"
-                type="continuous"
-                bins="7"
-                colorScheme="PuBu"
-                filled="true"
-                attribution="American Community Survey (ACS) 2021 5-year estimates"
-                layer="polygon"
-                beforeId="water"
-                method="QNT"
-                geoId="FIPS"
-                data=${censusTractData}
-              >
-              </osl-map-layer>
+                    legendtitle="Percent Non-Hispanic Black or African American Population"
+                    geoType="WKB"
+                    geoColumn="geometry"
+                    dataColumn="Pct Black"
+                    type="continuous"
+                    bins="5"
+                    colorScheme="GnBu"
+                    filled="true"
+                    labelFormat="percent"
+                    attribution="American Community Survey 2021"
+                    layer="polygon"
+                    beforeId="water"
+                    method="QNT"
+                    geoId="county_cd"
+                    data=${countyData}
+                    visible="false"
+                    stroked="true"
+                    staticStroke="[255,255,255,120]"
+                  >
+                  </osl-map-layer>
               <osl-map-layer
-                legendTitle="Non Hispanic Black Population (Census Tract)"
-                visible="false"
-                geoType="WKB"
-                geoColumn="geometry"
-                dataColumn="NH Black"
-                type="continuous"
-                bins="7"
-                colorScheme="PuBu"
-                filled="true"
-                attribution="American Community Survey (ACS) 2021 5-year estimates"
-                layer="polygon"
-                beforeId="water"
-                method="QNT"
-                geoId="FIPS"
-                data=${censusTractData}
-              >
-              </osl-map-layer>
-
+                    legendtitle="Percent Hispanic"
+                    geoType="WKB"
+                    geoColumn="geometry"
+                    dataColumn="Pct Hispanic"
+                    type="continuous"
+                    bins="5"
+                    colorScheme="GnBu"
+                    filled="true"
+                    attribution="American Community Survey 2021"
+                    layer="polygon"
+                    beforeId="water"
+                    method="QNT"
+                    geoId="county_cd"
+                    data=${countyData}
+                    visible="false"
+                    stroked="true"
+                    labelFormat="percent"
+                    staticStroke="[255,255,255,120]"
+                  >
+                  </osl-map-layer>
               <osl-map-layer
-                legendTitle="Non Hispanic American Indian and Alaska Native Population (Census Tract)"
-                visible="false"
-                geoType="WKB"
-                geoColumn="geometry"
-                dataColumn="NH AIAN"
-                type="continuous"
-                bins="7"
-                colorScheme="PuBu"
-                filled="true"
-                attribution="American Community Survey (ACS) 2021 5-year estimates"
-                layer="polygon"
-                beforeId="water"
-                method="QNT"
-                geoId="FIPS"
-                data=${censusTractData}
-              >
-              </osl-map-layer>
-              <osl-map-layer
-                legendTitle="Non Hispanic Asian Population (Census Tract)"
-                visible="false"
-                geoType="WKB"
-                geoColumn="geometry"
-                dataColumn="NH Asian"
-                type="continuous"
-                bins="7"
-                colorScheme="PuBu"
-                filled="true"
-                attribution="American Community Survey (ACS) 2021 5-year estimates"
-                layer="polygon"
-                beforeId="water"
-                method="QNT"
-                geoId="FIPS"
-                data=${censusTractData}
-              >
-              </osl-map-layer>
-              <osl-map-layer
-                legendTitle="Non Hispanic Native Hawaiian and Pacific Islander Population (Census Tract)"
-                visible="false"
-                geoType="WKB"
-                geoColumn="geometry"
-                dataColumn="NH NHPI"
-                type="continuous"
-                bins="7"
-                colorScheme="PuBu"
-                filled="true"
-                attribution="American Community Survey (ACS) 2021 5-year estimates"
-                layer="polygon"
-                beforeId="water"
-                method="QNT"
-                geoId="FIPS"
-                data=${censusTractData}
-              >
-              </osl-map-layer>
-
-              <osl-map-layer
-                legendTitle="Non Hispanic Another Race Population (Census Tract)"
-                visible="false"
-                geoType="WKB"
-                geoColumn="geometry"
-                dataColumn="NH Other"
-                type="continuous"
-                bins="7"
-                colorScheme="PuBu"
-                filled="true"
-                attribution="American Community Survey (ACS) 2021 5-year estimates"
-                layer="polygon"
-                beforeId="water"
-                method="QNT"
-                geoId="FIPS"
-                data=${censusTractData}
-              >
-              </osl-map-layer>
-
-              <osl-map-layer
-                legendTitle="Non Hispanic Two or More Races Population (Census Tract)"
-                visible="false"
-                geoType="WKB"
-                geoColumn="geometry"
-                dataColumn="NH Two or More"
-                type="continuous"
-                bins="7"
-                colorScheme="PuBu"
-                filled="true"
-                attribution="American Community Survey (ACS) 2021 5-year estimates"
-                layer="polygon"
-                beforeId="water"
-                method="QNT"
-                geoId="FIPS"
-                data=${censusTractData}
-              >
-              </osl-map-layer>
-
-              <osl-map-layer
-                legendTitle="Hispanic or Latinx Population (Census Tract)"
-                visible="false"
-                geoType="WKB"
-                geoColumn="geometry"
-                dataColumn="Pop Hispanic or Latino"
-                type="continuous"
-                bins="7"
-                colorScheme="PuBu"
-                filled="true"
-                attribution="American Community Survey (ACS) 2021 5-year estimates"
-                layer="polygon"
-                beforeId="water"
-                method="QNT"
-                geoId="FIPS"
-                data=${censusTractData}
-              >
-              </osl-map-layer>
-              <osl-map-layer
-                legendTitle="Median Income (Census Tract)"
-                visible="false"
-                geoType="WKB"
-                geoColumn="geometry"
-                dataColumn="Median Income"
-                type="continuous"
-                bins="7"
-                colorScheme="YlGn"
-                filled="true"
-                attribution="American Community Survey (ACS) 2021 5-year estimates"
-                layer="polygon"
-                beforeId="water"
-                method="QNT"
-                geoId="FIPS"
-                data=${censusTractData}
-              >
-              </osl-map-layer>
-            </osl-glmap>
+                    legendtitle="Percent without a high school degree"
+                    geoType="WKB"
+                    geoColumn="geometry"
+                    dataColumn="Pct No Hs"
+                    type="continuous"
+                    labelFormat="percent"
+                    bins="5"
+                    colorScheme="GnBu"
+                    filled="true"
+                    attribution="American Community Survey 2021"
+                    layer="polygon"
+                    beforeId="water"
+                    method="QNT"
+                    geoId="county_cd"
+                    data=${countyData}
+                    visible="false"
+                    stroked="true"
+                    staticStroke="[255,255,255,120]"
+                  >
+                  </osl-map-layer>
+              </osl-glmap>
+            </div>
+            </osl-eq-grid>
           </div>
-        </osl-flex-box>
-        <br /><br />
-        <div>
-        </div>
-        <div>
-          <osl-data-table
-            title="Census Tract Data"
-            maxw="300vw"
-            data=${censusTractData}
-            columns=${demogZipCodeColumns}
-            pagination="true"
-          ></osl-data-table>
-        </div>
-        <div>
-          <osl-download
-            title="Download Zip Code Summary Data"
-            filename="zip-code-summary"
-            parameterSuffixes=${JSON.stringify([
-              "start",
-              "end",
-              "ai_class",
-              "ai_type",
-              "ai_type_specific",
-              "site",
-              "agtype",
-            ])}
-            data=${zipCodeColumns}
-          ></osl-download>
-          <osl-download
-            title="Download Tract Code Summary Data"
-            filename="tract-summary"
-            parameterSuffixes=${JSON.stringify([
-              "start",
-              "end",
-              "ai_class",
-              "ai_type",
-              "ai_type_specific",
-              "site",
-              "agtype",
-            ])}
-            data=${zipCodeColumns}
-          ></osl-download>
-        </div>
+          <div data-tab="School Districts" style="width:100%">
+
+          <osl-eq-grid breakpoint="lg" style="height:100%;">
+            <div>
+              <osl-glmap
+                mapStyle="https://basemaps.cartocdn.com/gl/positron-gl-style/style.json"
+                legendPosition="bottom-left"
+                showNavigation="true"
+                showSingleLayer="true"
+                center="[-120.1,36.9]"
+                zoom="5"
+                mapGroup="1"
+              >
+                  <osl-map-layer
+                    legendTitle="Pounds of Chemical Used"
+                    geoType="WKB"
+                    geoColumn="geometry"
+                    dataColumn="lbs_chm_used"
+                    type="continuous"
+                    bins="5"
+                    colorScheme="Reds"
+                    filled="true"
+                    attribution="California Pesticide Use Reporting (PUR)"
+                    layer="polygon"
+                    beforeId="water"
+                    method="QNT"
+                    geoId="FIPS"
+                    data=${schoolDistrictData}
+                    visible="true"
+                    stroked="true"
+                    staticStroke="[255,255,255,120]"
+                    isolatedValues="[0, null]"
+                    isolatedColor="${zeroPesticideColor}"
+                  >
+                  </osl-map-layer>
+              </osl-glmap>
+            </div>
+            <div>
+              <osl-glmap
+                mapStyle="https://basemaps.cartocdn.com/gl/positron-gl-style/style.json"
+                legendPosition="bottom-left"
+                showNavigation="true"
+                showSingleLayer="true"
+                center="[-120.1,36.9]"
+                zoom="5"
+                mapGroup="1"
+              >
+
+              <osl-map-layer
+                    legendtitle="Median Household Income (In 2021 Inflation Adjusted Dollars)"
+                    geoType="WKB"
+                    geoColumn="geometry"
+                    dataColumn="Median Income"
+                    type="continuous"
+                    bins="5"
+                    colorScheme="Greens"
+                    filled="true"
+                    attribution="American Community Survey 2021"
+                    layer="polygon"
+                    beforeId="water"
+                    method="QNT"
+                    geoId="FIPS"
+                    data=${schoolDistrictData}
+                    visible="true"
+                    stroked="true"
+                    staticStroke="[255,255,255,120]"
+                  >
+                  </osl-map-layer>
+              <osl-map-layer
+                    legendtitle="Percent Non-Hispanic Black or African American Population"
+                    geoType="WKB"
+                    geoColumn="geometry"
+                    dataColumn="Pct Black"
+                    type="continuous"
+                    bins="5"
+                    colorScheme="GnBu"
+                    filled="true"
+                    labelFormat="percent"
+                    attribution="American Community Survey 2021"
+                    layer="polygon"
+                    beforeId="water"
+                    method="QNT"
+                    geoId="FIPS"
+                    data=${schoolDistrictData}
+                    visible="false"
+                    stroked="true"
+                    staticStroke="[255,255,255,120]"
+                  >
+                  </osl-map-layer>
+              <osl-map-layer
+                    legendtitle="Percent Hispanic"
+                    geoType="WKB"
+                    geoColumn="geometry"
+                    dataColumn="Pct Hispanic"
+                    type="continuous"
+                    bins="5"
+                    colorScheme="GnBu"
+                    filled="true"
+                    attribution="American Community Survey 2021"
+                    layer="polygon"
+                    beforeId="water"
+                    method="QNT"
+                    geoId="FIPS"
+                    data=${schoolDistrictData}
+                    visible="false"
+                    stroked="true"
+                    labelFormat="percent"
+                    staticStroke="[255,255,255,120]"
+                  >
+                  </osl-map-layer>
+              <osl-map-layer
+                    legendtitle="Percent without a high school degree"
+                    geoType="WKB"
+                    geoColumn="geometry"
+                    dataColumn="Pct No Hs"
+                    type="continuous"
+                    labelFormat="percent"
+                    bins="5"
+                    colorScheme="GnBu"
+                    filled="true"
+                    attribution="American Community Survey 2021"
+                    layer="polygon"
+                    beforeId="water"
+                    method="QNT"
+                    geoId="FIPS"
+                    data=${schoolDistrictData}
+                    visible="false"
+                    stroked="true"
+                    staticStroke="[255,255,255,120]"
+                  >
+                  </osl-map-layer>
+              </osl-glmap>
+            </div>
+          </osl-eq-grid>
+          </div>
+          <div data-tab="Townships (Pesticide Data) / Tracts (Demography)" style="width:100%">
+
+
+          <osl-eq-grid breakpoint="lg" style="height:100%;">
+            <div>
+              <osl-glmap
+                mapStyle="https://basemaps.cartocdn.com/gl/positron-gl-style/style.json"
+                legendPosition="bottom-left"
+                showNavigation="true"
+                showSingleLayer="true"
+                center="[-120.1,36.9]"
+                zoom="5"
+                mapGroup="1"
+              >
+                  <osl-map-layer
+                    legendTitle="Pounds of Chemical Used"
+                    geoType="WKB"
+                    geoColumn="geometry"
+                    dataColumn="lbs_chm_used"
+                    type="continuous"
+                    bins="5"
+                    colorScheme="Reds"
+                    filled="true"
+                    attribution="California Pesticide Use Reporting (PUR)"
+                    layer="polygon"
+                    beforeId="water"
+                    method="QNT"
+                    data=${townshipData}
+                    visible="true"
+                    stroked="true"
+                    staticStroke="[255,255,255,120]"
+                    isolatedValues="[0, null]"
+                    isolatedColor="${zeroPesticideColor}"
+                  >
+                  </osl-map-layer>
+              </osl-glmap>
+            </div>
+            <div>
+
+            <osl-glmap
+                mapStyle="https://basemaps.cartocdn.com/gl/positron-gl-style/style.json"
+                legendPosition="bottom-left"
+                showNavigation="true"
+                showSingleLayer="true"
+                center="[-120.1,36.9]"
+                zoom="5"
+                mapGroup="1"
+              >
+
+              <osl-map-layer
+                    legendtitle="Median Household Income (In 2021 Inflation Adjusted Dollars)"
+                    geoType="WKB"
+                    geoColumn="geometry"
+                    dataColumn="Median Income"
+                    type="continuous"
+                    bins="5"
+                    colorScheme="Greens"
+                    filled="true"
+                    attribution="American Community Survey 2021"
+                    layer="polygon"
+                    beforeId="water"
+                    method="QNT"
+                    geoId="FIPS"
+                    data=${censusTractData}
+                    visible="true"
+                    stroked="true"
+                    staticStroke="[255,255,255,120]"
+                  >
+                  </osl-map-layer>
+              <osl-map-layer
+                    legendtitle="Percent Non-Hispanic Black or African American Population"
+                    geoType="WKB"
+                    geoColumn="geometry"
+                    dataColumn="Pct Black"
+                    type="continuous"
+                    bins="5"
+                    colorScheme="GnBu"
+                    filled="true"
+                    labelFormat="percent"
+                    attribution="American Community Survey 2021"
+                    layer="polygon"
+                    beforeId="water"
+                    method="QNT"
+                    geoId="FIPS"
+                    data=${censusTractData}
+                    visible="false"
+                    stroked="true"
+                    staticStroke="[255,255,255,120]"
+                  >
+                  </osl-map-layer>
+              <osl-map-layer
+                    legendtitle="Percent Hispanic"
+                    geoType="WKB"
+                    geoColumn="geometry"
+                    dataColumn="Pct Hispanic"
+                    type="continuous"
+                    bins="5"
+                    colorScheme="GnBu"
+                    filled="true"
+                    attribution="American Community Survey 2021"
+                    layer="polygon"
+                    beforeId="water"
+                    method="QNT"
+                    geoId="FIPS"
+                    data=${censusTractData}
+                    visible="false"
+                    stroked="true"
+                    labelFormat="percent"
+                    staticStroke="[255,255,255,120]"
+                  >
+                  </osl-map-layer>
+              <osl-map-layer
+                    legendtitle="Percent without a high school degree"
+                    geoType="WKB"
+                    geoColumn="geometry"
+                    dataColumn="Pct No Hs"
+                    type="continuous"
+                    labelFormat="percent"
+                    bins="5"
+                    colorScheme="GnBu"
+                    filled="true"
+                    attribution="American Community Survey 2021"
+                    layer="polygon"
+                    beforeId="water"
+                    method="QNT"
+                    geoId="FIPS"
+                    data=${censusTractData}
+                    visible="false"
+                    stroked="true"
+                    staticStroke="[255,255,255,120]"
+                  >
+                  </osl-map-layer>
+              </osl-glmap>
+            </div>
+          </osl-eq-grid>
+          </div>
+
+        </osl-tabs>
       </div>
     </div>
   `;
 };
+
