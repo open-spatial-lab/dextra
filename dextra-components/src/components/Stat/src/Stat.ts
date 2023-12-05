@@ -26,6 +26,9 @@ export class OslStat extends OslData {
       ? this.currentResults[0]
       : this.currentResults;
     const value = data[this.property as keyof typeof data];
+    if (value === undefined || value === null) {
+      return 'No Data'
+    }
     return this.formatter ? this.formatter.format(value) : value;
   }
 
@@ -64,11 +67,11 @@ export class OslStat extends OslData {
   template() {
     const statData = this.getStat();
     if (statData === undefined) return html``;
-
+    const size = statData === 'No Data' ? '1rem' : this.statSize;
     return html`
       <div class="card">
         <sp-help-text>${this.title}</sp-help-text>
-        <p class="stat" style="font-size: ${this.statSize}">${statData}</p>
+        <p class="stat" style="font-size: ${size}">${statData}</p>
         <sp-help-text>${this.subtitle}</sp-help-text>
       </div>
     `;
