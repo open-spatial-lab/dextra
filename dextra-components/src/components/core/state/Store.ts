@@ -15,7 +15,7 @@ function wait(delay: number){
 }
 
 
-function fetchRetry(url: string, delay: number, tries: number, fetchOptions = {}): any {
+export function fetchRetry(url: string, delay: number, tries: number, fetchOptions = {}): any {
   function onError(err: any){
       tries = tries - 1;
       if(!tries){
