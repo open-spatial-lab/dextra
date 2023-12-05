@@ -1,6 +1,6 @@
 {
   "name": "@open-spatial-lab/density-plot",
-  "version": "0.0.25",
+  "version": "0.0.26",
   "main": "dist/index.js",
   "exports": {
     ".": "./dist/index.js"

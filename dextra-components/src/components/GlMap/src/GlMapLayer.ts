@@ -26,7 +26,7 @@ import type {
 import { tooltipStore } from "../../core/state/MapTooltipStore";
 import { html } from "lit";
 import { PickingInfo } from "@deck.gl/core/typed";
-import { type MjolnirEvent } from "mjolnir.js"
+import { MjolnirEvent } from "mjolnir.js"
 @safeCustomElement("osl-map-layer")
 export class OslMapLayer extends OslData {
   @property({ converter: interpretFuncJsonOrString })
