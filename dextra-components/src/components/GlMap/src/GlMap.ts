@@ -259,7 +259,7 @@ export class OslGlMap extends OslData {
 
   toggleLayer(key: string) {
     const filter = (l: any) => l.elementId === key;
-    const inverseFilter = (l: any) => l.elementId !== key;
+    const inverseFilter = (l: any) => l.elementId !== key && l.fixed !== true;
     if (this.showSingleLayer) {
       this.childMapLayers.find(filter)?.setVisibility(true);
       this.childMapLayers

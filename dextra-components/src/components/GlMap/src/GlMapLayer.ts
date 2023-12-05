@@ -151,7 +151,8 @@ export class OslMapLayer extends OslData {
   @property({ type: String })
   isolatedColor?: string;
 
-  
+  @property({ type: Boolean })
+  fixed: boolean = false;
 
   tooltipFormatters: { [key: string]: ReturnType<typeof getFormatter> } = {};
   binBuilder?: BinBuilder;
