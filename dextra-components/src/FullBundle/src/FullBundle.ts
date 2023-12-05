@@ -13,6 +13,7 @@ import * as Plot from "../../components/Plot/src/Plot";
 import * as Density from "../../components/Marks/Density/src/Density";
 import * as Heatmap from "../../components/Marks/Heatmap/src/Heatmap";
 import * as Dot from "../../components/Marks/Dot/src/Dot";
+import * as Line from "../../components/Marks/Line/src/Line";
 import * as Histogram from "../../components/Marks/Histogram/src/Histogram";
 import * as Radio from "../../components/Radio/src/Radio";
 import * as Select from "../../components/Select/src/Select";
@@ -38,6 +39,7 @@ export {
   Dot,
   Histogram,
   Radio,
+  Line,
   Select,
   SelectControl,
   Switch,

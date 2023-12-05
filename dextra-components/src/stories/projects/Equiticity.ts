@@ -351,8 +351,42 @@ export const Equiticity = () => {
       data=${communityAreasJoinedData}
     >
     </osl-map-layer>   
-    ${CommunityAreaBoundaries}
-    ${CommunityAreaLabels}
+    <osl-map-layer
+  legendTitle="Community Areas"
+  visible="true"
+  stroked="true"
+  filled="false"
+  geoType="WKB"
+  geoColumn="geometry"
+  layer="line"
+  type="static"
+  staticStroke="[0,0,0]"
+  geoId="community"
+  data=${communityAreasJoinedData}
+  lineWidthMaxPixels="5"
+  lineWidthMinPixels="2"
+  fixed="true"
+></osl-map-layer>
+      <osl-map-layer
+    legendTitle="Community Areas Labels"
+    visible="true"
+    stroked="false"
+    filled="false"
+    geoType="WKB"
+    geoColumn="geometry"
+    layer="text"
+    type="static"
+    staticRadius="100"
+    textColumn="community"
+    textSizeScale="5"
+    textSize="64"
+    textMaxWidth="400"
+    textSizeMaxPixels="16"
+    geoId="community"
+    data=${communityAreasJoinedData}
+    geoOperation="centroid"
+    fixed="true"
+  ></osl-map-layer>
   </osl-glmap></div>
 
   <div style="height:100%;width:100%">
@@ -363,7 +397,26 @@ export const Equiticity = () => {
     legendPosition="top-left" 
     showNavigation='true'
     >
-    ${CommunityAreaLabels}
+      <osl-map-layer
+    legendTitle="Community Areas Labels"
+    visible="true"
+    stroked="false"
+    filled="false"
+    geoType="WKB"
+    geoColumn="geometry"
+    layer="text"
+    type="static"
+    staticRadius="100"
+    textColumn="community"
+    textSizeScale="5"
+    textSize="64"
+    textMaxWidth="400"
+    textSizeMaxPixels="16"
+    geoId="community"
+    data=${communityAreasJoinedData}
+    geoOperation="centroid"
+    fixed="true"
+  ></osl-map-layer>
     <osl-map-layer
       layer="circle"
       data="${redLightDot}"
@@ -632,7 +685,26 @@ export const Equiticity = () => {
       data=${tractData}
     >
     </osl-map-layer>   
-    ${CommunityAreaLabels}
+      <osl-map-layer
+    legendTitle="Community Areas Labels"
+    visible="true"
+    stroked="false"
+    filled="false"
+    geoType="WKB"
+    geoColumn="geometry"
+    layer="text"
+    type="static"
+    staticRadius="100"
+    textColumn="community"
+    textSizeScale="5"
+    textSize="64"
+    textMaxWidth="400"
+    textSizeMaxPixels="16"
+    geoId="community"
+    data=${communityAreasJoinedData}
+    geoOperation="centroid"
+    fixed="true"
+  ></osl-map-layer>
   </osl-glmap></div>
 
   <div style="height:100%;width:100%">
@@ -643,7 +715,26 @@ export const Equiticity = () => {
     legendPosition="top-left" 
     showNavigation='true'
     >
-    ${CommunityAreaLabels}
+      <osl-map-layer
+    legendTitle="Community Areas Labels"
+    visible="true"
+    stroked="false"
+    filled="false"
+    geoType="WKB"
+    geoColumn="geometry"
+    layer="text"
+    type="static"
+    staticRadius="100"
+    textColumn="community"
+    textSizeScale="5"
+    textSize="64"
+    textMaxWidth="400"
+    textSizeMaxPixels="16"
+    geoId="community"
+    data=${communityAreasJoinedData}
+    geoOperation="centroid"
+    fixed="true"
+  ></osl-map-layer>
     <osl-map-layer
       layer="circle"
       data="${redLightDot}"
@@ -915,7 +1006,26 @@ export const Equiticity = () => {
     
 
     </osl-map-layer>   
-    ${CommunityAreaLabels}
+      <osl-map-layer
+    legendTitle="Community Areas Labels"
+    visible="true"
+    stroked="false"
+    filled="false"
+    geoType="WKB"
+    geoColumn="geometry"
+    layer="text"
+    type="static"
+    staticRadius="100"
+    textColumn="community"
+    textSizeScale="5"
+    textSize="64"
+    textMaxWidth="400"
+    textSizeMaxPixels="16"
+    geoId="community"
+    data=${communityAreasJoinedData}
+    geoOperation="centroid"
+    fixed="true"
+  ></osl-map-layer>
   </osl-glmap></div>
 
   <div style="height:100%;width:100%">
@@ -926,7 +1036,26 @@ export const Equiticity = () => {
     legendPosition="top-left" 
     showNavigation='true'
     >
-    ${CommunityAreaLabels}
+      <osl-map-layer
+    legendTitle="Community Areas Labels"
+    visible="true"
+    stroked="false"
+    filled="false"
+    geoType="WKB"
+    geoColumn="geometry"
+    layer="text"
+    type="static"
+    staticRadius="100"
+    textColumn="community"
+    textSizeScale="5"
+    textSize="64"
+    textMaxWidth="400"
+    textSizeMaxPixels="16"
+    geoId="community"
+    data=${communityAreasJoinedData}
+    geoOperation="centroid"
+    fixed="true"
+  ></osl-map-layer>
     <osl-map-layer
       layer="circle"
       data="${redLightDot}"
