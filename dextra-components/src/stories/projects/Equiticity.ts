@@ -39,6 +39,9 @@ export const Equiticity = () => {
         tractSummary,
         redLightDot,
         speedDot,
+        crashesOverTime,
+        speedTicketsOverTime,
+        redLightTicketsOverTime
       ])}
       option="start"
       title="Start date"
@@ -57,6 +60,9 @@ export const Equiticity = () => {
         tractSummary,
         redLightDot,
         speedDot,
+        crashesOverTime,
+        speedTicketsOverTime,
+        redLightTicketsOverTime
       ])}
       option="end"
       optionsData=${dateOptions.url}
@@ -73,6 +79,9 @@ export const Equiticity = () => {
         zipSummary,
         tractData,
         tractSummary,
+        crashesOverTime,
+        speedTicketsOverTime,
+        redLightTicketsOverTime
       ])}
       option="crashtype"
       optionsData=${crashTypeOptions.url}
@@ -88,6 +97,9 @@ export const Equiticity = () => {
         communityAreaSummary,
         redLightDot,
         speedDot,
+        crashesOverTime,
+        speedTicketsOverTime,
+        redLightTicketsOverTime
       ])}
       option="crashhour"
       optionsData=${crashHourOptions.url}
