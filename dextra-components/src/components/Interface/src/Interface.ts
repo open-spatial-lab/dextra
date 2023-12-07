@@ -16,7 +16,7 @@ export class OslControl extends ValtioElement<StateSchema> {
   @property({ type: String })
   option: string = "";
 
-  @property()
+  @property({ converter: interpretFuncJsonOrString})
   initialValue?: string | number | Array<string | number>;
 
   @property()
