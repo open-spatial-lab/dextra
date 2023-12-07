@@ -107,7 +107,7 @@ const buildDatasetPromise = async (key: string) => {
       statuses?.[currentParamString] === undefined
     })
     const url = new URL(key);
-    Object.entries(currentParams).forEach(([key, value]) => {
+    Object.entries(currentParams).filter(f => f[1] !== null && f[1] !== undefined && f[1] !== '*').forEach(([key, value]) => {
       url.searchParams.set(
         key,
         value
