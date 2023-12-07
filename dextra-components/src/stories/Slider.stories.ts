@@ -34,3 +34,31 @@ export const Slider = () => {
     > </osl-interface>
   `;
 };
+
+export const Range = () => {
+  const data = ["http://localhost:6006/data/interaction.json", "http://localhost:6006/data/summary.json"];
+  const dataString = JSON.stringify(data);
+  
+  return html`
+    The value is:
+    <osl-slider
+      data="${dataString}"
+      range="true"
+      option="mag"
+      min="5"
+      max="8"
+      step=".1"
+      initialValue="[5,8]"
+      title="Magnitude"
+    ></osl-slider>
+    <osl-interface
+      data="http://localhost:6006/data/interaction.json"
+      option="mag"
+      initialValue="7"
+    > </osl-interface><osl-interface
+      data="http://localhost:6006/data/summary.json"
+      option="mag"
+      initialValue="7"
+    > </osl-interface>
+  `;
+};
