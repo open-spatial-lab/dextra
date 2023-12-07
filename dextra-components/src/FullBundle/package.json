@@ -1,6 +1,6 @@
 {
   "name": "@open-spatial-lab/full-bundle",
-  "version": "0.0.28",
+  "version": "0.0.29",
   "main": "dist/full-bundle.es.js",
   "exports": {
     ".": "./dist/full-bundle.es.js"

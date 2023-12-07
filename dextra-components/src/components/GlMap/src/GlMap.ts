@@ -17,6 +17,8 @@ import { LegendSpec } from "./types";
 import "./MapLegend";
 import "./MapTooltip";
 import { interpretFuncJsonOrString } from "../../core/utils/converters";
+import { renderTemplateAsString } from "../../../utils/renderTemplateAsString";
+import { GWBP1 } from "../../../stories/projects/GWBP";
 
 const basicStyle = {
   version: 8,
