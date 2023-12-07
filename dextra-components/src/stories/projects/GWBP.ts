@@ -1,4 +1,6 @@
 import { html } from "lit";
+import { renderTemplateAsString } from "../../utils/renderTemplateAsString";
+import { getRenderString } from "../utils";
 
 const years = ["2021", "2022", "2023"];
 const months = [
@@ -65,18 +67,18 @@ export const GWBP1 = () => {
             <osl-flex-box breakpoint="lg" direction="row">
               <div>
                 <osl-select-control
-                  data=${filterDatasets}
+                  data="${filterDatasets}"
                   option="start"
-                  options=${monthyears}
+                  options="${monthyears}"
                   title="Start Date"
                   initialValue="2021-09"
                 ></osl-select-control>
               </div>
               <div>
                 <osl-select-control
-                  data=${filterDatasets}
+                  data="${filterDatasets}"
                   option="end"
-                  options=${monthyears}
+                  options="${monthyears}"
                   title="End Date"
                   initialValue="2023-12"
                 ></osl-select-control>
@@ -118,7 +120,7 @@ export const GWBP1 = () => {
                 title="Total Trees"
                 subtitle="From selected dates"
                 property="count"
-                data=${DATASETS.treeSummary}
+                data="${DATASETS.treeSummary}"
               >
               </osl-stat>
               <osl-stat
@@ -127,21 +129,21 @@ export const GWBP1 = () => {
                 subtitle="Calculated as dbH^2 x 0.005454"
                 property="Basal Area"
                 format="nice"
-                data=${DATASETS.treeSummary}
+                data="${DATASETS.treeSummary}"
               >
               </osl-stat>
               <osl-stat
                 statSize="1.5rem"
                 title="Most Common Species"
                 property="most common species"
-                data=${DATASETS.treeSummary}
+                data="${DATASETS.treeSummary}"
               >
               </osl-stat>
               <osl-stat
                 statSize="1.5rem"
                 title="Most Common Genus"
                 property="most common genus"
-                data=${DATASETS.treeSummary}
+                data="${DATASETS.treeSummary}"
               >
               </osl-stat>
             </osl-flex-box>
@@ -170,7 +172,7 @@ export const GWBP1 = () => {
               <h3>Trees Over Time</h3>
               <osl-plot
                 colorLegend="true"
-                data=${DATASETS.treesOverTime}
+                data="${DATASETS.treesOverTime}"
                 marginBottom="80"
                 marginRight="80"
                 colorScheme="accent"
@@ -205,7 +207,7 @@ export const GWBP2 = () => {
                   statSize="1rem"
                   title="Most Common Species"
                   property="most common species"
-                  data=${DATASETS.treeSummary}
+                  data="${DATASETS.treeSummary}"
                 >
                 </osl-stat>
                 <osl-stat
@@ -213,7 +215,7 @@ export const GWBP2 = () => {
                   title="Most Common Species Percent"
                   subtitle="%"
                   property="species dominance"
-                  data=${DATASETS.speciesDominance}
+                  data="${DATASETS.speciesDominance}"
                 >
                 </osl-stat>
                 <osl-stat
@@ -222,14 +224,14 @@ export const GWBP2 = () => {
                   subtitle="Simpson's Index"
                   property="species diversity"
                   format="nice"
-                  data=${DATASETS.speciesDiversity}
+                  data="${DATASETS.speciesDiversity}"
                 >
                 </osl-stat>
                 <osl-stat
                   statSize="1rem"
                   title="Most Common Genus"
                   property="most common genus"
-                  data=${DATASETS.treeSummary}
+                  data="${DATASETS.treeSummary}"
                 >
                 </osl-stat>
 
@@ -238,7 +240,7 @@ export const GWBP2 = () => {
                   title="Most Common Genus Percent"
                   subtitle="%"
                   property="percent"
-                  data=${DATASETS.genusDominance}
+                  data="${DATASETS.genusDominance}"
                 >
                 </osl-stat>
                 <osl-stat
@@ -247,7 +249,7 @@ export const GWBP2 = () => {
                   title="Genus Diversity"
                   property="diversity"
                   format="nice"
-                  data=${DATASETS.genusDiversity}
+                  data="${DATASETS.genusDiversity}"
                 >
                 </osl-stat>
               </osl-flex-box>
@@ -418,7 +420,7 @@ function TreeLayers(showFirstLayer: boolean = true) {
       pointRadiusMinPixels="3"
       pointRadiusMaxPixels="8"
       stroked="true"
-      data=${DATASETS.treesMainView}
+      data="${DATASETS.treesMainView}"
     >
     </osl-map-layer>
     <osl-map-layer
@@ -440,7 +442,7 @@ function TreeLayers(showFirstLayer: boolean = true) {
       pointRadiusMinPixels="3"
       pointRadiusMaxPixels="8"
       stroked="true"
-      data=${DATASETS.treesMainView}
+      data="${DATASETS.treesMainView}"
     >
     </osl-map-layer>
 
@@ -463,7 +465,7 @@ function TreeLayers(showFirstLayer: boolean = true) {
       pointRadiusMaxPixels="10"
       stroked="true"
       method="EQI"
-      data=${DATASETS.treesMainView}
+      data="${DATASETS.treesMainView}"
     >
     </osl-map-layer>
     <osl-map-layer
@@ -482,13 +484,13 @@ function TreeLayers(showFirstLayer: boolean = true) {
       statisFill="[0,0,0]"
       stroked="true"
       staticStroke="[0,0,0]"
-      data=${DATASETS.treesMainView}
+      data="${DATASETS.treesMainView}"
     >
     </osl-map-layer>
   `;
 }
 function MapSnippet(activeLayer: string = "Tracts: Total Population") {
-  return html`
+  return `
     <osl-glmap
       mapStyle="https://api.maptiler.com/maps/ea51b296-e8ba-4cf7-a8a7-12d33082fb31/style.json?key=GyJQwucrJIPRRzPw7mGT"
       legendPosition="bottom-left"
@@ -501,7 +503,7 @@ function MapSnippet(activeLayer: string = "Tracts: Total Population") {
         (l) =>
           html`
             <osl-map-layer
-              legendTitle=${l.id}
+              legendTitle="${l.id}"
               geoType="WKB"
               geoColumn="geometry"
               filled="true"
@@ -514,11 +516,11 @@ function MapSnippet(activeLayer: string = "Tracts: Total Population") {
               lineWidthMinPixels="0"
               stroked="true"
               labelFormat="${l.labelFormat || "nice"}"
-              visible=${l.id === activeLayer}
-              data=${l.data}
-              datacolumn=${l.dataColumn}
-              colorscheme=${l.colorScheme}
-              method=${l.method || "QNT"}
+              visible="${l.id === activeLayer}"
+              data="${l.data}"
+              datacolumn="${l.dataColumn}"
+              colorscheme="${l.colorScheme}"
+              method="${l.method || "QNT"}"
             >
             </osl-map-layer>
           `
@@ -540,18 +542,18 @@ export const GWBP3 = () => {
             <osl-flex-box breakpoint="lg" direction="row">
               <div>
                 <osl-select-control
-                  data=${filterDatasets}
+                  data="${filterDatasets}"
                   option="start"
-                  options=${monthyears}
+                  options="${monthyears}"
                   title="Start Date"
                   initialValue="2021-09"
                 ></osl-select-control>
               </div>
               <div>
                 <osl-select-control
-                  data=${filterDatasets}
+                  data="${filterDatasets}"
                   option="end"
-                  options=${monthyears}
+                  options="${monthyears}"
                   title="End Date"
                   initialValue="2023-12"
                 ></osl-select-control>
@@ -576,7 +578,7 @@ export const GWBP3 = () => {
                 title="Total Trees"
                 subtitle="From selected dates"
                 property="count"
-                data=${DATASETS.treeSummary}
+                data="${DATASETS.treeSummary}"
               >
               </osl-stat>
               <osl-stat
@@ -585,21 +587,21 @@ export const GWBP3 = () => {
                 subtitle="Calculated as dbH^2 x 0.005454"
                 property="Basal Area"
                 format="nice"
-                data=${DATASETS.treeSummary}
+                data="${DATASETS.treeSummary}"
               >
               </osl-stat>
               <osl-stat
                 statSize="1.5rem"
                 title="Most Common Species"
                 property="most common species"
-                data=${DATASETS.treeSummary}
+                data="${DATASETS.treeSummary}"
               >
               </osl-stat>
               <osl-stat
                 statSize="1.5rem"
                 title="Most Common Genus"
                 property="most common genus"
-                data=${DATASETS.treeSummary}
+                data="${DATASETS.treeSummary}"
               >
               </osl-stat>
             </osl-flex-box>
@@ -609,7 +611,7 @@ export const GWBP3 = () => {
               <osl-glmap
                 mapStyle="https://api.maptiler.com/maps/ea51b296-e8ba-4cf7-a8a7-12d33082fb31/style.json?key=GyJQwucrJIPRRzPw7mGT"
                 legendPosition="bottom-left"
-                onInteractDataset=${filterDatasets}
+                onInteractDataset="${filterDatasets}"
                 showNavigation="true"
                 showSingleLayer="true"
                 center="[-73.18,41.18]"
@@ -622,7 +624,7 @@ export const GWBP3 = () => {
               <h3>Trees Over Time</h3>
               <osl-plot
                 colorLegend="true"
-                data=${DATASETS.treesOverTime}
+                data="${DATASETS.treesOverTime}"
                 marginBottom="80"
                 marginRight="80"
                 colorScheme="accent"
@@ -641,3 +643,9 @@ export const GWBP3 = () => {
     </main>
   `;
 };
+
+// console.log(getRenderString(GWBP1()))
+// console.log(getRenderString(GWBP2()))
+// console.log(getRenderString(GWBP3()))
+// console.log(getRenderString(TreeLayers()))
+// console.log(getRenderString(MapSnippet("Tracts: Count of Trees")))

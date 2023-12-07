@@ -599,4 +599,4 @@ export const PreventBlindness = () => {
   `;
 };
 
-// console.log(renderTemplateAsString(PreventBlindness()))
+// console.log(getRenderString(PreventBlindness()))
