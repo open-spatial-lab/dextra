@@ -153,13 +153,22 @@ export class OslGlMap extends OslData {
       ? this.onInteractDataset
       : [this.onInteractDataset];
     datasets.forEach((dataset) => {
-      Object.entries(mapView).forEach(([key, value]) => {
-        this.store.datasets[dataset].parameters[key] = value;
-      });
+      this.store.datasets[dataset].parameters = {
+        ...this.store.datasets[dataset].parameters,
+        ...mapView,
+      }
+      // Object.entries(mapView).forEach(([key, value]) => {
+      //   this.store.datasets[dataset].parameters[key] = value;
+      // });
     });
   }
 
+  timeoutFn: any = null;
   handleMapMove() {
+    this.timeoutFn && clearTimeout(this.timeoutFn);
+  }
+
+  handleMapMoveEnd() {
     if (!this.onInteractDataset) {
       return;
     }
@@ -172,15 +181,17 @@ export class OslGlMap extends OslData {
         _ne: { lng: maxLng, lat: maxLat },
       } = bounds;
       const { lng: centerLng, lat: centerLat } = center;
-      this.handleChange({
-        minLng,
-        minLat,
-        maxLng,
-        maxLat,
-        centerLng,
-        centerLat,
-        zoom: Math.floor(zoom)
-      });
+      this.timeoutFn = setTimeout(() => {
+        this.handleChange({
+          minLng,
+          minLat,
+          maxLng,
+          maxLat,
+          centerLng,
+          centerLat,
+          zoom: Math.floor(zoom)
+        });
+      }, 250);
     }
   }
 
@@ -207,8 +218,11 @@ export class OslGlMap extends OslData {
     }
     if (!this.mapGroup || syncedMaps[this.mapGroup] === this.map) {
       this.map.on("moveend", () => {
-        this.handleMapMove();
+        this.handleMapMoveEnd();
       });
+      this.map.on("move", () => {
+        this.handleMapMove();
+      })
     }
     this.map.addControl(
       new maplibregl.AttributionControl({
