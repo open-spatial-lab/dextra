@@ -19,8 +19,8 @@ export class OslPlotDensity extends PlotMark {
   markOptions: (keyof this)[] = ['x','y','bandwidth'];
 
   connectedCallback(): void {
-    console.log('connected!')
-    console.log(this.allOptions)
+    // console.log('connected!')
+    // console.log(this.allOptions)
     super.connectedCallback();
   }
 
