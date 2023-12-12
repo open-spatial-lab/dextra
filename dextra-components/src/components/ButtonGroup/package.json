@@ -1,6 +1,6 @@
 {
   "name": "@open-spatial-lab/buttongroup",
-  "version": "0.0.29",
+  "version": "0.0.30",
   "main": "dist/index.js",
   "exports": {
     ".": "./dist/index.js"
