@@ -31,7 +31,9 @@ import { CPR3 as _CPR3} from './projects/CPR3';
 import { CirculateSanDiego as _CirculateSanDiego } from './projects/CSD1'
 import { CirculateSanDiego2 as _CirculateSanDiego2 } from './projects/CSD2'
 import { CirculateSanDiego3 as _CirculateSanDiego3 } from './projects/CSD3'
-import { Wisconsin as _Wisconsin } from './projects/Wisconsin'
+import { WisconsinTimeSeries as _WisconsinTimeSeries } from './projects/WisconsinTimeSeries'
+import { WisconsinMaps as _WisconsinMaps } from './projects/WisconsinMaps'
+import { WisconsinFunding as _WisconsinFunding} from "./projects/WisconsinFunding"
 import {Equiticity as _Equiticity} from './projects/Equiticity'
 import {m3 as _M3} from './projects/M3'
 import {GWBP1, GWBP2, GWBP3} from './projects/GWBP'
@@ -45,7 +47,9 @@ export const CPR3 = () => _CPR3();
 export const CirculateSanDiego = () => _CirculateSanDiego();
 export const CirculateSanDiego2 = () => _CirculateSanDiego2();
 export const CirculateSanDiego3 = () => _CirculateSanDiego3();
-export const Wisconsin = () => _Wisconsin();
+export const WisconsinTimeSeries = () => _WisconsinTimeSeries();
+export const WisconsinMaps = () => _WisconsinMaps();
+export const WisconsinFunding = () => _WisconsinFunding();
 export const M3 = () => _M3();
 export const GroundworkBridgeportView1 = () => GWBP1();
 export const GroundworkBridgeportView2 = () => GWBP2();

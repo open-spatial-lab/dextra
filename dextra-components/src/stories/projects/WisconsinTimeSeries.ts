@@ -6,7 +6,7 @@ import {
   congressionalDistricts,
 } from "./WisconsinUtils";
 
-export const Wisconsin = () => {
+export const WisconsinTimeSeries = () => {
   // <sp-help-text>Star Rating</sp-help-text>
   // <osl-select-control
   // data=${allDatasets}
@@ -22,10 +22,10 @@ export const Wisconsin = () => {
   <osl-flex-box breakpoint="md">
   <sp-help-text>Open On</sp-help-text>
   <osl-select-control
-data=${allDatasets}
-options=${JSON.stringify(dates)}
-option="open_on"
-initialValue="2021-03"
+    data=${allDatasets}
+    options=${JSON.stringify(dates)}
+    option="open_on"
+    initialValue="2021-03"
 >
 </osl-select-control></div>
 <div>

@@ -48,6 +48,8 @@ const DATASETS = {
     "https://d148axxp71p64w.cloudfront.net/data-query/655636c8d2d81200086f7694",
   censusTractOptions:
     "https://d148axxp71p64w.cloudfront.net/data-query/657240c85f744d0008ff544a",
+  dateOptions:
+  "https://d148axxp71p64w.cloudfront.net/data-query/6572547d222c6b0008b11c1b"
 };
 
 const filterDatasets = JSON.stringify([
@@ -69,7 +71,8 @@ export const GWBP1 = () => {
                 <osl-select-control
                   data="${filterDatasets}"
                   option="start"
-                  options="${monthyears}"
+                  optionsData="${DATASETS.dateOptions}"
+                  optionsDataValueColumn="monthyear"
                   title="Start Date"
                   initialValue="2021-09"
                 ></osl-select-control>
@@ -78,7 +81,8 @@ export const GWBP1 = () => {
                 <osl-select-control
                   data="${filterDatasets}"
                   option="end"
-                  options="${monthyears}"
+                  optionsData="${DATASETS.dateOptions}"
+                  optionsDataValueColumn="monthyear"
                   title="End Date"
                   initialValue="2023-12"
                 ></osl-select-control>
@@ -544,7 +548,8 @@ export const GWBP3 = () => {
                 <osl-select-control
                   data="${filterDatasets}"
                   option="start"
-                  options="${monthyears}"
+                  optionsData="${DATASETS.dateOptions}"
+                  optionsDataValueColumn="monthyear"
                   title="Start Date"
                   initialValue="2021-09"
                 ></osl-select-control>
@@ -553,7 +558,8 @@ export const GWBP3 = () => {
                 <osl-select-control
                   data="${filterDatasets}"
                   option="end"
-                  options="${monthyears}"
+                  optionsData="${DATASETS.dateOptions}"
+                  optionsDataValueColumn="monthyear"
                   title="End Date"
                   initialValue="2023-12"
                 ></osl-select-control>
