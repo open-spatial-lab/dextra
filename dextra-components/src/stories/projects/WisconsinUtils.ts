@@ -43,6 +43,7 @@ export const tractOptions = "https://d27ouidsqnp6r.cloudfront.net/data-query/657
 export const countyOptions = "https://d27ouidsqnp6r.cloudfront.net/data-query/6578b97cf1a1aa0008757554"
 export const stateSenateOptions = "https://d27ouidsqnp6r.cloudfront.net/data-query/6578b9d2f1a1aa0008757555"
 export const stateAssemblyOptions = "https://d27ouidsqnp6r.cloudfront.net/data-query/6578b9eff1a1aa0008757556"
+export const timeseriesCountyOptions = "https://d27ouidsqnp6r.cloudfront.net/data-query/6578c62744e1dc0008e34b4b"
 
 export const countyData = "https://d27ouidsqnp6r.cloudfront.net/data-query/6577d36ae5c0ce0008b1beab";
 export const tractData = "https://d27ouidsqnp6r.cloudfront.net/data-query/653b1e6e4c89d8000877c66e"
@@ -65,8 +66,7 @@ export const mapDatasets = JSON.stringify([
 export const allDatasets = JSON.stringify([
   cccStatDataset,
   lccStatDataset,
-  tableDataset,
-  countyData
+  tableDataset
 ]);
 
 export const allAndLineDataset = JSON.stringify([
