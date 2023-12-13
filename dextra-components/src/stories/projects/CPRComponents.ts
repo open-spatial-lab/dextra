@@ -1,5 +1,5 @@
 // import { Meta } from "@storybook/web-components";
-import { html } from "lit";
+import { template as html } from "../../utils/templateFunction";
 import "../../components/GlMap/src/GlMap.js";
 import "../../components/GlMap/src/GlMapLayer.js";
 import "../../components/Slider/src/Slider.js";

@@ -1,4 +1,4 @@
-import { html } from "lit";
+import { template as html } from "../utils/templateFunction";
 import "../components/GlMap/src/GlMap.ts";
 import "../components/GlMap/src/GlMapLayer.ts";
 import "../components/Slider/src/Slider.ts";

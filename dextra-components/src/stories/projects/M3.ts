@@ -1,4 +1,4 @@
-import { html } from "lit";
+import { template as html } from "../../utils/templateFunction";
 
 export const m3 = () => {
   return html`

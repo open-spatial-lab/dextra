@@ -1,5 +1,5 @@
 import { Meta } from "@storybook/web-components";
-import { html } from "lit"; 
+import { template as html } from "../utils/templateFunction"; 
 import "../components/marks/Bar/src/Bar.ts";
 import "../components/Plot/src/Plot.ts";
 

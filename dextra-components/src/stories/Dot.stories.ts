@@ -1,4 +1,4 @@
-import { html } from "lit";
+import { template as html } from "../utils/templateFunction";
 import "../components/Marks/Dot/src/Dot.ts";
 import "../components/Plot/src/Plot.ts";
 import "../components/Slider/src/Slider.ts";

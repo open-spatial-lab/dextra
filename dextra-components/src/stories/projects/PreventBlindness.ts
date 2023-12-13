@@ -1,4 +1,4 @@
-import { html } from "lit";
+import { template as html } from "../../utils/templateFunction";
 import {
   abbrs,
   specialties,
@@ -13,7 +13,7 @@ import {
   congressStatTable,
   zipStatTable,
 } from "./PreventBlindnessUtils";
-import { renderTemplateAsString } from "../../utils/renderTemplateAsString";
+
 export const PreventBlindness = () => {
   return html`
   <sp-theme>

@@ -1,4 +1,4 @@
-import { html } from "lit";
+import { template as html } from "../../utils/templateFunction";
 
 export const communityAreaOptions = {
   url: "https://d14xp4vykd1up4.cloudfront.net/data-query/656e2ffe98b5d40008de1bb6",

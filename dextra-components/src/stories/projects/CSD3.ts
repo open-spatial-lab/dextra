@@ -1,4 +1,4 @@
-import { html } from "lit";
+import { template as html } from "../../utils/templateFunction";
 
 import {
   tractJoined,

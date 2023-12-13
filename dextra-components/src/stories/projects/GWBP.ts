@@ -1,6 +1,4 @@
-import { html } from "lit";
-import { renderTemplateAsString } from "../../utils/renderTemplateAsString";
-import { getRenderString } from "../utils";
+import { template as html } from "../../utils/templateFunction";
 
 const years = ["2021", "2022", "2023"];
 const months = [
@@ -494,7 +492,7 @@ function TreeLayers(showFirstLayer: boolean = true) {
   `;
 }
 function MapSnippet(activeLayer: string = "Tracts: Total Population") {
-  return `
+  return html`
     <osl-glmap
       mapStyle="https://api.maptiler.com/maps/ea51b296-e8ba-4cf7-a8a7-12d33082fb31/style.json?key=GyJQwucrJIPRRzPw7mGT"
       legendPosition="bottom-left"
@@ -505,7 +503,7 @@ function MapSnippet(activeLayer: string = "Tracts: Total Population") {
     >
       ${layers.map(
         (l) =>
-          html`
+          `
             <osl-map-layer
               legendTitle="${l.id}"
               geoType="WKB"
