@@ -25,22 +25,36 @@ export class MapTooltip extends ValtioElement<TooltipStore> {
 
   static styles = css`
     .tooltipContainer {
+      max-width:40vw;
       padding: 0;
       margin: 0;
       position: absolute;
+      pointer-events: none;
       display: column;
       flex-direction: row;
       z-index: 500;
       background: white;
       border: 1px solid lightgray;
       background-color: var(--spectrum-background-layer-2-color);
-      padding: 0 0.5rem;
     }
     .tooltipContainer sp-help-text {
       margin-top:0;
       margin-bottom:0;
       padding-top:0;
       padding-bottom:0;
+    }
+    .tooltipContainer .tooltip-row {
+      margin:0;
+      padding:.25rem 0 .25rem 0.25rem;
+    }
+    .tooltipContainer .tooltip-row:nth-of-type(2n) {
+      background-color: #f7f7f7;
+    }
+    .tooltipContainer .tooltip-row p {
+      font-size:.75rem;
+      margin:0;
+      padding:0;
+      max-width: 30vw;
     }
   `;
 
@@ -71,16 +85,28 @@ export class MapTooltip extends ValtioElement<TooltipStore> {
     let tooltipContent: any = html``;
     const { x, y, data } = this.currentTooltip;
     if (x === null || y === null) return null;
+    // flip x if in right half of screen
+    const flipX = x > window.innerWidth / 2
+    // flip y if in bottom half of screen
+    const flipY = y > window.innerHeight / 2
+    const xModifier = flipX ? -5 : 5;
+    const yModifier = flipY ? -5 : 5;
     if (typeof data === "string") {
       tooltipContent = unsafeHTML(data);
     } else {
       tooltipContent = data.map(
-        (d) => html`<sp-help-text><b>${d.label}</b>: ${d.value}</sp-help-text>`
+        (d) => html`<div class="tooltip-row">
+          <p><b>${d.label}:</b> ${d.value}</p>
+      </div>`
       );
     }
     return html`<div
       class="tooltipContainer"
-      style="top:${y + 5}px;left:${x + 5}px;"
+      style="
+        top:${y + yModifier}px;
+        left:${x + xModifier}px;
+        transform: translate(${flipX ? "-100%" : "0"}, ${flipY ? "-100%" : "0"});
+      "
     >
       ${tooltipContent}
     </div>`;
