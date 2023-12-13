@@ -1,12 +1,6 @@
 import { template as html } from "../../utils/templateFunction";
 
-import {
-  complaints,
-  dates,
-  raw311,
-  walkAudits,
-  lineData,
-} from "./CSDUtils"
+import { complaints, dates, raw311, walkAudits, lineData } from "./CSDUtils";
 
 export const CirculateSanDiego2 = () => {
   return html`<div style="height:auto; width:100%">

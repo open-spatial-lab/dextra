@@ -21,8 +21,9 @@ import "../components/Tabs/src/Tabs.ts";
 import "../components/marks/Axis/src/Axis.ts";
 
 export default {
-  title: "Projects",
+  title: "Projects"
 };
+
 import {PreventBlindness as _PreventBlindness} from './projects/PreventBlindness'
 import {EECRC as _EECRC} from './projects/EECRC'
 import { CPR as _CPR} from './projects/CPR1';

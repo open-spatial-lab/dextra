@@ -1,12 +1,9 @@
-import { html } from "lit-html";
+import { template as html } from "../../utils/templateFunction";
 import {
   dates,
-  allDatasets,
   allAndLineDataset,
-  congressionalDistricts,
   stateSenateOptions,
   stateAssemblyOptions,
-  countyOptions,
   tractOptions,
   congressionalDistrictOptions,
   lineDataset,
@@ -162,10 +159,7 @@ export const WisconsinTimeSeries = () => {
         </osl-stat>
       </osl-flex-box>
       <div style="height: 60vh; width: 100%;">
-        <osl-plot
-          colorLegend="true"
-          data="${lineDataset}"
-        >
+        <osl-plot colorLegend="true" data="${lineDataset}">
           <osl-line
             x="Date"
             y="total_capacity"
