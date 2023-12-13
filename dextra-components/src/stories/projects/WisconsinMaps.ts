@@ -36,23 +36,23 @@ export const WisconsinMaps = () => {
     <div>
       <osl-tabs>
         <div data-tab="County" style="width:100%; height:80vh">
-          ${makeLayers(countyData, 'NAMELSAD')}
+          ${makeLayers(countyData, 'NAMELSAD', true)}
         </div>
         
         <div data-tab="Census Tract" style="width:100%; height:80vh">
-          ${makeLayers(tractData, 'GEOID')}
+          ${makeLayers(tractData, 'GEOID', true)}
         </div>
         
         <div data-tab="State Senate" style="width:100%; height:80vh">
-          ${makeLayers(stateSenateData, 'SEN2021')}
+          ${makeLayers(stateSenateData, 'SEN2021', true)}
         </div>
         
         <div data-tab="State Assembly" style="width:100%; height:80vh">
-          ${makeLayers(stateAssemblyData, 'ASM2021')}
+          ${makeLayers(stateAssemblyData, 'ASM2021', true)}
         </div>
         
         <div data-tab="Congressional Districts" style="width:100%; height:80vh">
-          ${makeLayers(congressionalDistrictData, 'DISTRICT')}
+          ${makeLayers(congressionalDistrictData, 'DISTRICT', true)}
         </div>
         
   </div>
