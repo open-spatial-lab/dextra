@@ -1,6 +1,6 @@
 {
   "name": "@open-spatial-lab/slider",
-  "version": "0.0.31",
+  "version": "0.0.32",
   "main": "dist/slider.es.js",
   "exports": {
     ".": "./dist/slider.es.js"
