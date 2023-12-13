@@ -29,6 +29,7 @@ import * as StatTable  from "../../components/StatTable/src/StatTable";
 import * as Tabs from "../../components/Tabs/src/Tabs";
 import * as EqGrid from "../../components/EqualSpacingGrid/src/EqualSpacingGrid";
 import * as Stat from "../../components/Stat/src/Stat";
+import * as Modal from "../../components/Modal/src/Modal";
 
 export {
   Chips,
@@ -54,5 +55,6 @@ export {
   FlexBox,
   Tabs,
   EqGrid,
+  Modal,
   Stat
 }

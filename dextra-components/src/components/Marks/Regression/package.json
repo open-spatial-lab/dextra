@@ -1,6 +1,6 @@
 {
   "name": "@open-spatial-lab/regression",
-  "version": "0.0.30",
+  "version": "0.0.31",
   "main": "dist/index.js",
   "exports": {
     ".": "./dist/index.js"

@@ -37,13 +37,20 @@ import { WisconsinFunding as _WisconsinFunding} from "./projects/WisconsinFundin
 import {Equiticity as _Equiticity} from './projects/Equiticity'
 import {m3 as _M3} from './projects/M3'
 import {GWBP1, GWBP2, GWBP3} from './projects/GWBP'
+import { getRenderString } from "./utils.ts";
 
 export const PreventBlindness = () => _PreventBlindness()
 export const EECRC = () => _EECRC();
 export const Equiticity = () => _Equiticity();
 export const CPR1 = () => _CPR();
-export const CPR2 = () => _CPR2();
-export const CPR3 = () => _CPR3();
+// export const CPR2 = () => _CPR2();
+// export const CPR3 = () => _CPR3();
+// console.log('CPR1')
+// console.log(getRenderString(_CPR()))
+// console.log('CPR2')
+// console.log(getRenderString(_CPR2()))
+// console.log('CPR3')
+// console.log(getRenderString(_CPR3()))
 export const CirculateSanDiego = () => _CirculateSanDiego();
 export const CirculateSanDiego2 = () => _CirculateSanDiego2();
 export const CirculateSanDiego3 = () => _CirculateSanDiego3();
