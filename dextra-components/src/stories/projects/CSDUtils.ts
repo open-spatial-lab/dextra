@@ -1,244 +1,223 @@
+import { innerTemplate as html } from "../../utils/templateFunction";
 export const tractJoined =
-  "https://dcoszmf9no5hj.cloudfront.net/data-query/653bfcc7a723810008c2c81e";
-export const months = [
-  "01",
-  "02",
-  "03",
-  "04",
-  "05",
-  "06",
-  "07",
-  "08",
-  "09",
-  "10",
-  "11",
-  "12",
-];
-export const years = ["2016", "2017", "2018", "2019", "2020", "2021", "2022", "2023"];
-export const complaints = [
-  "Other",
-  "Pavement Maintenance",
-  "Traffic Signal Timing",
-  "Encampment",
-  "Street Light Maintenance",
-  "Traffic Signal Issue",
-  "Street Flooded",
-  "Stormwater",
-  "Tree Maintenance",
-  "Pothole",
-  "Parking",
-  "Illegal Dumping",
-  "Graffiti - Public",
-  "Environmental Services Code Compliance",
-  "Missed Collection",
-  "Parks Issue",
-  "Street Sweeping",
-  "Traffic Sign Maintenance",
-  "ROW Maintenance",
-  "Graffiti - Code Enforcement",
-  "Stormwater Code Enforcement",
-  "Sidewalk Repair Issue",
-  "Parking Violation",
-  "Waste on Private Property",
-  "Shared Mobility Device",
-  "Traffic Engineering",
-  "Development Services - Code Enforcement",
-  "Dead Animal",
-  "Vegetation Encroachment",
-  "Trash/Recycling Collection",
-  "Weed Cleanup",
-  "Right-of-Way Code Enforcement",
-];
-export const walkAuditNames = [
-  '"No Riding Bikes on Sidewalk" Sign, but no bike infrastructure',
-  "10 Second Crossing Window",
-  "10 second crossing window",
-  "12th & Imperial Transit Center",
-  "4-Way Stop",
-  "4394 Mayberry St, San Diego, CA 92113, USA",
-  "4853 Bunnell St, San Diego, CA 92113, USA",
-  "4855 Ocean View Blvd, San Diego, CA 92113, USA",
-  "932 Delta St, National City, CA 91950, USA",
-  "Aggressive Drivers",
-  "Audible Crossing",
-  "Audible Pedestrian Crossing Signal",
-  "Audible Pedestrian Signal",
-  "Audible RRFB",
-  "Audible Signal",
-  "Beg Button Obscured",
-  "Bicycle Lane",
-  "Bike Lane",
-  "Bike Lane Starts Here",
-  "Bike Parking",
-  "Bike Rack",
-  "Bike lanes",
-  "Broken Sidewalk",
-  "Broken/Narrow Sidewalks",
-  "Broken/Uneven Sidewalks",
-  "Broken/narrow Sidewalk",
-  "Bus Only Lane",
-  "Cars Parked on Curb",
-  "Cars Roll Stop",
-  "Cars do not yield to pedestrians",
-  "Chicano Park",
-  "Chicano Park Museum and Cultural Center",
-  "Construction",
-  "County Center/Little Italy Station",
-  "Cracked Sidewalk",
-  "Cracked Sidewalks",
-  "Crosswalks",
-  "Curb Extension",
-  "Curb Should be Painted Red",
-  "Cycle Track",
-  "Debris",
-  "Debris on Sidewalk",
-  "Diverters",
-  "Division St & Highland Av, National City, CA 91950, USA",
-  "Drivers Speeding",
-  "Empty Lot",
-  "Euclid Elementary School",
-  "Excess Litter",
-  "Faded Crosswalk",
-  "Faded Crosswalk Paint",
-  "Faded School Crosswalks",
-  "Faded crosswalk",
-  "Faded/ Missing Crosswalks",
-  "Faded/Missing Crosswalk",
-  "Faded/Missing Crosswalks",
-  "Father Joe's",
-  "Father Joe's\xa0",
-  "Flooding",
-  "Flooding Issues",
-  "Former car crash",
-  "Fridge in Curb Ramp",
-  "High Visibility Crosswalk",
-  "Hill",
-  "Insufficient Street Lighting",
-  "Intersection Mural",
-  "Keeler Court Apartments",
-  "Kennedy Neighborhood Park",
-  "Lack of Lighting",
-  "Las Serenas Apartments",
-  "Las Serenas Apartments, Delta Street, San Diego, CA, USA",
-  "Lincoln Senior High School",
-  "Litter",
-  "Little Italy",
-  "Long Light, hard to catch bus",
-  "Long Signals, Short Crossing Windows",
-  "Marriott Marquis San Diego Marina",
-  "Mayberry Street & South 44th Street, San Diego, CA, USA",
-  "Mayberry Townhomes",
-  "Memorial Dog Park",
-  "Mid-Block Crossing",
-  "Midblock Crossing",
-  "Missing Crosswalk",
-  "Missing Crosswalks",
-  "Missing Curb Ramp",
-  "Missing Sidewalk",
-  "Missing/Broken Sidewalks",
-  "Montgomery Middle School",
-  "Mural",
-  "Murals",
-  "Murals/Art",
-  "Narrow Sidewalk",
-  "Narrow Sidewalks",
-  "Narrow/ Broken Sidewalks",
-  "No Audible Pedestrian Crossing Signals",
-  "No Bench or Shade Bus Stop",
-  "No Crossing",
-  "No Crosswalk",
-  "No Crosswalks or Stoppages",
-  "No Crosswalk\xa0",
-  "No Curb Ramp",
-  "No Ramp",
-  "No Ramp or Crosswalk",
-  "No Ramps",
-  "No School Crossing Markings",
-  "No Shade",
-  "No Shade Bus Stop",
-  "No Sidewalk",
-  "No Truncated Domes",
-  "No crosswalk",
-  "Nobel Drive Station",
-  "Not Enough Time to Cross",
-  "Obstruction",
-  "Obstructions/Trash",
-  "Only one crosswalk, no vehicle stoppage",
-  "Overgrown Path",
-  "Pacific Beach Middle School",
-  "Pacific Beach Taylor Branch Library",
-  "Paradise Senior Center",
-  "Parking obscures line of sight during drop off and pick up, teachers would like no parking during x hours signage",
-  "Parklets",
-  "Pedestrian Median",
-  "Pedestrian Refuge Island",
-  "Pedestrian Scale Lighting",
-  "Point 20",
-  "Polk Avenue",
-  "Poor Lighting",
-  "Protected Pedestrian Promenade",
-  "Rapid Flashing Beacon",
-  "Rapid Flashing Beacon (RRFB)",
-  "Route",
-  "San Diego College of Continuing Education",
-  "San Diego Convention Center",
-  "Santa Fe Depot",
-  "School Entrance",
-  "Seaport Village",
-  "Separated Bike Lane",
-  "Shade",
-  "Shaded Sidewalk",
-  "Sharrow",
-  "Sheltered Bus Stop",
-  "Short Crossing Signal",
-  "Short Crossing Time",
-  "Sidewalk Obstruction",
-  "Sidewalk Obstructions",
-  "Speed Bump",
-  "Speeding Cars",
-  "Speeding Vehicles",
-  "St. Rita's Catholic School",
-  "Starting Point",
-  "Teralta Park",
-  "Traffic lights malfuctioning",
-  "Trash",
-  "Trash\xa0",
-  "Tree Cover, Wide Sidewalks",
-  "Trees",
-  "Trees/ Shade",
-  "Trees/Shade",
-  "Uneven Sidewalk",
-  "Uneven Sidewalks",
-  "University Avenue",
-  "Unusable Sidewalk",
-  "Walk Audit Route",
-  "Walk Audit Start Location",
-  "Walking Route",
-  "Walking route",
-  "Waterfront Park",
-  "Wayfinding Sign",
-  "Weeds and Graffiti",
-  "Wide Sidewalk",
-  "Wide Sidewalks",
-  "Witnessed Jaywalking",
-  "Yellow Crosswalk",
-  "Zebra Crosswalks",
-];
-
-export const dates = (() => {
-  let dates: string[] = [];
-  years.forEach((year) => {
-    months.forEach((month) => {
-      dates.push(`${year}-${month}`);
-    });
-  });
-  return dates;
-})();
-
+  "https://dcoszmf9no5hj.cloudfront.net/data-query/657cbb22b1dd2900083e1194";
+export const zipJoined = "https://dcoszmf9no5hj.cloudfront.net/data-query/657cbfdc4e9cef0008f1bfe1"
 export const raw311 =
   "https://dcoszmf9no5hj.cloudfront.net/data-query/653be6b05ff01600085e5eef";
 export const walkAudits =
-  "https://dcoszmf9no5hj.cloudfront.net/data-query/653bf1235ecf29000896210d";
+  "https://dcoszmf9no5hj.cloudfront.net/data-query/657a2f5c898e0a0008358b11";
 
 export const lineData =
   "https://dcoszmf9no5hj.cloudfront.net/data-query/653bf6dbc5ea2b0008cd63c0";
+
+export const summary311 =
+  "https://dcoszmf9no5hj.cloudfront.net/data-query/657b69306628570008f282f6";
+
+export const complaintsOptions = {
+  url: "https://dcoszmf9no5hj.cloudfront.net/data-query/657a34763429c300089e1592",
+  column: "service_name",
+};
+export const specificComplaintOptions = {
+  url: "https://dcoszmf9no5hj.cloudfront.net/data-query/657b5a101c31230008e5d1ea",
+  column: "service_name_detail",
+};
+
+export const walkAuditOptions = {
+  url: "https://dcoszmf9no5hj.cloudfront.net/data-query/657a2f8d898e0a0008358b12",
+  column: "New Issue Name",
+};
+
+export const year311Options = {
+  url: "https://dcoszmf9no5hj.cloudfront.net/data-query/657b259a0315ac0008d98571",
+  column: "year",
+};
+
+export const monthyear311Options = {
+  url: "https://dcoszmf9no5hj.cloudfront.net/data-query/657b25bb0315ac0008d98572",
+  column: "month",
+};
+
+export const zipCodeOptions = {
+  url: "https://dcoszmf9no5hj.cloudfront.net/data-query/657b62b86628570008f282f2",
+  column: "ZIP_CODE",
+};
+
+export const districtOptions = {
+  url: "https://dcoszmf9no5hj.cloudfront.net/data-query/657b65816628570008f282f3",
+  column: "district",
+};
+
+export const cpCodeOptions = {
+  url: "https://dcoszmf9no5hj.cloudfront.net/data-query/657b65c96628570008f282f4",
+  column: "cpcode",
+};
+
+type FilterData = {
+  monthDataToFilter: string[];
+  yearDataToFilter: string[];
+  complatintOptionsToFilter: string[];
+  serviceDetailOptionsToFilter: string[];
+  zipcodeDataToFilter: string[];
+  cpcodeDataToFilter: string[];
+  districtDataToFilter: string[];
+  showWalkAuditFilter?: boolean;
+};
+export const filterRow = (filterData: FilterData) => {
+  const {
+    monthDataToFilter,
+    yearDataToFilter,
+    complatintOptionsToFilter,
+    serviceDetailOptionsToFilter,
+    zipcodeDataToFilter,
+    cpcodeDataToFilter,
+    districtDataToFilter,
+    showWalkAuditFilter = false,
+  } = filterData;
+
+  return html` <div style="padding-bottom:30px;">
+      <osl-eq-grid breakpoint="md">
+        <div>
+          <osl-eq-grid breakpoint="md">
+            <osl-select-control
+              data=${JSON.stringify(monthDataToFilter)}
+              option="month"
+              optionsData="${monthyear311Options.url}"
+              optionsDataValueColumn="${monthyear311Options.column}"
+              title="311 Complaints Month"
+              initialValue="*"
+              multipleSelect
+            ></osl-select-control>
+            <osl-select-control
+              data=${JSON.stringify(yearDataToFilter)}
+              option="year"
+              optionsData="${year311Options.url}"
+              optionsDataValueColumn="${year311Options.column}"
+              title="311 Complaints Year"
+              initialValue="2023"
+              multipleSelect
+            ></osl-select-control>
+          </osl-eq-grid>
+        </div>
+        <div>
+          <osl-select-control
+            data=${JSON.stringify(complatintOptionsToFilter)}
+            option="service"
+            optionsData="${complaintsOptions.url}"
+            optionsDataValueColumn="${complaintsOptions.column}"
+            title="311 Complaints Type"
+            initialValue="${JSON.stringify([
+              "Bicycle-Related Issue",
+              "Parking Violation",
+              "Sidewalk Repair Issue",
+              "Street Light Maintenance",
+              "Traffic Engineering",
+              "Vegetation Encroachment",
+            ])}"
+            showAny
+          ></osl-select-control>
+          <osl-select-control
+            data=${JSON.stringify(serviceDetailOptionsToFilter)}
+            option="servicedetail"
+            optionsData="${specificComplaintOptions.url}"
+            optionsDataValueColumn="${specificComplaintOptions.column}"
+            title="Detailed 311 Complaints Type"
+            initialValue="*"
+            showAny
+          ></osl-select-control>
+          ${showWalkAuditFilter
+            ? html`<osl-select-control
+                data=${JSON.stringify([walkAudits])}
+                option="walkaudit_name"
+                optionsData="${walkAuditOptions.url}"
+                optionsDataValueColumn="${walkAuditOptions.column}"
+                title="Walk Audit Issue Type"
+                showAny
+              ></osl-select-control>`
+            : ""}
+        </div>
+        <div>
+          <osl-chips
+            data=${JSON.stringify(zipcodeDataToFilter)}
+            option="zip"
+            optionsData="${zipCodeOptions.url}"
+            optionsDataValueColumn="${zipCodeOptions.column}"
+            title="Zip Code"
+            initialValue="*"
+            showAny
+            multipleSelect
+          ></osl-chips>
+          <osl-eq-grid breakpoint="md">
+            <div>
+              <osl-select-control
+                data=${JSON.stringify(districtDataToFilter)}
+                option="district"
+                optionsData="${districtOptions.url}"
+                optionsDataValueColumn="${districtOptions.column}"
+                title="District"
+                initialValue="*"
+                showAny
+              ></osl-select-control>
+            </div>
+            <div>
+              <osl-select-control
+                data=${JSON.stringify(cpcodeDataToFilter)}
+                option="cpcode"
+                optionsData="${cpCodeOptions.url}"
+                optionsDataValueColumn="${cpCodeOptions.column}"
+                title="CP Code"
+                initialValue="*"
+                showAny
+              ></osl-select-control>
+            </div>
+          </osl-eq-grid>
+        </div>
+      </osl-eq-grid>
+    </div>
+    &nbsp;`;
+};
+
+export const keyStatBlock = () => {
+  return html`
+    &nbsp;
+    <div>
+      <osl-eq-grid breakpoint="xl">
+        <osl-stat
+          data=${summary311}
+          title="Bicycle-Related Issues"
+          property="Bicycle-Related Issue"
+        ></osl-stat>
+        <osl-stat
+          data=${summary311}
+          title="Parking Violations"
+          property="Parking Violation"
+        ></osl-stat>
+        <osl-stat
+          data=${summary311}
+          title="Sidewalk Repair Issues"
+          property="Sidewalk Repair Issue"
+        ></osl-stat>
+      </osl-eq-grid>
+    </div>
+    &nbsp;
+    <div>
+      <osl-eq-grid breakpoint="xl">
+        <osl-stat
+          data=${summary311}
+          title="Street Light Maintenance"
+          property="Street Light Maintenance"
+        ></osl-stat>
+        <osl-stat
+          data=${summary311}
+          title="Traffic Engineering"
+          property="Traffic Engineering"
+        ></osl-stat>
+        <osl-stat
+          data=${summary311}
+          title="Vegetation Encroachment"
+          property="Vegetation Encroachment"
+        ></osl-stat>
+      </osl-eq-grid>
+    </div>
+    &nbsp;
+  `;
+};

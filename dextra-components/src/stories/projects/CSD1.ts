@@ -1,35 +1,31 @@
 import { template as html } from "../../utils/templateFunction";
 
-import { months, years, complaints, raw311, walkAudits } from "./CSDUtils";
+import {
+  raw311,
+  walkAudits,
+  specificComplaintOptions,
+  filterRow,
+  keyStatBlock,
+} from "./CSDUtils";
 
 export const CirculateSanDiego = () => {
-  let dates: string[] = [];
-  years.forEach((year) => {
-    months.forEach((month) => {
-      dates.push(`${year}-${month}`);
-    });
-  });
-
   return html`
-<div style="height:auto; width:100%">
-  <osl-flex-box breakpoint="md">
-    <osl-select-control
-        data=${JSON.stringify([raw311])}
-        option="month"
-        options=${JSON.stringify(dates)}
-        title="311 Complaints Month"
-        initialValue="2023-01"
-    ></osl-select-control>
-    <osl-select-control
-        data=${JSON.stringify([raw311])}
-        option="service"
-        options=${JSON.stringify(complaints)}
-        title="311 Complaints Type"
-        initialValue="*"
-    ></osl-select-control>
-  </osl-flex-box>
-  <br/><br/>
-  <osl-flex-box breakpoint="xl">
+  <div style="position:relative;height:fit-content;">
+  <div>
+${filterRow({
+  monthDataToFilter: [raw311],
+  yearDataToFilter: [raw311],
+  complatintOptionsToFilter: [raw311, specificComplaintOptions.url],
+  serviceDetailOptionsToFilter: [raw311],
+  zipcodeDataToFilter: [raw311, walkAudits],
+  cpcodeDataToFilter: [raw311, walkAudits],
+  districtDataToFilter: [raw311, walkAudits],
+})}
+</div>
+<hr style="margin:2rem 0 1rem 0"/>
+  ${keyStatBlock()}
+  </div>
+  <osl-eq-grid breakpoint="xl" style="position:relative">
     <div style="height:80vh">
       <osl-glmap 
         mapGroup="1"
@@ -38,6 +34,7 @@ export const CirculateSanDiego = () => {
         showNavigation='true'
         center="[-117.2,32.7]"
         zoom="11"
+        multipleSelect
         >
         <osl-map-layer
           layer="circle"
@@ -49,7 +46,7 @@ export const CirculateSanDiego = () => {
           legendtitle="Walk Audits"
           visible="true"
           colorscheme="d3-sinebow"
-          circleRadius="30"
+          staticRadius="30"
           dataColumn="site"
           pointRadiusMaxPixels="10"
           pointRadiusMinPixels="2"
@@ -77,17 +74,16 @@ export const CirculateSanDiego = () => {
           legendtitle="311 Complaints by Type"
           visible="true"
           colorscheme="d3-turbo"
-          circleRadius="30"
+          staticRadius="30"
           dataColumn="service_name"
           pointRadiusMaxPixels="10"
           pointRadiusMinPixels="2"
+          multipleSelect
         >
         </osl-map-layer>
 
         
 </osl-glmap>
-</osl-flex-box>
-    </div>
-  </div>
+</osl-eq-grid>
   `;
 };
