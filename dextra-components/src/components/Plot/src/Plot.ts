@@ -21,7 +21,6 @@ export class OslPlot extends OslData {
         position: relative;
         svg {
           width: 100%;
-          max-height: ${(this as any).containerHeight || 200}px;
         }
       }
     `;
@@ -175,7 +174,7 @@ export class OslPlot extends OslData {
     return plot;
   }
   template() {
-    return html` <div class="container">${this.plot()}</div> `;
+    return html` <div class="container" style="height:${this.containerHeight}px; width:${this.containerWidth}px;">${this.plot()}</div> `;
   }
   updateContainerSize() {
     const container = this.shadowRoot?.querySelector("div");
