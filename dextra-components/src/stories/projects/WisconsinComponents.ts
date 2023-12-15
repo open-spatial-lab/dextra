@@ -1,4 +1,4 @@
-import { template as html } from "../../utils/templateFunction";
+import { innerTemplate as html } from "../../utils/templateFunction";
 import { providerLocations } from "./WisconsinUtils";
 
 const tooltipSpec = (idCol: String) =>
@@ -80,7 +80,7 @@ export const makeLayers = (data: string, idCol: String) => {
         beforeId="water"
         method="QNT"
         geoId="${idCol}"
-        tooltips="${tooltipSpec(idCol)}"
+        tooltips='${tooltipSpec(idCol)}'
       ></osl-map-layer>
       <osl-map-layer
         staticStroke="[255,255,255]"
@@ -100,7 +100,7 @@ export const makeLayers = (data: string, idCol: String) => {
         beforeId="water"
         method="QNT"
         geoId="${idCol}"
-        tooltips="${tooltipSpec(idCol)}"
+        tooltips='${tooltipSpec(idCol)}'
       ></osl-map-layer>
       <osl-map-layer
         staticStroke="[255,255,255]"
@@ -119,7 +119,7 @@ export const makeLayers = (data: string, idCol: String) => {
         beforeId="water"
         method="QNT"
         geoId="${idCol}"
-        tooltips="${tooltipSpec(idCol)}"
+        tooltips='${tooltipSpec(idCol)}'
       ></osl-map-layer>
       <osl-map-layer
         staticStroke="[255,255,255]"
@@ -138,7 +138,7 @@ export const makeLayers = (data: string, idCol: String) => {
         beforeId="water"
         method="QNT"
         geoId="${idCol}"
-        tooltips="${tooltipSpec(idCol)}"
+        tooltips='${tooltipSpec(idCol)}'
       ></osl-map-layer>
       <osl-map-layer
         staticStroke="[255,255,255]"
@@ -158,7 +158,7 @@ export const makeLayers = (data: string, idCol: String) => {
         beforeId="water"
         method="QNT"
         geoId="${idCol}"
-        tooltips="${tooltipSpec(idCol)}"
+        tooltips='${tooltipSpec(idCol)}'
       ></osl-map-layer>
       <osl-map-layer
         staticStroke="[255,255,255]"
@@ -179,7 +179,7 @@ export const makeLayers = (data: string, idCol: String) => {
         beforeId="water"
         method="QNT"
         geoId="${idCol}"
-        tooltips="${tooltipSpec(idCol)}"
+        tooltips='${tooltipSpec(idCol)}'
       ></osl-map-layer>
       <osl-map-layer
         staticStroke="[255,255,255]"
@@ -199,7 +199,7 @@ export const makeLayers = (data: string, idCol: String) => {
         beforeId="water"
         method="QNT"
         geoId="${idCol}"
-        tooltips="${tooltipSpec(idCol)}"
+        tooltips='${tooltipSpec(idCol)}'
       ></osl-map-layer>
       <osl-map-layer
         staticStroke="[255,255,255]"
@@ -219,7 +219,7 @@ export const makeLayers = (data: string, idCol: String) => {
         beforeId="water"
         method="QNT"
         geoId="${idCol}"
-        tooltips="${tooltipSpec(idCol)}"
+        tooltips='${tooltipSpec(idCol)}'
       ></osl-map-layer>
       <osl-map-layer
         staticStroke="[255,255,255]"
@@ -240,7 +240,7 @@ export const makeLayers = (data: string, idCol: String) => {
         beforeId="water"
         method="QNT"
         geoId="${idCol}"
-        tooltips="${tooltipSpec(idCol)}"
+        tooltips='${tooltipSpec(idCol)}'
       ></osl-map-layer>
       <osl-map-layer
         staticStroke="[255,255,255]"
@@ -261,7 +261,7 @@ export const makeLayers = (data: string, idCol: String) => {
         beforeId="water"
         method="QNT"
         geoId="${idCol}"
-        tooltips="${tooltipSpec(idCol)}"
+        tooltips='${tooltipSpec(idCol)}'
       ></osl-map-layer>
 
       <osl-map-layer
