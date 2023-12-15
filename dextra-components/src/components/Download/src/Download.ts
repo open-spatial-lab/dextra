@@ -7,6 +7,7 @@ import "@spectrum-web-components/action-group/sp-action-group.js";
 import "@spectrum-web-components/tooltip/sp-tooltip.js";
 import { property } from "lit/decorators.js";
 import { interpretFuncJsonOrString } from "../../core/utils/converters";
+import { nonReactiveStore } from "../../core/state/Store";
 
 const helpText = {
   json: "Download the data in JSON format (Web)",
@@ -14,6 +15,7 @@ const helpText = {
   tsv: "Download the data in TSV format (Tab Separated Values)",
   markdown: "Download the data in Markdown format",
   text: "Download the data in Text format",
+  geojson: "Download the data in GeoJSON format",
 } as const;
 type FORMATS = keyof typeof helpText;
 const formats = Object.keys(helpText) as FORMATS[];
@@ -30,6 +32,8 @@ export class OslDownload extends OslData {
   text: boolean = false;
   @property({ type: Boolean })
   tsv: boolean = false;
+  @property({ type: Boolean })
+  geojson: boolean = false;
   @property({ type: String })
   size: string = "s";
   @property({ type: String })
@@ -69,6 +73,28 @@ export class OslDownload extends OslData {
         const data = JSON.stringify(this.currentResults);
         blob = new Blob([data], { type: "application/json" });
         link.download = `${this.filename}${suffixes}.json`;
+        break;
+      }
+      case "geojson": {
+        const keys = Object.keys(nonReactiveStore[this.data])
+        const dataKey = keys.find(key => key.includes("geo") && key.includes(this.currentParametersHash))
+        if (!dataKey) {
+          alert("Sorry, this data cannot be downloaded as GeoJSON. Please reload the page and try again.")
+          return;
+        }
+        const data = JSON.stringify({
+          type: "FeatureCollection",
+          // projection 4326
+          crs: {
+            type: "name",
+            properties: {
+              name: "EPSG:4326",
+            },
+          },
+          features: nonReactiveStore[this.data][dataKey],
+        })
+        blob = new Blob([data], { type: "application/json" });
+        link.download = `${this.filename}${suffixes}.geojson`;
         break;
       }
       case "csv": {
