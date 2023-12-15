@@ -92,12 +92,12 @@ ${filterRow({
   <osl-download
                   title="Download Get It Done (311) Data"
                   filename="311-get-it-done"
-                  parameterSuffixes="${JSON.stringify([
+                  parameterSuffixes=${JSON.stringify([
                     "month",
                     "year",
                     "service",
                     "servicedetail"
-                  ])}"
+                  ])}
                   geojson
                   data=${raw311}
                 ></osl-download></div>

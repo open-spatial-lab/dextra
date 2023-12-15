@@ -79,7 +79,7 @@ export const filterRow = (filterData: FilterData) => {
         <div>
           <osl-eq-grid breakpoint="md">
             <osl-select-control
-              data=${JSON.stringify(monthDataToFilter)}
+              data='${JSON.stringify(monthDataToFilter)}'
               option="month"
               optionsData="${monthyear311Options.url}"
               optionsDataValueColumn="${monthyear311Options.column}"
@@ -88,7 +88,7 @@ export const filterRow = (filterData: FilterData) => {
               multipleSelect
             ></osl-select-control>
             <osl-select-control
-              data=${JSON.stringify(yearDataToFilter)}
+              data='${JSON.stringify(yearDataToFilter)}'
               option="year"
               optionsData="${year311Options.url}"
               optionsDataValueColumn="${year311Options.column}"
@@ -100,23 +100,23 @@ export const filterRow = (filterData: FilterData) => {
         </div>
         <div>
           <osl-select-control
-            data=${JSON.stringify(complatintOptionsToFilter)}
+            data='${JSON.stringify(complatintOptionsToFilter)}'
             option="service"
             optionsData="${complaintsOptions.url}"
             optionsDataValueColumn="${complaintsOptions.column}"
             title="311 Complaints Type"
-            initialValue="${JSON.stringify([
+            initialValue='${JSON.stringify([
               "Bicycle-Related Issue",
               "Parking Violation",
               "Sidewalk Repair Issue",
               "Street Light Maintenance",
               "Traffic Engineering",
               "Vegetation Encroachment",
-            ])}"
+            ])}'
             showAny
           ></osl-select-control>
           <osl-select-control
-            data=${JSON.stringify(serviceDetailOptionsToFilter)}
+            data='${JSON.stringify(serviceDetailOptionsToFilter)}'
             option="servicedetail"
             optionsData="${specificComplaintOptions.url}"
             optionsDataValueColumn="${specificComplaintOptions.column}"
@@ -126,7 +126,7 @@ export const filterRow = (filterData: FilterData) => {
           ></osl-select-control>
           ${showWalkAuditFilter
             ? html`<osl-select-control
-                data=${JSON.stringify([walkAudits])}
+                data='${JSON.stringify([walkAudits])}'
                 option="walkaudit_name"
                 optionsData="${walkAuditOptions.url}"
                 optionsDataValueColumn="${walkAuditOptions.column}"
@@ -137,7 +137,7 @@ export const filterRow = (filterData: FilterData) => {
         </div>
         <div>
           <osl-chips
-            data=${JSON.stringify(zipcodeDataToFilter)}
+            data='${JSON.stringify(zipcodeDataToFilter)}'
             option="zip"
             optionsData="${zipCodeOptions.url}"
             optionsDataValueColumn="${zipCodeOptions.column}"
@@ -149,7 +149,7 @@ export const filterRow = (filterData: FilterData) => {
           <osl-eq-grid breakpoint="md">
             <div>
               <osl-select-control
-                data=${JSON.stringify(districtDataToFilter)}
+                data='${JSON.stringify(districtDataToFilter)}'
                 option="district"
                 optionsData="${districtOptions.url}"
                 optionsDataValueColumn="${districtOptions.column}"
@@ -160,7 +160,7 @@ export const filterRow = (filterData: FilterData) => {
             </div>
             <div>
               <osl-select-control
-                data=${JSON.stringify(cpcodeDataToFilter)}
+                data='${JSON.stringify(cpcodeDataToFilter)}'
                 option="cpcode"
                 optionsData="${cpCodeOptions.url}"
                 optionsDataValueColumn="${cpCodeOptions.column}"
@@ -182,17 +182,17 @@ export const keyStatBlock = () => {
     <div>
       <osl-eq-grid breakpoint="xl">
         <osl-stat
-          data=${summary311}
+          data='${summary311}'
           title="Bicycle-Related Issues"
           property="Bicycle-Related Issue"
         ></osl-stat>
         <osl-stat
-          data=${summary311}
+          data='${summary311}'
           title="Parking Violations"
           property="Parking Violation"
         ></osl-stat>
         <osl-stat
-          data=${summary311}
+          data='${summary311}'
           title="Sidewalk Repair Issues"
           property="Sidewalk Repair Issue"
         ></osl-stat>
@@ -202,17 +202,17 @@ export const keyStatBlock = () => {
     <div>
       <osl-eq-grid breakpoint="xl">
         <osl-stat
-          data=${summary311}
+          data='${summary311}'
           title="Street Light Maintenance"
           property="Street Light Maintenance"
         ></osl-stat>
         <osl-stat
-          data=${summary311}
+          data='${summary311}'
           title="Traffic Engineering"
           property="Traffic Engineering"
         ></osl-stat>
         <osl-stat
-          data=${summary311}
+          data='${summary311}'
           title="Vegetation Encroachment"
           property="Vegetation Encroachment"
         ></osl-stat>

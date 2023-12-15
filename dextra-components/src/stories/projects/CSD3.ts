@@ -263,7 +263,7 @@ ${filterRow({
       </osl-glmap>
     </div>
   </div>
-  </div
+</div>
 </osl-tabs>
 </div>
   `;
