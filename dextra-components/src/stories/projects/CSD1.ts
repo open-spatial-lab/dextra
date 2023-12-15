@@ -38,7 +38,7 @@ ${filterRow({
         >
         <osl-map-layer
           layer="circle"
-          data=${walkAudits}
+          data="${walkAudits}"
           geoColumn="geometry"
           type="categorical"
           staticColor="[255,0,0]"
@@ -66,7 +66,7 @@ ${filterRow({
 
 <osl-map-layer
           layer="circle"
-          data=${raw311}
+          data="${raw311}"
           geoColumn="geometry"
           type="categorical"
           staticColor="[255,0,0]"

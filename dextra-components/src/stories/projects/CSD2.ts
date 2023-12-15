@@ -22,7 +22,7 @@ ${filterRow({
     <div style="height:400vh;width:100%;">
       <osl-plot
         colorLegend="true" 
-        data=${lineData}
+        data="${lineData}"
         marginRight="150"
         >
         <osl-line 
@@ -46,7 +46,7 @@ ${filterRow({
       >
         <osl-map-layer
           layer="circle"
-          data=${raw311}
+          data="${raw311}"
           geoColumn="geometry"
           type="categorical"
           staticColor="[255,0,0]"
@@ -62,7 +62,7 @@ ${filterRow({
         </osl-map-layer>
       <osl-map-layer
           layer="circle"
-          data=${walkAudits}
+          data="${walkAudits}"
           geoColumn="geometry"
           type="categorical"
           staticColor="[255,0,0]"
@@ -86,7 +86,7 @@ ${filterRow({
 <h3>311 Complaints table</h3>
 <osl-data-table
   pagination="true"
-  data=${raw311}
+  data="${raw311}"
   columns='["service_name", "service_name_detail", "public_description", "street_address", "date", "status"]'
 ></osl-data-table>
   <br/>
@@ -95,7 +95,7 @@ ${filterRow({
   <h3>Walk Audits Table</h3>
 <osl-data-table
   pagination="true"
-  data=${walkAudits}
+  data="${walkAudits}"
   columns='["Name", "site", "Description"]'
 ></osl-data-table>
   `;
