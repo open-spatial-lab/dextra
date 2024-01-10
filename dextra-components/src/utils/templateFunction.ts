@@ -1,6 +1,6 @@
 import { html } from "lit";
 
-const USE_STATIC_OUTPUT = false;
+const USE_STATIC_OUTPUT = true;
 
 // @ts-ignore
 function simpleHtmlTemplate(strings, ...values) {

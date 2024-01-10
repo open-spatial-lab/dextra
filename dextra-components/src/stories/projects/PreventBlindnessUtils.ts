@@ -115,30 +115,30 @@ export const specialties = [
   },
   { value: "%156FX1900X%", label: "- Orthoptist" },
 ];
-export const countyStatTable = JSON.stringify([
+export const countyStatTable = `'${JSON.stringify([
   "providers_per_100k",
   "providers_count",
   "Vision Difficulty Rate",
   "Percent Without Health Insurance",
   "Percent Less than High School",
   "Total Population",
-]);
-export const zipStatTable = JSON.stringify([
+])}'`
+export const zipStatTable = `'${JSON.stringify([
   "Providers Per 100k",
   "providers_count",
   "Vision Difficulty Rate",
   "Percent Without Health Insurance",
   "Percent Less than High School",
   "Total Population",
-]);
-export const congressStatTable = JSON.stringify([
+])}'`
+export const congressStatTable = `'${JSON.stringify([
   "Providers Per 100k",
   "providers_count",
   "Vision Difficulty Rate",
   "Percent Without Health Insurance",
   "Percent Less than High School",
   "Total Population",
-]);
+])}'`
 export const countyData =
   "https://d36q6zt0rhsb35.cloudfront.net/data-query/655e3148b52ed80008d79518";
 export const zipData =
@@ -147,17 +147,16 @@ export const CongressionalDistrictData =
   "https://d36q6zt0rhsb35.cloudfront.net/data-query/655d301777b38300088750c7";
 export const visionProvidersData =
   "https://d36q6zt0rhsb35.cloudfront.net/data-query/65303831181b4500089e4fe6";
-
 export const fqhcData = "https://d36q6zt0rhsb35.cloudfront.net/data-query/65666e47e8daf40008705c87"
-export const allDatasets = JSON.stringify([
+export const allDatasets = `'${JSON.stringify([
   countyData,
   zipData,
   CongressionalDistrictData,
   visionProvidersData,
   fqhcData
-]);
+])}'`
 
-export const tableColumns = JSON.stringify([
+export const tableColumns = `'${JSON.stringify([
   "NPI",
   "Provider First Name",
   "Provider Last Name (Legal Name)",
@@ -168,9 +167,9 @@ export const tableColumns = JSON.stringify([
   "Congressional District GEOID",
   "Zip Code (ZCTA)",
   "County GEOID",
-]);
+])}'`
 
-export const tooltipSpec = JSON.stringify([
+export const tooltipSpec = `'${JSON.stringify([
   {
     column: "NAME",
     label: "County",
@@ -198,4 +197,4 @@ export const tooltipSpec = JSON.stringify([
     column: "Percent Without Health Insurance",
     format: "percent",
   },
-]);
+])}'`

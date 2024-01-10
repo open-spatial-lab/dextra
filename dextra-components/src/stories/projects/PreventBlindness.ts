@@ -12,6 +12,7 @@ import {
   countyStatTable,
   congressStatTable,
   zipStatTable,
+  fqhcData,
 } from "./PreventBlindnessUtils";
 
 export const PreventBlindness = () => {
@@ -58,13 +59,13 @@ export const PreventBlindness = () => {
         <osl-select-control
           data=${allDatasets}
           option="state"
-          options=${JSON.stringify(abbrs)}
+          options='${JSON.stringify(abbrs)}'
           title="Filter by state"
           initialValue="IL"
         ></osl-select-control>
 
       <osl-checkbox
-          options=${JSON.stringify(specialties)}
+          options='${JSON.stringify(specialties)}'
           title="Choose a specialty or subspecialty"
           option="taxonomy"
           data=${allDatasets}
@@ -207,6 +208,24 @@ export const PreventBlindness = () => {
           tooltips=${tooltipSpec}
           >
           </osl-map-layer>
+          <osl-map-layer
+            legendTitle="FQHC and Look Alikes"
+            visible="true"
+            filled="true"
+            geoType="WKB"
+            geoColumn="geometry"
+            layer="point"
+            type="static"
+            staticFill="[40,40,40]"
+            data="${fqhcData}"
+            pointRadiusMinPixels="2"
+            pointRadiusMaxPixels="15"
+            pointRadiusScale="100"
+            pointRadiusUnits="meters"
+            getPointRadius="100"
+            fixed="true"
+            attribution="HHS National Provider Identifier (2023)"
+          ></osl-map-layer>
         </osl-glmap>
       </div>
 
@@ -217,22 +236,22 @@ export const PreventBlindness = () => {
               suffixParam="state"
               data=${countyData}
               columns=${countyStatTable}
-              columnNames=${JSON.stringify([
+              columnNames='${JSON.stringify([
                 "Providers Per 100k",
                 "Total Providers",
                 "Percent with Vision Difficulty",
                 "Percent Without Health Insurance",
                 "Percent Less than High School Education at Age 25",
                 "Total Population",
-              ])}
-              columnFormats=${JSON.stringify([
+              ])}'
+              columnFormats='${JSON.stringify([
                 "nice",
                 "nice",
                 "percent",
                 "percent",
                 "percent",
                 "nice",
-              ])}
+              ])}'
             ></osl-stat-table>
         </div>
       </div>
@@ -371,6 +390,42 @@ export const PreventBlindness = () => {
           tooltips=${tooltipSpec}
           >
           </osl-map-layer>
+          <osl-map-layer
+            legendTitle="FQHC and Look Alikes"
+            visible="true"
+            filled="true"
+            geoType="WKB"
+            geoColumn="geometry"
+            layer="point"
+            type="static"
+            staticFill="[40,40,40]"
+            data="${fqhcData}"
+            pointRadiusMinPixels="2"
+            pointRadiusMaxPixels="15"
+            pointRadiusScale="100"
+            pointRadiusUnits="meters"
+            getPointRadius="100"
+            fixed="true"
+            attribution="HHS National Provider Identifier (2023)"
+          ></osl-map-layer>
+          <osl-map-layer
+            legendTitle="FQHC and Look Alikes"
+            visible="true"
+            filled="true"
+            geoType="WKB"
+            geoColumn="geometry"
+            layer="point"
+            type="static"
+            staticFill="[40,40,40]"
+            data="${fqhcData}"
+            pointRadiusMinPixels="2"
+            pointRadiusMaxPixels="15"
+            pointRadiusScale="100"
+            pointRadiusUnits="meters"
+            getPointRadius="100"
+            fixed="true"
+            attribution="HHS National Provider Identifier (2023)"
+          ></osl-map-layer>
         </osl-glmap>
       </div>
 
@@ -381,22 +436,22 @@ export const PreventBlindness = () => {
               suffixParam="state"
               data=${CongressionalDistrictData}
               columns=${congressStatTable}
-              columnNames=${JSON.stringify([
+              columnNames='${JSON.stringify([
                 "Providers Per 100k",
                 "Total Providers",
                 "Percent with Vision Difficulty",
                 "Percent Without Health Insurance",
                 "Percent Less than High School Education at Age 25",
                 "Total Population",
-              ])}
-              columnFormats=${JSON.stringify([
+              ])}'
+              columnFormats='${JSON.stringify([
                 "nice",
                 "nice",
                 "percent",
                 "percent",
                 "percent",
                 "nice",
-              ])}
+              ])}'
             ></osl-stat-table>
         </div>
       </div>
@@ -544,22 +599,22 @@ export const PreventBlindness = () => {
               suffixParam="state"
               data=${zipData}
               columns=${zipStatTable}
-              columnNames=${JSON.stringify([
+              columnNames='${JSON.stringify([
                 "Providers Per 100k",
                 "Total Providers",
                 "Percent with Vision Difficulty",
                 "Percent Without Health Insurance",
                 "Percent Less than High School Education at Age 25",
                 "Total Population",
-              ])}
-              columnFormats=${JSON.stringify([
+              ])}'
+              columnFormats='${JSON.stringify([
                 "nice",
                 "nice",
                 "percent",
                 "percent",
                 "percent",
                 "nice",
-              ])}
+              ])}'
             ></osl-stat-table>
         </div>
       </div>
@@ -586,13 +641,13 @@ export const PreventBlindness = () => {
               <osl-download
                 title="Download County Summary Data"
                 filename="counties-summary"
-                parameterSuffixes=${JSON.stringify(["state", "taxonomy"])}
+                parameterSuffixes='${JSON.stringify(["state", "taxonomy"])}'
                 data=${countyData}
                 ></osl-download>
                 <osl-download
                 title="Download All Providers"
                 filename="vision-providers"
-                parameterSuffixes=${JSON.stringify(["state", "taxonomy"])}
+                parameterSuffixes='${JSON.stringify(["state", "taxonomy"])}'
                 data=${countyData}
                 ></osl-download>
             </div></div>
