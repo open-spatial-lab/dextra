@@ -41,7 +41,10 @@ export const interpretFuncJsonOrString = (value: string | null, _type: unknown) 
     }
   }
   try {
-    return JSON.parse(value);
+    const quoteStrings = ["'", '"']
+    const hasInnerQuotes = typeof value === "string" && (quoteStrings.includes(value[0]) && quoteStrings.includes(value[value.length - 1]))
+    const valueString = hasInnerQuotes ? value.slice(1, -1) : value;
+    return JSON.parse(valueString);
   } catch (e) {
     return value;
   }
