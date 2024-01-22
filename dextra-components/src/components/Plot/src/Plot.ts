@@ -179,9 +179,13 @@ export class OslPlot extends OslData {
   updateContainerSize() {
     const container = this.shadowRoot?.querySelector("div");
     if (container) {
-      this.containerWidth = container.clientWidth;
-      this.containerHeight = container.clientHeight;
-      this.requestUpdate();
+      const width = container.clientWidth;
+      const height = container.clientHeight;
+      if ((height + width) > 0){
+        this.containerHeight = height;
+        this.containerWidth = width;
+        this.requestUpdate();
+      } 
     }
   }
   
