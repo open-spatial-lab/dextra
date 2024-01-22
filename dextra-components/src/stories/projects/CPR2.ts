@@ -36,7 +36,7 @@ export const CPR2 = () => {
                 each Area and various demographic characteristics from the US
                 Census American Community Survey. The color scale in the legend
                 show the ranges of the values based on quantile breaks
-                (septile).
+                (quintile).
                 <br /><br />
                 To change the scale from census tracts or zip codes, or change
                 the demographic data displayed, click the layer icon on the
@@ -107,7 +107,7 @@ export const CPR2 = () => {
       <br />
       <div style="height:60vh;">
         <osl-tabs>
-          <div data-tab="Census Tracts" style="width:100%">
+          <div data-tab="Census Tracts" style="width:100%;height:100%;min-height:60vh;">
             <osl-eq-grid breakpoint="lg" style="height:100%;">
             <div>
               <osl-glmap
@@ -241,7 +241,7 @@ export const CPR2 = () => {
             </div>
           </osl-eq-grid>
           </div>
-          <div data-tab="County" style="width:100%">
+          <div data-tab="County" style="width:100%;height:100%;min-height:60vh;">
 
           <osl-eq-grid breakpoint="lg" style="height:100%;">
             <div>
@@ -376,7 +376,7 @@ export const CPR2 = () => {
             </div>
             </osl-eq-grid>
           </div>
-          <div data-tab="School Districts" style="width:100%">
+          <div data-tab="School Districts" style="width:100%;height:100%;min-height:60vh;">
 
           <osl-eq-grid breakpoint="lg" style="height:100%;">
             <div>
@@ -511,7 +511,7 @@ export const CPR2 = () => {
             </div>
           </osl-eq-grid>
           </div>
-          <div data-tab="Townships (Pesticide Data) / Tracts (Demography)" style="width:100%">
+          <div data-tab="Townships (Pesticide Data) / Tracts (Demography)" style="width:100%;height:100%;min-height:60vh;">
 
 
           <osl-eq-grid breakpoint="lg" style="height:100%;">

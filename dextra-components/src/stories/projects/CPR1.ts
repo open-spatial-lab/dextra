@@ -17,8 +17,8 @@ export const CPR = () => {
     <div style="width:100%;display:block;">
       ${CprFilterHeader(filteredDatasets)}
       <br />
-      <div style="width:100%;height:100vh;position:relative">
-        <osl-flex-box breakpoint="lg">
+      <div style="width:100%;height:80vh;position:relative">
+        <osl-flex-box breakpoint="lg" style="height:100%" >
           <div style="flex-basis:25%; flex-grow:0;">
             <div>
               <sp-theme>
@@ -26,7 +26,7 @@ export const CPR = () => {
                 <p>
                   The map on the right displays pesticide use reporting data 
                   at the census tract or zip code scale. The colors on this map represent the pounds of pesticide used in each area.
-                  The color scale in the legend show the range of use, based on quantile breaks (septile).
+                  The color scale in the legend show the range of use, based on quantile breaks (quintile).
                   <br/><br/> 
                   To change the scale from census tracts or zip codes, 
                   click on the layer icon on the legend on the bottom left of the map.
@@ -83,9 +83,9 @@ export const CPR = () => {
               ${CprDataDescription()}
             </div>
           </div>
-          <div style="max-height:100vh">
+          <div style="max-height:100vh;min-height:40vh;">
             <osl-tabs>
-              <div data-tab="Tract" style="width:100%;height:100%;">
+              <div data-tab="Tract" style="width:100%;height:100%;min-height:60vh;">
                 <osl-glmap
                   mapStyle="https://basemaps.cartocdn.com/gl/positron-gl-style/style.json"
                   legendPosition="bottom-left"
@@ -132,7 +132,7 @@ export const CPR = () => {
                   data='${censusTractData}'
                 ></osl-download>
               </div>
-              <div data-tab="County" style="width:100%;height:100%;">
+              <div data-tab="County" style="width:100%;height:100%;min-height:60vh;">
                 <osl-glmap
                   mapStyle="https://basemaps.cartocdn.com/gl/positron-gl-style/style.json"
                   legendPosition="bottom-left"
@@ -178,7 +178,7 @@ export const CPR = () => {
                   data='${countyData}'
                 ></osl-download>
               </div>
-              <div data-tab="School District" style="width:100%;height:100%;">
+              <div data-tab="School District" style="width:100%;height:100%;min-height:60vh;">
                 <osl-glmap
                   mapStyle="https://basemaps.cartocdn.com/gl/positron-gl-style/style.json"
                   legendPosition="bottom-left"
@@ -225,7 +225,7 @@ export const CPR = () => {
                   data='${schoolDistrictData}'
                 ></osl-download>
               </div>
-              <div data-tab="Townships" style="width:100%;height:100%;">
+              <div data-tab="Townships" style="width:100%;height:100%;min-height:60vh;">
                 <osl-glmap
                   mapStyle="https://basemaps.cartocdn.com/gl/positron-gl-style/style.json"
                   legendPosition="bottom-left"
