@@ -17,12 +17,12 @@ export const CPR3 = () => {
     <div style="width:100%;height:auto">
       ${CprTimeSeriesHeader()}
       <osl-tabs breakpoint="lg">
-        <div data-tab="By Year">
+        <div data-tab="By Year" style="width:100%">
           <div style="width:100%;height:40vh;position:relative">
             <h3>Use over time by Active Ingredient Class</h3>
               <osl-plot
                 colorLegend="true"
-                data=${yearlyByAiClass}
+                data='${yearlyByAiClass}'
                 marginBottom="80"
                 marginLeft="80"
                 marginRight="80"
@@ -40,7 +40,7 @@ export const CPR3 = () => {
             <h3>Use over time by Active Ingredient Type</h3>
             <osl-plot
               colorLegend="true"
-              data=${yearlyByAiType}
+              data='${yearlyByAiType}'
               marginBottom="80"
               marginLeft="80"
               marginRight="80"
@@ -59,7 +59,7 @@ export const CPR3 = () => {
             <h3>Use over time by Agricultural or Non-Agricultural Use</h3>
             <osl-plot
               colorLegend="true"
-              data=${yearlyByAgNonAg}
+              data='${yearlyByAgNonAg}'
               marginBottom="80"
               marginLeft="80"
               marginRight="80"
@@ -72,19 +72,19 @@ export const CPR3 = () => {
             </osl-plot>
           </div>
         </div>
-        <div data-tab="By Month">
+        <div data-tab="By Month" style="width:100%">
           <div>
             <osl-select-control
-              data=${timeSeriesData}
+              data='${timeSeriesData}'
               option="start"
-              options=${JSON.stringify(yearLabels)}
+              options='${JSON.stringify(yearLabels)}'
               title="Start Date"
               initialValue="2017-01"
             ></osl-select-control>
             <osl-select-control
-              data=${timeSeriesData}
+              data='${timeSeriesData}'
               option="end"
-              options=${JSON.stringify(yearLabels)}
+              options='${JSON.stringify(yearLabels)}'
               title="End Date"
               initialValue="2021-12"
             ></osl-select-control>
@@ -93,7 +93,7 @@ export const CPR3 = () => {
           <h3>Use over time by Active Ingredient Class</h3>
           <osl-plot
             colorLegend="true"
-            data=${monthlyByAiClass}
+            data='${monthlyByAiClass}'
             marginBottom="80"
             marginLeft="80"
             marginRight="80"
@@ -111,7 +111,7 @@ export const CPR3 = () => {
           <h3>Use over time by Active Ingredient Type</h3>
           <osl-plot
             colorLegend="true"
-            data=${monthlyByAiType}
+            data='${monthlyByAiType}'
             marginBottom="80"
             marginLeft="80"
             marginRight="80"
@@ -130,7 +130,7 @@ export const CPR3 = () => {
             <h3>Use over time by Agricultural or Non-Agricultural Use</h3>
             <osl-plot
               colorLegend="true"
-              data=${monthlyByAgNonAg}
+              data='${monthlyByAgNonAg}'
               marginBottom="80"
               marginLeft="80"
               marginRight="80"

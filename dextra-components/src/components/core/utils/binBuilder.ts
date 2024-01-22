@@ -298,27 +298,44 @@ export class BinBuilder {
       return idx === -1 ? null : colors[idx];
     };
   }
+  setNullData(){
+    this.current = {
+      breaks: [0],
+      labels: ['No Data'],
+      colorStops: []
+    };
+  }
 
   async ingestDataAndAccesor(
     data: DataResult,
     accessor: (d: DataResult[number]) => number | string
   ) {
-    const { colorScheme, bins, type } = this;
+    const { colorScheme, bins: _bins, type } = this;
     const isContinuous = type === "continuous";
+    const dataLessthanSpec = _bins && data.length < _bins;
+    const bins = dataLessthanSpec ? data.length : _bins;
     const schemaValid = colorScheme || bins;
     const inputValid = data?.length;
-
     if (schemaValid && inputValid) {
       this.data = data;
       this.accessor = accessor;
       const breaks = await this.generateBins();
       const labels = isContinuous ? breaks.map(this.formatter.format) : breaks;
       const count = isContinuous ? bins : breaks.length;
+      const colorLength = dataLessthanSpec ? count - 1 : count;
+
+      if (count === 0) {
+        this.setNullData()
+        return
+      }
+      
       this.current = {
         breaks,
         labels,
-        colorStops: this.applyColorScheme(colorScheme!, count),
+        colorStops: this.applyColorScheme(colorScheme!, colorLength),
       };
+    } else if (data.length == 0) {
+      this.setNullData()
     }
   }
 

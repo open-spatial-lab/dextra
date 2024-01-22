@@ -19,7 +19,7 @@ import {
 export const CPR2 = () => {
   return html`
     <div style="width:100%;height:auto">
-      ${CprFilterHeader()}
+      ${CprFilterHeader(filteredDatasets)}
       <br />
       <hr/>
       <br />
@@ -62,8 +62,8 @@ export const CPR2 = () => {
 
           <div style="flex-basis:50%">
               <osl-param-view
-                data=${JSON.parse(filteredDatasets)[0]}
-                parameters=${JSON.stringify([
+                data='${JSON.parse(filteredDatasets)[0]}'
+                parameters='${JSON.stringify([
                   "start",
                   "end",
                   "ai_class",
@@ -78,8 +78,8 @@ export const CPR2 = () => {
                   "pctblack",
                   "pcthispanic",
                   "income"
-                ])}
-                labels=${JSON.stringify([
+                ])}'
+                labels='${JSON.stringify([
                   "Start Date",
                   "End Date",
                   "Active Ingredient Class",
@@ -94,7 +94,7 @@ export const CPR2 = () => {
                   "Percent Black / African American Population",
                   "Percent Hispanic Population",
                   "Median Household Income (2021 dollars)"
-                ])}
+                ])}'
                 parameterTitle="Filter"
                 title="Current Data Filters"
               ></osl-param-view>
@@ -133,7 +133,7 @@ export const CPR2 = () => {
                     beforeId="water"
                     method="QNT"
                     geoId="FIPS"
-                    data=${censusTractData}
+                    data='${censusTractData}'
                     visible="true"
                     stroked="true"
                     staticStroke="[255,255,255,120]"
@@ -168,7 +168,7 @@ export const CPR2 = () => {
                     beforeId="water"
                     method="QNT"
                     geoId="FIPS"
-                    data=${censusTractData}
+                    data='${censusTractData}'
                     visible="true"
                     stroked="true"
                     staticStroke="[255,255,255,120]"
@@ -189,7 +189,7 @@ export const CPR2 = () => {
                     beforeId="water"
                     method="QNT"
                     geoId="FIPS"
-                    data=${censusTractData}
+                    data='${censusTractData}'
                     visible="false"
                     stroked="true"
                     staticStroke="[255,255,255,120]"
@@ -209,7 +209,7 @@ export const CPR2 = () => {
                     beforeId="water"
                     method="QNT"
                     geoId="FIPS"
-                    data=${censusTractData}
+                    data='${censusTractData}'
                     visible="false"
                     stroked="true"
                     labelFormat="percent"
@@ -231,7 +231,7 @@ export const CPR2 = () => {
                     beforeId="water"
                     method="QNT"
                     geoId="FIPS"
-                    data=${censusTractData}
+                    data='${censusTractData}'
                     visible="false"
                     stroked="true"
                     staticStroke="[255,255,255,120]"
@@ -268,7 +268,7 @@ export const CPR2 = () => {
                     beforeId="water"
                     method="QNT"
                     geoId="county_cd"
-                    data=${countyData}
+                    data='${countyData}'
                     visible="true"
                     stroked="true"
                     staticStroke="[255,255,255,120]"
@@ -303,7 +303,7 @@ export const CPR2 = () => {
                     beforeId="water"
                     method="QNT"
                     geoId="county_cd"
-                    data=${countyData}
+                    data='${countyData}'
                     visible="true"
                     stroked="true"
                     staticStroke="[255,255,255,120]"
@@ -324,7 +324,7 @@ export const CPR2 = () => {
                     beforeId="water"
                     method="QNT"
                     geoId="county_cd"
-                    data=${countyData}
+                    data='${countyData}'
                     visible="false"
                     stroked="true"
                     staticStroke="[255,255,255,120]"
@@ -344,7 +344,7 @@ export const CPR2 = () => {
                     beforeId="water"
                     method="QNT"
                     geoId="county_cd"
-                    data=${countyData}
+                    data='${countyData}'
                     visible="false"
                     stroked="true"
                     labelFormat="percent"
@@ -366,7 +366,7 @@ export const CPR2 = () => {
                     beforeId="water"
                     method="QNT"
                     geoId="county_cd"
-                    data=${countyData}
+                    data='${countyData}'
                     visible="false"
                     stroked="true"
                     staticStroke="[255,255,255,120]"
@@ -403,7 +403,7 @@ export const CPR2 = () => {
                     beforeId="water"
                     method="QNT"
                     geoId="FIPS"
-                    data=${schoolDistrictData}
+                    data='${schoolDistrictData}'
                     visible="true"
                     stroked="true"
                     staticStroke="[255,255,255,120]"
@@ -438,7 +438,7 @@ export const CPR2 = () => {
                     beforeId="water"
                     method="QNT"
                     geoId="FIPS"
-                    data=${schoolDistrictData}
+                    data='${schoolDistrictData}'
                     visible="true"
                     stroked="true"
                     staticStroke="[255,255,255,120]"
@@ -459,7 +459,7 @@ export const CPR2 = () => {
                     beforeId="water"
                     method="QNT"
                     geoId="FIPS"
-                    data=${schoolDistrictData}
+                    data='${schoolDistrictData}'
                     visible="false"
                     stroked="true"
                     staticStroke="[255,255,255,120]"
@@ -479,7 +479,7 @@ export const CPR2 = () => {
                     beforeId="water"
                     method="QNT"
                     geoId="FIPS"
-                    data=${schoolDistrictData}
+                    data='${schoolDistrictData}'
                     visible="false"
                     stroked="true"
                     labelFormat="percent"
@@ -501,7 +501,7 @@ export const CPR2 = () => {
                     beforeId="water"
                     method="QNT"
                     geoId="FIPS"
-                    data=${schoolDistrictData}
+                    data='${schoolDistrictData}'
                     visible="false"
                     stroked="true"
                     staticStroke="[255,255,255,120]"
@@ -538,7 +538,7 @@ export const CPR2 = () => {
                     layer="polygon"
                     beforeId="water"
                     method="QNT"
-                    data=${townshipData}
+                    data='${townshipData}'
                     visible="true"
                     stroked="true"
                     staticStroke="[255,255,255,120]"
@@ -574,7 +574,7 @@ export const CPR2 = () => {
                     beforeId="water"
                     method="QNT"
                     geoId="FIPS"
-                    data=${censusTractData}
+                    data='${censusTractData}'
                     visible="true"
                     stroked="true"
                     staticStroke="[255,255,255,120]"
@@ -595,7 +595,7 @@ export const CPR2 = () => {
                     beforeId="water"
                     method="QNT"
                     geoId="FIPS"
-                    data=${censusTractData}
+                    data='${censusTractData}'
                     visible="false"
                     stroked="true"
                     staticStroke="[255,255,255,120]"
@@ -615,7 +615,7 @@ export const CPR2 = () => {
                     beforeId="water"
                     method="QNT"
                     geoId="FIPS"
-                    data=${censusTractData}
+                    data='${censusTractData}'
                     visible="false"
                     stroked="true"
                     labelFormat="percent"
@@ -637,7 +637,7 @@ export const CPR2 = () => {
                     beforeId="water"
                     method="QNT"
                     geoId="FIPS"
-                    data=${censusTractData}
+                    data='${censusTractData}'
                     visible="false"
                     stroked="true"
                     staticStroke="[255,255,255,120]"

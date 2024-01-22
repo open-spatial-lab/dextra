@@ -50,28 +50,28 @@ const filterModal = (datasetsToFilter: string, demographicDatasetsToFilter: stri
       <h3>Active Ingredients</h3>
       <osl-eq-grid breakpoint="lg">
         <osl-select-control
-          data=${datasetsToFilter}
+          data='${datasetsToFilter}'
           option="ai_class"
           multipleSelect="true"
           title="Active Ingredient Class"
           label="Search for AI classes"
-          optionsData=${aiClassOptionsData}
+          optionsData='${aiClassOptionsData}'
           optionsDataValueColumn="ai_class"
           initialValue="*"
         ></osl-select-control>
         <osl-select-control
-          data=${datasetsToFilter}
+          data='${datasetsToFilter}'
           option="ai_type"
           multipleSelect="true"
           title="Active Ingredient Type"
-          optionsData=${aiTypeOptionsData}
+          optionsData='${aiTypeOptionsData}'
           optionsDataValueColumn="ai_type"
           initialValue="*"
         ></osl-select-control>
         <osl-select-control
-          data=${datasetsToFilter}
+          data='${datasetsToFilter}'
           option="ai_type_specific"
-          optionsData=${aiTypeSpecificOptionsData}
+          optionsData='${aiTypeSpecificOptionsData}'
           optionsDataValueColumn="ai_type_specific"
           multipleSelect="true"
           title="Active Ingredient Type (Specific)"
@@ -84,12 +84,12 @@ const filterModal = (datasetsToFilter: string, demographicDatasetsToFilter: stri
           <h3>Commodity Type</h3>
 
           <osl-select-control
-            data=${datasetsToFilter}
+            data='${datasetsToFilter}'
             option="site"
             title="Location that pesticide was applied to"
             initialValue="*"
             multipleSelect
-            optionsData=${siteLocationOptionsData}
+            optionsData='${siteLocationOptionsData}'
             optionsDataLabelColumn="site_name"
             optionsDataValueColumn="site_code"
           ></osl-select-control>
@@ -97,10 +97,10 @@ const filterModal = (datasetsToFilter: string, demographicDatasetsToFilter: stri
         <div>
           <h3>Application Site Type</h3>
           <osl-radio
-            data=${datasetsToFilter}
+            data='${datasetsToFilter}'
             option="usetype"
             initialValue="ag"
-            options=${JSON.stringify([
+            options='${JSON.stringify([
               {
                 label: "Agricultural",
                 value: "ag",
@@ -113,7 +113,7 @@ const filterModal = (datasetsToFilter: string, demographicDatasetsToFilter: stri
                 label: "Both  (County Only)",
                 value: "*",
               },
-            ])}
+            ])}'
           >
           </osl-radio>
         </div>
@@ -124,12 +124,12 @@ const filterModal = (datasetsToFilter: string, demographicDatasetsToFilter: stri
           <h3>Specific Chemical(s)</h3>
 
           <osl-select-control
-            data=${datasetsToFilter}
+            data='${datasetsToFilter}'
             option="chemical"
             multipleSelect="true"
             title="Specific Chemical(s)"
             initialValue="*"
-            optionsData=${chemicalOptionsData}
+            optionsData='${chemicalOptionsData}'
             optionsDataLabelColumn="chem_name"
             optionsDataValueColumn="chem_code"
           ></osl-select-control>
@@ -139,12 +139,12 @@ const filterModal = (datasetsToFilter: string, demographicDatasetsToFilter: stri
           <h3>Specific Product(s)</h3>
 
           <osl-select-control
-            data=${datasetsToFilter}
+            data='${datasetsToFilter}'
             option="product"
             multipleSelect="true"
             title="Specific Chemical(s)"
             initialValue="*"
-            optionsData=${productOptionsData}
+            optionsData='${productOptionsData}'
             optionsDataLabelColumn="product_name"
             optionsDataValueColumn="product_code"
           ></osl-select-control>
@@ -155,12 +155,12 @@ const filterModal = (datasetsToFilter: string, demographicDatasetsToFilter: stri
         <div>
           <h3>Filter by County</h3>
           <osl-chips
-            data=${datasetsToFilter}
+            data='${datasetsToFilter}'
             initialValue="[]"
             title="County"
             option="county"
             label="Enter county name to filter options"
-            optionsData=${countiesOptionsData}
+            optionsData='${countiesOptionsData}'
             optionsDataValueColumn="FIPS"
             optionsDataLabelColumn="Area Name"
             showAllOptions="true"
@@ -170,12 +170,12 @@ const filterModal = (datasetsToFilter: string, demographicDatasetsToFilter: stri
         <div>
           <h3>Filter by Township</h3>
           <osl-chips
-            data=${datasetsToFilter}
+            data='${datasetsToFilter}'
             initialValue="[]"
             title="Township"
             option="townshiprange"
             label="Enter township ID to filter options"
-            optionsData=${townshipCodesOptionsData}
+            optionsData='${townshipCodesOptionsData}'
             optionsDataValueColumn="TownshipRange"
             showAllOptions="true"
             maxOptions="50"
@@ -185,12 +185,12 @@ const filterModal = (datasetsToFilter: string, demographicDatasetsToFilter: stri
           <h3>Filter by School District</h3>
 
           <osl-chips
-            data=${datasetsToFilter}
+            data='${datasetsToFilter}'
             initialValue="[]"
             title="School District"
             option="schooldistrict"
             label="Enter zip code to filter options"
-            optionsData=${schoolDistrictOptionsData}
+            optionsData='${schoolDistrictOptionsData}'
             optionsDataValueColumn="FIPS"
             optionsDataLabelColumn="Area Name"
             showAllOptions="true"
@@ -201,12 +201,12 @@ const filterModal = (datasetsToFilter: string, demographicDatasetsToFilter: stri
         <div>
           <h3>Filter by Census Tract</h3>
           <osl-chips
-            data=${datasetsToFilter}
+            data='${datasetsToFilter}'
             initialValue="[]"
             title="Tract"
             option="tract"
             label="Enter tract ID to filter options"
-            optionsData=${censusTractsOptionsData}
+            optionsData='${censusTractsOptionsData}'
             optionsDataValueColumn="FIPS"
             showAllOptions="true"
             maxOptions="50"
@@ -221,7 +221,7 @@ const filterModal = (datasetsToFilter: string, demographicDatasetsToFilter: stri
               Percent Black
 
               <osl-slider
-                data="${demographicDatasetsToFilter}"
+                data='${demographicDatasetsToFilter}'
                 option="pctblack"
                 min="0"
                 max="1"
@@ -233,7 +233,7 @@ const filterModal = (datasetsToFilter: string, demographicDatasetsToFilter: stri
             <div>
               Percent Hispanic
               <osl-slider
-                data="${demographicDatasetsToFilter}"
+                data='${demographicDatasetsToFilter}'
                 option="pcthispanic"
                 min="0"
                 max="1"
@@ -245,7 +245,7 @@ const filterModal = (datasetsToFilter: string, demographicDatasetsToFilter: stri
             <div>
               Median Income
               <osl-slider
-                data="${demographicDatasetsToFilter}"
+                data='${demographicDatasetsToFilter}'
                 option="income"
                 min="0"
                 max="120000"
@@ -259,7 +259,7 @@ const filterModal = (datasetsToFilter: string, demographicDatasetsToFilter: stri
     </div>
   </osl-modal>`;
 };
-export const CprFilterHeader = () => {
+export const CprFilterHeader = (datasetsToFilter: string) => {
   return html`
     <osl-flex-box breakpoint="lg">
       <div>
@@ -277,21 +277,21 @@ export const CprFilterHeader = () => {
         </sp-theme>
       </div>
       <osl-select-control
-        data=${monthlyData}
+        data='${datasetsToFilter}'
         option="start"
-        options=${JSON.stringify(yearLabels)}
+        options='${JSON.stringify(yearLabels)}'
         title="Start Date"
         initialValue="2021-01"
       ></osl-select-control>
       <osl-select-control
-        data=${monthlyData}
+        data='${datasetsToFilter}'
         option="end"
-        options=${JSON.stringify(yearLabels)}
+        options='${JSON.stringify(yearLabels)}'
         title="End Date"
         initialValue="2021-12"
       ></osl-select-control>
     </osl-flex-box>
-    ${filterModal(filteredDatasets, demographyFilteredDatasets, true)}
+    ${filterModal(datasetsToFilter, demographyFilteredDatasets, true)}
   `;
 };
 
@@ -304,8 +304,8 @@ export const CprTimeSeriesHeader = () => {
       <div>${filterModal(timeSeriesData, "[]")}</div>
       <div>
         <osl-param-view
-          data=${JSON.parse(monthlyData)[0]}
-          parameters=${JSON.stringify([
+          data='${JSON.parse(monthlyData)[0]}'
+          parameters='${JSON.stringify([
             "start",
             "end",
             "ai_class",
@@ -317,8 +317,8 @@ export const CprTimeSeriesHeader = () => {
             "township",
             "schooldistrict",
             "tract",
-          ])}
-          labels=${JSON.stringify([
+          ])}'
+          labels='${JSON.stringify([
             "Start Date",
             "End Date",
             "Active Ingredient Class",
@@ -330,7 +330,7 @@ export const CprTimeSeriesHeader = () => {
             "Township",
             "School District",
             "Census Tract",
-          ])}
+          ])}'
           parameterTitle="Filter"
           title="Current Data Filters"
         ></osl-param-view>

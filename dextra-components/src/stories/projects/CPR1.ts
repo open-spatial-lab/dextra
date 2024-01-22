@@ -15,7 +15,7 @@ import { CprDataDescription, CprFilterHeader } from "./CPRComponents";
 export const CPR = () => {
   return html`
     <div style="width:100%;display:block;">
-      ${CprFilterHeader()}
+      ${CprFilterHeader(filteredDatasets)}
       <br />
       <div style="width:100%;height:100vh;position:relative">
         <osl-flex-box breakpoint="lg">
@@ -41,8 +41,8 @@ export const CPR = () => {
                   <hr/>
               </sp-theme>
               <osl-param-view
-                data=${JSON.parse(filteredDatasets)[0]}
-                parameters=${JSON.stringify([
+                data='${JSON.parse(filteredDatasets)[0]}'
+                parameters='${JSON.stringify([
                   "start",
                   "end",
                   "ai_class",
@@ -57,8 +57,8 @@ export const CPR = () => {
                   "pctblack",
                   "pcthispanic",
                   "income"
-                ])}
-                labels=${JSON.stringify([
+                ])}'
+                labels='${JSON.stringify([
                   "Start Date",
                   "End Date",
                   "Active Ingredient Class",
@@ -73,7 +73,7 @@ export const CPR = () => {
                   "Percent Black / African American Population",
                   "Percent Hispanic Population",
                   "Median Household Income (2021 dollars)"
-                ])}
+                ])}'
                 parameterTitle="Filter"
                 title="Current Data Filters"
               ></osl-param-view>
@@ -108,7 +108,7 @@ export const CPR = () => {
                     beforeId="water"
                     method="JNK"
                     geoId="FIPS"
-                    data=${censusTractData}
+                    data='${censusTractData}'
                     visible="true"
                     stroked="true"
                     staticStroke="[255,255,255,120]"
@@ -120,7 +120,7 @@ export const CPR = () => {
                 <osl-download
                   title="Download Census Tract Code Summary Data"
                   filename="census-tract-summary"
-                  parameterSuffixes=${JSON.stringify([
+                  parameterSuffixes='${JSON.stringify([
                     "start",
                     "end",
                     "ai_class",
@@ -128,8 +128,8 @@ export const CPR = () => {
                     "ai_type_specific",
                     "site",
                     "usetype",
-                  ])}
-                  data=${censusTractData}
+                  ])}'
+                  data='${censusTractData}'
                 ></osl-download>
               </div>
               <div data-tab="County" style="width:100%;height:100%;">
@@ -156,7 +156,7 @@ export const CPR = () => {
                     layer="polygon"
                     beforeId="water"
                     method="JNK"
-                    data=${countyData}
+                    data='${countyData}'
                     visible="true"
                     isolatedValues="[0, null]"
                     isolatedColor="${zeroPesticideColor}"
@@ -166,7 +166,7 @@ export const CPR = () => {
                 <osl-download
                   title="County Summary Data"
                   filename="county-summary"
-                  parameterSuffixes=${JSON.stringify([
+                  parameterSuffixes='${JSON.stringify([
                     "start",
                     "end",
                     "ai_class",
@@ -174,8 +174,8 @@ export const CPR = () => {
                     "ai_type_specific",
                     "site",
                     "usetype",
-                  ])}
-                  data=${countyData}
+                  ])}'
+                  data='${countyData}'
                 ></osl-download>
               </div>
               <div data-tab="School District" style="width:100%;height:100%;">
@@ -203,17 +203,17 @@ export const CPR = () => {
                     geoId="FIPS"
                     stroked="true"
                     staticStroke="[255,255,255,120]"
-                    data=${schoolDistrictData}
+                    data='${schoolDistrictData}'
                     visible="true"
                     isolatedValues="[0, null]"
                     isolatedColor="${zeroPesticideColor}"
                   >
                   </osl-map-layer>
                 </osl-glmap>
-                <osl-download
+              <osl-download
                   title="School District Summary Data"
                   filename="school-district-summary"
-                  parameterSuffixes=${JSON.stringify([
+                  parameterSuffixes='${JSON.stringify([
                     "start",
                     "end",
                     "ai_class",
@@ -221,8 +221,8 @@ export const CPR = () => {
                     "ai_type_specific",
                     "site",
                     "usetype",
-                  ])}
-                  data=${schoolDistrictData}
+                  ])}'
+                  data='${schoolDistrictData}'
                 ></osl-download>
               </div>
               <div data-tab="Townships" style="width:100%;height:100%;">
@@ -250,7 +250,7 @@ export const CPR = () => {
                     layer="polygon"
                     beforeId="water"
                     method="JNK"
-                    data=${townshipData}
+                    data='${townshipData}'
                     isolatedValues="[0, null]"
                     isolatedColor="${zeroPesticideColor}"
                   >
@@ -259,7 +259,7 @@ export const CPR = () => {
                 <osl-download
                   title="Download Township Summary Data"
                   filename="township-summary"
-                  parameterSuffixes=${JSON.stringify([
+                  parameterSuffixes='${JSON.stringify([
                     "start",
                     "end",
                     "ai_class",
@@ -267,8 +267,8 @@ export const CPR = () => {
                     "ai_type_specific",
                     "site",
                     "usetype",
-                  ])}
-                  data=${townshipData}
+                  ])}'
+                  data='${townshipData}'
                 ></osl-download>
               </div>
             </osl-tabs>
@@ -280,8 +280,8 @@ export const CPR = () => {
   <!-- <osl-data-table
     title="Census Tract Data"
     maxw="200vw"
-    data=${censusTractData}
-    columns=${censusTractColumns}
+    data='${censusTractData}'
+    columns='${censusTractColumns}'
     pagination="true"
   ></osl-data-table> -->
   </div>
