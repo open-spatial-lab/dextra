@@ -31,7 +31,7 @@ export const censusTractData =
 export const schoolDistrictData =
   "https://d3lsdszfx9jqxt.cloudfront.net/data-query/6567764c2aa95c0008fc60f5";
 export const countyData =
-  "https://d3lsdszfx9jqxt.cloudfront.net/data-query/6567863eb678c50008c549ff";
+  "https://d3lsdszfx9jqxt.cloudfront.net/data-query/65aae468610bc40008856abf";
 export const monthlyByAiClass =
   "https://d3lsdszfx9jqxt.cloudfront.net/data-query/65410c3b5c8aac0008d57dbf";
 export const monthlyByAiType =
