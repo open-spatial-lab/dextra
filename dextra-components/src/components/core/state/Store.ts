@@ -86,6 +86,7 @@ let queryControllers: {
   };
 } = {};
 
+const nullParamValues = [null, undefined, "*"]
 const buildDatasetPromise = async (key: string) => {
   const statuses = store.datasets[key].statuses;
   const currentParams = store.datasets[key].parameters;
@@ -107,7 +108,11 @@ const buildDatasetPromise = async (key: string) => {
       statuses?.[currentParamString] === undefined
     })
     const url = new URL(key);
-    Object.entries(currentParams).filter(f => f[1] !== null && f[1] !== undefined && f[1] !== '*').forEach(([key, value]) => {
+    
+    Object.entries(currentParams).forEach(([key, value]) => {
+      if (nullParamValues.includes(value)) return
+      if (Array.isArray(value) && value.length === 0) return
+
       url.searchParams.set(
         key,
         value
@@ -213,3 +218,4 @@ subscribe(store.datasets, async () => {
 subscribe(store.geoListeners, async () => {
   parseGeoDatasets()
 });
+
