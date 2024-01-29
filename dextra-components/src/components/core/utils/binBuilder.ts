@@ -181,7 +181,8 @@ export class BinBuilder {
     const values = data
       .map(modifiedAcessor)
       .filter((d) => d !== undefined && d !== null) as number[];
-    const cleanBins = Math.min(bins!, values.length - 1);
+
+      const cleanBins = Math.min(bins!, values.length - 1);
     try {
       const breaks = await generateBuckets(method, values, cleanBins);
       return breaks;
@@ -236,7 +237,7 @@ export class BinBuilder {
         colorStops.forEach((c, i) => {
           legendEntries.push({
             symbol: { color: this.formatColor(c, format) },
-            text: `${labels[i]} - ${labels[i + 1]}`,
+            text: `${labels[i]} ${labels?.[i + 1] ? ` - ${labels[i + 1]}` : "+"}`,
           });
         });
         break;
@@ -267,11 +268,15 @@ export class BinBuilder {
         return isolatedColor
       }
       for (let i = 1; i < bins.length; i++) {
-        if (val <= bins[i]) {
-          return colors[i - 1];
+        if (val < bins[i]) {
+          return colors[i-1];
         }
       }
-      return colors[0];
+      if (val >= bins[bins.length - 1]) {
+        return colors[colors.length - 1];
+      } else {
+        return colors[0];
+      }
     };
   }
 
@@ -323,7 +328,6 @@ export class BinBuilder {
       const labels = isContinuous ? breaks.map(this.formatter.format) : breaks;
       const count = isContinuous ? bins : breaks.length;
       const colorLength = dataLessthanSpec ? count - 1 : count;
-
       if (count === 0) {
         this.setNullData()
         return
